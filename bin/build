@@ -1,0 +1,34 @@
+#!/usr/bin/env sh
+set -eu
+
+image=project-laravel-build
+mkdir -p var/cache/laravel var/cache/phpunit
+docker build --file etc/docker/fpm/Dockerfile --tag "$image" .
+docker run --rm \
+    --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
+    --env APP_NAME='Fight Laravel Starter' \
+    --env APP_CONFIG_CACHE=/app/var/cache/laravel/config.php \
+    --env APP_EVENTS_CACHE=/app/var/cache/laravel/events.php \
+    --env APP_PACKAGES_CACHE=/app/var/cache/laravel/packages.php \
+    --env APP_ROUTES_CACHE=/app/var/cache/laravel/routes.php \
+    --env APP_SERVICES_CACHE=/app/var/cache/laravel/services.php \
+    --env VIEW_COMPILED_PATH=/app/var/cache/laravel/views \
+    --env CACHE_STORE=file \
+    --env CACHE_FILE_PATH=/app/var/cache/laravel/data \
+    --volume "$(pwd):/app" --workdir /app "$image" sh -ec '
+    composer validate --strict
+    composer install --no-interaction --prefer-dist --no-progress
+    php scripts/artisan config:cache
+    test -f var/cache/laravel/config.php
+    php scripts/planning-check.php
+    # Tooling boots Laravel with its own test configuration.
+    env -u APP_CONFIG_CACHE php vendor/bin/pint --test
+    env -u APP_CONFIG_CACHE php vendor/bin/phpunit
+
+    production_root=$(mktemp -d)
+    trap "rm -rf \"$production_root\"" EXIT
+    cp -a . "$production_root"
+    cd "$production_root"
+    composer install --no-dev --no-interaction --prefer-dist --no-progress
+    php scripts/production-autoload-check.php
+'

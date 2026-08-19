@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -eu
+
+mkdir -p var/cache/laravel var/cache/phpunit
+docker compose run --rm api php vendor/bin/phpunit "$@"

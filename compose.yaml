@@ -1,0 +1,42 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: etc/docker/fpm/Dockerfile
+    working_dir: /app
+    environment:
+      APP_ENV: local
+      APP_DEBUG: 'true'
+      APP_NAME: 'Fight Laravel Starter'
+      APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      APP_CONFIG_CACHE: /app/var/cache/laravel/config.php
+      APP_EVENTS_CACHE: /app/var/cache/laravel/events.php
+      APP_PACKAGES_CACHE: /app/var/cache/laravel/packages.php
+      APP_ROUTES_CACHE: /app/var/cache/laravel/routes.php
+      APP_SERVICES_CACHE: /app/var/cache/laravel/services.php
+      VIEW_COMPILED_PATH: /app/var/cache/laravel/views
+      SESSION_DRIVER: file
+      QUEUE_CONNECTION: sync
+      CACHE_STORE: file
+      CACHE_FILE_PATH: /app/var/cache/laravel/data
+    volumes:
+      - ./:/app
+    networks:
+      - app-network
+
+  server:
+    build: ./etc/docker/nginx
+    ports:
+      - '18084:80'
+    volumes:
+      - ./:/app:ro
+      - ./etc/docker/nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      api:
+        condition: service_started
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

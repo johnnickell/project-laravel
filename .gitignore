@@ -9,11 +9,13 @@
 /.idea
 /.nova
 /var/
+/public/var/
+/database/*.sqlite
 /.runs/
 /.vscode
 /.zed
 /auth.json
-/node_modules
+/client/node_modules
 /public/build
 /public/fonts-manifest.dev.json
 /public/hot
