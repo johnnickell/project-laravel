@@ -2,7 +2,7 @@
 id: T-00001
 prd: PRD-00001
 title: Establish the Canonical Full-Stack Laravel Starter Foundation
-status: in-progress
+status: done
 blocked_by: []
 ---
 
@@ -14,12 +14,12 @@ Establish the Laravel-native, public-source foundation: native composition throu
 
 ## Acceptance criteria
 
-- [ ] `planning/specs/00001-PRD.md` and `planning/tickets/BOARD.md` are the local authorities.
-- [ ] Fight packages are Composer dependencies and no copied shared Domain/Application source exists.
-- [ ] `GET /` renders the Laravel foundation through PHP-FPM and Nginx at `http://127.0.0.1:18084/`.
-- [ ] Laravel and developer-tool cache artifacts use ignored `var/cache/` paths.
-- [ ] `./bin/build` verifies Composer, planning, architecture, tests, and a production installation.
-- [ ] Hosted CI delegates to `./bin/build`; a clean-clone receipt binds the successful build to a commit.
+- [x] `planning/specs/00001-PRD.md` and `planning/tickets/BOARD.md` are the local authorities.
+- [x] Fight packages are Composer dependencies and no copied shared Domain/Application source exists.
+- [x] `GET /` renders the Laravel foundation through PHP-FPM and Nginx at `http://127.0.0.1:18084/`.
+- [x] Laravel and developer-tool cache artifacts use ignored `var/cache/` paths.
+- [x] `./bin/build` verifies Composer, planning, architecture, tests, and a production installation.
+- [x] Hosted CI delegates to `./bin/build`; a clean-clone receipt binds the successful build to a commit.
 
 ## Explicit exclusions
 
