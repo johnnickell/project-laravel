@@ -78,4 +78,13 @@ final class SourceBoundaryTest extends TestCase
         self::assertStringContainsString('cacheDirectory="var/cache/phpunit"', (string) file_get_contents($root.'/phpunit.xml'));
         self::assertStringContainsString('/var/', (string) file_get_contents($root.'/.gitignore'));
     }
+
+    public function test_generated_graph_artifacts_are_ignored_at_any_depth(): void
+    {
+        $root = dirname(__DIR__, 2);
+        $gitignore = (string) file_get_contents($root.'/.gitignore');
+
+        self::assertStringContainsString('graphify-out/', $gitignore);
+        self::assertStringNotContainsString('/graphify-out/', $gitignore);
+    }
 }
