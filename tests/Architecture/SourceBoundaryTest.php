@@ -43,18 +43,24 @@ final class SourceBoundaryTest extends TestCase
 
         foreach ([
             'AGENTS.md', 'CONTEXT.md', 'LICENSE', 'SECURITY.md', 'CONTRIBUTING.md',
-            'bin/build', 'bin/composer', 'bin/console', 'bin/down', 'bin/exec', 'bin/phpunit', 'bin/up',
+            'bin/artisan', 'bin/build', 'bin/composer', 'bin/down', 'bin/exec', 'bin/phpunit', 'bin/up',
             'compose.yaml', 'bootstrap/app.php', 'bootstrap/providers.php',
             'app/Providers/FightServiceProvider.php', 'routes/web.php', 'resources/views/home.blade.php',
             'planning/specs/00001-PRD.md', 'planning/tickets/00001-TICKET.md', 'planning/tickets/BOARD.md',
             'planning/agents/domain.md', 'planning/agents/issue-tracker.md', 'planning/agents/triage-labels.md',
-            'scripts/planning-check.php', 'scripts/production-autoload-check.php',
+            'scripts/artisan', 'scripts/planning-check.php', 'scripts/production-autoload-check.php',
+            'client/package.json', 'client/.npmrc', 'client/vite.config.js',
         ] as $path) {
             self::assertFileExists($root.'/'.$path, sprintf('Missing foundation file: %s', $path));
         }
 
         self::assertStringContainsString('FightServiceProvider', (string) file_get_contents($root.'/bootstrap/providers.php'));
         self::assertStringContainsString('Ready Frontier', (string) file_get_contents($root.'/planning/tickets/BOARD.md'));
+        self::assertFileDoesNotExist($root.'/artisan');
+        self::assertFileDoesNotExist($root.'/bin/console');
+        self::assertFileDoesNotExist($root.'/package.json');
+        self::assertFileDoesNotExist($root.'/.npmrc');
+        self::assertFileDoesNotExist($root.'/vite.config.js');
     }
 
     public function test_cache_artifacts_are_routed_to_var_cache(): void

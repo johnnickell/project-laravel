@@ -18,7 +18,7 @@ docker run --rm \
     --volume "$(pwd):/app" --workdir /app "$image" sh -ec '
     composer validate --strict
     composer install --no-interaction --prefer-dist --no-progress
-    php artisan config:cache
+    php scripts/artisan config:cache
     test -f var/cache/laravel/config.php
     php scripts/planning-check.php
     # Tooling boots Laravel with its own test configuration.
