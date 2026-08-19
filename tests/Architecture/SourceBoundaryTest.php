@@ -73,6 +73,8 @@ final class SourceBoundaryTest extends TestCase
         self::assertStringContainsString('APP_CONFIG_CACHE=/app/var/cache/laravel/config.php', $environment);
         self::assertStringContainsString('VIEW_COMPILED_PATH=/app/var/cache/laravel/views', $environment);
         self::assertStringContainsString('CACHE_FILE_PATH=/app/var/cache/laravel/data', $environment);
+        self::assertStringContainsString('SESSION_DRIVER=file', $environment);
+        self::assertStringContainsString('QUEUE_CONNECTION=sync', $environment);
         self::assertStringContainsString('cacheDirectory="var/cache/phpunit"', (string) file_get_contents($root.'/phpunit.xml'));
         self::assertStringContainsString('/var/', (string) file_get_contents($root.'/.gitignore'));
     }
