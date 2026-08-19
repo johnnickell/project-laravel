@@ -45,6 +45,7 @@ final class SourceBoundaryTest extends TestCase
             'AGENTS.md', 'CONTEXT.md', 'LICENSE', 'SECURITY.md', 'CONTRIBUTING.md',
             'bin/artisan', 'bin/build', 'bin/composer', 'bin/down', 'bin/exec', 'bin/phpunit', 'bin/up',
             'compose.yaml', 'bootstrap/app.php', 'bootstrap/providers.php',
+            'etc/docker/fpm/Dockerfile', 'etc/docker/nginx/Dockerfile',
             'app/Providers/FightServiceProvider.php', 'routes/web.php', 'resources/views/home.blade.php',
             'planning/specs/00001-PRD.md', 'planning/tickets/00001-TICKET.md', 'planning/tickets/BOARD.md',
             'planning/agents/domain.md', 'planning/agents/issue-tracker.md', 'planning/agents/triage-labels.md',
@@ -61,6 +62,7 @@ final class SourceBoundaryTest extends TestCase
         self::assertFileDoesNotExist($root.'/package.json');
         self::assertFileDoesNotExist($root.'/.npmrc');
         self::assertFileDoesNotExist($root.'/vite.config.js');
+        self::assertFileDoesNotExist($root.'/Dockerfile');
     }
 
     public function test_cache_artifacts_are_routed_to_var_cache(): void

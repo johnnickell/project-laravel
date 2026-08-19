@@ -1,6 +1,8 @@
 services:
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: etc/docker/fpm/Dockerfile
     working_dir: /app
     environment:
       APP_ENV: local
