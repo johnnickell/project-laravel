@@ -21,7 +21,7 @@ docker run --rm \
     php artisan config:cache
     test -f var/cache/laravel/config.php
     php scripts/planning-check.php
-    php vendor/bin/pint --test
+    php -d display_errors=1 vendor/bin/pint --test --verbose
     php vendor/bin/phpunit
 
     production_root=$(mktemp -d)
