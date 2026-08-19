@@ -9,6 +9,8 @@
 /.idea
 /.nova
 /var/
+/public/var/
+/database/*.sqlite
 /.runs/
 /.vscode
 /.zed

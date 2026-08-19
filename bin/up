@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+set -eu
+
+docker compose build
+docker compose up -d
+
+if [ "${1:-}" = '--logs' ]; then
+    docker compose logs -f
+fi
