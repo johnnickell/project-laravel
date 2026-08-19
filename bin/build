@@ -2,6 +2,7 @@
 set -eu
 
 image=project-laravel-build
+mkdir -p var/cache/laravel var/cache/phpunit
 docker build --tag "$image" .
 docker run --rm \
     --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
