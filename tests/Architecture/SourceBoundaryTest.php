@@ -49,7 +49,7 @@ final class SourceBoundaryTest extends TestCase
             'app/Providers/FightServiceProvider.php', 'routes/web.php', 'resources/views/home.blade.php',
             'planning/specs/00001-PRD.md', 'planning/tickets/00001-TICKET.md', 'planning/tickets/BOARD.md',
             'planning/agents/domain.md', 'planning/agents/issue-tracker.md', 'planning/agents/triage-labels.md',
-            'scripts/artisan', 'scripts/planning-check.php', 'scripts/production-autoload-check.php',
+            'scripts/artisan', 'scripts/planning_portfolio.py', 'scripts/production-autoload-check.php',
             'client/package.json', 'client/.npmrc', 'client/vite.config.js',
         ] as $path) {
             self::assertFileExists($root.'/'.$path, sprintf('Missing foundation file: %s', $path));

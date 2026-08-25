@@ -20,7 +20,7 @@ docker run --rm \
     composer install --no-interaction --prefer-dist --no-progress
     php scripts/artisan config:cache
     test -f var/cache/laravel/config.php
-    php scripts/planning-check.php
+    python3 scripts/planning_portfolio.py
     # Tooling boots Laravel with its own test configuration.
     env -u APP_CONFIG_CACHE php vendor/bin/pint --test
     env -u APP_CONFIG_CACHE php vendor/bin/phpunit
