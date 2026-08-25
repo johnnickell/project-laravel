@@ -102,19 +102,22 @@ def main() -> int:
         if record_id.startswith("T-"):
             visit(record_id)
 
-    ignored = subprocess.run(
-        [
-            "git",
-            "-c",
-            f"safe.directory={ROOT.resolve()}",
-            "check-ignore",
-            "-q",
-            ".runs/planning-check",
-        ],
-        cwd=ROOT,
-        check=False,
-    )
-    if ignored.returncode != 0:
+    try:
+        ignored = subprocess.run(
+            [
+                "git",
+                "-c",
+                f"safe.directory={ROOT.resolve()}",
+                "check-ignore",
+                "-q",
+                ".runs/planning-check",
+            ],
+            cwd=ROOT,
+            check=False,
+        )
+    except FileNotFoundError:
+        ignored = None
+    if ignored is not None and ignored.returncode != 0:
         errors.append(".runs/ must be gitignored")
 
     if errors:
