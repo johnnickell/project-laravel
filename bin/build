@@ -16,7 +16,8 @@ docker run --rm \
     --env CACHE_STORE=file \
     --env CACHE_FILE_PATH=/app/var/cache/laravel/data \
     --volume "$(pwd):/app" --workdir /app "$image" sh -ec '
-    composer validate --strict
+    # Composer reports an advisory for the intentional Fight Common VCS commit reference.
+    composer validate
     composer install --no-interaction --prefer-dist --no-progress
     php scripts/artisan config:cache
     test -f var/cache/laravel/config.php

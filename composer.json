@@ -8,10 +8,12 @@
     "require": {
         "php": "^8.3",
         "johnnickell/fight-access-control": "dev-develop",
-        "johnnickell/fight-common": "dev-develop as 1.2.0-dev",
+        "johnnickell/fight-common": "dev-develop#4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16 as 1.2.0-dev",
+        "guzzlehttp/guzzle": "^8.0",
         "laravel/framework": "^13.17",
         "laravel/tinker": "^3.0",
-        "symfony/filesystem": "^7.4"
+        "symfony/filesystem": "^7.4",
+        "symfony/process": "^8.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

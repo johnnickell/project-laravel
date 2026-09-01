@@ -15,7 +15,7 @@ final class FrameworkSupportReceiptTest extends TestCase
 
         self::assertSame(['schema_version', 'content_id', 'candidate', 'framework', 'lock_sha256', 'capabilities', 'journeys', 'result', 'evidence', 'next_action'], array_keys($receipt));
         self::assertSame('fight-common.framework-support-receipt/v1', $receipt['schema_version']);
-        self::assertSame(['package' => 'johnnickell/fight-common', 'version' => '1.2.0-dev', 'reference' => '4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16'], $receipt['candidate']);
+        self::assertSame(['package' => 'johnnickell/fight-common', 'version' => 'dev-develop', 'reference' => '4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16'], $receipt['candidate']);
         self::assertSame('laravel', $receipt['framework']['name']);
         self::assertSame(hash_file('sha256', $root.'/composer.lock'), $receipt['lock_sha256']);
         self::assertSame('passed', $receipt['result']);

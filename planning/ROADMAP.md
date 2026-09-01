@@ -4,7 +4,7 @@
 
 | PRD | Target | Status | Current outcome |
 | --- | --- | --- | --- |
-| [PRD-00002](specs/00002-PRD.md) | Fight Common 1.2 | in-progress | Laravel 1.2 candidate receipt is complete; retain 2.0 preparation as needs-info. |
+| [PRD-00002](specs/00002-PRD.md) | Fight Common 1.2 | in-progress | Complete Laravel platform profile and revised receipt are under verification; retain 2.0 preparation as needs-info. |
 
 ## Route to 1.0
 

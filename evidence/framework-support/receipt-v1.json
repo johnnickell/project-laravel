@@ -1,36 +1,60 @@
 {
     "schema_version": "fight-common.framework-support-receipt/v1",
-    "content_id": "619bc4b3c67a24008adfd3dd9a84767a95ef47483f90a9e5b8cb2f56114ed236",
+    "content_id": "eaa10e1b1fe830dd2d4247491edd962c02ad6d5fb29281c749db5ed9c10a61a1",
     "candidate": {
         "package": "johnnickell/fight-common",
-        "version": "1.2.0-dev",
+        "version": "dev-develop",
         "reference": "4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16"
     },
     "framework": {
         "name": "laravel",
         "version": "13.26.1",
         "providers": [
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\BroadcastingServiceProvider",
             "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\MessagingServiceProvider",
             "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\PersistenceServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\SecurityServiceProvider",
             "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\RoutingServiceProvider",
             "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\CacheServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\HttpServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\HttpClientServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\LoggingServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\MailServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\MetricsServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\ProcessServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\TemplatingServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\FileStorageServiceProvider",
             "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\FilesystemServiceProvider"
         ]
     },
-    "lock_sha256": "c8c4b38a8dc9a72fead5bc70166c441003d2544f7116d515405a9e8d2e1c5c12",
+    "lock_sha256": "7e0116b9048239774814197d147bad4aeee1922f5ff34c7884c4016a60857ace",
     "capabilities": {
+        "authentication_security": "ship",
         "container": "ship",
         "queue": "ship",
+        "synchronous_messaging": "wire",
         "persistence": "ship",
+        "event_store": "wire",
         "routing": "ship",
         "response": "ship",
         "cache": "ship",
-        "filesystem": "wire"
+        "filesystem": "wire",
+        "file_storage": "wire",
+        "file_transfer": "wire",
+        "http_psr18": "wire",
+        "process": "wire",
+        "scheduler": "wire",
+        "mail": "ship",
+        "templating": "ship",
+        "observability": "wire",
+        "sms": "wire",
+        "broadcasting": "ship",
+        "validation": "wire"
     },
     "journeys": [
         {"name": "lowest_resolution", "status": "passed", "evidence": "evidence/framework-support/composer-lowest.lock.sha256"},
         {"name": "latest_resolution", "status": "passed", "evidence": "composer.lock"},
-        {"name": "booted_capabilities", "status": "passed", "evidence": "tests/Feature/FrameworkSupportReceiptTest.php"},
+        {"name": "complete_platform_profile", "status": "passed", "evidence": "tests/Feature/FightCommonCapabilityTest.php"},
         {"name": "planning_check", "status": "passed", "evidence": "./bin/planning-check"},
         {"name": "build", "status": "passed", "evidence": "./bin/build"}
     ],
@@ -38,7 +62,7 @@
     "evidence": {
         "build": "./bin/build",
         "planning_check": "./bin/planning-check",
-        "receipt_sha256": "557424d26b59f0dd31e475feb54110c2df1901f4f6628a10ef714a6351b54138"
+        "receipt_sha256": "cdf14f160e2e7838323123ee564a72b3e144473499c2156d7ce17c2981706c85"
     },
     "next_action": null
 }

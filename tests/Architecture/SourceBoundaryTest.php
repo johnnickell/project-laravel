@@ -17,7 +17,7 @@ final class SourceBoundaryTest extends TestCase
         $manifest = json_decode((string) file_get_contents($root.'/composer.json'), true, flags: JSON_THROW_ON_ERROR);
 
         self::assertSame(
-            'dev-develop as 1.2.0-dev',
+            'dev-develop#4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16 as 1.2.0-dev',
             $manifest['require']['johnnickell/fight-common']
         );
         self::assertSame('^7.4', $manifest['require']['symfony/filesystem']);
