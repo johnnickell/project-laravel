@@ -12,8 +12,7 @@ When an unqualified "What's next?" is asked:
 
 ## Now
 
-No local human decision is pending. Fight Common 2.0 remains `needs-info` until its contract,
-deprecation-removal inventory, and migration guide exist.
+Fight Common 2.0 remains `needs-info` until its contract, deprecation-removal inventory, and migration guide exist.
 
 ## Wayfinder Review
 
@@ -38,5 +37,5 @@ No ticket is currently waiting on an unfinished local dependency.
 
 | Ticket | Parent PRD | Outcome |
 |--------|------------|---------|
-| [T-00002 — Adopt Fight Common 1.2](00002-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Complete Laravel platform profile, exact `dev-develop` candidate and lowest-lock receipt, warning allowlist, planning check, and canonical build are verified locally. |
 | [T-00001 — Establish the Canonical Full-Stack Laravel Starter Foundation](00001-TICKET.md) | [PRD-00001](../specs/00001-PRD.md) | Local and hosted `./bin/build` receipts are green. The governed bootstrap handoff is accepted. |
+| [T-00002 — Adopt Fight Common 1.2](00002-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Complete Laravel platform profile, candidate receipt, and fresh lowest/latest dependency lanes are verified. |

@@ -16,6 +16,7 @@ use Fight\Common\Domain\Messaging\Event\Event;
 use Fight\Common\Domain\Messaging\Event\EventMessage;
 use Fight\Common\Domain\Utility\ClassName;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 final class FightCommonMessagingJourneyTest extends TestCase
@@ -33,8 +34,9 @@ final class FightCommonMessagingJourneyTest extends TestCase
         self::assertSame(['sync-command'], $handled);
     }
 
-    public function test_queued_command_is_held_until_commit_and_delivered_by_laravel_sync_queue(): void
+    public function test_queued_command_is_persisted_after_commit_then_delivered_by_a_laravel_database_worker(): void
     {
+        $this->prepareDatabaseQueue();
         $handled = [];
         $this->app->make(InMemoryCommandRouter::class)->registerHandler(
             ProfileCommand::class,
@@ -45,13 +47,18 @@ final class FightCommonMessagingJourneyTest extends TestCase
             $this->app->make(AsynchronousCommandBus::class)->execute(new ProfileCommand('queued-command'));
 
             self::assertSame([], $handled);
+            self::assertSame(0, DB::table('jobs')->count());
         });
 
+        self::assertSame(1, DB::table('jobs')->count());
+        $this->artisan('queue:work', ['connection' => 'database', '--once' => true, '--tries' => 1])->assertExitCode(0);
+        self::assertSame(0, DB::table('jobs')->count());
         self::assertSame(['queued-command'], $handled);
     }
 
-    public function test_queued_event_is_held_until_commit_and_delivered_with_its_payload(): void
+    public function test_queued_event_is_persisted_after_commit_then_delivered_by_a_laravel_database_worker(): void
     {
+        $this->prepareDatabaseQueue();
         $handled = [];
         $this->app->make(EventDispatcher::class)->addHandler(
             ClassName::underscore(ProfileEvent::class),
@@ -64,9 +71,28 @@ final class FightCommonMessagingJourneyTest extends TestCase
             $this->app->make(AsynchronousEventDispatcher::class)->trigger(new ProfileEvent('queued-event'));
 
             self::assertSame([], $handled);
+            self::assertSame(0, DB::table('jobs')->count());
         });
 
+        self::assertSame(1, DB::table('jobs')->count());
+        $this->artisan('queue:work', ['connection' => 'database', '--once' => true, '--tries' => 1])->assertExitCode(0);
+        self::assertSame(0, DB::table('jobs')->count());
         self::assertSame([['reference' => 'queued-event']], $handled);
+    }
+
+    private function prepareDatabaseQueue(): void
+    {
+        config(['queue.default' => 'database']);
+        Schema::dropIfExists('jobs');
+        Schema::create('jobs', static function ($table): void {
+            $table->id();
+            $table->string('queue')->index();
+            $table->longText('payload');
+            $table->unsignedTinyInteger('attempts');
+            $table->unsignedInteger('reserved_at')->nullable();
+            $table->unsignedInteger('available_at');
+            $table->unsignedInteger('created_at');
+        });
     }
 }
 

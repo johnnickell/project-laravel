@@ -16,7 +16,7 @@ services:
       APP_SERVICES_CACHE: /app/var/cache/laravel/services.php
       VIEW_COMPILED_PATH: /app/var/cache/laravel/views
       SESSION_DRIVER: file
-      QUEUE_CONNECTION: sync
+      QUEUE_CONNECTION: database
       CACHE_STORE: file
       CACHE_FILE_PATH: /app/var/cache/laravel/data
     volumes:

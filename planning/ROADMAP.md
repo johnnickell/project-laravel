@@ -4,12 +4,11 @@
 
 | PRD | Target | Status | Current outcome |
 | --- | --- | --- | --- |
-| [PRD-00002](specs/00002-PRD.md) | Fight Common 1.2 | in-progress | Complete Laravel platform profile, immutable candidate receipt, and checked-in lowest/latest dependency evidence are verified; retain 2.0 preparation as needs-info. |
+| [PRD-00002](specs/00002-PRD.md) | Fight Common 1.2 | in-progress | Complete Laravel platform profile and candidate receipt are verified at `cfb951c`; fresh lowest/latest lanes pass. Fight Common 2.0 migration authority remains outstanding. |
 
 ## Route to 1.0
 
-1. Laravel's Fight Common 1.2 candidate receipt and complete platform profile are complete.
-2. Revisit 2.0 only after Fight Common publishes its migration authority.
+1. Revisit 2.0 only after Fight Common publishes its migration authority.
 
 ## Completed / Released
 

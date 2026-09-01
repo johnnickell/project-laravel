@@ -17,10 +17,10 @@ final class SourceBoundaryTest extends TestCase
         $manifest = json_decode((string) file_get_contents($root.'/composer.json'), true, flags: JSON_THROW_ON_ERROR);
 
         self::assertSame(
-            'dev-develop#4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16 as 1.2.0-dev',
+            'dev-develop#cfb951c368f9b40fe460e931011b092d8eef6509 as 1.2.0-dev',
             $manifest['require']['johnnickell/fight-common']
         );
-        self::assertSame('^7.4', $manifest['require']['symfony/filesystem']);
+        self::assertArrayNotHasKey('symfony/filesystem', $manifest['require']);
         self::assertSame('dev-develop', $manifest['require']['johnnickell/fight-access-control']);
         self::assertContains('https://github.com/johnnickell/fight-access-control', array_column($manifest['repositories'], 'url'));
         self::assertContains('https://github.com/johnnickell/fight-common', array_column($manifest['repositories'], 'url'));
@@ -79,7 +79,7 @@ final class SourceBoundaryTest extends TestCase
         self::assertStringContainsString('VIEW_COMPILED_PATH=/app/var/cache/laravel/views', $environment);
         self::assertStringContainsString('CACHE_FILE_PATH=/app/var/cache/laravel/data', $environment);
         self::assertStringContainsString('SESSION_DRIVER=file', $environment);
-        self::assertStringContainsString('QUEUE_CONNECTION=sync', $environment);
+        self::assertStringContainsString('QUEUE_CONNECTION=database', $environment);
         self::assertStringContainsString('cacheDirectory="var/cache/phpunit"', (string) file_get_contents($root.'/phpunit.xml'));
         self::assertStringContainsString('/var/', (string) file_get_contents($root.'/.gitignore'));
     }

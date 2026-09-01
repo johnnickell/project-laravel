@@ -15,8 +15,9 @@ final class FrameworkSupportReceiptTest extends TestCase
 
         self::assertSame(['schema_version', 'content_id', 'candidate', 'framework', 'lock_sha256', 'capabilities', 'journeys', 'result', 'evidence', 'next_action'], array_keys($receipt));
         self::assertSame('fight-common.framework-support-receipt/v1', $receipt['schema_version']);
-        self::assertSame(['package' => 'johnnickell/fight-common', 'version' => 'dev-develop', 'reference' => '4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16'], $receipt['candidate']);
+        self::assertSame(['package' => 'johnnickell/fight-common', 'version' => 'dev-develop', 'reference' => 'cfb951c368f9b40fe460e931011b092d8eef6509'], $receipt['candidate']);
         self::assertSame('laravel', $receipt['framework']['name']);
+        self::assertSame('13.30.0', $receipt['framework']['version']);
         self::assertSame([
             'Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\BroadcastingServiceProvider',
             'Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\MessagingServiceProvider',
@@ -35,7 +36,7 @@ final class FrameworkSupportReceiptTest extends TestCase
             'Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\FilesystemServiceProvider',
         ], $receipt['framework']['providers']);
         foreach ($receipt['capabilities'] as $capability => $state) {
-            self::assertContains($state, ['ship', 'wire', 'unavailable'], sprintf('%s has an invalid capability state.', $capability));
+            self::assertContains($state, ['ship', 'wire', 'unavailable', 'blocked'], sprintf('%s has an invalid capability state.', $capability));
         }
         self::assertSame(hash_file('sha256', $root.'/composer.lock'), $receipt['lock_sha256']);
         $lowestLock = $root.'/evidence/framework-support/composer-lowest.lock';
@@ -46,8 +47,9 @@ final class FrameworkSupportReceiptTest extends TestCase
         $fightCommon = array_values(array_filter($lowest['packages'], static fn (array $package): bool => $package['name'] === 'johnnickell/fight-common'));
         self::assertCount(1, $fightCommon);
         self::assertSame('dev-develop', $fightCommon[0]['version']);
-        self::assertSame('4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16', $fightCommon[0]['source']['reference']);
+        self::assertSame('cfb951c368f9b40fe460e931011b092d8eef6509', $fightCommon[0]['source']['reference']);
         self::assertSame('passed', $receipt['result']);
+        self::assertSame('ship', $receipt['capabilities']['hmac_request_signing']);
         self::assertNull($receipt['next_action']);
 
         $content = $receipt;

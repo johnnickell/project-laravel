@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae21603e20ee54d594c55c14b446d361",
+    "content-hash": "e4b458a1d6d16985c9fc4eca7b519553",
     "packages": [
         {
             "name": "brick/math",
@@ -1087,7 +1087,7 @@
             "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "git@github.com:johnnickell/fight-access-control.git",
+                "url": "https://github.com/johnnickell/fight-access-control.git",
                 "reference": "4259ea0b77bc2e1d87e62ab70b64af63bae99477"
             },
             "dist": {
@@ -1126,6 +1126,10 @@
                 "MIT"
             ],
             "description": "Framework-neutral identity, credential, session, authorization, and account-lifecycle contracts",
+            "support": {
+                "source": "https://github.com/johnnickell/fight-access-control/tree/develop",
+                "issues": "https://github.com/johnnickell/fight-access-control/issues"
+            },
             "time": "2026-08-31T03:38:38+00:00"
         },
         {
@@ -1133,13 +1137,13 @@
             "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "git@github.com:johnnickell/fight-common.git",
-                "reference": "4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16"
+                "url": "https://github.com/johnnickell/fight-common.git",
+                "reference": "cfb951c368f9b40fe460e931011b092d8eef6509"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnnickell/fight-common/zipball/4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16",
-                "reference": "4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16",
+                "url": "https://api.github.com/repos/johnnickell/fight-common/zipball/cfb951c368f9b40fe460e931011b092d8eef6509",
+                "reference": "cfb951c368f9b40fe460e931011b092d8eef6509",
                 "shasum": ""
             },
             "require": {
@@ -1261,7 +1265,11 @@
                 "MIT"
             ],
             "description": "A shared PHP library for Hexagonal Architecture, CQRS, and reusable domain primitives",
-            "time": "2026-09-01T02:56:07+00:00"
+            "support": {
+                "source": "https://github.com/johnnickell/fight-common/tree/develop",
+                "issues": "https://github.com/johnnickell/fight-common/issues"
+            },
+            "time": "2026-09-01T18:37:43+00:00"
         },
         {
             "name": "laravel/framework",
@@ -1680,6 +1688,79 @@
             "time": "2026-03-17T14:53:17+00:00"
         },
         {
+            "name": "lcobucci/jwt",
+            "version": "5.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lcobucci/jwt.git",
+                "reference": "bb3e9f21e4196e8afc41def81ef649c164bca25e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/bb3e9f21e4196e8afc41def81ef649c164bca25e",
+                "reference": "bb3e9f21e4196e8afc41def81ef649c164bca25e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "ext-sodium": "*",
+                "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
+                "psr/clock": "^1.0"
+            },
+            "require-dev": {
+                "infection/infection": "^0.29",
+                "lcobucci/clock": "^3.2",
+                "lcobucci/coding-standard": "^11.0",
+                "phpbench/phpbench": "^1.2",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10.7",
+                "phpstan/phpstan-deprecation-rules": "^1.1.3",
+                "phpstan/phpstan-phpunit": "^1.3.10",
+                "phpstan/phpstan-strict-rules": "^1.5.0",
+                "phpunit/phpunit": "^11.1"
+            },
+            "suggest": {
+                "lcobucci/clock": ">= 3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lcobucci\\JWT\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Luís Cobucci",
+                    "email": "lcobucci@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple library to work with JSON Web Token and JSON Web Signature",
+            "keywords": [
+                "JWS",
+                "jwt"
+            ],
+            "support": {
+                "issues": "https://github.com/lcobucci/jwt/issues",
+                "source": "https://github.com/lcobucci/jwt/tree/5.6.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/lcobucci",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/lcobucci",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2025-10-17T11:30:53+00:00"
+        },
+        {
             "name": "league/commonmark",
             "version": "2.9.0",
             "source": {
@@ -2019,25 +2100,25 @@
         },
         {
             "name": "league/mime-type-detection",
-            "version": "1.0.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/mime-type-detection.git",
-                "reference": "bd4d425ab8eabcd8595571b33665ae3cd2aaeeff"
+                "reference": "fda190b62b962d96a069fcc414d781db66d65b69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/bd4d425ab8eabcd8595571b33665ae3cd2aaeeff",
-                "reference": "bd4d425ab8eabcd8595571b33665ae3cd2aaeeff",
+                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/fda190b62b962d96a069fcc414d781db66d65b69",
+                "reference": "fda190b62b962d96a069fcc414d781db66d65b69",
                 "shasum": ""
             },
             "require": {
                 "ext-fileinfo": "*",
-                "php": "^7.2"
+                "php": "^7.2 || ^8.0"
             },
             "require-dev": {
-                "phpstan/phpstan": "^0.12.11",
-                "phpunit/phpunit": "^8.5"
+                "phpstan/phpstan": "^0.12.36",
+                "phpunit/phpunit": "^8.5.8"
             },
             "type": "library",
             "autoload": {
@@ -2058,7 +2139,7 @@
             "description": "Mime-type detection for Flysystem",
             "support": {
                 "issues": "https://github.com/thephpleague/mime-type-detection/issues",
-                "source": "https://github.com/thephpleague/mime-type-detection/tree/master"
+                "source": "https://github.com/thephpleague/mime-type-detection/tree/main"
             },
             "funding": [
                 {
@@ -2070,7 +2151,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-02-28T16:48:40+00:00"
+            "time": "2020-08-09T10:34:01+00:00"
         },
         {
             "name": "league/uri",
@@ -2457,34 +2538,37 @@
         },
         {
             "name": "nette/schema",
-            "version": "v1.2.0",
+            "version": "v1.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/schema.git",
-                "reference": "9962564311f4affebd63f9cab014ab69266306ce"
+                "reference": "2befc2f42d7c715fd9d95efc31b1081e5d765004"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/schema/zipball/9962564311f4affebd63f9cab014ab69266306ce",
-                "reference": "9962564311f4affebd63f9cab014ab69266306ce",
+                "url": "https://api.github.com/repos/nette/schema/zipball/2befc2f42d7c715fd9d95efc31b1081e5d765004",
+                "reference": "2befc2f42d7c715fd9d95efc31b1081e5d765004",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^3.1.4",
-                "php": ">=7.1 <8.1"
+                "nette/utils": "^4.0",
+                "php": "8.1 - 8.5"
             },
             "require-dev": {
-                "nette/tester": "^2.2",
-                "phpstan/phpstan-nette": "^0.12",
-                "tracy/tracy": "^2.3"
+                "nette/tester": "^2.5.2",
+                "phpstan/phpstan-nette": "^2.0@stable",
+                "tracy/tracy": "^2.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
+                "psr-4": {
+                    "Nette\\": "src"
+                },
                 "classmap": [
                     "src/"
                 ]
@@ -2513,31 +2597,36 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/schema/issues",
-                "source": "https://github.com/nette/schema/tree/v1.2.0"
+                "source": "https://github.com/nette/schema/tree/v1.3.3"
             },
-            "time": "2021-01-21T14:49:23+00:00"
+            "time": "2025-10-30T22:57:59+00:00"
         },
         {
             "name": "nette/utils",
-            "version": "v3.1.4",
+            "version": "v4.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "19b3057d44cf5306c64f3c51a7fb77fa834fda1c"
+                "reference": "c930ca4e3cf4f17dcfb03037703679d2396d2ede"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/19b3057d44cf5306c64f3c51a7fb77fa834fda1c",
-                "reference": "19b3057d44cf5306c64f3c51a7fb77fa834fda1c",
+                "url": "https://api.github.com/repos/nette/utils/zipball/c930ca4e3cf4f17dcfb03037703679d2396d2ede",
+                "reference": "c930ca4e3cf4f17dcfb03037703679d2396d2ede",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": "8.0 - 8.5"
+            },
+            "conflict": {
+                "nette/finder": "<3",
+                "nette/schema": "<1.2.2"
             },
             "require-dev": {
-                "nette/tester": "~2.0",
-                "phpstan/phpstan": "^0.12",
-                "tracy/tracy": "^2.3"
+                "jetbrains/phpstorm-attributes": "^1.2",
+                "nette/tester": "^2.5",
+                "phpstan/phpstan-nette": "^2.0@stable",
+                "tracy/tracy": "^2.9"
             },
             "suggest": {
                 "ext-gd": "to use Image",
@@ -2545,16 +2634,18 @@
                 "ext-intl": "to use Strings::webalize(), toAscii(), normalize() and compare()",
                 "ext-json": "to use Nette\\Utils\\Json",
                 "ext-mbstring": "to use Strings::lower() etc...",
-                "ext-tokenizer": "to use Nette\\Utils\\Reflection::getUseStatements()",
-                "ext-xml": "to use Strings::length() etc. when mbstring is not available"
+                "ext-tokenizer": "to use Nette\\Utils\\Reflection::getUseStatements()"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
+                "psr-4": {
+                    "Nette\\": "src"
+                },
                 "classmap": [
                     "src/"
                 ]
@@ -2595,9 +2686,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/utils/issues",
-                "source": "https://github.com/nette/utils/tree/v3.1.4"
+                "source": "https://github.com/nette/utils/tree/v4.0.8"
             },
-            "time": "2020-11-25T20:53:17+00:00"
+            "time": "2025-08-06T21:43:34+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -4216,76 +4307,6 @@
                 }
             ],
             "time": "2021-07-12T14:48:14+00:00"
-        },
-        {
-            "name": "symfony/filesystem",
-            "version": "v7.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/filesystem.git",
-                "reference": "d551b38811096d0be9c4691d406991b47c0c630a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/d551b38811096d0be9c4691d406991b47c0c630a",
-                "reference": "d551b38811096d0be9c4691d406991b47c0c630a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "symfony/polyfill-ctype": "~1.8",
-                "symfony/polyfill-mbstring": "~1.8"
-            },
-            "require-dev": {
-                "symfony/process": "^6.4|^7.0|^8.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Filesystem\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Provides basic utilities for the filesystem",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v7.4.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/nicolas-grekas",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2025-11-27T13:27:24+00:00"
         },
         {
             "name": "symfony/finder",
@@ -8870,7 +8891,7 @@
     "prefer-stable": true,
     "prefer-lowest": true,
     "platform": {
-        "php": "^8.3"
+        "php": "^8.5"
     },
     "platform-dev": {},
     "plugin-api-version": "2.9.0"
