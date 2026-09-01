@@ -24,14 +24,23 @@ if [ -z "$composer_auth" ]; then
 fi
 
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-lane_root=$(mktemp -d /private/tmp/project-laravel-framework-support-"$lane"-XXXXXX)
+tmp_base=${TMPDIR:-/tmp}
+if [ ! -d "$tmp_base" ] || [ ! -w "$tmp_base" ]; then
+    echo "Temporary directory is not writable: $tmp_base" >&2
+    exit 1
+fi
+lane_root=$(mktemp -d "$tmp_base/project-laravel-framework-support-$lane-XXXXXX")
 trap 'rm -rf "$lane_root"' EXIT INT TERM
 
 mkdir -p "$lane_root/database"
 rsync -a --exclude .git --exclude vendor --exclude var --exclude .runs "$root/" "$lane_root/"
 touch "$lane_root/database/database.sqlite"
 
-docker run --rm \
+docker build --file "$root/etc/docker/fpm/Dockerfile" --tag project-laravel-build "$root"
+
+# COMPOSER_AUTH reaches only the disposable Composer process through stdin, never
+# Docker's command line, process list, a file, or command output.
+printf '%s' "$composer_auth" | docker run --rm -i \
     --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
     --env APP_CONFIG_CACHE=/app/var/cache/laravel/config.php \
     --env APP_EVENTS_CACHE=/app/var/cache/laravel/events.php \
@@ -41,8 +50,12 @@ docker run --rm \
     --env VIEW_COMPILED_PATH=/app/var/cache/laravel/views \
     --env CACHE_STORE=file \
     --env CACHE_FILE_PATH=/app/var/cache/laravel/data \
-    --env COMPOSER_AUTH="$composer_auth" \
+    --env COMPOSER_AUTH_FROM_STDIN=1 \
     --volume "$lane_root:/app" --workdir /app project-laravel-build sh -ec '
+        if [ "${COMPOSER_AUTH_FROM_STDIN:-}" = 1 ]; then
+            COMPOSER_AUTH=$(cat)
+            export COMPOSER_AUTH
+        fi
         mkdir -p var/cache/laravel var/cache/phpunit
         if [ "'$lane'" = lowest ]; then
             composer update --prefer-lowest --prefer-stable --no-interaction --prefer-dist --no-progress
@@ -52,14 +65,15 @@ docker run --rm \
         composer install --no-interaction --prefer-dist --no-progress
         php scripts/artisan migrate --force
         php scripts/artisan config:cache
-        php vendor/bin/phpunit tests/Feature/FightCommonCapabilityTest.php tests/Feature/FightCommonMessagingJourneyTest.php tests/Feature/FightCommonEventPublicationTest.php tests/Feature/FightCommonPrivatePublicationTest.php tests/Feature/FightCommonSecurityAndFilesystemJourneyTest.php tests/Architecture/SourceBoundaryTest.php
+        env -u APP_CONFIG_CACHE php vendor/bin/phpunit tests/Feature/FightCommonCapabilityTest.php tests/Feature/FightCommonMessagingJourneyTest.php tests/Feature/FightCommonEventPublicationTest.php tests/Feature/FightCommonPrivatePublicationTest.php tests/Feature/FightCommonSecurityAndFilesystemJourneyTest.php tests/Feature/FightCommonNativeAdapterJourneyTest.php tests/Architecture/SourceBoundaryTest.php
     '
 
 if [ "$lane" = lowest ]; then
     cp "$lane_root/composer.lock" "$root/evidence/framework-support/composer-lowest.lock"
-    (cd "$root" && sha256sum evidence/framework-support/composer-lowest.lock) > "$root/evidence/framework-support/composer-lowest.lock.sha256"
+    digest=$(php -r 'echo hash_file("sha256", $argv[1]);' "$root/evidence/framework-support/composer-lowest.lock")
+    printf '%s  %s\n' "$digest" evidence/framework-support/composer-lowest.lock > "$root/evidence/framework-support/composer-lowest.lock.sha256"
 else
     cp "$lane_root/composer.lock" "$root/composer.lock"
 fi
 
-sha256sum "$lane_root/composer.lock"
+php -r 'printf("%s  composer.lock\\n", hash_file("sha256", $argv[1]));' "$lane_root/composer.lock"

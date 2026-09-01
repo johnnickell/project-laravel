@@ -92,4 +92,19 @@ final class SourceBoundaryTest extends TestCase
         self::assertStringContainsString('graphify-out/', $gitignore);
         self::assertStringNotContainsString('/graphify-out/', $gitignore);
     }
+
+    public function test_framework_support_lanes_are_portable_and_do_not_expose_composer_credentials(): void
+    {
+        $root = dirname(__DIR__, 2);
+        $lane = (string) file_get_contents($root.'/scripts/framework-support-lane');
+
+        self::assertStringContainsString('tmp_base=${TMPDIR:-/tmp}', $lane);
+        self::assertStringNotContainsString('/private/tmp', $lane);
+        self::assertStringContainsString('docker build --file', $lane);
+        self::assertStringContainsString('docker run --rm -i', $lane);
+        self::assertStringContainsString('COMPOSER_AUTH=$(cat)', $lane);
+        self::assertStringNotContainsString('--env COMPOSER_AUTH="$composer_auth"', $lane);
+        self::assertStringNotContainsString('sha256sum', $lane);
+        self::assertStringContainsString('hash_file', $lane);
+    }
 }

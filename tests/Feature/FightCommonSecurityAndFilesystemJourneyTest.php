@@ -13,10 +13,41 @@ use Fight\Common\Application\Auth\Security\TokenEncoder;
 use Fight\Common\Application\Filesystem\Exception\FileNotFoundException;
 use Fight\Common\Application\Filesystem\Filesystem;
 use GuzzleHttp\Psr7\ServerRequest;
+use RuntimeException;
 use Tests\TestCase;
 
 final class FightCommonSecurityAndFilesystemJourneyTest extends TestCase
 {
+    public function test_security_services_boot_from_explicit_test_configuration(): void
+    {
+        self::assertNotSame('', config('fight.security.hmac.public'));
+        self::assertNotSame('', config('fight.security.hmac.private'));
+        self::assertNotSame('', config('fight.security.jwt.secret'));
+        self::assertIsObject($this->app->make(RequestService::class));
+        self::assertIsObject($this->app->make(TokenEncoder::class));
+    }
+
+    public function test_security_services_fail_clearly_when_required_configuration_is_missing(): void
+    {
+        config(['fight.security.hmac.private' => '']);
+
+        try {
+            $this->app->make(RequestService::class);
+            self::fail('Missing HMAC configuration must fail before Fight security services resolve.');
+        } catch (RuntimeException $exception) {
+            self::assertSame('FIGHT_HMAC_PRIVATE must be configured before resolving Fight security services.', $exception->getMessage());
+        }
+
+        config(['fight.security.jwt.secret' => '']);
+
+        try {
+            $this->app->make(TokenEncoder::class);
+            self::fail('Missing JWT configuration must fail before Fight security services resolve.');
+        } catch (RuntimeException $exception) {
+            self::assertSame('FIGHT_JWT_SECRET must be configured before resolving Fight security services.', $exception->getMessage());
+        }
+    }
+
     public function test_jwt_services_round_trip_through_the_booted_container(): void
     {
         $token = $this->app->make(TokenEncoder::class)->encode(['sub' => 'profile-user'], new DateTimeImmutable('+5 minutes'));

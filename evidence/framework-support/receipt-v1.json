@@ -1,9 +1,9 @@
 {
     "schema_version": "fight-common.framework-support-receipt/v1",
-    "content_id": "ea7339f4cc2ed87b7f24f18873a2b3feb5f55f4715d41a5d462af44eb10f51a5",
+    "content_id": "3467b158ad2a8045f4ec3ebee415f865d3d3e5367f2e93c19a32beff99aff551",
     "candidate": {
         "package": "johnnickell/fight-common",
-        "version": "dev-develop",
+        "version": "1.2.0-dev",
         "reference": "cfb951c368f9b40fe460e931011b092d8eef6509"
     },
     "framework": {
@@ -65,13 +65,14 @@
         {"name": "private_publication", "status": "passed", "evidence": "tests/Feature/FightCommonPrivatePublicationTest.php"},
         {"name": "planning_check", "status": "passed", "evidence": "./bin/planning-check"},
         {"name": "build", "status": "passed", "evidence": "./bin/build"},
-        {"name": "security_and_filesystem", "status": "passed", "evidence": "tests/Feature/FightCommonSecurityAndFilesystemJourneyTest.php"}
+        {"name": "security_and_filesystem", "status": "passed", "evidence": "tests/Feature/FightCommonSecurityAndFilesystemJourneyTest.php"},
+        {"name": "native_laravel_adapters", "status": "passed", "evidence": "tests/Feature/FightCommonNativeAdapterJourneyTest.php"}
     ],
     "result": "passed",
     "evidence": {
         "build": "./bin/build",
         "planning_check": "./bin/planning-check",
-        "receipt_sha256": "4bd09a53bb477ee2fe5b3d922c8a2fe7e711d0e0655c1efc6830784ede26c49e"
+        "receipt_sha256": "da599d89fb71d0699a3413ce962579ff47635613659b6d1de27c53303b2bdb4d"
     },
     "next_action": null
 }

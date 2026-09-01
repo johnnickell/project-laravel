@@ -89,6 +89,7 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 use Psr\Http\Client\ClientInterface as Psr18ClientInterface;
 use Psr\Log\LoggerInterface;
+use RuntimeException;
 
 final class FightServiceProvider extends ServiceProvider
 {
@@ -137,8 +138,8 @@ final class FightServiceProvider extends ServiceProvider
             assert($config instanceof Config);
 
             return new HmacAuthenticator(
-                (string) $config->get('fight.security.hmac.public'),
-                (string) $config->get('fight.security.hmac.private'),
+                self::requiredSecurityValue($config, 'fight.security.hmac.public', 'FIGHT_HMAC_PUBLIC'),
+                self::requiredSecurityValue($config, 'fight.security.hmac.private', 'FIGHT_HMAC_PRIVATE'),
                 (int) $config->get('fight.security.hmac.time_tolerance', 300),
             );
         });
@@ -147,21 +148,27 @@ final class FightServiceProvider extends ServiceProvider
             assert($config instanceof Config);
 
             return new HmacRequestService(
-                (string) $config->get('fight.security.hmac.public'),
-                (string) $config->get('fight.security.hmac.private'),
+                self::requiredSecurityValue($config, 'fight.security.hmac.public', 'FIGHT_HMAC_PUBLIC'),
+                self::requiredSecurityValue($config, 'fight.security.hmac.private', 'FIGHT_HMAC_PRIVATE'),
             );
         });
         $this->app->singleton(TokenEncoder::class, static function (Container $app): JwtEncoder {
             $config = $app->make('config');
             assert($config instanceof Config);
 
-            return new JwtEncoder((string) $config->get('fight.security.jwt.secret'), (string) $config->get('fight.security.jwt.algorithm', 'HS256'));
+            return new JwtEncoder(
+                self::requiredSecurityValue($config, 'fight.security.jwt.secret', 'FIGHT_JWT_SECRET'),
+                (string) $config->get('fight.security.jwt.algorithm', 'HS256'),
+            );
         });
         $this->app->singleton(TokenDecoder::class, static function (Container $app): JwtDecoder {
             $config = $app->make('config');
             assert($config instanceof Config);
 
-            return new JwtDecoder((string) $config->get('fight.security.jwt.secret'), (string) $config->get('fight.security.jwt.algorithm', 'HS256'));
+            return new JwtDecoder(
+                self::requiredSecurityValue($config, 'fight.security.jwt.secret', 'FIGHT_JWT_SECRET'),
+                (string) $config->get('fight.security.jwt.algorithm', 'HS256'),
+            );
         });
         $this->app->singleton(MessageFactory::class, GuzzleMessageFactory::class);
         $this->app->singleton(StreamFactory::class, GuzzleStreamFactory::class);
@@ -203,5 +210,16 @@ final class FightServiceProvider extends ServiceProvider
                 (string) $config->get('fight.scheduler.from_email', '')
             );
         });
+    }
+
+    private static function requiredSecurityValue(Config $config, string $key, string $environmentVariable): string
+    {
+        $value = $config->get($key);
+
+        if (! is_string($value) || trim($value) === '') {
+            throw new RuntimeException(sprintf('%s must be configured before resolving Fight security services.', $environmentVariable));
+        }
+
+        return $value;
     }
 }
