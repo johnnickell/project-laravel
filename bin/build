@@ -16,8 +16,18 @@ docker run --rm \
     --env CACHE_STORE=file \
     --env CACHE_FILE_PATH=/app/var/cache/laravel/data \
     --volume "$(pwd):/app" --workdir /app "$image" sh -ec '
-    # Composer reports an advisory for the intentional Fight Common VCS commit reference.
-    composer validate
+    # Temporary candidate-validation behavior: remove this allowlist when Fight Common 1.2 is tagged.
+    validation_output=$(composer validate 2>&1) || {
+        printf "%s\n" "$validation_output"
+        exit 1
+    }
+    printf "%s\n" "$validation_output"
+    expected_warning="- The package \"johnnickell/fight-common\" is pointing to a commit-ref, this is bad practice and can cause unforeseen issues."
+    warnings=$(printf "%s\n" "$validation_output" | grep -c "^- " || true)
+    if [ "$warnings" -ne 1 ] || ! printf "%s\n" "$validation_output" | grep -Fqx -- "$expected_warning"; then
+        echo "Unexpected Composer validation warning." >&2
+        exit 1
+    fi
     composer install --no-interaction --prefer-dist --no-progress
     php scripts/artisan config:cache
     test -f var/cache/laravel/config.php
