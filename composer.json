@@ -8,9 +8,10 @@
     "require": {
         "php": "^8.3",
         "johnnickell/fight-access-control": "dev-develop",
-        "johnnickell/fight-common": "^1.1",
+        "johnnickell/fight-common": "dev-develop as 1.2.0-dev",
         "laravel/framework": "^13.17",
-        "laravel/tinker": "^3.0"
+        "laravel/tinker": "^3.0",
+        "symfony/filesystem": "^7.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -37,6 +38,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/johnnickell/fight-access-control"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/johnnickell/fight-common"
         }
     ],
     "scripts": {

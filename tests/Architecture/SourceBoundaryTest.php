@@ -16,9 +16,14 @@ final class SourceBoundaryTest extends TestCase
         $root = dirname(__DIR__, 2);
         $manifest = json_decode((string) file_get_contents($root.'/composer.json'), true, flags: JSON_THROW_ON_ERROR);
 
-        self::assertSame('^1.1', $manifest['require']['johnnickell/fight-common']);
+        self::assertSame(
+            'dev-develop as 1.2.0-dev',
+            $manifest['require']['johnnickell/fight-common']
+        );
+        self::assertSame('^7.4', $manifest['require']['symfony/filesystem']);
         self::assertSame('dev-develop', $manifest['require']['johnnickell/fight-access-control']);
         self::assertContains('https://github.com/johnnickell/fight-access-control', array_column($manifest['repositories'], 'url'));
+        self::assertContains('https://github.com/johnnickell/fight-common', array_column($manifest['repositories'], 'url'));
 
         $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root.'/app'));
 

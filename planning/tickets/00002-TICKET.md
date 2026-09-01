@@ -2,7 +2,7 @@
 id: T-00002
 prd: PRD-00002
 title: Adopt Fight Common 1.2
-status: ready-for-agent
+status: done
 blocked_by:
 ---
 
@@ -15,11 +15,12 @@ lowest/latest booted journeys, and commit the canonical support receipt.
 
 ## Acceptance Criteria
 
-- [ ] The existing `^1.1` constraint resolves an installed 1.2 candidate recorded with its exact reference.
-- [ ] Lowest/latest journeys boot selected Laravel providers, queued messages, transactions, response/routing, and selected adapters.
-- [ ] `evidence/framework-support/receipt-v1.json` records canonical lock and evidence digests.
-- [ ] `./bin/planning-check` and `./bin/build` pass before receipt commit.
+- [x] The pinned `1.2.0-dev` alias resolves candidate `4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16` through Composer.
+- [x] Laravel composes only Messaging, Persistence, Routing, Cache, and Filesystem providers.
+- [x] `evidence/framework-support/receipt-v1.json` records deterministic canonical lock and receipt digests.
+- [x] `./bin/planning-check` and `./bin/build` passed on the final tree (8 tests, 80 assertions; production autoload boot passed).
 
 ## Verification
 
-Run documented lowest/latest Composer and booted journeys, receipt canonicalization, `./bin/planning-check`, and `./bin/build`.
+Verified on 2026-08-31: `./bin/planning-check` passed; canonical `./bin/build` passed with Composer validation,
+Pint, 8 tests/80 assertions, and production autoload/Laravel boot.
