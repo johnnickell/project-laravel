@@ -17,7 +17,7 @@ final class SourceBoundaryTest extends TestCase
         $manifest = json_decode((string) file_get_contents($root.'/composer.json'), true, flags: JSON_THROW_ON_ERROR);
 
         self::assertSame(
-            'dev-develop#cfb951c368f9b40fe460e931011b092d8eef6509 as 1.2.0-dev',
+            'dev-develop#ceae16393fd15a2a20687b7533dc048ab1f6a1af as 1.2.0-dev',
             $manifest['require']['johnnickell/fight-common']
         );
         self::assertArrayNotHasKey('symfony/filesystem', $manifest['require']);
@@ -68,6 +68,24 @@ final class SourceBoundaryTest extends TestCase
         self::assertFileDoesNotExist($root.'/.npmrc');
         self::assertFileDoesNotExist($root.'/vite.config.js');
         self::assertFileDoesNotExist($root.'/Dockerfile');
+    }
+
+    public function test_common_owns_the_laravel_async_and_private_adapters(): void
+    {
+        $root = dirname(__DIR__, 2);
+        $provider = (string) file_get_contents($root.'/app/Providers/FightServiceProvider.php');
+
+        foreach ([
+            'app/Infrastructure/Messaging/LaravelQueuedCommandBus.php',
+            'app/Infrastructure/Messaging/LaravelQueuedEventDispatcher.php',
+            'app/Infrastructure/Socket/LaravelPrivatePublisher.php',
+        ] as $path) {
+            self::assertFileDoesNotExist($root.'/'.$path);
+        }
+
+        self::assertStringNotContainsString('AsynchronousCommandBus::class', $provider);
+        self::assertStringNotContainsString('AsynchronousEventDispatcher::class', $provider);
+        self::assertStringNotContainsString('PrivatePublisher::class', $provider);
     }
 
     public function test_cache_artifacts_are_routed_to_var_cache(): void

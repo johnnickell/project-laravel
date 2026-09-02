@@ -38,4 +38,4 @@ No ticket is currently waiting on an unfinished local dependency.
 | Ticket | Parent PRD | Outcome |
 |--------|------------|---------|
 | [T-00001 — Establish the Canonical Full-Stack Laravel Starter Foundation](00001-TICKET.md) | [PRD-00001](../specs/00001-PRD.md) | Local and hosted `./bin/build` receipts are green. The governed bootstrap handoff is accepted. |
-| [T-00002 — Adopt Fight Common 1.2](00002-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Canonically valid `1.2.0-dev` receipt, fail-closed security, native adapter journeys, and fresh dependency lanes are verified. |
+| [T-00002 — Adopt Fight Common 1.2](00002-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Common-owned Laravel async/private adapters, canonical receipt, and fresh dependency/build evidence are verified at `ceae163`. |

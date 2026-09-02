@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use Fight\Common\Adapter\Messaging\Command\Sync\Routing\InMemoryCommandRouter;
+use Fight\Common\Adapter\Messaging\Laravel\LaravelCommandBus;
+use Fight\Common\Adapter\Messaging\Laravel\LaravelEventDispatcher;
 use Fight\Common\Application\Messaging\Command\AsynchronousCommandBus;
 use Fight\Common\Application\Messaging\Command\CommandBus;
 use Fight\Common\Application\Messaging\Command\CommandHandler;
@@ -37,6 +39,7 @@ final class FightCommonMessagingJourneyTest extends TestCase
     public function test_queued_command_is_persisted_after_commit_then_delivered_by_a_laravel_database_worker(): void
     {
         $this->prepareDatabaseQueue();
+        self::assertInstanceOf(LaravelCommandBus::class, $this->app->make(AsynchronousCommandBus::class));
         $handled = [];
         $this->app->make(InMemoryCommandRouter::class)->registerHandler(
             ProfileCommand::class,
@@ -59,6 +62,7 @@ final class FightCommonMessagingJourneyTest extends TestCase
     public function test_queued_event_is_persisted_after_commit_then_delivered_by_a_laravel_database_worker(): void
     {
         $this->prepareDatabaseQueue();
+        self::assertInstanceOf(LaravelEventDispatcher::class, $this->app->make(AsynchronousEventDispatcher::class));
         $handled = [];
         $this->app->make(EventDispatcher::class)->addHandler(
             ClassName::underscore(ProfileEvent::class),

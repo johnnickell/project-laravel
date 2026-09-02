@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Infrastructure\Socket\LaravelPrivatePublisher;
+use Fight\Common\Adapter\Socket\Laravel\LaravelPrivatePublisher;
 use Fight\Common\Application\Socket\Publisher;
 use Tests\TestCase;
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e4b458a1d6d16985c9fc4eca7b519553",
+    "content-hash": "d640e7301de9791ba47c67cd16ca225e",
     "packages": [
         {
             "name": "brick/math",
@@ -1138,12 +1138,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnnickell/fight-common.git",
-                "reference": "cfb951c368f9b40fe460e931011b092d8eef6509"
+                "reference": "ceae16393fd15a2a20687b7533dc048ab1f6a1af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnnickell/fight-common/zipball/cfb951c368f9b40fe460e931011b092d8eef6509",
-                "reference": "cfb951c368f9b40fe460e931011b092d8eef6509",
+                "url": "https://api.github.com/repos/johnnickell/fight-common/zipball/ceae16393fd15a2a20687b7533dc048ab1f6a1af",
+                "reference": "ceae16393fd15a2a20687b7533dc048ab1f6a1af",
                 "shasum": ""
             },
             "require": {
@@ -1269,7 +1269,7 @@
                 "source": "https://github.com/johnnickell/fight-common/tree/develop",
                 "issues": "https://github.com/johnnickell/fight-common/issues"
             },
-            "time": "2026-09-01T18:37:43+00:00"
+            "time": "2026-09-02T00:30:12+00:00"
         },
         {
             "name": "laravel/framework",

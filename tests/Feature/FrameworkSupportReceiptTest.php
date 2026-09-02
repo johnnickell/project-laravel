@@ -15,9 +15,9 @@ final class FrameworkSupportReceiptTest extends TestCase
 
         self::assertSame(['schema_version', 'content_id', 'candidate', 'framework', 'lock_sha256', 'capabilities', 'journeys', 'result', 'evidence', 'next_action'], array_keys($receipt));
         self::assertSame('fight-common.framework-support-receipt/v1', $receipt['schema_version']);
-        self::assertSame(['package' => 'johnnickell/fight-common', 'version' => '1.2.0-dev', 'reference' => 'cfb951c368f9b40fe460e931011b092d8eef6509'], $receipt['candidate']);
+        self::assertSame(['package' => 'johnnickell/fight-common', 'version' => '1.2.0-dev', 'reference' => 'ceae16393fd15a2a20687b7533dc048ab1f6a1af'], $receipt['candidate']);
         self::assertSame('laravel', $receipt['framework']['name']);
-        self::assertSame('13.30.0', $receipt['framework']['version']);
+        self::assertSame('13.30.1', $receipt['framework']['version']);
         self::assertSame([
             'Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\BroadcastingServiceProvider',
             'Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\MessagingServiceProvider',
@@ -53,7 +53,7 @@ final class FrameworkSupportReceiptTest extends TestCase
         $fightCommon = array_values(array_filter($lowest['packages'], static fn (array $package): bool => $package['name'] === 'johnnickell/fight-common'));
         self::assertCount(1, $fightCommon);
         self::assertSame('dev-develop', $fightCommon[0]['version']);
-        self::assertSame('cfb951c368f9b40fe460e931011b092d8eef6509', $fightCommon[0]['source']['reference']);
+        self::assertSame('ceae16393fd15a2a20687b7533dc048ab1f6a1af', $fightCommon[0]['source']['reference']);
         self::assertSame('passed', $receipt['result']);
         self::assertSame('ship', $receipt['capabilities']['hmac_request_signing']);
         self::assertTrue(self::hasCanonicalOutcome($receipt));

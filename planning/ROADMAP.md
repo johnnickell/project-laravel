@@ -4,7 +4,7 @@
 
 | PRD | Target | Status | Current outcome |
 | --- | --- | --- | --- |
-| [PRD-00002](specs/00002-PRD.md) | Fight Common 1.2 | in-progress | Canonical receipt identity, fail-closed security configuration, native-adapter journeys, and fresh lowest/latest lanes are verified at `cfb951c`; Fight Common 2.0 migration authority remains outstanding. |
+| [PRD-00002](specs/00002-PRD.md) | Fight Common 1.2 | in-progress | Common-owned Laravel async/private adapters, fresh lowest/latest lanes, and final receipt gates are verified at `ceae163`; Fight Common 2.0 migration authority remains outstanding. |
 
 ## Route to 1.0
 

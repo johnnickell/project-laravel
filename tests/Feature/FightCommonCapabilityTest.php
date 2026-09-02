@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Infrastructure\Socket\LaravelPrivatePublisher;
 use Fight\Common\Adapter\Cache\Laravel\LaravelCache;
 use Fight\Common\Adapter\Filesystem\Laravel\LaravelFilesystem;
 use Fight\Common\Adapter\Http\Laravel\JSendResponse;
+use Fight\Common\Adapter\Messaging\Laravel\LaravelCommandBus;
+use Fight\Common\Adapter\Messaging\Laravel\LaravelEventDispatcher;
 use Fight\Common\Adapter\Persistence\Laravel\LaravelTransactionalUnitOfWork;
 use Fight\Common\Adapter\Routing\Laravel\LaravelUrlGenerator;
+use Fight\Common\Adapter\Socket\Laravel\LaravelPrivatePublisher;
 use Fight\Common\Application\Auth\Authenticator;
 use Fight\Common\Application\Auth\RequestService;
 use Fight\Common\Application\Auth\Security\PasswordHasher;
@@ -62,6 +64,8 @@ final class FightCommonCapabilityTest extends TestCase
         self::assertInstanceOf(LaravelTransactionalUnitOfWork::class, $this->app->make(TransactionalUnitOfWork::class));
         self::assertInstanceOf(LaravelUrlGenerator::class, $this->app->make(UrlGenerator::class));
         self::assertInstanceOf(LaravelFilesystem::class, $this->app->make(Filesystem::class));
+        self::assertInstanceOf(LaravelCommandBus::class, $this->app->make(AsynchronousCommandBus::class));
+        self::assertInstanceOf(LaravelEventDispatcher::class, $this->app->make(AsynchronousEventDispatcher::class));
         self::assertInstanceOf(LaravelPrivatePublisher::class, $this->app->make(PrivatePublisher::class));
         foreach ([
             PasswordHasher::class, PasswordValidator::class, TokenEncoder::class, TokenDecoder::class,

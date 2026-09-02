@@ -1,14 +1,14 @@
 {
     "schema_version": "fight-common.framework-support-receipt/v1",
-    "content_id": "3467b158ad2a8045f4ec3ebee415f865d3d3e5367f2e93c19a32beff99aff551",
+    "content_id": "bdda487f5ae57a6137b962be83680361be5d40967dc739d3ce2c6cc75842b8d6",
     "candidate": {
         "package": "johnnickell/fight-common",
         "version": "1.2.0-dev",
-        "reference": "cfb951c368f9b40fe460e931011b092d8eef6509"
+        "reference": "ceae16393fd15a2a20687b7533dc048ab1f6a1af"
     },
     "framework": {
         "name": "laravel",
-        "version": "13.30.0",
+        "version": "13.30.1",
         "providers": [
             "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\BroadcastingServiceProvider",
             "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\MessagingServiceProvider",
@@ -27,7 +27,7 @@
             "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\FilesystemServiceProvider"
         ]
     },
-    "lock_sha256": "f358655de55b4191aacaac10cb7be458b3dee3a9160987935a42b3119107eba4",
+    "lock_sha256": "aaa784e6a6577f48ddd05d93c6338f1fb47bb001892a807a760f4d2464118487",
     "capabilities": {
         "password_security": "ship",
         "jwt": "ship",
@@ -72,7 +72,7 @@
     "evidence": {
         "build": "./bin/build",
         "planning_check": "./bin/planning-check",
-        "receipt_sha256": "da599d89fb71d0699a3413ce962579ff47635613659b6d1de27c53303b2bdb4d"
+        "receipt_sha256": "f45fb0d770809402fb5310746ecf4e0ba56d5867796c29a1c6b29a123316755a"
     },
     "next_action": null
 }
