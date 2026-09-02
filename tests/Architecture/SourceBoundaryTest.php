@@ -16,9 +16,14 @@ final class SourceBoundaryTest extends TestCase
         $root = dirname(__DIR__, 2);
         $manifest = json_decode((string) file_get_contents($root.'/composer.json'), true, flags: JSON_THROW_ON_ERROR);
 
-        self::assertSame('^1.1', $manifest['require']['johnnickell/fight-common']);
+        self::assertSame(
+            'dev-develop#ceae16393fd15a2a20687b7533dc048ab1f6a1af as 1.2.0-dev',
+            $manifest['require']['johnnickell/fight-common']
+        );
+        self::assertArrayNotHasKey('symfony/filesystem', $manifest['require']);
         self::assertSame('dev-develop', $manifest['require']['johnnickell/fight-access-control']);
         self::assertContains('https://github.com/johnnickell/fight-access-control', array_column($manifest['repositories'], 'url'));
+        self::assertContains('https://github.com/johnnickell/fight-common', array_column($manifest['repositories'], 'url'));
 
         $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root.'/app'));
 
@@ -65,6 +70,24 @@ final class SourceBoundaryTest extends TestCase
         self::assertFileDoesNotExist($root.'/Dockerfile');
     }
 
+    public function test_common_owns_the_laravel_async_and_private_adapters(): void
+    {
+        $root = dirname(__DIR__, 2);
+        $provider = (string) file_get_contents($root.'/app/Providers/FightServiceProvider.php');
+
+        foreach ([
+            'app/Infrastructure/Messaging/LaravelQueuedCommandBus.php',
+            'app/Infrastructure/Messaging/LaravelQueuedEventDispatcher.php',
+            'app/Infrastructure/Socket/LaravelPrivatePublisher.php',
+        ] as $path) {
+            self::assertFileDoesNotExist($root.'/'.$path);
+        }
+
+        self::assertStringNotContainsString('AsynchronousCommandBus::class', $provider);
+        self::assertStringNotContainsString('AsynchronousEventDispatcher::class', $provider);
+        self::assertStringNotContainsString('PrivatePublisher::class', $provider);
+    }
+
     public function test_cache_artifacts_are_routed_to_var_cache(): void
     {
         $root = dirname(__DIR__, 2);
@@ -74,7 +97,7 @@ final class SourceBoundaryTest extends TestCase
         self::assertStringContainsString('VIEW_COMPILED_PATH=/app/var/cache/laravel/views', $environment);
         self::assertStringContainsString('CACHE_FILE_PATH=/app/var/cache/laravel/data', $environment);
         self::assertStringContainsString('SESSION_DRIVER=file', $environment);
-        self::assertStringContainsString('QUEUE_CONNECTION=sync', $environment);
+        self::assertStringContainsString('QUEUE_CONNECTION=database', $environment);
         self::assertStringContainsString('cacheDirectory="var/cache/phpunit"', (string) file_get_contents($root.'/phpunit.xml'));
         self::assertStringContainsString('/var/', (string) file_get_contents($root.'/.gitignore'));
     }
@@ -86,5 +109,20 @@ final class SourceBoundaryTest extends TestCase
 
         self::assertStringContainsString('graphify-out/', $gitignore);
         self::assertStringNotContainsString('/graphify-out/', $gitignore);
+    }
+
+    public function test_framework_support_lanes_are_portable_and_do_not_expose_composer_credentials(): void
+    {
+        $root = dirname(__DIR__, 2);
+        $lane = (string) file_get_contents($root.'/scripts/framework-support-lane');
+
+        self::assertStringContainsString('tmp_base=${TMPDIR:-/tmp}', $lane);
+        self::assertStringNotContainsString('/private/tmp', $lane);
+        self::assertStringContainsString('docker build --file', $lane);
+        self::assertStringContainsString('docker run --rm -i', $lane);
+        self::assertStringContainsString('COMPOSER_AUTH=$(cat)', $lane);
+        self::assertStringNotContainsString('--env COMPOSER_AUTH="$composer_auth"', $lane);
+        self::assertStringNotContainsString('sha256sum', $lane);
+        self::assertStringContainsString('hash_file', $lane);
     }
 }

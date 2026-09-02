@@ -4,14 +4,11 @@
 
 | PRD | Target | Status | Current outcome |
 | --- | --- | --- | --- |
-| [PRD-00002](specs/00002-PRD.md) | Fight Common 1.2 | ready-for-agent | Boot and commit the Laravel support receipt; retain 2.0 preparation as needs-info. |
+| [PRD-00002](specs/00002-PRD.md) | Fight Common 1.2 | in-progress | Common-owned Laravel async/private adapters, fresh lowest/latest lanes, and final receipt gates are verified at `ceae163`; Fight Common 2.0 migration authority remains outstanding. |
 
 ## Route to 1.0
 
-1. Resolve the supported Fight Common 1.2 candidate through this starter's Composer installation.
-2. Activate selected Laravel capabilities and prove lowest/latest booted journeys.
-3. Commit `evidence/framework-support/receipt-v1.json` after local planning and build evidence pass.
-4. Revisit 2.0 only after Fight Common publishes its migration authority.
+1. Revisit 2.0 only after Fight Common publishes its migration authority.
 
 ## Completed / Released
 

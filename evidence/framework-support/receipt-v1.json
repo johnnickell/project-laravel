@@ -1,0 +1,78 @@
+{
+    "schema_version": "fight-common.framework-support-receipt/v1",
+    "content_id": "bdda487f5ae57a6137b962be83680361be5d40967dc739d3ce2c6cc75842b8d6",
+    "candidate": {
+        "package": "johnnickell/fight-common",
+        "version": "1.2.0-dev",
+        "reference": "ceae16393fd15a2a20687b7533dc048ab1f6a1af"
+    },
+    "framework": {
+        "name": "laravel",
+        "version": "13.30.1",
+        "providers": [
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\BroadcastingServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\MessagingServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\PersistenceServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\SecurityServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\RoutingServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\CacheServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\HttpServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\HttpClientServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\LoggingServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\MailServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\MetricsServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\ProcessServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\TemplatingServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\FileStorageServiceProvider",
+            "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\FilesystemServiceProvider"
+        ]
+    },
+    "lock_sha256": "aaa784e6a6577f48ddd05d93c6338f1fb47bb001892a807a760f4d2464118487",
+    "capabilities": {
+        "password_security": "ship",
+        "jwt": "ship",
+        "request_middleware": "unavailable",
+        "container": "ship",
+        "queue": "ship",
+        "synchronous_messaging": "ship",
+        "persistence": "ship",
+        "event_store": "wire",
+        "event_publication_state": "wire",
+        "routing": "ship",
+        "response": "ship",
+        "cache": "ship",
+        "filesystem": "ship",
+        "file_storage": "wire",
+        "file_transfer": "wire",
+        "http_psr18": "wire",
+        "process": "wire",
+        "scheduler": "wire",
+        "mail": "ship",
+        "templating": "ship",
+        "observability": "wire",
+        "sms": "wire",
+        "broadcasting": "ship",
+        "private_publication": "ship",
+        "validation": "wire",
+        "hmac_request_signing": "ship"
+    },
+    "journeys": [
+        {"name": "lowest_resolution", "status": "passed", "evidence": "evidence/framework-support/composer-lowest.lock.sha256"},
+        {"name": "latest_resolution", "status": "passed", "evidence": "composer.lock"},
+        {"name": "complete_platform_profile", "status": "passed", "evidence": "tests/Feature/FightCommonCapabilityTest.php"},
+        {"name": "messaging_queue", "status": "passed", "evidence": "tests/Feature/FightCommonMessagingJourneyTest.php"},
+        {"name": "event_publication_state", "status": "passed", "evidence": "tests/Feature/FightCommonEventPublicationTest.php"},
+        {"name": "private_publication", "status": "passed", "evidence": "tests/Feature/FightCommonPrivatePublicationTest.php"},
+        {"name": "planning_check", "status": "passed", "evidence": "./bin/planning-check"},
+        {"name": "build", "status": "passed", "evidence": "./bin/build"},
+        {"name": "security_and_filesystem", "status": "passed", "evidence": "tests/Feature/FightCommonSecurityAndFilesystemJourneyTest.php"},
+        {"name": "native_laravel_adapters", "status": "passed", "evidence": "tests/Feature/FightCommonNativeAdapterJourneyTest.php"}
+    ],
+    "result": "passed",
+    "evidence": {
+        "build": "./bin/build",
+        "planning_check": "./bin/planning-check",
+        "receipt_sha256": "f45fb0d770809402fb5310746ecf4e0ba56d5867796c29a1c6b29a123316755a"
+    },
+    "next_action": null
+}
