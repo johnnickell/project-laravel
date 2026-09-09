@@ -8,7 +8,7 @@
     "require": {
         "php": "^8.5",
         "johnnickell/fight-access-control": "dev-develop",
-        "johnnickell/fight-common": "dev-develop#ceae16393fd15a2a20687b7533dc048ab1f6a1af as 1.2.0-dev",
+        "johnnickell/fight-common": "dev-develop#ce212af215d4ddf8d70f349b7a8c5e634dc9e539 as 1.2.0-dev",
         "guzzlehttp/guzzle": "^8.0",
         "laravel/framework": "^13.17",
         "laravel/tinker": "^3.0",

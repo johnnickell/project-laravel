@@ -17,7 +17,7 @@ final class SourceBoundaryTest extends TestCase
         $manifest = json_decode((string) file_get_contents($root.'/composer.json'), true, flags: JSON_THROW_ON_ERROR);
 
         self::assertSame(
-            'dev-develop#ceae16393fd15a2a20687b7533dc048ab1f6a1af as 1.2.0-dev',
+            'dev-develop#ce212af215d4ddf8d70f349b7a8c5e634dc9e539 as 1.2.0-dev',
             $manifest['require']['johnnickell/fight-common']
         );
         self::assertArrayNotHasKey('symfony/filesystem', $manifest['require']);

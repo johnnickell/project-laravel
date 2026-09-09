@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d640e7301de9791ba47c67cd16ca225e",
+    "content-hash": "124e16e29be9d17e38c04b70bbc6711e",
     "packages": [
         {
             "name": "brick/math",
@@ -1138,12 +1138,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnnickell/fight-common.git",
-                "reference": "ceae16393fd15a2a20687b7533dc048ab1f6a1af"
+                "reference": "ce212af215d4ddf8d70f349b7a8c5e634dc9e539"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnnickell/fight-common/zipball/ceae16393fd15a2a20687b7533dc048ab1f6a1af",
-                "reference": "ceae16393fd15a2a20687b7533dc048ab1f6a1af",
+                "url": "https://api.github.com/repos/johnnickell/fight-common/zipball/ce212af215d4ddf8d70f349b7a8c5e634dc9e539",
+                "reference": "ce212af215d4ddf8d70f349b7a8c5e634dc9e539",
                 "shasum": ""
             },
             "require": {
@@ -1257,7 +1257,6 @@
             "autoload-dev": {
                 "psr-4": {
                     "Fight\\Release\\": "release/src",
-                    "Fight\\Test\\Release\\": "release/tests",
                     "Fight\\Test\\Common\\": "tests"
                 }
             },
@@ -1269,7 +1268,7 @@
                 "source": "https://github.com/johnnickell/fight-common/tree/develop",
                 "issues": "https://github.com/johnnickell/fight-common/issues"
             },
-            "time": "2026-09-02T00:30:12+00:00"
+            "time": "2026-09-09T18:43:20+00:00"
         },
         {
             "name": "laravel/framework",

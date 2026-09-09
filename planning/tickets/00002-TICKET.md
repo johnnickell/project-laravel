@@ -32,3 +32,8 @@ private publisher; database-queue worker delivery; private publication; fail-clo
 transactional UnitOfWork; named routing; JSend response; and Laravel filesystem journeys. `./bin/planning-check`
 passed with 5 records and 3 active; the final detached `./bin/build` passed with 24 tests, 299 assertions, production
 autoload, and Laravel boot.
+## Supersession
+
+Fight Common's 2026-09-09 authorship-only history rewrite supersedes the commit identity recorded above without
+changing its source tree: `ceae16393fd15a2a20687b7533dc048ab1f6a1af -> ce212af215d4ddf8d70f349b7a8c5e634dc9e539`. T-00005 owns the fresh consumer locks,
+receipt digests, and verification for the rewritten identity; the original certification remains historical fact.
