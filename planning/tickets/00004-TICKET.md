@@ -2,7 +2,7 @@
 id: T-00004
 prd: PRD-00002
 title: Establish the Canonical Laravel Pre-Submit Quality Gate
-status: in-progress
+status: done
 blocked_by:
 ---
 
@@ -63,10 +63,11 @@ and align its minimal FPM runtime with the proven Fight CMS and Symfony starter 
 
 ## Completion Notes
 
-Local implementation is complete while the ticket remains `in-progress`: `./bin/planning-check`, the direct
+Local implementation is complete: `./bin/planning-check`, the direct
 standards and architecture tools, warning-free Pest with exact 100% owned-production statement coverage, both
 read-only dependency lanes, the frontend build, and the disposable `--no-dev` production-autoload proof pass on
 2026-09-09. The gate contains no `tests/Tooling` suite or synthetic fixtures added to certify its own scripts.
 
-Exact-head hosted CI remains explicitly pending `/ship`; do not mark this ticket `done` until that published-head
-result passes.
+Hosted `./bin/build` passed for published implementation head
+`575763d900f60f9a7b556c1f6431f8979a2760aa` in GitHub Actions run
+[34439214106](https://github.com/johnnickell/project-laravel/actions/runs/34439214106).

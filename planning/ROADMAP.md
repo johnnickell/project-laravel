@@ -4,7 +4,7 @@
 
 | PRD | Target | Status | Current outcome |
 | --- | --- | --- | --- |
-| [PRD-00002](specs/00002-PRD.md) | Fight Common 1.2 | in-progress | Common-owned adapters, dependency lanes, and receipt gates are verified; T-00004 owns the permanent pre-submit gate, while Fight Common 2.0 authority remains outstanding. |
+| [PRD-00002](specs/00002-PRD.md) | Fight Common 1.2 | in-progress | Common-owned adapters, dependency lanes, receipts, and the permanent pre-submit gate are verified; Fight Common 2.0 authority remains outstanding. |
 
 ## Route to 1.0
 
