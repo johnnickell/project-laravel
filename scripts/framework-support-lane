@@ -1,12 +1,20 @@
 #!/usr/bin/env sh
 set -eu
 
-lane=${1:?usage: scripts/framework-support-lane latest|lowest}
-
-case "$lane" in
-    latest|lowest) ;;
-    *) echo "Unknown framework-support lane: $lane" >&2; exit 64 ;;
+operation=${1:-verify}
+case "$operation" in
+    verify|refresh-lowest) ;;
+    *) echo "Usage: scripts/framework-support-lane [verify|refresh-lowest]" >&2; exit 64 ;;
 esac
+
+root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+image=${PROJECT_LARAVEL_BUILD_IMAGE:-project-laravel-build}
+tmp_base=${TMPDIR:-/tmp}
+
+if [ ! -d "$tmp_base" ] || [ ! -w "$tmp_base" ]; then
+    echo "Temporary directory is not writable: $tmp_base" >&2
+    exit 1
+fi
 
 # Credentials are process-local. This temporary candidate flow is compatible with
 # GitHub Actions (GITHUB_TOKEN) and local Keychain-backed gh authentication.
@@ -19,61 +27,109 @@ if [ -z "$composer_auth" ] && [ -n "$github_token" ]; then
     composer_auth=$(printf '{"github-oauth":{"github.com":"%s"}}' "$github_token")
 fi
 if [ -z "$composer_auth" ]; then
-    echo "No ephemeral Composer or GitHub authentication is available for the disposable lane." >&2
-    exit 1
+    composer_auth='{}'
 fi
 
-root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-tmp_base=${TMPDIR:-/tmp}
-if [ ! -d "$tmp_base" ] || [ ! -w "$tmp_base" ]; then
-    echo "Temporary directory is not writable: $tmp_base" >&2
-    exit 1
+if [ -z "${PROJECT_LARAVEL_BUILD_IMAGE:-}" ]; then
+    docker build --file "$root/etc/docker/build/Dockerfile" --tag "$image" "$root"
 fi
-lane_root=$(mktemp -d "$tmp_base/project-laravel-framework-support-$lane-XXXXXX")
-trap 'rm -rf "$lane_root"' EXIT INT TERM
 
-mkdir -p "$lane_root/database"
-rsync -a --exclude .git --exclude vendor --exclude var --exclude .runs "$root/" "$lane_root/"
-touch "$lane_root/database/database.sqlite"
+run_lowest_lane() {
+    # The committed lowest toolchain predates PHP 8.5's nullable-parameter deprecations.
+    # The canonical latest and coverage runs retain E_ALL, so owned code is never exempt.
+    php_error_reporting=8191
+    lane_root=$(mktemp -d "$tmp_base/project-laravel-framework-support-lowest-XXXXXX")
+    trap 'rm -rf "$lane_root"' EXIT INT TERM
 
-docker build --file "$root/etc/docker/fpm/Dockerfile" --tag project-laravel-build "$root"
+    mkdir -p "$lane_root/database"
+    rsync -a \
+        --exclude .git \
+        --exclude vendor \
+        --exclude var \
+        --exclude .runs \
+        --exclude client/node_modules \
+        --exclude public/build \
+        "$root/" "$lane_root/"
+    touch "$lane_root/database/database.sqlite"
 
-# COMPOSER_AUTH reaches only the disposable Composer process through stdin, never
-# Docker's command line, process list, a file, or command output.
-printf '%s' "$composer_auth" | docker run --rm -i \
-    --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
-    --env APP_CONFIG_CACHE=/app/var/cache/laravel/config.php \
-    --env APP_EVENTS_CACHE=/app/var/cache/laravel/events.php \
-    --env APP_PACKAGES_CACHE=/app/var/cache/laravel/packages.php \
-    --env APP_ROUTES_CACHE=/app/var/cache/laravel/routes.php \
-    --env APP_SERVICES_CACHE=/app/var/cache/laravel/services.php \
-    --env VIEW_COMPILED_PATH=/app/var/cache/laravel/views \
-    --env CACHE_STORE=file \
-    --env CACHE_FILE_PATH=/app/var/cache/laravel/data \
-    --env COMPOSER_AUTH_FROM_STDIN=1 \
-    --volume "$lane_root:/app" --workdir /app project-laravel-build sh -ec '
-        if [ "${COMPOSER_AUTH_FROM_STDIN:-}" = 1 ]; then
+    cp "$root/etc/evidence/framework-support/composer-lowest.lock" "$lane_root/composer.lock"
+
+    printf '%s' "$composer_auth" | docker run --rm -i \
+        --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
+        --env "APP_NAME=Fight Laravel Starter" \
+        --env APP_CONFIG_CACHE=/app/var/cache/laravel/config.php \
+        --env APP_EVENTS_CACHE=/app/var/cache/laravel/events.php \
+        --env APP_PACKAGES_CACHE=/app/var/cache/laravel/packages.php \
+        --env APP_ROUTES_CACHE=/app/var/cache/laravel/routes.php \
+        --env APP_SERVICES_CACHE=/app/var/cache/laravel/services.php \
+        --env COMPOSER_AUTH_FROM_STDIN=1 \
+        --env COMPOSER_HOME=/app/var/cache/composer \
+        --env HOME=/tmp \
+        --env LANE_ERROR_REPORTING="$php_error_reporting" \
+        --env VIEW_COMPILED_PATH=/app/var/cache/laravel/views \
+        --env CACHE_STORE=file \
+        --env CACHE_FILE_PATH=/app/var/cache/laravel/data \
+        --volume "$lane_root:/app" \
+        --workdir /app \
+        "$image" sh -ec '
             COMPOSER_AUTH=$(cat)
             export COMPOSER_AUTH
-        fi
-        mkdir -p var/cache/laravel var/cache/phpunit
-        if [ "'$lane'" = lowest ]; then
-            composer update --prefer-lowest --prefer-stable --no-interaction --prefer-dist --no-progress
-        else
-            composer update --no-interaction --prefer-dist --no-progress
-        fi
-        composer install --no-interaction --prefer-dist --no-progress
-        php scripts/artisan migrate --force
-        php scripts/artisan config:cache
-        env -u APP_CONFIG_CACHE php vendor/bin/phpunit tests/Feature/FightCommonCapabilityTest.php tests/Feature/FightCommonMessagingJourneyTest.php tests/Feature/FightCommonEventPublicationTest.php tests/Feature/FightCommonPrivatePublicationTest.php tests/Feature/FightCommonSecurityAndFilesystemJourneyTest.php tests/Feature/FightCommonNativeAdapterJourneyTest.php tests/Architecture/SourceBoundaryTest.php
-    '
+            mkdir -p var/cache/composer var/cache/laravel var/cache/phpunit
+            php -d error_reporting="$LANE_ERROR_REPORTING" /usr/bin/composer install \
+                --no-scripts --no-interaction --prefer-dist --no-progress
+            php -d error_reporting="$LANE_ERROR_REPORTING" scripts/artisan package:discover --ansi
+            php -d error_reporting="$LANE_ERROR_REPORTING" scripts/artisan migrate --force
+            php -d error_reporting="$LANE_ERROR_REPORTING" scripts/artisan config:cache
+            env -u APP_CONFIG_CACHE php -d error_reporting="$LANE_ERROR_REPORTING" vendor/bin/pest \
+                --fail-on-warning --fail-on-risky --fail-on-deprecation \
+                --fail-on-notice --fail-on-skipped --fail-on-incomplete \
+                tests/Feature/FightCommonCapabilityTest.php \
+                tests/Feature/FightCommonMessagingJourneyTest.php \
+                tests/Feature/FightCommonEventPublicationTest.php \
+                tests/Feature/FightCommonPrivatePublicationTest.php \
+                tests/Feature/FightCommonSecurityAndFilesystemJourneyTest.php \
+                tests/Feature/FightCommonNativeAdapterJourneyTest.php
+        '
 
-if [ "$lane" = lowest ]; then
-    cp "$lane_root/composer.lock" "$root/evidence/framework-support/composer-lowest.lock"
-    digest=$(php -r 'echo hash_file("sha256", $argv[1]);' "$root/evidence/framework-support/composer-lowest.lock")
-    printf '%s  %s\n' "$digest" evidence/framework-support/composer-lowest.lock > "$root/evidence/framework-support/composer-lowest.lock.sha256"
-else
-    cp "$lane_root/composer.lock" "$root/composer.lock"
+    php -r 'printf("%s  %s\n", hash_file("sha256", $argv[1]), $argv[2]);' \
+        "$lane_root/composer.lock" lowest
+    rm -rf "$lane_root"
+    trap - EXIT INT TERM
+}
+
+if [ "$operation" = refresh-lowest ]; then
+    refresh_root=$(mktemp -d "$tmp_base/project-laravel-framework-support-refresh-lowest-XXXXXX")
+    trap 'rm -rf "$refresh_root"' EXIT INT TERM
+    rsync -a --exclude .git --exclude vendor --exclude var --exclude .runs "$root/" "$refresh_root/"
+
+    printf '%s' "$composer_auth" | docker run --rm -i \
+        --env COMPOSER_AUTH_FROM_STDIN=1 \
+        --env COMPOSER_HOME=/app/var/cache/composer \
+        --env HOME=/tmp \
+        --volume "$refresh_root:/app" \
+        --workdir /app \
+        "$image" sh -ec '
+            COMPOSER_AUTH=$(cat)
+            export COMPOSER_AUTH
+            mkdir -p var/cache/composer
+            composer update --prefer-lowest --prefer-stable --no-interaction --prefer-dist --no-progress
+        '
+
+    mkdir -p "$root/etc/evidence/framework-support"
+    cp "$refresh_root/composer.lock" "$root/etc/evidence/framework-support/composer-lowest.lock"
+    digest=$(php -r 'echo hash_file("sha256", $argv[1]);' "$root/etc/evidence/framework-support/composer-lowest.lock")
+    printf '%s  %s\n' "$digest" etc/evidence/framework-support/composer-lowest.lock \
+        > "$root/etc/evidence/framework-support/composer-lowest.lock.sha256"
+    exit 0
 fi
 
-php -r 'printf("%s  composer.lock\\n", hash_file("sha256", $argv[1]));' "$lane_root/composer.lock"
+expected_digest=$(php -r 'echo hash_file("sha256", $argv[1]);' "$root/etc/evidence/framework-support/composer-lowest.lock")
+recorded_digest=$(cut -d ' ' -f 1 "$root/etc/evidence/framework-support/composer-lowest.lock.sha256")
+if [ "$expected_digest" != "$recorded_digest" ]; then
+    echo "Committed lowest lock does not match its SHA-256 evidence." >&2
+    exit 1
+fi
+
+# The root locked install plus canonical Pest run are the latest lane. Only the
+# lowest lock needs a second disposable install and journey run.
+run_lowest_lane

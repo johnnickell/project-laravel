@@ -1,45 +1,120 @@
 #!/usr/bin/env sh
 set -eu
 
-image=project-laravel-build
-mkdir -p var/cache/laravel var/cache/phpunit
-docker build --file etc/docker/fpm/Dockerfile --tag "$image" .
-docker run --rm \
-    --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
-    --env APP_NAME='Fight Laravel Starter' \
-    --env APP_CONFIG_CACHE=/app/var/cache/laravel/config.php \
-    --env APP_EVENTS_CACHE=/app/var/cache/laravel/events.php \
-    --env APP_PACKAGES_CACHE=/app/var/cache/laravel/packages.php \
-    --env APP_ROUTES_CACHE=/app/var/cache/laravel/routes.php \
-    --env APP_SERVICES_CACHE=/app/var/cache/laravel/services.php \
-    --env VIEW_COMPILED_PATH=/app/var/cache/laravel/views \
-    --env CACHE_STORE=file \
-    --env CACHE_FILE_PATH=/app/var/cache/laravel/data \
-    --volume "$(pwd):/app" --workdir /app "$image" sh -ec '
-    # Temporary candidate-validation behavior: remove this allowlist when Fight Common 1.2 is tagged.
-    validation_output=$(composer validate 2>&1) || {
-        printf "%s\n" "$validation_output"
-        exit 1
-    }
-    printf "%s\n" "$validation_output"
-    expected_warning="- The package \"johnnickell/fight-common\" is pointing to a commit-ref, this is bad practice and can cause unforeseen issues."
-    warnings=$(printf "%s\n" "$validation_output" | grep -c "^- " || true)
-    if [ "$warnings" -ne 1 ] || ! printf "%s\n" "$validation_output" | grep -Fqx -- "$expected_warning"; then
-        echo "Unexpected Composer validation warning." >&2
-        exit 1
-    fi
-    composer install --no-interaction --prefer-dist --no-progress
-    php scripts/artisan config:cache
-    test -f var/cache/laravel/config.php
-    python3 scripts/planning_portfolio.py
-    # Tooling boots Laravel with its own test configuration.
-    env -u APP_CONFIG_CACHE php vendor/bin/pint --test
-    env -u APP_CONFIG_CACHE php vendor/bin/phpunit
+root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+build_image=project-laravel-build
+runtime_image=project-laravel-runtime
 
-    production_root=$(mktemp -d)
-    trap "rm -rf \"$production_root\"" EXIT
-    cp -a . "$production_root"
-    cd "$production_root"
-    composer install --no-dev --no-interaction --prefer-dist --no-progress
-    php scripts/production-autoload-check.php
-'
+cd "$root"
+export APP_NAME='Fight Laravel Starter'
+
+# Planning remains at the host boundary so git ignore checks work in ordinary and linked worktrees.
+./bin/planning-check
+
+mkdir -p \
+    var/cache/composer \
+    var/cache/laravel/data \
+    var/cache/laravel/views \
+    var/cache/npm \
+    var/cache/phpstan \
+    var/cache/phpunit
+
+docker build --file etc/docker/build/Dockerfile --tag "$build_image" .
+docker build --file etc/docker/fpm/Dockerfile --tag "$runtime_image" .
+
+services=$(docker compose config --services)
+if [ "$services" != "api
+server" ]; then
+    echo "Compose must define exactly the api and server services." >&2
+    exit 1
+fi
+
+composer_auth=${COMPOSER_AUTH:-}
+github_token=${GITHUB_TOKEN:-${GH_TOKEN:-}}
+if [ -z "$composer_auth" ] && [ -z "$github_token" ] && command -v gh >/dev/null 2>&1; then
+    github_token=$(gh auth token 2>/dev/null || true)
+fi
+if [ -z "$composer_auth" ] && [ -n "$github_token" ]; then
+    composer_auth=$(printf '{"github-oauth":{"github.com":"%s"}}' "$github_token")
+fi
+if [ -z "$composer_auth" ]; then
+    composer_auth='{}'
+fi
+
+container_environment() {
+    printf '%s\n' \
+        --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
+        --env APP_NAME \
+        --env APP_CONFIG_CACHE=/app/var/cache/laravel/config.php \
+        --env APP_EVENTS_CACHE=/app/var/cache/laravel/events.php \
+        --env APP_PACKAGES_CACHE=/app/var/cache/laravel/packages.php \
+        --env APP_ROUTES_CACHE=/app/var/cache/laravel/routes.php \
+        --env APP_SERVICES_CACHE=/app/var/cache/laravel/services.php \
+        --env VIEW_COMPILED_PATH=/app/var/cache/laravel/views \
+        --env CACHE_STORE=file \
+        --env CACHE_FILE_PATH=/app/var/cache/laravel/data \
+        --env COMPOSER_HOME=/app/var/cache/composer \
+        --env HOME=/tmp
+}
+
+# shellcheck disable=SC2046
+printf '%s' "$composer_auth" | docker run --rm -i \
+    $(container_environment) \
+    --env COMPOSER_AUTH_FROM_STDIN=1 \
+    --volume "$root:/app" --workdir /app "$build_image" sh -ec '
+        COMPOSER_AUTH=$(cat)
+        export COMPOSER_AUTH
+        php scripts/validate-composer.php
+        composer install --no-interaction --prefer-dist --no-progress
+        php scripts/artisan config:cache
+        test -f var/cache/laravel/config.php
+        php scripts/artisan about --only=environment
+    '
+
+PROJECT_LARAVEL_BUILD_IMAGE="$build_image" scripts/framework-support-lane
+
+# shellcheck disable=SC2046
+docker run --rm \
+    $(container_environment) \
+    --volume "$root:/app" --workdir /app "$build_image" sh -ec '
+        env -u APP_CONFIG_CACHE php vendor/bin/pint --test
+        php vendor/bin/phpcs
+        php vendor/bin/phpstan analyse --no-progress
+        php vendor/bin/deptrac analyse --fail-on-uncovered --report-uncovered --no-cache
+        unassigned=$(php vendor/bin/deptrac debug:unassigned --no-cache --no-ansi)
+        printf "%s\n" "$unassigned"
+        if [ "$unassigned" != "There are no unassigned tokens." ]; then
+            echo "Deptrac found unassigned production code." >&2
+            exit 1
+        fi
+        php vendor/bin/rector process --dry-run
+        env -u APP_CONFIG_CACHE php -d pcov.enabled=1 vendor/bin/pest \
+            --coverage --exactly=100 \
+            --fail-on-warning --fail-on-risky --fail-on-deprecation \
+            --fail-on-notice --fail-on-skipped --fail-on-incomplete
+        npm ci --prefix client --cache /app/var/cache/npm --no-audit --no-fund
+        npm --prefix client run build
+    '
+
+production_root=$(mktemp -d "${TMPDIR:-/tmp}/project-laravel-production-XXXXXX")
+trap 'rm -rf "$production_root"' EXIT INT TERM
+rsync -a \
+    --exclude .git \
+    --exclude vendor \
+    --exclude var \
+    --exclude .runs \
+    --exclude client/node_modules \
+    "$root/" "$production_root/"
+mkdir -p "$production_root/database" "$production_root/var/cache/composer" "$production_root/var/cache/laravel/views"
+touch "$production_root/database/database.sqlite"
+
+# shellcheck disable=SC2046
+printf '%s' "$composer_auth" | docker run --rm -i \
+    $(container_environment) \
+    --env COMPOSER_AUTH_FROM_STDIN=1 \
+    --volume "$production_root:/app" --workdir /app "$build_image" sh -ec '
+        COMPOSER_AUTH=$(cat)
+        export COMPOSER_AUTH
+        composer install --no-dev --no-interaction --prefer-dist --no-progress --classmap-authoritative
+        php scripts/production-autoload-check.php
+    '

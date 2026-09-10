@@ -4,11 +4,16 @@ set -eu
 mkdir -p var/cache/laravel var/cache/phpunit
 image=project-laravel-build
 docker build --file etc/docker/build/Dockerfile --tag "$image" .
-# Compatibility entrypoint; Pest is the repository's canonical runner.
+# Pest's explicit test environment must not inherit Laravel's development config cache.
 docker run --rm \
     --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
     --env "APP_NAME=Fight Laravel Starter" \
     --env VIEW_COMPILED_PATH=/app/var/cache/laravel/views \
     --env CACHE_STORE=file \
     --env CACHE_FILE_PATH=/app/var/cache/laravel/data \
-    --volume "$(pwd):/app" --workdir /app "$image" php vendor/bin/pest "$@"
+    --volume "$(pwd):/app" --workdir /app "$image" \
+    php -d pcov.enabled=1 vendor/bin/pest \
+        --coverage --exactly=100 \
+        --fail-on-warning --fail-on-risky --fail-on-deprecation \
+        --fail-on-notice --fail-on-skipped --fail-on-incomplete \
+        "$@"

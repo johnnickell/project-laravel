@@ -1,0 +1,70 @@
+deptrac:
+  paths:
+    - ./app
+
+  layers:
+    - name: Domain
+      collectors:
+        - type: classLike
+          value: ^App\\Domain\\.*
+    - name: Application
+      collectors:
+        - type: classLike
+          value: ^App\\Application\\.*
+    - name: Adapter
+      collectors:
+        - type: classLike
+          value: ^App\\(Adapter\\.*|Providers\\.*)
+    - name: FightDomain
+      collectors:
+        - type: classLike
+          value: ^Fight\\(Common|AccessControl)\\Domain\\.*
+    - name: FightApplication
+      collectors:
+        - type: classLike
+          value: ^Fight\\(Common|AccessControl)\\Application\\.*
+    - name: FightAdapter
+      collectors:
+        - type: classLike
+          value: ^Fight\\(Common|AccessControl)\\Adapter\\.*
+    - name: Framework
+      collectors:
+        - type: classLike
+          value: ^Illuminate\\.*
+    - name: ThirdParty
+      collectors:
+        - type: bool
+          must:
+            - type: classLike
+              value: .*
+          must_not:
+            - type: classLike
+              value: ^(App|Fight\\(Common|AccessControl)|Illuminate)\\.*
+            - type: php_internal
+              value: .*
+    - name: PhpInternal
+      collectors:
+        - type: php_internal
+          value: .*
+
+  ruleset:
+    Domain:
+      - Domain
+      - FightDomain
+      - PhpInternal
+    Application:
+      - Application
+      - Domain
+      - FightApplication
+      - FightDomain
+      - PhpInternal
+    Adapter:
+      - Adapter
+      - Application
+      - Domain
+      - FightApplication
+      - FightDomain
+      - FightAdapter
+      - Framework
+      - ThirdParty
+      - PhpInternal
