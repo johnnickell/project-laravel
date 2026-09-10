@@ -23,7 +23,7 @@ When asked for the next wayfinder target, offer to chart a new feature rather th
 
 | Rank | Ticket | Parent PRD | Current slice |
 | --- | --- | --- | --- |
-| 1 | [T-00004 — Establish the Canonical Laravel Pre-Submit Quality Gate](00004-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Make `./bin/build` the permanent complete local and hosted gate. |
+| 1 | [T-00004 — Establish the Canonical Laravel Pre-Submit Quality Gate](00004-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Publish the verified implementation and qualify its exact head with hosted `./bin/build`. |
 
 ## Waiting
 
