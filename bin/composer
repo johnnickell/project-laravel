@@ -18,6 +18,7 @@ if [ -z "$composer_auth" ]; then
 fi
 
 printf '%s' "$composer_auth" | docker run --rm -i \
+    --user "$(id -u):$(id -g)" \
     --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
     --env APP_CONFIG_CACHE=/app/var/cache/laravel/config.php \
     --env APP_EVENTS_CACHE=/app/var/cache/laravel/events.php \

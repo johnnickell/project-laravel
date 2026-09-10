@@ -6,6 +6,7 @@ image=project-laravel-build
 docker build --file etc/docker/build/Dockerfile --tag "$image" .
 # Pest's explicit test environment must not inherit Laravel's development config cache.
 docker run --rm \
+    --user "$(id -u):$(id -g)" \
     --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
     --env "APP_NAME=Fight Laravel Starter" \
     --env VIEW_COMPILED_PATH=/app/var/cache/laravel/views \

@@ -43,6 +43,7 @@ fi
 
 container_environment() {
     printf '%s\n' \
+        --user "$(id -u):$(id -g)" \
         --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
         --env APP_NAME \
         --env APP_CONFIG_CACHE=/app/var/cache/laravel/config.php \

@@ -6,6 +6,7 @@ image=project-laravel-build
 docker build --file etc/docker/build/Dockerfile --tag "$image" .
 # Compatibility entrypoint; Pest is the repository's canonical runner.
 docker run --rm \
+    --user "$(id -u):$(id -g)" \
     --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
     --env "APP_NAME=Fight Laravel Starter" \
     --env VIEW_COMPILED_PATH=/app/var/cache/laravel/views \

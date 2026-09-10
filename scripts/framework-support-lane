@@ -55,6 +55,7 @@ run_lowest_lane() {
     cp "$root/etc/evidence/framework-support/composer-lowest.lock" "$lane_root/composer.lock"
 
     printf '%s' "$composer_auth" | docker run --rm -i \
+        --user "$(id -u):$(id -g)" \
         --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
         --env "APP_NAME=Fight Laravel Starter" \
         --env APP_CONFIG_CACHE=/app/var/cache/laravel/config.php \
@@ -103,6 +104,7 @@ if [ "$operation" = refresh-lowest ]; then
     rsync -a --exclude .git --exclude vendor --exclude var --exclude .runs "$root/" "$refresh_root/"
 
     printf '%s' "$composer_auth" | docker run --rm -i \
+        --user "$(id -u):$(id -g)" \
         --env COMPOSER_AUTH_FROM_STDIN=1 \
         --env COMPOSER_HOME=/app/var/cache/composer \
         --env HOME=/tmp \
