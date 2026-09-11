@@ -37,3 +37,6 @@ autoload, and Laravel boot.
 Fight Common's 2026-09-09 authorship-only history rewrite supersedes the commit identity recorded above without
 changing its source tree: `ceae16393fd15a2a20687b7533dc048ab1f6a1af -> ce212af215d4ddf8d70f349b7a8c5e634dc9e539`. T-00005 owns the fresh consumer locks,
 receipt digests, and verification for the rewritten identity; the original certification remains historical fact.
+
+The operational evidence later moved to `etc/evidence/framework-support/`. This location change supersedes the
+root path above without changing the historical certification claim.

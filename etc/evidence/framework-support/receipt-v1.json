@@ -1,6 +1,6 @@
 {
     "schema_version": "fight-common.framework-support-receipt/v1",
-    "content_id": "b2699b4d44a8542209fcfaf8d0f442d53db7f8a50653f31b566344f9755ad570",
+    "content_id": "9c6121a84d096ffe474d08486298eef8362646ccaf8879305d30592c0b8a4095",
     "candidate": {
         "package": "johnnickell/fight-common",
         "version": "1.2.0-dev",
@@ -27,7 +27,7 @@
             "Fight\\Common\\Adapter\\ServiceContainer\\Laravel\\FilesystemServiceProvider"
         ]
     },
-    "lock_sha256": "a902f23ed6c864763da54264b1a4a0f81812f9faa0a2887a557335fa5dfcc877",
+    "lock_sha256": "32f6d02178edfb5b1e0432a275f4f178fcc41a29fffa25d97a2afb24e73ae7b5",
     "capabilities": {
         "password_security": "ship",
         "jwt": "ship",
@@ -57,7 +57,7 @@
         "hmac_request_signing": "ship"
     },
     "journeys": [
-        {"name": "lowest_resolution", "status": "passed", "evidence": "evidence/framework-support/composer-lowest.lock.sha256"},
+        {"name": "lowest_resolution", "status": "passed", "evidence": "etc/evidence/framework-support/composer-lowest.lock.sha256"},
         {"name": "latest_resolution", "status": "passed", "evidence": "composer.lock"},
         {"name": "complete_platform_profile", "status": "passed", "evidence": "tests/Feature/FightCommonCapabilityTest.php"},
         {"name": "messaging_queue", "status": "passed", "evidence": "tests/Feature/FightCommonMessagingJourneyTest.php"},
@@ -72,7 +72,7 @@
     "evidence": {
         "build": "./bin/build",
         "planning_check": "./bin/planning-check",
-        "receipt_sha256": "ed5d3d9da33f726c559d4f3a0329c918c6dd021a54388f25331b7fa5a28f8a59"
+        "receipt_sha256": "851de3da20baa1f1d1de906afc4bd679cc854d299f6c3fa23a369a04a0c6ebf5"
     },
     "next_action": null
 }

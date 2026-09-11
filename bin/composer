@@ -1,5 +1,38 @@
 #!/usr/bin/env sh
 set -eu
 
-mkdir -p var/cache/laravel var/cache/phpunit
-docker compose run --rm api composer "$@"
+mkdir -p var/cache/composer var/cache/laravel/data var/cache/laravel/views var/cache/phpunit
+image=project-laravel-build
+docker build --file etc/docker/build/Dockerfile --tag "$image" .
+
+composer_auth=${COMPOSER_AUTH:-}
+github_token=${GITHUB_TOKEN:-${GH_TOKEN:-}}
+if [ -z "$composer_auth" ] && [ -z "$github_token" ] && command -v gh >/dev/null 2>&1; then
+    github_token=$(gh auth token 2>/dev/null || true)
+fi
+if [ -z "$composer_auth" ] && [ -n "$github_token" ]; then
+    composer_auth=$(printf '{"github-oauth":{"github.com":"%s"}}' "$github_token")
+fi
+if [ -z "$composer_auth" ]; then
+    composer_auth='{}'
+fi
+
+printf '%s' "$composer_auth" | docker run --rm -i \
+    --user "$(id -u):$(id -g)" \
+    --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
+    --env APP_CONFIG_CACHE=/app/var/cache/laravel/config.php \
+    --env APP_EVENTS_CACHE=/app/var/cache/laravel/events.php \
+    --env APP_PACKAGES_CACHE=/app/var/cache/laravel/packages.php \
+    --env APP_ROUTES_CACHE=/app/var/cache/laravel/routes.php \
+    --env APP_SERVICES_CACHE=/app/var/cache/laravel/services.php \
+    --env VIEW_COMPILED_PATH=/app/var/cache/laravel/views \
+    --env CACHE_STORE=file \
+    --env CACHE_FILE_PATH=/app/var/cache/laravel/data \
+    --env COMPOSER_AUTH_FROM_STDIN=1 \
+    --env COMPOSER_HOME=/app/var/cache/composer \
+    --env HOME=/tmp \
+    --volume "$(pwd):/app" --workdir /app "$image" sh -ec '
+        COMPOSER_AUTH=$(cat)
+        export COMPOSER_AUTH
+        composer "$@"
+    ' sh "$@"

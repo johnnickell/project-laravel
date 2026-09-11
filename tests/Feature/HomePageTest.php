@@ -1,15 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+final class HomePageTest extends TestCase
 {
-    /**
-     * A basic test example.
-     */
     public function test_the_home_page_renders_the_full_stack_foundation(): void
     {
         $response = $this->get('/');

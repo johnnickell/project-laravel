@@ -11,7 +11,7 @@ final class FrameworkSupportReceiptTest extends TestCase
     public function test_the_committed_receipt_is_a_deterministic_passing_laravel_receipt(): void
     {
         $root = dirname(__DIR__, 2);
-        $receipt = json_decode((string) file_get_contents($root.'/evidence/framework-support/receipt-v1.json'), true, flags: JSON_THROW_ON_ERROR);
+        $receipt = json_decode((string) file_get_contents($root.'/etc/evidence/framework-support/receipt-v1.json'), true, flags: JSON_THROW_ON_ERROR);
 
         self::assertSame(['schema_version', 'content_id', 'candidate', 'framework', 'lock_sha256', 'capabilities', 'journeys', 'result', 'evidence', 'next_action'], array_keys($receipt));
         self::assertSame('fight-common.framework-support-receipt/v1', $receipt['schema_version']);
@@ -45,10 +45,10 @@ final class FrameworkSupportReceiptTest extends TestCase
             self::assertNotSame('', $journey['evidence']);
         }
         self::assertSame(hash_file('sha256', $root.'/composer.lock'), $receipt['lock_sha256']);
-        $lowestLock = $root.'/evidence/framework-support/composer-lowest.lock';
-        $lowestDigest = trim((string) file_get_contents($root.'/evidence/framework-support/composer-lowest.lock.sha256'));
+        $lowestLock = $root.'/etc/evidence/framework-support/composer-lowest.lock';
+        $lowestDigest = trim((string) file_get_contents($root.'/etc/evidence/framework-support/composer-lowest.lock.sha256'));
         self::assertFileExists($lowestLock);
-        self::assertSame(hash_file('sha256', $lowestLock).'  evidence/framework-support/composer-lowest.lock', $lowestDigest);
+        self::assertSame(hash_file('sha256', $lowestLock).'  etc/evidence/framework-support/composer-lowest.lock', $lowestDigest);
         $lowest = json_decode((string) file_get_contents($lowestLock), true, flags: JSON_THROW_ON_ERROR);
         $fightCommon = array_values(array_filter($lowest['packages'], static fn (array $package): bool => $package['name'] === 'johnnickell/fight-common'));
         self::assertCount(1, $fightCommon);
