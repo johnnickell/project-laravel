@@ -16,8 +16,10 @@ Fight Common 2.0 remains `needs-info` until its contract, deprecation-removal in
 
 ## Wayfinder Review
 
-No active Wayfinder map currently exists. When an active map has an unblocked frontier ticket, list it here.
-When asked for the next wayfinder target, offer to chart a new feature rather than fabricating one.
+[Complete Laravel AccessControl API and SPA](../wayfinder/complete-access-control-api-and-spa-map.md) is active.
+Its first review target is [WF-001 — Development runtime topology](../wayfinder/tickets/WF-001-development-runtime-topology.md),
+which fixes the Compose, wrapper, environment, health, and worktree-isolation contract. WF-002 is independently
+unblocked, but WF-001 remains the map's explicit environment-first frontier.
 
 ## Ready Frontier
 
