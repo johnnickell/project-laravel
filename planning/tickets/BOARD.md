@@ -23,7 +23,9 @@ unblocked, but WF-001 remains the map's explicit environment-first frontier.
 
 ## Ready Frontier
 
-No ticket is currently ready for implementation.
+| Suggested Order | Ticket | Parent PRD | Why now |
+| --- | --- | --- | --- |
+| 1 | [T-00006 — Establish the Lean Laravel Pre-Submit Quality Gate](00006-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Direct successor to Fight Common T-00087; remove certification machinery while retaining Laravel behavior. |
 
 ## Waiting
 
