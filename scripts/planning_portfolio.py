@@ -19,7 +19,6 @@ VALID_STATUSES = {
 }
 TERMINAL = {"done", "wontfix"}
 ACCEPTED = {"ready-for-agent", "in-progress"}
-LEGACY_TICKETS = {f"T-{number:05d}" for number in range(1, 6)}
 KINDS = {
     "epics": ("EPIC", "EPIC"),
     "tickets": ("T", "TICKET"),
@@ -96,8 +95,8 @@ def validate_records(records: Records, errors: list[str]) -> None:
         required_parent = ""
         allowed_parents: set[str] = set()
         if prefix == "T":
-            required_parent = "prd" if identifier in LEGACY_TICKETS else "epic"
-            allowed_parents = {"prd"} if identifier in LEGACY_TICKETS else {"epic", "prd"}
+            required_parent = "epic"
+            allowed_parents = {"epic", "prd"}
         elif prefix == "TASK":
             required_parent = "ticket"
             allowed_parents = {"ticket"}
@@ -113,8 +112,6 @@ def validate_records(records: Records, errors: list[str]) -> None:
                 errors.append(f"{label}: {field} is not a parent at this level")
             if parent not in records or not parent.startswith(expected_prefix):
                 errors.append(f"{label}: invalid {field} parent {parent}")
-            elif prefix == "TASK" and parent in LEGACY_TICKETS:
-                errors.append(f"{label}: legacy executable tickets cannot parent new TASKs")
         dependencies = blockers(data)
         if len(set(dependencies)) != len(dependencies):
             errors.append(f"{label}: duplicate blocker")
@@ -251,7 +248,7 @@ def board(source: Path, records: Records) -> str:
 def planning_frontier(source: Path, records: Records) -> str:
     lines = ["| Record | Status | Next planning action |", "| --- | --- | --- |"]
     for identifier, (path, data) in sorted(records.items()):
-        if not is_live(path) or data["status"] in TERMINAL or identifier in LEGACY_TICKETS:
+        if not is_live(path) or data["status"] in TERMINAL:
             continue
         if not identifier.startswith(("EPIC-", "T-")):
             continue
@@ -279,11 +276,7 @@ def generated_views(records: Records) -> list[tuple[Path, str, str]]:
     for directory, (prefix, _) in KINDS.items():
         path = PLANNING / directory / "README.md"
         identifiers = sorted(identifier for identifier in records if identifier.startswith(prefix + "-"))
-        if directory == "tickets":
-            views.append((path, "requirements", table([identifier for identifier in identifiers if identifier not in LEGACY_TICKETS], path, records)))
-            views.append((path, "legacy", table([identifier for identifier in identifiers if identifier in LEGACY_TICKETS], path, records)))
-        else:
-            views.append((path, "index", table(identifiers, path, records)))
+        views.append((path, "index", table(identifiers, path, records)))
     path = PLANNING / "tasks/BOARD.md"
     views.append((path, "tasks", board(path, records)))
     path = PLANNING / "ROADMAP.md"
@@ -292,7 +285,7 @@ def generated_views(records: Records) -> list[tuple[Path, str, str]]:
     views.append((path, "epics", table(epics, path, records)))
     views.append((path, "frontier", planning_frontier(path, records)))
     for identifier, (path, _) in records.items():
-        if not is_live(path) or identifier in LEGACY_TICKETS or not identifier.startswith(("EPIC-", "T-")):
+        if not is_live(path) or not identifier.startswith(("EPIC-", "T-")):
             continue
         field = "epic" if identifier.startswith("EPIC-") else "ticket"
         child_prefix = "T-" if field == "epic" else "TASK-"

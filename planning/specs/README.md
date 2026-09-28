@@ -1,12 +1,12 @@
-# Supporting specifications
+# Optional supporting PRDs
 
-PRDs remain optional supporting specifications and historical records. New requirements TICKETs link directly
-to an EPIC and are implemented through TASKs; a PRD is no longer a mandatory intermediate parent.
-Existing PRD and legacy ticket relationships remain intact.
+PRDs support EPICs and requirements when useful; they are not mandatory parents or execution records.
+Use [_PRD_TEMPLATE.md](_PRD_TEMPLATE.md). Every requirements TICKET still needs its own EPIC parent.
+
+The former destination PRDs migrated to [EPIC-00002](../epics/00002-EPIC.md) and
+[EPIC-00003](../epics/00003-EPIC.md). PRD-00001/00002 are reserved historical aliases; the next optional PRD is
+PRD-00003. See [the complete mapping](../MIGRATION.md). No supporting PRD is needed solely to fill this directory.
 
 <!-- planning:index -->
-| ID | Title | Status | Parent | Blocked by |
-| --- | --- | --- | --- | --- |
-| [PRD-00001](00001-PRD.md) | Framework Starter Product and Walking-Slice Acceptance | done | — | — |
-| [PRD-00002](00002-PRD.md) | Fight Common Version Adoption and Support Evidence | in-progress | — | — |
+None.
 <!-- /planning:index -->

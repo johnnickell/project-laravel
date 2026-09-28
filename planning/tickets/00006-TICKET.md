@@ -70,9 +70,11 @@ API behavior must not change accidentally as a side effect of dependency adoptio
 
 The human maintainer approved the exact baseline below and one cohesive adoption/retirement TASK under
 [EPIC-00001](../epics/00001-EPIC.md). Requirements were accepted for execution planning. TASK-00001 now records
-successful installation and bounded local integration; hosted verification and independent review remain pending. If implementation discovers an
-incompatible dependency or missing required public contract, record the blocker and seek a decision rather than
-silently changing the baseline or adding a retiring-interface shim.
+successful installation and bounded local integration. The original independent review is `revise` for missing
+hosted evidence; draft PR #10 now includes the maintainer-authorized complete planning correction. Hosted evidence
+and fresh review of the corrected target remain required. If implementation discovers an incompatible dependency
+or missing required public contract, record the blocker and seek a decision rather than silently changing the
+baseline or adding a retiring-interface shim.
 
 ### Approved release baseline
 
@@ -110,8 +112,8 @@ verify the approved baseline and document the downstream public contracts it act
 
 Coordinate the public inventory with [WF-002](../wayfinder/tickets/WF-002-access-control-capability-inventory.md)
 and replace its old 0.2 assumptions before downstream implementation. Supersede future obligations in
-[PRD-00002](../specs/00002-PRD.md) without erasing historical evidence. Do not create duplicate package inventory
-or certification authorities.
+[EPIC-00003](../epics/00003-EPIC.md), migrated from PRD-00002, without erasing historical evidence. Do not create
+duplicate package inventory or certification authorities.
 
 ## TASKs
 
@@ -127,5 +129,7 @@ or certification authorities.
 certification retirement in the authorized current checkout/branch. Installation, bounded security/transaction
 integration, unchanged homepage, exact 38/38 statement coverage, and the local canonical gate pass. The
 [installed-contract handoff](../wayfinder/fight-package-baseline.md) supplies downstream signatures and explicit
-limits; WF-002's full inventory remains open. Hosted exact-head verification and independent review are pending,
-so this TICKET remains in progress and its downstream dependency edges remain blocking.
+limits; WF-002's full inventory remains open. The maintainer's complete planning-migration correction is included
+in draft PR #10; it does not implement the successor gate. Hosted verification and fresh independent review of
+the corrected head remain required; the original `revise` report is preserved. This TICKET stays in progress
+and its downstream dependency edges remain blocking. See [the migration mapping](../MIGRATION.md).

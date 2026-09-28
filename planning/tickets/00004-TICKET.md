@@ -1,6 +1,6 @@
 ---
 id: T-00004
-prd: PRD-00002
+epic: EPIC-00003
 title: Establish the Canonical Laravel Pre-Submit Quality Gate
 status: done
 blocked_by:
@@ -8,66 +8,55 @@ blocked_by:
 
 # Establish the Canonical Laravel Pre-Submit Quality Gate
 
-## Outcome
+## Problem and outcome
 
-Make `./bin/build` the permanent clean-clone completion gate for the Laravel starter while preserving its
-framework-native boot, cached configuration, frontend, dependency-lane, receipt, and production-install evidence,
-and align its minimal FPM runtime with the proven Fight CMS and Symfony starter pattern.
-
-## Portfolio Provenance
-
-- Fight Common [T-00087](https://github.com/johnnickell/fight-common/blob/develop/planning/tickets/00087-TICKET.md)
-- Fight Common PRD-00018
+Establish the historical clean-clone canonical local/hosted gate and bounded non-root FPM runtime. The original
+scope, all eleven detailed acceptance criteria, upstream provenance and exact verification are preserved in
+[TASK-00004](../tasks/00004-TASK.md), which owns the delivered implementation.
 
 ## Scope
 
-- In scope: ordinary Composer validation with only the temporary candidate-reference warning allowed; Pint plus
-  the repository PHPCS/fixer policy; PHPStan; Deptrac; Rector dry-run; Pest with the Laravel plugin and exact 100%
-  owned-production statement coverage; lowest/latest dependency lanes; booted Laravel HTTP, console, queue, cache, database, and production
-  journeys; receipt authority under `etc/evidence/framework-support/`; clean `--no-dev` installation; frontend asset compilation; host-boundary planning
-  validation; the existing two-service Compose runtime using a non-root FPM user, bounded pool configuration, and
-  FIFO stdout workaround; and hosted CI delegation to `./bin/build`.
-- Out of scope: a Fight Laravel package, copied Fight package source, aggregate production profiles or receipt
-  authorities, new business capabilities, release publication, or a Fight Common-owned starter build.
+- Ordered Composer validation, Pint/PHPCS, PHPStan, Deptrac, Rector, Pest/Laravel coverage, frontend build,
+  planning validation, cached configuration, dependency lanes/receipt and no-dev boot proof.
+- Two-service Compose runtime, non-root FPM, bounded pool and FIFO stdout behavior.
+- Exclude new business capabilities, package source copying, new receipt authorities and release publication.
 
-## Acceptance Criteria
+## Use cases and contracts
 
-- [x] A clean clone can run only `./bin/build` and receive the complete ordered local verdict.
-- [x] Pint/PHPCS, PHPStan, Deptrac, Rector dry-run, Pest, its Laravel plugin, and the compatible PHPUnit engine are
-      locked development dependencies and execute
-      inside the build image without baselines or suppressed failures.
-- [x] Deptrac enforces Adapter to Application to Domain, rejects unclassified production code, and keeps Laravel
-      types at Adapter and composition boundaries.
-- [x] Pest is the canonical Laravel test runner and the existing framework-booted Feature journeys remain intact.
-      `pest --coverage --exactly=100` applies to the owned production source configured in `phpunit.xml`.
-- [x] Existing candidate validation, dependency lanes, receipt authority, Laravel boot, cached configuration,
-      planning, frontend asset compilation, and production-autoload checks remain in the canonical gate.
-- [x] Committed support receipts and dependency-lane evidence live under `etc/evidence/framework-support/`; no
-      generic repository-root `evidence/` namespace is recreated.
-- [x] `./bin/build` invokes planning validation once at the host boundary, where `git check-ignore` works in normal
-      and linked worktrees, without adding Git-metadata mounts solely for that assertion.
-- [x] The FPM Dockerfile and Compose configuration run non-root with bounded `ondemand` pool settings, clean FIFO
-      stdout streaming, and only the Laravel starter's required `api` and `server` services.
-- [x] Capability probes and fixtures remain test-only; no synthetic Domain events, global platform profile, or
-      receipt-authority service is added to production for test convenience.
-- [x] `.github/workflows/build.yml` invokes `./bin/build` without duplicating its ordered checks.
-- [x] Local and exact-head hosted results are recorded separately.
+| Use case | Commands | Queries | Events | Expected effects |
+| --- | --- | --- | --- | --- |
+| Verify a clean clone | `./bin/build`; maintenance, not business execution | Quality and retained Laravel journey checks | N/A | One ordered local/hosted verdict and build/cache artifacts |
+| Run the minimal runtime | Explicit Compose lifecycle | Runtime readiness | N/A | Non-root FPM and web server with bounded resources |
 
-## Verification
+## Validation and permissions
 
-- Direct execution of the configured quality tools and real framework-booted journeys; no tests that parse tooling
-  scripts or configuration.
-- `./bin/planning-check`
-- `./bin/build`
-- Exact-head hosted build after publication.
+Fail on quality/test errors rather than masking them with baselines. Preserve runtime file/user permissions and
+keep credentials out of diagnostics. No business actor/target authorization or new API behavior is introduced.
 
-## Completion Notes
+## Acceptance and evidence
 
-Local implementation is complete: `./bin/planning-check`, the direct
-standards and architecture tools, warning-free Pest with exact 100% owned-production statement coverage, both
-read-only dependency lanes, the frontend build, and the disposable `--no-dev` production-autoload proof pass on
-2026-09-09. The gate contains no `tests/Tooling` suite or synthetic fixtures added to certify its own scripts.
+- [x] Clean-clone build provides the complete verdict with locked tools, exact configured coverage, and all
+  retained checks; detailed historical checks and exclusions remain in TASK-00004.
+- [x] Inward dependency enforcement and Laravel-owned Adapter/composition boundaries hold.
+- [x] Planning runs once at the worktree-safe host boundary; no synthetic production capabilities or tool tests.
+- [x] Minimal FPM runtime and hosted delegation match the agreed operational contract.
+- [x] Local and exact-head hosted results are separately recorded.
 
-Hosted `./bin/build` passed for published implementation head
-`575763d900f60f9a7b556c1f6431f8979a2760aa` in GitHub Actions run
-[34439214106](https://github.com/johnnickell/project-laravel/actions/runs/34439214106).
+## Decisions and dependencies
+
+Migrated under [EPIC-00003](../epics/00003-EPIC.md), formerly PRD-00002. EPIC-00001 supersedes the future
+self-provisioning/certification obligations, not this successful historical delivery. T-00007 and T-00011 retain
+the successor-gate requirements and their unresolved policy reconciliation.
+
+## TASKs
+
+<!-- planning:children -->
+| ID | Title | Status | Parent | Blocked by |
+| --- | --- | --- | --- | --- |
+| [TASK-00004](../tasks/00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | done | [T-00004](00004-TICKET.md) | — |
+<!-- /planning:children -->
+
+## Progress
+
+Complete through TASK-00004 / PR #7. The recorded hosted run for `575763d900f60f9a7b556c1f6431f8979a2760aa`
+remains historical evidence; migration does not certify the replacement gate or fabricate a new review.

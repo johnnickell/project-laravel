@@ -1,3 +1,3 @@
 # Contributing
 
-Create a feature branch from `develop`, keep implementation within an approved local TASK under its requirements TICKET and EPIC, and run `./bin/build` before opening a pull request. After changing planning files, run `./bin/planning-check --write` and `./bin/planning-check`. See `planning/CONVENTIONS.md` for readiness and legacy-record rules. Do not add copied Fight Common or Fight AccessControl source; Laravel-specific composition belongs in this repository.
+Create a feature branch from `develop`, keep implementation within an approved local TASK under its requirements TICKET and EPIC, and run `./bin/build` before opening a pull request. After changing planning files, run `./bin/planning-check --write` and `./bin/planning-check`. See `planning/CONVENTIONS.md` for readiness and migrated-record provenance rules. Do not add copied Fight Common or Fight AccessControl source; Laravel-specific composition belongs in this repository.

@@ -1,8 +1,9 @@
 # Planning Conventions
 
 This document is the canonical planning authority for Fight Laravel Starter. The human-approved lifecycle is
-**EPIC → TICKET → TASK**. It replaces the old PRD-to-executable-ticket workflow for new work without changing
-historical record identities or claiming unfinished work is complete.
+**EPIC → TICKET → TASK**. All non-archived records use it, including migrated historical work. The
+[complete migration map](MIGRATION.md) records renamed/moved identities and inherited evidence without claiming
+unfinished work is complete. There is no live legacy-record exception.
 
 ## Hierarchy and ownership
 
@@ -11,7 +12,7 @@ historical record identities or claiming unfinished work is complete.
 | EPIC | Approved destination, outcome, boundaries | `epics/00001-EPIC.md` · `EPIC-00001` |
 | TICKET | Cohesive use cases, requirements, acceptance evidence | `tickets/00006-TICKET.md` · `T-00006` |
 | TASK | Independently implementable/reviewable slice, normally one PR | `tasks/00001-TASK.md` · `TASK-00001` |
-| PRD | Optional supporting specification, not a mandatory parent | `specs/00001-PRD.md` · `PRD-00001` |
+| PRD | Optional supporting specification, not a mandatory parent | `specs/00003-PRD.md` · `PRD-00003` (next available) |
 
 Requirements TICKETs may need several TASKs and PRs. Do not implement an EPIC or TICKET directly or silently
 rename a requirement into a TASK. Approve the destination, accept the requirements, then approve bounded TASKs.
@@ -26,7 +27,8 @@ ADRs remain in `adr/NNNN-description.md`, focused instructions in `agents/`, and
 
 EPIC, TICKET, TASK, and PRD IDs have independent five-digit sequences. Retain the repository's `T-` ticket prefix;
 do not renumber existing tickets to match another repository. Inspect live and archived records before allocating
-IDs. Preserve gaps and never reuse an archived identity. File numbers must match record IDs.
+IDs, including retired aliases in [MIGRATION.md](MIGRATION.md). Preserve gaps and never reuse an archived or
+migrated-away identity (PRD-00001/00002 are reserved; the next optional PRD is PRD-00003). File numbers must match record IDs.
 
 Copy the directory's `_…_TEMPLATE.md` before authoring a record. Templates are not records and receive no ID.
 Every record requires `id`, `title`, and `status`. EPICs also require `target` (use `TBD` until a version is selected).
@@ -98,17 +100,18 @@ identities, parents, dependency cycles, impossible parent completion, broken lin
 Neither command invents statuses, decisions, tickets, or tasks. The canonical build uses the read-only check.
 Validate planning tooling through these owning commands and direct inspection, not product-suite meta-tests.
 
-## Legacy records and migration
+## Migrated records and historical evidence
 
-Only **T-00001 through T-00005** retain the old executable-ticket/PRD semantics. Their bodies, IDs, statuses,
-completed evidence, and PRD relationships remain historical authority. They are not automatically requirements
-TICKETs and receive no retrospective TASKs. `tickets/BOARD.md` is a retained legacy snapshot with a pointer to the
-current Board; it is not a second execution frontier.
+The maintainer authorized complete conversion of non-archived planning, including completed live records.
+[MIGRATION.md](MIGRATION.md) maps former destination PRDs to EPICs and executable tickets to requirements plus
+historical TASKs. Original acceptance bodies, source references, counts and hosted links remain in those TASKs;
+`done` is inherited historical acceptance, not fresh verification or an invented independent review.
 
-T-00003 remains unresolved Common 2.0 planning. If resumed, explicitly approve its requirements and create a new
-EPIC-linked TICKET referencing the legacy record before TASK decomposition. Do not promote it onto the TASK Board
-or silently reinterpret it. Existing PRDs remain accessible supporting/historical specifications. New records
-cannot use the legacy exception. No archive or completion follows from this migration.
+T-00003 remains the EPIC-00003-linked Common 2.0 requirement, `needs-info` until its upstream artifacts exist.
+Do not create an executable TASK before accepting its requirements. T-00011 preserves the concurrent develop-side
+lean-gate requirement formerly named T-00006; reconcile its policy with T-00007 before successor-gate decomposition.
+The old `tickets/BOARD.md` is removed; only `tasks/BOARD.md` routes execution. No archive or new completion follows
+from conversion. Archived records, if present during a future migration, are not moved as an implicit side effect.
 
 ## Wayfinder
 
@@ -140,7 +143,7 @@ Never move records manually or archive as a completion side effect.
 | Wayfinder | `./bin/archive-planning wayfinder map-name [--apply]` | Existing Wayfinder archive directories |
 
 Selected records must be terminal; all child/descendant records, including archived ones, must be terminal.
-Legacy PRDs retain their legacy ticket relationships for this check. Wayfinder maps additionally require Closed
+Optional supporting PRD relationships remain part of descendant validation. Wayfinder maps additionally require Closed
 decisions, no frontier, and a linked handoff. The tool repairs links and refreshes generated views. After an
 applied archive, inspect references and authored Board/Roadmap narrative, then run `./bin/planning-check`.
 Records remain addressable: never renumber, flatten, or replace them with summaries.

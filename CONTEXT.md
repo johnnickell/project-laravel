@@ -24,4 +24,6 @@ and transaction commit/rollback on the SQLite test connection. Exact statement c
 `./bin/build` remains the existing self-provisioning local/hosted gate, minus certification. It still builds
 images, installs locked dependencies, runs quality tools/application tests, compiles the frontend, and verifies
 production boot. T-00007 owns the separate approved transition to a thin running-Compose wrapper and PHP
-orchestrator. Historical receipts and prior success claims in legacy planning records are historical only.
+orchestrator. T-00007 and the migrated develop-side T-00011 must reconcile their coverage/CI requirements before
+gate implementation. Historical receipts and prior success claims in migrated TASK records are historical only.
+All live planning now uses EPIC → TICKET → TASK; `planning/MIGRATION.md` traces the converted identities.

@@ -31,7 +31,7 @@ Always run before committing or creating a PR:
 ## Planning
 
 See `planning/CONVENTIONS.md` for the canonical EPIC → TICKET → TASK lifecycle, TASK Board execution frontier,
-Wayfinder maps, optional supporting PRDs, legacy-record boundaries, templates, and explicit-only archive operations. Never
+Wayfinder maps, optional supporting PRDs, complete-migration provenance, templates, and explicit-only archive operations. Never
 archive planning records as a completion side effect; run `./bin/archive-planning` only on an explicit request,
 review its dry run, and then apply it.
 

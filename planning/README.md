@@ -15,9 +15,11 @@ Read [CONVENTIONS.md](CONVENTIONS.md) for EPIC → TICKET → TASK ownership, ap
 completion synchronization, and explicit-only archives. Each record level has an independent five-digit ID
 sequence. TICKETs keep `T-NNNNN`; TASKs use `TASK-NNNNN`. Inspect live and archived records before allocation.
 
-Only T-00001 through T-00005 retain legacy executable-ticket/PRD semantics. Their IDs, evidence, and historical
-meaning are preserved; no retrospective TASKs are created. [tickets/BOARD.md](tickets/BOARD.md) is a legacy
-snapshot, not a competing execution board. PRDs are no longer a mandatory parent for new TICKETs.
+All non-archived records use this structure, including historical completed work. The
+[complete migration map](MIGRATION.md) traces former destination PRDs to EPICs and executable tickets to
+requirements plus historical TASKs. Counts, acceptance and source references retain their historical meaning;
+no new verification or independent acceptance is fabricated. There is no second ticket execution board.
+PRDs are optional supporting specifications, never substitutes for EPIC parents.
 
 Use each directory's `_…_TEMPLATE.md`. After changes, run `./bin/planning-check --write`, then
 `./bin/planning-check`. Record metadata is authoritative; marked generated views must not be hand-edited.
