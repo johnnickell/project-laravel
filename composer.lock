@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "22323997d03139225d1e63ceb560296a",
+    "content-hash": "18bd79bf3367a3e52cdb58d16616063a",
     "packages": [
         {
             "name": "brick/math",
@@ -1061,20 +1061,20 @@
         },
         {
             "name": "johnnickell/fight-access-control",
-            "version": "dev-develop",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnnickell/fight-access-control.git",
-                "reference": "4259ea0b77bc2e1d87e62ab70b64af63bae99477"
+                "reference": "380b134b35c722e6416787b13f5c20c64bd05388"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnnickell/fight-access-control/zipball/4259ea0b77bc2e1d87e62ab70b64af63bae99477",
-                "reference": "4259ea0b77bc2e1d87e62ab70b64af63bae99477",
+                "url": "https://api.github.com/repos/johnnickell/fight-access-control/zipball/380b134b35c722e6416787b13f5c20c64bd05388",
+                "reference": "380b134b35c722e6416787b13f5c20c64bd05388",
                 "shasum": ""
             },
             "require": {
-                "johnnickell/fight-common": "^1.1",
+                "johnnickell/fight-common": "^1.2",
                 "php": ">=8.5"
             },
             "require-dev": {
@@ -1084,9 +1084,12 @@
                 "rector/rector": "^2.4",
                 "slevomat/coding-standard": "^8.27",
                 "squizlabs/php_codesniffer": "^4.0",
-                "symfony/process": "^7.0"
+                "symfony/process": "^7.0",
+                "zircote/swagger-php": "^6.5"
             },
-            "default-branch": true,
+            "suggest": {
+                "zircote/swagger-php": "Generate a consumer-owned OpenAPI document from the opt-in openapi/ component catalog."
+            },
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -1094,33 +1097,29 @@
                     "Fight\\AccessControl\\Application\\": "src/Application"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Fight\\Test\\AccessControl\\": "tests"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Framework-neutral identity, credential, session, authorization, and account-lifecycle contracts",
             "support": {
-                "source": "https://github.com/johnnickell/fight-access-control/tree/develop",
-                "issues": "https://github.com/johnnickell/fight-access-control/issues"
+                "issues": "https://github.com/johnnickell/fight-access-control/issues",
+                "source": "https://github.com/johnnickell/fight-access-control/tree/v0.4.0"
             },
-            "time": "2026-08-31T03:38:38+00:00"
+            "time": "2026-09-27T20:03:41+00:00"
         },
         {
             "name": "johnnickell/fight-common",
-            "version": "dev-develop",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnnickell/fight-common.git",
-                "reference": "ce212af215d4ddf8d70f349b7a8c5e634dc9e539"
+                "reference": "a2cd615d9b5064c9c30e994655536176249cd73b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnnickell/fight-common/zipball/ce212af215d4ddf8d70f349b7a8c5e634dc9e539",
-                "reference": "ce212af215d4ddf8d70f349b7a8c5e634dc9e539",
+                "url": "https://api.github.com/repos/johnnickell/fight-common/zipball/a2cd615d9b5064c9c30e994655536176249cd73b",
+                "reference": "a2cd615d9b5064c9c30e994655536176249cd73b",
                 "shasum": ""
             },
             "require": {
@@ -1170,7 +1169,6 @@
                 "symfony/routing": "^8.1",
                 "twig/twig": "^3.0",
                 "twilio/sdk": "^8.0",
-                "yiisoft/config": "^1.2",
                 "yiisoft/db": "^2.0",
                 "yiisoft/db-sqlite": "^2.0",
                 "yiisoft/di": "^1.4",
@@ -1210,7 +1208,6 @@
                 "symfony/routing": "Required for the URL generator",
                 "twig/twig": "Required by the Twig template engine adapter",
                 "twilio/sdk": "Required by the Twilio SMS transport adapter",
-                "yiisoft/config": "Required to select Yii capability configuration groups",
                 "yiisoft/db": "Required by the Yii DB transactional unit of work adapter",
                 "yiisoft/db-sqlite": "Required to run the Yii DB transactional unit of work adapter conformance tests",
                 "yiisoft/di": "Required to boot Yii capability service providers",
@@ -1220,32 +1217,26 @@
                 "yiisoft/router-fastroute": "Required to run the Yii URL generator adapter conformance tests",
                 "yiisoft/view": "Required to evaluate Yii View against the shared Fight templating conformance suite"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
+                "files": [
+                    "src/Domain/functions.php"
+                ],
                 "psr-4": {
                     "Fight\\Common\\": "src",
                     "Fight\\Test\\Common\\TestCase\\": "tests/TestCase"
-                },
-                "files": [
-                    "src/Domain/functions.php"
-                ]
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Fight\\Release\\": "release/src",
-                    "Fight\\Test\\Common\\": "tests"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "A shared PHP library for Hexagonal Architecture, CQRS, and reusable domain primitives",
             "support": {
-                "source": "https://github.com/johnnickell/fight-common/tree/develop",
-                "issues": "https://github.com/johnnickell/fight-common/issues"
+                "issues": "https://github.com/johnnickell/fight-common/issues",
+                "source": "https://github.com/johnnickell/fight-common/tree/v1.2.0"
             },
-            "time": "2026-09-09T18:43:20+00:00"
+            "time": "2026-09-13T00:57:20+00:00"
         },
         {
             "name": "laravel/framework",
@@ -10844,19 +10835,9 @@
             "time": "2026-06-15T15:31:57+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "johnnickell/fight-common",
-            "version": "dev-develop",
-            "alias": "1.2.0-dev",
-            "alias_normalized": "1.2.0.0-dev"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "johnnickell/fight-access-control": 20,
-        "johnnickell/fight-common": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

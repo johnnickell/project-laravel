@@ -1,6 +1,6 @@
 ---
 id: PRD-NNNNN
-epic: EPIC-NNNNN
+epic:
 title: Brief requirement
 status: needs-triage
 ---
@@ -9,7 +9,8 @@ status: needs-triage
 
 ## Problem Statement
 
-Describe the user and product problem.
+Describe the user and product problem. A PRD is optional supporting material, not a mandatory layer between
+an EPIC and its requirements TICKETs. Set `epic` only when this specification supports one.
 
 ## Solution
 
@@ -31,4 +32,4 @@ Describe the intended outcome and boundaries.
 
 Link governing ADRs, Wayfinder records, and related work.
 
-Tickets: T-NNNNN.
+Link related requirements TICKETs where relevant; they retain their own EPIC parents.

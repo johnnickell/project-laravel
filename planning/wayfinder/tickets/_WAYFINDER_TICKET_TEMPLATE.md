@@ -25,5 +25,5 @@ State what this ticket may settle and what must remain downstream.
 
 ## Resolution
 
-Write this only when the decision is closed. Link the epic, PRD, or implementation-ticket handoff created by
-the resolved map where relevant.
+Write this only when the decision is closed. Link the EPIC, requirements TICKETs, and subsequent TASK handoff
+created by the resolved map where relevant; PRDs are optional supporting material.

@@ -8,7 +8,7 @@ Use `var/cache/` for Laravel and developer-tool cache artifacts. `.runs/` is ign
 
 ## Work Routing
 
-When asked "What's next?" or invoked without a task, read `planning/tickets/BOARD.md` and return the current human decision under **Now** and the first ticket under **Ready Frontier**. Use `planning/CONVENTIONS.md` to interpret ticket status and ordering.
+When asked "What's next?" or invoked without a task, read `planning/tasks/BOARD.md` and return the current human decision under **Now** and the active TASK, or otherwise the first executable TASK under **Ready Frontier**. Say when none exists; never substitute a requirements TICKET. Use `planning/CONVENTIONS.md` for EPIC → TICKET → TASK readiness and ordering.
 
 ## Run and Worktree Isolation
 
@@ -20,7 +20,7 @@ Create feature branches from `develop` as `feature/<description>`. Never commit 
 
 ## Pre-Submit Gate
 
-For a long non-interactive build, run `screen -dmS <ticket>-build /bin/zsh -lc './bin/build > /private/tmp/<ticket>-build.log 2>&1; print -r -- $? > /private/tmp/<ticket>-build.exit'`, then inspect the log and require an exit file containing `0`; never treat foreground timeout output as a build result.
+For a long non-interactive build, run `screen -dmS <task>-build /bin/zsh -lc './bin/build > /private/tmp/<task>-build.log 2>&1; print -r -- $? > /private/tmp/<task>-build.exit'`, then inspect the log and require an exit file containing `0`; never treat foreground timeout output as a build result.
 
 Always run before committing or creating a PR:
 
@@ -30,8 +30,8 @@ Always run before committing or creating a PR:
 
 ## Planning
 
-See `planning/CONVENTIONS.md` for the canonical planning structure: ticket lifecycle, BOARD.md execution frontier,
-Wayfinder maps, PRD and epic conventions, file naming, templates, and explicit-only archive operations. Never
+See `planning/CONVENTIONS.md` for the canonical EPIC → TICKET → TASK lifecycle, TASK Board execution frontier,
+Wayfinder maps, optional supporting PRDs, complete-migration provenance, templates, and explicit-only archive operations. Never
 archive planning records as a completion side effect; run `./bin/archive-planning` only on an explicit request,
 review its dry run, and then apply it.
 
@@ -39,10 +39,10 @@ review its dry run, and then apply it.
 
 Before final commit and PR for any feature or bug fix:
 
-1. Mark the ticket `done` with verified acceptance criteria
-2. Move the ticket to **Recently Done** in `planning/tickets/BOARD.md`
-3. Recalculate the "What's Next?" contract if dependencies shifted
-4. Update parent PRD and epic progress sections
-5. Update `ROADMAP.md` if strategic progress changed
-6. Verify no downstream ticket still lists the completed ticket as `blocked_by`
-7. Run `./bin/planning-check`
+1. Record verified TASK acceptance, evidence, and actual review state; mark `done` only when its criteria are met
+2. Reconcile parent TICKET and EPIC progress; do not close a parent solely because one TASK finished
+3. Recalculate the Board's "What's Next?" contract and authored human-decision/Wayfinder pointers
+4. Update affected supporting PRDs and `planning/ROADMAP.md` when progress changed
+5. Preserve dependency edges and derive which blockers remain unfinished
+6. Refresh generated views with `./bin/planning-check --write`
+7. Run `./bin/planning-check`; retain the canonical build requirement above

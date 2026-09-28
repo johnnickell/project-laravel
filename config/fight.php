@@ -3,10 +3,6 @@
 declare(strict_types=1);
 
 return [
-    'broadcast' => [
-        'event_name' => env('FIGHT_BROADCAST_EVENT', 'fight.private'),
-    ],
-    'templates_path' => resource_path('views'),
     'security' => [
         'hmac' => [
             'public' => env('FIGHT_HMAC_PUBLIC'),
@@ -17,9 +13,5 @@ return [
             'secret' => env('FIGHT_JWT_SECRET'),
             'algorithm' => env('FIGHT_JWT_ALGORITHM', 'HS256'),
         ],
-    ],
-    'scheduler' => [
-        'timezone' => env('FIGHT_SCHEDULER_TIMEZONE', 'UTC'),
-        'from_email' => env('FIGHT_SCHEDULER_FROM_EMAIL', env('MAIL_FROM_ADDRESS', 'hello@example.com')),
     ],
 ];

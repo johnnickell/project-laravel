@@ -52,9 +52,36 @@ def local_target(source: Path, destination: str) -> Path | None:
 
 
 def require_terminal(selected: list[Path]) -> None:
-    for path in selected:
-        if frontmatter(path).get("status") not in TERMINAL:
+    all_records = [
+        path
+        for directory, suffix in (("epics", "EPIC"), ("specs", "PRD"), ("tickets", "TICKET"), ("tasks", "TASK"))
+        for path in (PLANNING / directory).rglob(f"*-{suffix}.md")
+        if not path.name.startswith("_")
+    ]
+    pending = list(selected)
+    visited: set[Path] = set()
+    while pending:
+        path = pending.pop()
+        if path in visited:
+            continue
+        visited.add(path)
+        data = frontmatter(path)
+        if data.get("status") not in TERMINAL:
             raise ValueError(f"{path.relative_to(ROOT)} is not terminal")
+        identifier = data.get("id")
+        if not identifier:
+            raise ValueError(f"{path.relative_to(ROOT)} has no id")
+        for child in all_records:
+            child_data = frontmatter(child)
+            if identifier in (child_data.get("epic"), child_data.get("prd"), child_data.get("ticket")):
+                pending.append(child)
+
+
+def archive_tasks(identifiers: list[str]) -> dict[Path, Path]:
+    current = records("tasks", "-TASK.md")
+    selected = [current[identifier] for identifier in identifiers]
+    require_terminal(selected)
+    return {path: PLANNING / "tasks/archive" / path.name for path in selected}
 
 
 def archive_tickets(identifiers: list[str]) -> dict[Path, Path]:
@@ -68,11 +95,6 @@ def archive_specs(identifiers: list[str]) -> dict[Path, Path]:
     current = records("specs", "-PRD.md")
     selected = [current[identifier] for identifier in identifiers]
     require_terminal(selected)
-    all_tickets = records("tickets", "-TICKET.md")
-    for path in selected:
-        identifier = frontmatter(path)["id"]
-        children = [ticket for ticket in all_tickets.values() if frontmatter(ticket).get("prd") == identifier]
-        require_terminal(children)
     return {path: PLANNING / "specs/archive" / path.name for path in selected}
 
 
@@ -80,11 +102,6 @@ def archive_epics(identifiers: list[str]) -> dict[Path, Path]:
     current = records("epics", "-EPIC.md")
     selected = [current[identifier] for identifier in identifiers]
     require_terminal(selected)
-    all_specs = records("specs", "-PRD.md")
-    for path in selected:
-        identifier = frontmatter(path)["id"]
-        children = [spec for spec in all_specs.values() if frontmatter(spec).get("epic") == identifier]
-        require_terminal(children)
     return {path: PLANNING / "epics/archive" / path.name for path in selected}
 
 
@@ -106,7 +123,7 @@ def archive_wayfinder(name: str) -> dict[Path, Path]:
         raise ValueError(f"{path.relative_to(ROOT)} has no linked decision tickets")
     if any(not ticket.is_file() or wayfinder_status(ticket) != "closed" for ticket in ticket_paths):
         raise ValueError(f"{path.relative_to(ROOT)} has unresolved decision tickets")
-    if not re.search(r"\]\(\.\./(?:epics|specs|tickets)/", text):
+    if not re.search(r"\]\(\.\./(?:epics|specs|tickets|tasks)/", text):
         raise ValueError(f"{path.relative_to(ROOT)} lacks a linked implementation handoff")
 
     moves = {path: PLANNING / "wayfinder/archive/maps" / path.name}
@@ -147,13 +164,15 @@ def rewrite_links(moves: dict[Path, Path]) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("kind", choices=("tickets", "specs", "epics", "wayfinder"))
+    parser.add_argument("kind", choices=("tasks", "tickets", "specs", "epics", "wayfinder"))
     parser.add_argument("identifiers", nargs="+")
     parser.add_argument("--apply", action="store_true", help="perform the validated archive move")
     args = parser.parse_args()
 
     try:
-        if args.kind == "tickets":
+        if args.kind == "tasks":
+            moves = archive_tasks(args.identifiers)
+        elif args.kind == "tickets":
             moves = archive_tickets(args.identifiers)
         elif args.kind == "specs":
             moves = archive_specs(args.identifiers)
@@ -180,6 +199,9 @@ def main() -> int:
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.move(source, destination)
     rewrite_links(moves)
+    refreshed = subprocess.run([str(ROOT / "bin/planning-check"), "--write"], cwd=ROOT, check=False)
+    if refreshed.returncode != 0:
+        return refreshed.returncode
     return subprocess.run([str(ROOT / "bin/planning-check")], cwd=ROOT, check=False).returncode
 
 

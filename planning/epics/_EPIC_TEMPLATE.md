@@ -2,23 +2,36 @@
 id: EPIC-NNNNN
 title: Brief destination
 status: needs-triage
-target: target-version
+target: TBD
 ---
 
 # Brief destination
 
 ## Destination
 
-Describe the durable outcome and the boundary of this epic.
+Describe the durable outcome and boundary. An approved EPIC is decomposed into requirements TICKETs, then TASKs.
 
 ## Decisions so far
 
-- Link accepted decisions and their consequences.
+- Link accepted decisions and their consequences. Record the human approval explicitly.
 
-## PRDs
+## Completion criteria
 
-- PRD-NNNNN — Title
+- Observable destination-level acceptance; completion of a single child does not close the EPIC.
+
+## Out of scope
+
+- Explicit exclusions.
+
+## TICKETs
+
+<!-- planning:children -->
+<!-- /planning:children -->
+
+## Supporting specifications
+
+Optional PRDs or ADRs; no mandatory intermediate hierarchy layer.
 
 ## Progress
 
-Record completed milestones and the next unresolved planning consequence.
+Record completed milestones, outstanding decisions, and the next decomposition or closeout action.
