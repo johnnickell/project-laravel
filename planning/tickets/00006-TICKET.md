@@ -2,7 +2,7 @@
 id: T-00006
 epic: EPIC-00001
 title: Adopt Current Fight Packages as an Application Consumer
-status: in-progress
+status: done
 blocked_by:
 ---
 
@@ -63,16 +63,19 @@ API behavior must not change accidentally as a side effect of dependency adoptio
       owned-production statement coverage and an explicit source denominator.
 - [x] Instructions/current context describe an application consumer, distinguish historical receipts from current
       authority, and name explicit setup requirements without rewriting completed historical records.
-- [ ] Required local and hosted verification is recorded for the delivered TASKs. Gate changes needed to stop
+- [x] Required local and hosted verification is recorded for the delivered TASKs. Gate changes needed to stop
       invoking removed certification checks occur with retirement; the larger gate redesign belongs to T-00007.
 
 ## Decisions and dependencies
 
 The human maintainer approved the exact baseline below and one cohesive adoption/retirement TASK under
 [EPIC-00001](../epics/00001-EPIC.md). Requirements were accepted for execution planning. TASK-00001 now records
-successful installation and bounded local integration. The original independent review is `revise` for missing
-hosted evidence; draft PR #10 now includes the maintainer-authorized complete planning correction. Hosted evidence
-and fresh review of the corrected target remain required. If implementation discovers an incompatible dependency
+successful installation and bounded integration. Independent review accepts implementation
+`03207b90cb833d3dfe75849eb2b8be31144de1db`, including the complete planning correction and hosted evidence.
+The maintainer approved the [TASK's acceptance/closeout contract](../tasks/00001-TASK.md#approved-acceptance-and-closeout-contract--2026-09-28):
+`done` records that accepted candidate; a metadata-only closeout requires its own hosted proof and independent
+final-delivery review before PR #10 becomes ready. Those delivery gates are pending at this checkpoint.
+If implementation discovers an incompatible dependency
 or missing required public contract, record the blocker and seek a decision rather than silently changing the
 baseline or adding a retiring-interface shim.
 
@@ -120,7 +123,7 @@ duplicate package inventory or certification authorities.
 <!-- planning:children -->
 | ID | Title | Status | Parent | Blocked by |
 | --- | --- | --- | --- | --- |
-| [TASK-00001](../tasks/00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | ready-for-human | [T-00006](00006-TICKET.md) | — |
+| [TASK-00001](../tasks/00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | done | [T-00006](00006-TICKET.md) | — |
 <!-- /planning:children -->
 
 ## Progress
@@ -129,7 +132,15 @@ duplicate package inventory or certification authorities.
 certification retirement in the authorized current checkout/branch. Installation, bounded security/transaction
 integration, unchanged homepage, exact 38/38 statement coverage, and the local canonical gate pass. The
 [installed-contract handoff](../wayfinder/fight-package-baseline.md) supplies downstream signatures and explicit
-limits; WF-002's full inventory remains open. The maintainer's complete planning-migration correction is included
-in draft PR #10; it does not implement the successor gate. Hosted verification and fresh independent review of
-the corrected head remain required; the original `revise` report is preserved. This TICKET stays in progress
-and its downstream dependency edges remain blocking. See [the migration mapping](../MIGRATION.md).
+limits; WF-002's full inventory remains open. All seven requirement criteria are satisfied by the single accepted
+TASK: released installation, documented public contracts, certification retirement, justified composition/tests,
+exact configured coverage, current consumer instructions, and separate local/hosted verification. Nothing is waived.
+The current independent `accept` resolves the original missing-hosted R1; hosted run
+[36378700857](https://github.com/johnnickell/project-laravel/actions/runs/36378700857) proves the accepted tree.
+
+This TICKET is done for accepted implementation A under the TASK's approved closeout contract, not merely
+because its child changed status. Final metadata-head delivery remains pending; PR #10 is not approved or merged.
+Preserve all downstream dependency edges: T-00006 is now terminal, but T-00007/T-00011 still need gate-policy
+reconciliation, T-00008 still needs the shared authorization journey, T-00009 still depends on unfinished T-00008,
+and T-00010 still depends on unfinished T-00007/T-00008/T-00009. No downstream TASK becomes executable.
+EPIC-00001 remains in progress. See [the migration mapping](../MIGRATION.md).

@@ -15,7 +15,7 @@ executable merely because its old record used the word ticket. Use [_TICKET_TEMP
 | [T-00003](00003-TICKET.md) | Prepare Fight Common 2.0 Migration | needs-info | [EPIC-00003](../epics/00003-EPIC.md) | — |
 | [T-00004](00004-TICKET.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | done | [EPIC-00003](../epics/00003-EPIC.md) | — |
 | [T-00005](00005-TICKET.md) | Re-certify Rewritten Fight Common Candidate | done | [EPIC-00003](../epics/00003-EPIC.md) | — |
-| [T-00006](00006-TICKET.md) | Adopt Current Fight Packages as an Application Consumer | in-progress | [EPIC-00001](../epics/00001-EPIC.md) | — |
+| [T-00006](00006-TICKET.md) | Adopt Current Fight Packages as an Application Consumer | done | [EPIC-00001](../epics/00001-EPIC.md) | — |
 | [T-00007](00007-TICKET.md) | Verify the Application Through a Running Compose Stack | needs-info | [EPIC-00001](../epics/00001-EPIC.md) | [T-00006](00006-TICKET.md) |
 | [T-00008](00008-TICKET.md) | Enforce Shared Application Permission Policy | needs-info | [EPIC-00001](../epics/00001-EPIC.md) | [T-00006](00006-TICKET.md) |
 | [T-00009](00009-TICKET.md) | Persist Authoritative AccessControl State and Required Effects | needs-info | [EPIC-00001](../epics/00001-EPIC.md) | [T-00006](00006-TICKET.md), [T-00008](00008-TICKET.md) |

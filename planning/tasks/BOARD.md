@@ -11,16 +11,17 @@ substitute a requirements TICKET for an approved implementation TASK.
 
 ## Now
 
-[TASK-00001](00001-TASK.md) is published as [draft PR #10](https://github.com/johnnickell/project-laravel/pull/10).
-The maintainer requested a complete migration of all non-archived planning and reconciliation with current
-develop. [The mapping](../MIGRATION.md) records converted identities and the preserved develop-side lean-gate
-requirement. Obtain hosted verification of the updated target and fresh independent review. The original
-`revise` report is preserved, not approval of the correction; AC8 and T-00006 remain incomplete.
+[TASK-00001](00001-TASK.md) and T-00006 are done for independently accepted implementation `03207b9`,
+including the complete planning migration and local/hosted proof. Under the maintainer-approved closeout contract,
+[PR #10](https://github.com/johnnickell/project-laravel/pull/10) remains draft at this checkpoint pending fresh
+metadata-head hosted proof and independent final-delivery review. Approval/merge remain human actions;
+accepted implementation is not a claim of successful final delivery.
 
-Settle the successor-gate policy differences between [T-00007](../tickets/00007-TICKET.md) and
+There is no active or executable TASK. Settle the successor-gate policy differences between [T-00007](../tickets/00007-TICKET.md) and
 [T-00011](../tickets/00011-TICKET.md) before decomposing them. Separately, the real read/write journey and its
 permission policy still need joint selection for T-00008/T-00009/T-00010. These downstream decisions do not
 expand TASK-00001 into implementing a new gate or business journey.
+T-00006 is now terminal, but all successor requirements remain `needs-info`; preserve their dependency edges.
 See the [Roadmap planning frontier](../ROADMAP.md#planning-frontier) for requirement readiness.
 
 ## Wayfinder Review
@@ -49,9 +50,7 @@ No TASKs.
 
 ## Human Action
 
-| Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | [TASK-00001](00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | [T-00006](../tickets/00006-TICKET.md) | ready-for-human | — | https://github.com/johnnickell/project-laravel/pull/10 |
+No TASKs.
 
 ## Needs Triage
 
@@ -61,6 +60,7 @@ No TASKs.
 
 | Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
 | --- | --- | --- | --- | --- | --- | --- |
+| 1 | [TASK-00001](00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | [T-00006](../tickets/00006-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/10 |
 | — | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | [T-00001](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | [T-00002](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | [T-00004](../tickets/00004-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/7 |

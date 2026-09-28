@@ -8,7 +8,7 @@ creating its record does not start execution or select an implementation worktre
 <!-- planning:index -->
 | ID | Title | Status | Parent | Blocked by |
 | --- | --- | --- | --- | --- |
-| [TASK-00001](00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | ready-for-human | [T-00006](../tickets/00006-TICKET.md) | — |
+| [TASK-00001](00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | done | [T-00006](../tickets/00006-TICKET.md) | — |
 | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | done | [T-00001](../tickets/00001-TICKET.md) | — |
 | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | done | [T-00002](../tickets/00002-TICKET.md) | — |
 | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | done | [T-00004](../tickets/00004-TICKET.md) | — |
