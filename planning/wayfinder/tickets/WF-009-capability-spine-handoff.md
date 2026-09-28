@@ -10,7 +10,7 @@
 ## Question
 
 Do the eight resolved decisions form a complete, coherent, implementation-ready Laravel capability spine that
-can be approved and handed to `/to-spec`, `/to-tickets`, and vertical-slice delivery?
+can be approved and handed to EPIC → TICKET → TASK decomposition and vertical-slice delivery?
 
 ## Must decide
 
@@ -20,8 +20,9 @@ can be approved and handed to `/to-spec`, `/to-tickets`, and vertical-slice deli
   authorization, frontend UX, verification, and an owning future slice.
 - Confirm every operational-only capability has a worker/scheduler owner and every deferred or excluded
   capability is visible with rationale.
-- Approve an epic destination, coherent PRD boundaries, and independently verifiable vertical slices with
-  dependency edges, acceptance criteria, rollback/failure boundaries, and explicit exclusions.
+- Approve an EPIC destination, cohesive requirements TICKETs, and subsequent independently verifiable TASK
+  boundaries with dependencies, acceptance criteria, rollback/failure boundaries, and explicit exclusions.
+  Supporting PRDs are optional, not a mandatory hierarchy layer.
 - Sequence the handoff environment-first while preserving parallel work where dependencies allow it; WF-002's
   independent start must remain visible.
 - Require installable Fight Common `1.2.0`, Fight AccessControl `0.2.0`, and the accepted
@@ -34,7 +35,7 @@ can be approved and handed to `/to-spec`, `/to-tickets`, and vertical-slice deli
 
 - A traceability review has no orphan capability, OpenAPI operation, route, persistence responsibility, async
   effect, realtime signal, UI journey, or implementation slice.
-- The future tickets cover Compose health and lifecycle; MySQL migration and concurrency;
+- The future requirements TICKETs and implementation TASKs cover Compose health and lifecycle; MySQL migration and concurrency;
   JSend/HTTP failures; JWT, refresh, CSRF/Origin, dashboards, and private channels; Horizon, recovery, Mailpit,
   Mercure two-browser/reconnect; frontend quality and deterministic assets.
 - The handoff requires one valid checked-in Laravel-generated OpenAPI document and rendered local Swagger UI,
@@ -45,11 +46,11 @@ can be approved and handed to `/to-spec`, `/to-tickets`, and vertical-slice deli
 
 ## Resolution boundary
 
-This ticket may approve and create the linked epic, PRDs, and executable T-tickets, then close the map with an
-empty frontier. It does not authorize implementation, dependency publication, commits, pull requests,
+This decision may approve the linked EPIC and requirement boundaries, then hand off to TICKET and TASK
+decomposition under the local planning conventions. Close the map only with an empty frontier and a linked handoff. It does not authorize implementation, dependency publication, commits, pull requests,
 deployment, template enablement, archive operations, or cleanup.
 
 ## Resolution
 
-Open. After approval, link the resulting epic, PRDs, and implementation tickets here and from the map before
-closing either record.
+Open. After approval, link the resulting EPIC, requirements TICKETs, and subsequent TASK handoff here and from
+the map before closing either record. Lifecycle migration itself does not settle the map's technical decisions.

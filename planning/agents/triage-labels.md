@@ -1,11 +1,16 @@
-# Triage States
+# Triage and readiness
 
-- `needs-triage`: not yet classified.
-- `needs-info`: blocked on a decision or missing evidence.
-- `ready-for-agent`: decision-complete and executable when dependencies are done.
-- `ready-for-human`: requires human judgment or an external action.
-- `in-progress`: actively being changed.
-- `done`: acceptance criteria and verification are complete.
-- `wontfix`: intentionally closed without implementation.
+Use the status definitions in [planning conventions](../CONVENTIONS.md#status-and-readiness).
 
-Do not store `blocked` as a status; derive it from unfinished dependency edges.
+- `needs-triage`: unclassified scope or ownership.
+- `needs-info`: named decisions or evidence are missing.
+- `ready-for-human`: human judgment or an external action is next.
+- `ready-for-agent`: approved EPIC for requirements decomposition; accepted, decision-complete TICKET for TASK
+  decomposition; approved TASK for execution when its own and parent dependencies permit.
+- `in-progress`: child delivery or TASK implementation/revision is underway.
+- `done`: acceptance and required verification complete, with all children terminal.
+- `wontfix`: explicitly closed without delivery, with all children terminal.
+
+Blocking is derived from unfinished same-level `blocked_by` edges and TASK ancestor readiness, never stored as
+`blocked`. Preserve completed dependency edges. Do not confuse an approved split with resolved requirements,
+TASK completion with parent completion, or `done` with independent review, merge, release, or deployment.

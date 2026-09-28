@@ -16,15 +16,22 @@ presentation, and operational responsibilities explicit.
 
 **Done** = every linked decision ticket is closed; the runtime, capability inventory, upstream contract,
 persistence, HTTP/security, asynchronous delivery, realtime, and SPA adoption decisions are internally
-consistent; the remaining fog is resolved or excluded; and the approved handoff links to its resulting epic,
-PRDs, and executable vertical-slice tickets.
+consistent; the remaining fog is resolved or excluded; and the approved handoff links to its resulting EPIC,
+requirements TICKETs, and subsequent bounded TASK handoff.
 
 ## Notes
 
+- The approved [foundation epic](../epics/00001-EPIC.md) and
+  [T-00006](../tickets/00006-TICKET.md) supersede the old package-baseline assumptions below with approved
+  Common 1.2.0 / AccessControl 0.4.0. Both are installed; the
+  [bounded contract handoff](fight-package-baseline.md) records local integration and its limits. Full capability,
+  persistence, and security decisions remain pending; reconcile them before dependent implementation.
+  The EPIC → TICKET → TASK lifecycle changes handoff terminology, not this map's unresolved technical decisions.
 - This is a planning-only map. It does not authorize production-code changes, dependency publication, release,
   deployment, or copying package-owned source.
-- Implementation is gated on installable Fight Common `1.2.0` and Fight AccessControl `0.2.0` releases.
-- Fight AccessControl `0.2.0` supplies scan-only reusable component schemas. Laravel owns paths, operations,
+- The selected package baseline is Common `1.2.0` / AccessControl `0.4.0`; WF-002's complete inventory is open.
+- The original OpenAPI plan assumed AccessControl `0.2.0` scan-only reusable component schemas. WF-003 must
+  verify the selected 0.4.0 catalog before retaining that handshake. Laravel owns paths, operations,
   operation IDs, security schemes, status codes, framework errors, servers, tags, the generator command, the one
   checked-in OpenAPI 3.1 document, Swagger UI, and drift checks.
 - A Laravel-owned Artisan generator scans the installed package `resources/openapi/` carriers and Laravel Actions,
@@ -40,12 +47,12 @@ PRDs, and executable vertical-slice tickets.
 ## Decisions so far
 
 1. **[Development runtime topology](tickets/WF-001-development-runtime-topology.md) is open.** Fix the complete,
-   worktree-safe Compose and wrapper contract before implementation tickets are produced.
+   worktree-safe Compose and wrapper contract before executable TASKs are produced.
 2. **[AccessControl capability inventory](tickets/WF-002-access-control-capability-inventory.md) is open.** Map
    every package command, query, and service entrypoint to an external HTTP operation or an intentionally
    operational-only entrypoint.
 3. **[OpenAPI and release handshake](tickets/WF-003-openapi-and-release-handshake.md) is open.** Define the
-   shared-component 0.2.0 handshake, Laravel-owned one-pass OpenAPI generation, and Symfony wire compatibility.
+   selected-release shared-component handshake, Laravel-owned one-pass OpenAPI generation, and Symfony wire compatibility.
 4. **[Persistence and transaction model](tickets/WF-004-persistence-and-transaction-model.md) is open.** Define
    Eloquent record mapping, UnitOfWork, migrations, concurrency, refresh sessions, and atomic audit behavior.
 5. **[HTTP and security conventions](tickets/WF-005-http-and-security-conventions.md) is open.** Settle JWT,
@@ -57,14 +64,14 @@ PRDs, and executable vertical-slice tickets.
 8. **[Portable React SPA](tickets/WF-008-portable-react-spa.md) is open.** Define the Symfony-led portable client
    architecture and exact Laravel adoption contract for all self-service and administrative journeys.
 9. **[Capability-spine approval and handoff](tickets/WF-009-capability-spine-handoff.md) is open.** Reconcile the
-   decisions and obtain human approval before creating the epic, PRDs, and executable vertical slices.
+   decisions and obtain human approval before creating the EPIC, requirements TICKETs, and subsequent TASKs.
 
 ## Tickets
 
 | Ticket | Type | Mode | Status | Depends On | Gate |
 |---|---|---|---|---|---|
 | [WF-001 — Development runtime topology](tickets/WF-001-development-runtime-topology.md) | Grilling | HITL | **Open** | — | — |
-| [WF-002 — AccessControl capability inventory](tickets/WF-002-access-control-capability-inventory.md) | Research | AFK | **Open** | — | Installable Fight Common 1.2.0 and Fight AccessControl 0.2.0 |
+| [WF-002 — AccessControl capability inventory](tickets/WF-002-access-control-capability-inventory.md) | Research | AFK | **Open** | — | Common 1.2.0 / AccessControl 0.4.0 installed; complete inventory pending |
 | [WF-003 — OpenAPI and release handshake](tickets/WF-003-openapi-and-release-handshake.md) | Grilling | HITL | **Open** | WF-002 | Symfony canonical wire contract |
 | [WF-004 — Persistence and transaction model](tickets/WF-004-persistence-and-transaction-model.md) | Prototype | HITL | **Open** | WF-002 | — |
 | [WF-005 — HTTP and security conventions](tickets/WF-005-http-and-security-conventions.md) | Grilling | HITL | **Open** | WF-002, WF-003, WF-004 | Symfony authentication contract |
@@ -80,12 +87,13 @@ WF-001 ────────────────────────�
                                       │                         │
 WF-002 ──→ WF-003 ────────────────────┼────────────────────────→ WF-008 ──┐
     └────→ WF-004 ──→ WF-005 ─────────┴──→ WF-006 ──→ WF-007 ──┘          │
-                                                                           ├──→ WF-009 ──→ epic / PRDs / T-tickets
+                                                                           ├──→ WF-009 ──→ EPIC / TICKETs / TASKs
 Symfony wire/realtime/client gates ────────────────────────────→ WF-003/WF-005/WF-007/WF-008
 ```
 
-WF-001 is first because the requested sequence is environment-first. WF-002 has no local dependency but remains
-externally gated on the installable package releases; it must not be mistaken for a ready frontier.
+WF-001 remains first because the requested sequence is environment-first. WF-002's package-availability gate is
+now satisfied for the selected baseline; its complete inventory is independently researchable, not an approved
+implementation TASK.
 
 ## Frontier
 
@@ -94,10 +102,10 @@ decision.
 
 ## Not yet specified (fog)
 
-- Exact installable AccessControl `0.2.0` component manifest and release timing.
+- Exact AccessControl `0.4.0` component manifest and compatibility with the original OpenAPI plan.
 - Exact Symfony client baseline reference and its generated-contract/adoption artifacts.
 - Final route matrix, schemas, record shapes, channel names, queue names, retry budgets, and supervisor sizing;
-  the linked decision tickets must settle these before implementation-ticket generation.
+  the linked decision tickets must settle these before implementation TASK generation.
 - Production authorization policies for Horizon and Swagger UI; both remain local-only by default and fail closed
   outside development.
 

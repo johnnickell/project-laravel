@@ -1,6 +1,7 @@
 # Wayfinder Maps
 
-Wayfinder maps chart an uncertain feature before it becomes an epic, PRD, or implementation ticket. A map is an
+Wayfinder maps chart an uncertain feature before it becomes an approved EPIC, requirements TICKETs, and
+implementation TASKs; PRDs are optional supporting specifications. A map is an
 index of linked decision tickets, not a second source of decisions. Start with an active map's **Frontier**; when
 none is available, offer to chart a new feature.
 

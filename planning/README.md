@@ -1,24 +1,25 @@
 # Planning
 
-This directory is the committed source of truth for Fight Laravel Starter planning.
+This directory is the committed planning authority for Fight Laravel Starter.
 
-- `ROADMAP.md` records strategic progress.
-- `epics/` describes destinations.
-- `specs/` describes coherent product requirements.
-- `tickets/` contains executable work; each ticket is canonical for its own status and dependencies.
-- `tickets/BOARD.md` ranks the current execution frontier.
-- `adr/` records architectural decisions.
-- `agents/` contains focused working instructions.
-- `wayfinder/` contains planning-only investigation maps and decision tickets for efforts whose
-  implementation route is not clear enough for an epic or PRD yet.
+- `epics/` owns approved destinations and boundaries.
+- `tickets/` owns cohesive requirements and acceptance evidence, not implementation assignments.
+- `tasks/` owns bounded implementation slices, normally one PR each.
+- [tasks/BOARD.md](tasks/BOARD.md) is the canonical execution frontier and "What's next?" entrypoint.
+- `specs/` holds optional supporting PRDs and historical specifications.
+- `ROADMAP.md` records strategy and exposes the planning/decomposition frontier.
+- `adr/` records architectural decisions; `agents/` contains focused working instructions.
+- [wayfinder/README.md](wayfinder/README.md) indexes pre-implementation investigation maps and decision tickets.
 
-Every artifact directory keeps a `_…_TEMPLATE.md` copy-ready starting point. `wayfinder/README.md` is the
-continuity index for charting work and its next decision frontier. Archives remain part of this committed
-planning record: use `./bin/archive-planning` only when explicitly asked, review its dry run, then use `--apply`
-to move eligible terminal records and repair local Markdown links.
+Read [CONVENTIONS.md](CONVENTIONS.md) for EPIC → TICKET → TASK ownership, approval/readiness, metadata,
+completion synchronization, and explicit-only archives. Each record level has an independent five-digit ID
+sequence. TICKETs keep `T-NNNNN`; TASKs use `TASK-NNNNN`. Inspect live and archived records before allocation.
 
-Identifiers are independent five-digit sequences. Ticket identifiers are displayed as `T-NNNNN`. Valid statuses are `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `in-progress`, `done`, and `wontfix`. Blocking is derived from unfinished `blocked_by` edges and is not stored as a status.
+Only T-00001 through T-00005 retain legacy executable-ticket/PRD semantics. Their IDs, evidence, and historical
+meaning are preserved; no retrospective TASKs are created. [tickets/BOARD.md](tickets/BOARD.md) is a legacy
+snapshot, not a competing execution board. PRDs are no longer a mandatory parent for new TICKETs.
 
-`CONVENTIONS.md` is the canonical reference for planning structure, file naming, ticket lifecycle, BOARD.md, wayfinder maps, epics, PRDs, and pre-PR synchronization.
-
-Run `./bin/planning-check` after changing planning files. Coordinate-build scratch belongs in gitignored `.runs/`, never here.
+Use each directory's `_…_TEMPLATE.md`. After changes, run `./bin/planning-check --write`, then
+`./bin/planning-check`. Record metadata is authoritative; marked generated views must not be hand-edited.
+Never archive as a completion side effect. Use `./bin/archive-planning` only on an explicit request, review its
+dry run, then apply it. Ignored coordination scratch stays under `.runs/` and must not be staged.

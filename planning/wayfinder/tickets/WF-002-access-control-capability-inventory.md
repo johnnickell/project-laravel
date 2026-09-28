@@ -3,13 +3,13 @@
 **Labels:** `wayfinder:research`, `area:access-control`
 **Mode:** AFK
 **Status:** Open
-**Gate:** Installable Fight Common 1.2.0 and Fight AccessControl 0.2.0
+**Gate:** Selected Common 1.2.0 / AccessControl 0.4.0 are installed locally under T-00006; complete inventory remains open
 **Map:** [Complete Laravel AccessControl API and SPA](../complete-access-control-api-and-spa-map.md)
 **Depends on:** —
 
 ## Question
 
-What is the complete public Fight AccessControl `0.2.0` command, query, and service-entrypoint inventory, and
+What is the complete public Fight AccessControl `0.4.0` command, query, and service-entrypoint inventory, and
 which capabilities belong to the external resource-oriented HTTP API versus workers or the scheduler?
 
 ## Must decide
@@ -45,4 +45,7 @@ WF-001 because package capability discovery does not require the runtime topolog
 
 ## Resolution
 
-Open. Link the completed capability matrix or record its durable conclusions here before closing this ticket.
+Open. [TASK-00001](../../tasks/00001-TASK.md) installs the approved Common 1.2.0 / AccessControl 0.4.0 baseline.
+The [bounded installed-contract handoff](../fight-package-baseline.md) records transaction, principal/permission,
+and representative message/handler/View observations. It supersedes this decision's former 0.2 package gate but
+is not the complete capability matrix or approval of API routes. Complete the matrix before closing this ticket.

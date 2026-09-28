@@ -65,14 +65,12 @@ printf '%s' "$composer_auth" | docker run --rm -i \
     --volume "$root:/app" --workdir /app "$build_image" sh -ec '
         COMPOSER_AUTH=$(cat)
         export COMPOSER_AUTH
-        php scripts/validate-composer.php
+        composer validate --strict
         composer install --no-interaction --prefer-dist --no-progress
         php scripts/artisan config:cache
         test -f var/cache/laravel/config.php
         php scripts/artisan about --only=environment
     '
-
-PROJECT_LARAVEL_BUILD_IMAGE="$build_image" scripts/framework-support-lane
 
 # shellcheck disable=SC2046
 docker run --rm \

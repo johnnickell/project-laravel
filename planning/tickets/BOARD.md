@@ -1,6 +1,9 @@
-# Ticket Board
+# Legacy Ticket Board
 
-Ticket files are canonical for status and blockers; this board is canonical for recommended execution order.
+This is the retained pre-migration snapshot for T-00001 through T-00005. The old routing text and outcomes below
+are historical, not current execution instructions. Use [the TASK Board](../tasks/BOARD.md) for "What's next?"
+and [planning conventions](../CONVENTIONS.md#legacy-records-and-migration) before resuming legacy work.
+No retrospective TASKs were created and no legacy record was renumbered or archived.
 
 ## "What's Next?" Contract
 
