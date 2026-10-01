@@ -46,8 +46,10 @@ requirements TICKETs, and subsequent bounded TASK handoff.
 
 ## Decisions so far
 
-1. **[Development runtime topology](tickets/WF-001-development-runtime-topology.md) is open.** Fix the complete,
-   worktree-safe Compose and wrapper contract before executable TASKs are produced.
+1. **[Development runtime topology](tickets/WF-001-development-runtime-topology.md) is open with partial agreement.**
+   Full-stack startup, Agent OS shared ingress/private services, same-origin Mercure, compiled assets with opt-in
+   containerized Vite, and thin Compose wrappers are accepted. Upstream resource ownership/isolation and exact
+   ingress integration remain pending; do not design a separate Laravel worktree infrastructure contract.
 2. **[AccessControl capability inventory](tickets/WF-002-access-control-capability-inventory.md) is open.** Map
    every package command, query, and service entrypoint to an external HTTP operation or an intentionally
    operational-only entrypoint.
@@ -70,7 +72,7 @@ requirements TICKETs, and subsequent bounded TASK handoff.
 
 | Ticket | Type | Mode | Status | Depends On | Gate |
 |---|---|---|---|---|---|
-| [WF-001 — Development runtime topology](tickets/WF-001-development-runtime-topology.md) | Grilling | HITL | **Open** | — | — |
+| [WF-001 — Development runtime topology](tickets/WF-001-development-runtime-topology.md) | Grilling | HITL | **Open** | — | Agent OS ingress contract and shared database/cache/test-isolation decisions pending |
 | [WF-002 — AccessControl capability inventory](tickets/WF-002-access-control-capability-inventory.md) | Research | AFK | **Open** | — | Common 1.2.0 / AccessControl 0.4.0 installed; complete inventory pending |
 | [WF-003 — OpenAPI and release handshake](tickets/WF-003-openapi-and-release-handshake.md) | Grilling | HITL | **Open** | WF-002 | Symfony canonical wire contract |
 | [WF-004 — Persistence and transaction model](tickets/WF-004-persistence-and-transaction-model.md) | Prototype | HITL | **Open** | WF-002 | — |
@@ -102,6 +104,8 @@ decision.
 
 ## Not yet specified (fog)
 
+- Agent OS shared-ingress integration details and upstream database/cache ownership, worktree identity, test
+  isolation, persistence, and cleanup contract; WF-001 must consume these rather than preempt their design.
 - Exact AccessControl `0.4.0` component manifest and compatibility with the original OpenAPI plan.
 - Exact Symfony client baseline reference and its generated-contract/adoption artifacts.
 - Final route matrix, schemas, record shapes, channel names, queue names, retry budgets, and supervisor sizing;

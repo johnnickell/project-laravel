@@ -40,9 +40,19 @@ review its dry run, and then apply it.
 Before final commit and PR for any feature or bug fix:
 
 1. Record verified TASK acceptance, evidence, and actual review state; mark `done` only when its criteria are met
-2. Reconcile parent TICKET and EPIC progress; do not close a parent solely because one TASK finished
+2. Apply automatic parent completion and reconcile parent progress in the same operation
 3. Recalculate the Board's "What's Next?" contract and authored human-decision/Wayfinder pointers
 4. Update affected supporting PRDs and `planning/ROADMAP.md` when progress changed
 5. Preserve dependency edges and derive which blockers remain unfinished
 6. Refresh generated views with `./bin/planning-check --write`
 7. Run `./bin/planning-check`; retain the canonical build requirement above
+
+When completing a TASK, apply [Automatic parent completion](planning/CONVENTIONS.md#automatic-parent-completion)
+in the same operation; do not leave a separate parent assessment or closeout action for the user.
+
+## Certification retirement
+
+Test owned application behavior and meaningful package integrations. Do not create or restore framework-support
+certification files, receipt readers/generators, dependency certification matrices, or tests of those mechanisms.
+Validate build, configuration and planning tools directly with their owning commands, outside product suites.
+Historical certification notes remain history, not current gates.
