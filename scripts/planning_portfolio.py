@@ -263,12 +263,10 @@ def planning_frontier(source: Path, records: Records) -> str:
                 action = "Resolve requirement prerequisites before TASK readiness."
             else:
                 action = "Decompose into requirements TICKETs." if field == "epic" else "Decompose accepted requirements into TASKs."
-        elif all(child["status"] in TERMINAL for child in children):
-            action = "Review parent acceptance and explicitly close or plan remaining scope."
         else:
             continue
         lines.append(f"| {link(identifier, source, records)} | {data['status']} | {action} |")
-    return "\n".join(lines) if len(lines) > 2 else "No decomposition or closeout frontier."
+    return "\n".join(lines) if len(lines) > 2 else "No decomposition frontier."
 
 
 def generated_views(records: Records) -> list[tuple[Path, str, str]]:
@@ -295,9 +293,28 @@ def generated_views(records: Records) -> list[tuple[Path, str, str]]:
     return views
 
 
+def complete_parents(records: dict) -> dict[Path, str]:
+    """Plan bottom-up parent closure from all live and archived child records."""
+    pending = {}
+    for kind, parent_key in (("T-", "ticket"), ("EPIC-", "epic")):
+        for identifier, (path, data) in sorted(records.items()):
+            if not identifier.startswith(kind) or "archive" in path.parts or data["status"] in TERMINAL:
+                continue
+            children = [child for _, child in records.values() if child.get(parent_key) == identifier]
+            if not children or any(child["status"] not in TERMINAL for child in children):
+                continue
+            status = "wontfix" if all(child["status"] == "wontfix" for child in children) else "done"
+            text = path.read_text()
+            header, body = text[4:].split("\n---\n", 1)
+            header = re.sub(r"^status:[^\n]*$", f"status: {status}", header, count=1, flags=re.MULTILINE)
+            pending[path] = f"---\n{header}\n---\n{body}"
+            data["status"] = status
+    return pending
+
+
 def refresh_views(records: Records, write: bool, errors: list[str]) -> None:
-    changes: dict[Path, str] = {}
-    stale: set[Path] = set()
+    changes = complete_parents(records)
+    stale = set(changes)
     for path, name, content in generated_views(records):
         if not path.is_file():
             errors.append(f"{path.relative_to(ROOT)}: missing generated view host")

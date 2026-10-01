@@ -23,6 +23,22 @@ not merely one technical layer. Coordination notes belong in ignored `.runs/`, n
 ADRs remain in `adr/NNNN-description.md`, focused instructions in `agents/`, and investigation maps/decisions in
 `wayfinder/`. `ROADMAP.md` records strategy. Wayfinder `WF-NNN` decisions are not requirements TICKETs or TASKs.
 
+## Automatic parent completion
+
+When a TASK becomes `done` or `wontfix`, complete eligible parent TICKETs and then EPICs in the same operation.
+Count live and archived children. A live, non-terminal parent with at least one child closes when every child
+is terminal: use `wontfix` if every child is `wontfix`, otherwise `done`. Parents without children or with an
+unfinished child remain open. Preserve already-terminal and archived parents.
+
+Child acceptance and intentional `wontfix` decisions remain with the child records. Parent completion requires
+no separate assessment, independent review, QA, confirmation, or skill invocation. Record any remaining work as
+an unfinished child rather than a separate parent-closeout gate. Parent status does not assert review, merge,
+release, deployment or publication, and completion never archives records automatically.
+
+Run `./bin/planning-check --write` during completion; it closes eligible parents and refreshes views.
+Then run the read-only `./bin/planning-check`. Read-only validation never writes completion metadata.
+
+
 ## Identity and templates
 
 EPIC, TICKET, TASK, and PRD IDs have independent five-digit sequences. Retain the repository's `T-` ticket prefix;
@@ -66,8 +82,7 @@ must be reviewed for whether the dependent requirement still makes sense before 
 A TASK is executable only when it is `ready-for-agent`, its TASK blockers are terminal, its parent TICKET and
 EPIC have accepted scope (`ready-for-agent` or `in-progress`), and the parent TICKET's requirement blockers are
 terminal. Otherwise it is waiting or needs a decision. An active TASK does not become permission to bypass new
-parent/dependency uncertainty. No parent closes automatically: verify its own acceptance and explain any waived
-or cancelled child scope first. `done` does not imply merge, deployment, or independent review acceptance.
+parent/dependency uncertainty. Apply [Automatic parent completion](#automatic-parent-completion) in the same operation that closes children. `done` does not imply merge, deployment, or independent review acceptance.
 
 ## Boards and source of truth
 
@@ -86,7 +101,7 @@ Priority comes from TASK `order`; unranked tasks follow ranked tasks, with IDs b
 
 Live EPICs list child TICKETs and live requirement TICKETs list child TASKs in generated tables. Indexes derive
 statuses from records. `ROADMAP.md` retains authored strategy and a generated **Planning Frontier** for missing
-children or parent closeout. This exposes decomposition without promoting planning to execution.
+children for decomposition. This exposes decomposition without promoting planning to execution.
 
 After editing planning records:
 
@@ -97,7 +112,7 @@ After editing planning records:
 
 `--write` validates records/links before refreshing marked views. The read-only command fails on invalid
 identities, parents, dependency cycles, impossible parent completion, broken links, or stale generated sections.
-Neither command invents statuses, decisions, tickets, or tasks. The canonical build uses the read-only check.
+The write command derives eligible parent completion; neither command invents child acceptance, decisions or records. The canonical build uses the read-only check.
 Validate planning tooling through these owning commands and direct inspection, not product-suite meta-tests.
 
 ## Migrated records and historical evidence
