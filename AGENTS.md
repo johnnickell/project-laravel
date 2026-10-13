@@ -1,14 +1,24 @@
 # AGENTS.md
 
+## Work routing
+
+For “What's next?”, `next`, or an unqualified `/ask-matt`, go straight to the [Board](planning/tasks/BOARD.md)
+before general project orientation. Read its current human decision and active work; otherwise select the first
+executable ready TASK in Board order. Use the [Wayfinder index](planning/wayfinder/README.md) for map status and current frontier pointers.
+Follow [lightweight work routing](planning/CONVENTIONS.md#lightweight-work-routing) for validation,
+bounded evidence reads and planning handoffs. Recommend and stop; load execution guidance when work is invoked.
+This routing path does not require reading README, architecture, full project context, task history or receiving skills.
+
+## Project guidance
+
+For execution or substantive planning changes, load the applicable guidance below. The read-only routing
+path above takes precedence over broad orientation reads; it does not waive engineering or delivery rules.
+
 Read `CONTEXT.md`, `planning/CONVENTIONS.md`, and `planning/agents/` before changing behavior. Work in independently verifiable vertical slices. Use the repository-owned `./bin/build`, `./bin/phpunit`, `./bin/up`, `./bin/down`, `./bin/composer`, `./bin/artisan`, and `./bin/exec` commands; `./bin/build` is the single noninteractive local and hosted gate.
 
 Fight Common and Fight AccessControl are consumed only as Composer packages. Do not copy their Domain or Application source, and do not add a Fight Laravel package or framework adapter. Laravel owns its providers, container, routing, middleware, handlers, HTTP, security, persistence, queues, realtime, presentation, and operational composition.
 
 Use `var/cache/` for Laravel and developer-tool cache artifacts. `.runs/` is ignored scratch space and must not be staged. Create feature branches from `develop`; do not commit directly to `develop`.
-
-## Work Routing
-
-When asked "What's next?" or invoked without a task, read `planning/tasks/BOARD.md` and return the current human decision under **Now** and the active TASK, or otherwise the first executable TASK under **Ready Frontier**. Say when none exists; never substitute a requirements TICKET. Use `planning/CONVENTIONS.md` for EPIC → TICKET → TASK readiness and ordering.
 
 ## Run and Worktree Isolation
 
