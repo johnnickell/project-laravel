@@ -34,7 +34,8 @@ current-package upgrade is delivered and merged through PR #13 at `3fa576d`; its
 review/QA acceptance and hosted-delivery provenance. Integrated TASK-00007 supplies standalone-bug planning support
 and patched container baselines, without implementing the successor gate.
 
-TASK-00008 adapts bounded planning synchronization: generated Board/Roadmap current TASK summaries, explicit
+TASK-00008 delivered bounded planning synchronization through PR #15, merged at `54a071d`:
+generated Board/Roadmap current TASK summaries, explicit
 `delivery: awaiting-merge` markers, and `./bin/planning-check --check-delivery` for read-only live handoff checks.
 The build's fail-fast planning check remains offline. Local [delivery pre-submit](planning/CONVENTIONS.md#delivery-pre-submit-and-final-handoff)
 requires Land to reconcile affected authored handoffs as well as generated views; human merge remains separate.

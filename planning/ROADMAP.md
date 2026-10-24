@@ -38,7 +38,8 @@ Required hosted delivery proof passed for reconciled published head `a93e222` un
 identical-tree merge-candidate contract; PR #13 merged into develop at `3fa576d`. See the TASK's completion
 notes for provenance. Neither Land nor another review cycle remains pending for that slice.
 EPIC-00001 remains open. Remaining workflow/binding changes need bounded decomposition; TASK-00007 supplies
-standalone-bug planning support and TASK-00008 owns the bounded routing/delivery synchronization repair.
+standalone-bug planning support. TASK-00008's bounded routing/delivery synchronization repair is delivered
+and merged through PR #15 at `54a071d`; its completion notes preserve acceptance and merge evidence.
 These slices do not implement the entire amendment or authorize changing the harness provider.
 
 [EPIC-00003](epics/00003-EPIC.md), formerly PRD-00002, preserves historical package/gate evidence and the
