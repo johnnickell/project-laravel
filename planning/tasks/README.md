@@ -18,5 +18,5 @@ not start execution or select an implementation worktree.
 | [TASK-00005](00005-TASK.md) | Re-certify Rewritten Fight Common Candidate | done | [T-00005](../tickets/00005-TICKET.md) | — |
 | [TASK-00006](00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | done | [T-00012](../tickets/00012-TICKET.md) | [TASK-00001](00001-TASK.md) |
 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | done | — | — |
-| [TASK-00008](00008-TASK.md) | Keep planning routing and delivery handoffs synchronized | in-progress | — | — |
+| [TASK-00008](00008-TASK.md) | Keep planning routing and delivery handoffs synchronized | done | — | — |
 <!-- /planning:index -->

@@ -32,13 +32,17 @@ below, not restated in authored prose; acceptance/verification checkpoints remai
 <!-- planning:next -->
 | Route | TASK | Title | Status | Readiness |
 | --- | --- | --- | --- | --- |
-| Active Work | [TASK-00008](00008-TASK.md) | Keep planning routing and delivery handoffs synchronized | in-progress | — |
+| None | — | — | — | — |
+
+No TASK is currently executable; unresolved planning or human decisions may remain.
 <!-- /planning:next -->
 
 ## Current delivery
 
 <!-- planning:delivery -->
-No current delivery handoffs. Historical PR links do not imply pending delivery.
+| TASK | Current delivery | PR |
+| --- | --- | --- |
+| [TASK-00008](00008-TASK.md) | Awaiting human review/merge | https://github.com/johnnickell/project-laravel/pull/15 |
 <!-- /planning:delivery -->
 
 ## Wayfinder Review
@@ -51,9 +55,7 @@ on the installed package baseline; neither the map nor any WF decision closes wi
 <!-- planning:tasks -->
 ## Active Work
 
-| Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | [TASK-00008](00008-TASK.md) | Keep planning routing and delivery handoffs synchronized | — | in-progress | — | — |
+No TASKs.
 
 ## Ready Frontier
 
@@ -82,6 +84,7 @@ No TASKs.
 | 1 | [TASK-00001](00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | [T-00006](../tickets/00006-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/10 |
 | 1 | [TASK-00006](00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | [T-00012](../tickets/00012-TICKET.md) | done | [TASK-00001](00001-TASK.md) | https://github.com/johnnickell/project-laravel/pull/13 |
 | 1 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | — | done | — | https://github.com/johnnickell/project-laravel/pull/14 |
+| 1 | [TASK-00008](00008-TASK.md) | Keep planning routing and delivery handoffs synchronized | — | done | — | https://github.com/johnnickell/project-laravel/pull/15 |
 | — | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | [T-00001](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | [T-00002](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | [T-00004](../tickets/00004-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/7 |
