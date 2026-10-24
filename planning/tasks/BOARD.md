@@ -76,7 +76,7 @@ No TASKs.
 | Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | [TASK-00001](00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | [T-00006](../tickets/00006-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/10 |
-| 1 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | — | done | — | — |
+| 1 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | — | done | — | https://github.com/johnnickell/project-laravel/pull/14 |
 | — | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | [T-00001](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | [T-00002](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | [T-00004](../tickets/00004-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/7 |
