@@ -85,7 +85,9 @@ migrated-away identity (PRD-00001/00002 are reserved; the next optional PRD is P
 
 Copy the directory's `_…_TEMPLATE.md` before authoring a record. Templates are not records and receive no ID.
 Every record requires `id`, `title`, and `status`. EPICs also require `target` (use `TBD` until a version is selected).
-New TICKETs require `epic: EPIC-NNNNN`; TASKs require `ticket: T-NNNNN`. An optional `prd: PRD-NNNNN` on a TICKET
+New TICKETs require `epic: EPIC-NNNNN`; feature TASKs require `ticket: T-NNNNN`. Standalone bug TASKs use
+`kind: bug` and an explicit empty `ticket:` field; do not invent a parent merely to track a small repair.
+TASK `kind` may be `feature` or `bug`; omitted kind means feature for existing records. An optional `prd: PRD-NNNNN` on a TICKET
 links supporting material without replacing its EPIC parent. PRDs may optionally link an EPIC.
 
 TASK metadata also includes `order` (optional positive integer, lower first) and `pr` (optional full PR URL).
@@ -118,7 +120,8 @@ must be reviewed for whether the dependent requirement still makes sense before 
 
 A TASK is executable only when it is `ready-for-agent`, its TASK blockers are terminal, its parent TICKET and
 EPIC have accepted scope (`ready-for-agent` or `in-progress`), and the parent TICKET's requirement blockers are
-terminal. Otherwise it is waiting or needs a decision. An active TASK does not become permission to bypass new
+terminal. An approved standalone `kind: bug` TASK has no ancestor readiness or parent completion; its own
+acceptance, TASK blockers, verification and independent review obligations still apply. Otherwise it is waiting or needs a decision. An active TASK does not become permission to bypass new
 parent/dependency uncertainty. Apply [Automatic parent completion](#automatic-parent-completion) in the same operation that closes children. `done` does not imply merge, deployment, or independent review acceptance.
 
 ## Boards and source of truth

@@ -1,6 +1,7 @@
 ---
 id: TASK-NNNNN
 ticket: T-NNNNN
+kind: feature
 title: Brief independently reviewable outcome
 status: needs-triage
 order:
@@ -12,7 +13,8 @@ pr:
 
 ## Outcome
 
-State the bounded observable slice and the parent acceptance criteria it satisfies. A TASK normally owns one PR.
+State the bounded observable slice and the parent acceptance criteria it satisfies. For an approved standalone
+bug, use kind: bug with an empty ticket field and state the repair outcome instead. A TASK normally owns one PR.
 
 ## Scope
 

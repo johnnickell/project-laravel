@@ -24,6 +24,15 @@ gates; those gates are pending at this checkpoint, not waived by implementation 
 unresolved Common 2.0 requirement [T-00003](tickets/00003-TICKET.md). EPIC-00001 supersedes continuing
 certification and the self-provisioning gate design; historical success does not certify their replacements.
 
+## Security maintenance
+
+[TASK-00007](tasks/00007-TASK.md) is done for the independently accepted PHP/Node/NGINX container-baseline
+repair and narrow standalone-bug planning support. QA-01 remains preserved as the prior-candidate finding; the
+cycle-1 bounded build-cache cleanup was independently reviewed and affected QA passed on the repaired candidate.
+Completion records accepted local delivery, not production deployment, release, merge, or resolution of existing
+Composer advisories. It remains independent of successor-gate and package-upgrade work; its pre-existing CLI
+entrypoint finding remains a separate scope decision.
+
 ## Route to 1.0
 
 1. Complete the metadata-head delivery gates for accepted TASK-00001, then hand PR #10 to the maintainer for
