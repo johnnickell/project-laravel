@@ -19,18 +19,22 @@ substitute a requirements TICKET for an approved implementation TASK.
 
 ## Now
 
-[TASK-00001](00001-TASK.md) and T-00006 are done for independently accepted implementation `03207b9`,
-including the complete planning migration and local/hosted proof. Under the maintainer-approved closeout contract,
-[PR #10](https://github.com/johnnickell/project-laravel/pull/10) remains draft at this checkpoint pending fresh
-metadata-head hosted proof and independent final-delivery review. Approval/merge remain human actions;
-accepted implementation is not a claim of successful final delivery.
+[TASK-00006](00006-TASK.md) is the approved active slice: upgrade Common to 1.4.0 and AccessControl to 0.8.0
+under [T-00012](../tickets/00012-TICKET.md), using the main checkout on a feature branch. Implementation and the
+local gate pass; **independent review is next** (`/skill:review TASK-00006`), followed by applicable behavioral QA
+and authorized hosted delivery verification. Its [completion notes](00006-TASK.md#completion-notes) own evidence,
+including unchanged-dependency advisories. No independent acceptance or publication is claimed; do not start a
+second TASK.
 
-There is no active or executable TASK. Settle the successor-gate policy differences between [T-00007](../tickets/00007-TICKET.md) and
-[T-00011](../tickets/00011-TICKET.md) before decomposing them. Separately, the real read/write journey and its
-permission policy still need joint selection for T-00008/T-00009/T-00010. These downstream decisions do not
-expand TASK-00001 into implementing a new gate or business journey.
-T-00006 is now terminal, but all successor requirements remain `needs-info`; preserve their dependency edges.
-See the [Roadmap planning frontier](../ROADMAP.md#planning-frontier) for requirement readiness.
+The maintainer approved broad Agent OS adoption with Laravel-native exceptions in
+[EPIC-00001's amendment](../epics/00001-EPIC.md#approved-broad-adoption-amendment--2026-10-24).
+After the package slice, the planning owner must decompose remaining workflow/binding changes and reconcile
+[T-00007](../tickets/00007-TICKET.md)/[T-00011](../tickets/00011-TICKET.md) gate policies before their TASKs.
+The shared real journey/permission decisions for T-00008/T-00009/T-00010 remain open; preserve dependency edges.
+
+TASK-00001/T-00006 remain complete. Local develop contains PR #10's merge at `f13a727`; the canonical independent
+review accepts final-delivery candidate `fbd110f`. Their earlier delivery-pending checkpoint is historical,
+not a request to resume delivery. See the [Roadmap](../ROADMAP.md) for the current planning handoff.
 
 ## Wayfinder Review
 
@@ -42,7 +46,9 @@ on the installed package baseline; neither the map nor any WF decision closes wi
 <!-- planning:tasks -->
 ## Active Work
 
-No TASKs.
+| Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | [TASK-00006](00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | [T-00012](../tickets/00012-TICKET.md) | in-progress | [TASK-00001](00001-TASK.md) | — |
 
 ## Ready Frontier
 

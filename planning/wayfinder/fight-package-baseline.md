@@ -1,5 +1,9 @@
 # Installed Fight package baseline
 
+Historical Common 1.2.0 / AccessControl 0.4.0 snapshot. For current development, use the
+[Common 1.4.0 / AccessControl 0.8.0 handoff](fight-package-baseline-1.4-0.8.md) under T-00012/TASK-00006.
+The original inspection and acceptance evidence below remains unchanged.
+
 Bounded consumer handoff for [T-00006](../tickets/00006-TICKET.md) and [TASK-00001](../tasks/00001-TASK.md),
 inspected on 2026-09-27. This note supports [WF-002](tickets/WF-002-access-control-capability-inventory.md);
 it is not the complete API capability matrix, a support receipt, or a new certification authority.

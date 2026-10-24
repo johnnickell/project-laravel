@@ -13,12 +13,16 @@ All non-archived planning now uses EPIC → TICKET → TASK. The [migration map]
 identities, source snapshots and historical evidence; no live legacy execution tier or second Board remains.
 
 [EPIC-00001](epics/00001-EPIC.md) owns the application-consumer direction and shared authorization foundation.
-[TASK-00001](tasks/00001-TASK.md) implements released packages/certification retirement. Draft
-[PR #10](https://github.com/johnnickell/project-laravel/pull/10) also corrects the complete planning migration and
-integrates the planning added by develop PR #9. Independent review accepts implementation `03207b9` with
-local/hosted proof; TASK-00001 and T-00006 are done for that accepted candidate. The maintainer-approved
-closeout contract keeps final metadata-head hosted verification and independent evidence review as delivery
-gates; those gates are pending at this checkpoint, not waived by implementation acceptance.
+[TASK-00001](tasks/00001-TASK.md) delivered released packages/certification retirement and the planning
+migration through [PR #10](https://github.com/johnnickell/project-laravel/pull/10). Local develop contains its
+merge at `f13a727`; the canonical independent review accepts final-delivery candidate `fbd110f`, retaining
+implementation acceptance at `03207b9`. Earlier tracked delivery-pending notes are historical checkpoints.
+
+The maintainer approved [broad Agent OS adoption with Laravel exceptions](epics/00001-EPIC.md#approved-broad-adoption-amendment--2026-10-24)
+on 2026-10-24. [T-00012](tickets/00012-TICKET.md) / [TASK-00006](tasks/00006-TASK.md) is the accepted first
+slice: Common 1.4.0 / AccessControl 0.8.0 in the main checkout on a feature branch. Remaining workflow/binding,
+standalone-bug and future closeout changes need bounded decomposition after this slice; the amendment does not
+claim they are implemented or authorize changing the harness provider.
 
 [EPIC-00003](epics/00003-EPIC.md), formerly PRD-00002, preserves historical package/gate evidence and the
 unresolved Common 2.0 requirement [T-00003](tickets/00003-TICKET.md). EPIC-00001 supersedes continuing
@@ -26,8 +30,9 @@ certification and the self-provisioning gate design; historical success does not
 
 ## Route to 1.0
 
-1. Complete the metadata-head delivery gates for accepted TASK-00001, then hand PR #10 to the maintainer for
-   approval/merge. Preserve candidate acceptance separately from final delivery evidence.
+1. Implement and independently verify TASK-00006's current stable package upgrade. Preserve Laravel behavior,
+   exact configured coverage and separate review/QA/hosted delivery evidence. Decompose the remaining approved
+   workflow adoption into requirements and TASKs; preserve the existing gate until its replacement lands.
 2. Reconcile the successor-gate requirements in [T-00007](tickets/00007-TICKET.md) and
    [T-00011](tickets/00011-TICKET.md): exact Unit-only versus all-suite coverage, Covers annotations, PHPCS
    standard, production-install inspection and explicit CI setup/lifecycle. Both scopes remain preserved;
@@ -54,7 +59,8 @@ certification and the self-provisioning gate design; historical success does not
 ## Completed / Released
 
 TASK-00001/T-00006 are accepted at `03207b9` for the released-package consumer cutover and certification retirement.
-Final closeout delivery remains pending at this checkpoint; no merge, release, or deployment is claimed.
+The final-delivery review accepts `fbd110f`, and local develop includes PR #10's merge at `f13a727`.
+This current routing reconciliation does not rewrite the original acceptance checkpoint or claim release/deployment.
 
 [EPIC-00002](epics/00002-EPIC.md) preserves the completed governed starter foundation through T-00001 and
 TASK-00002. Historical Common adoption, gate and recertification are retained under T-00002/TASK-00003,

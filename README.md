@@ -28,10 +28,12 @@ the running-stack replacement belongs to T-00007 and is not implemented by the p
 
 ## Package integration and verification
 
-Composer locks Fight Common **1.2.0** and Fight AccessControl **0.4.0** from published packages. Laravel owns
+Composer locks Fight Common **1.4.0** and Fight AccessControl **0.8.0** from published packages. Laravel owns
 local composition; do not copy package Domain/Application code or introduce a Fight Laravel package.
-The [installed contract handoff](planning/wayfinder/fight-package-baseline.md) describes current public contracts,
-retained/removed integration, and downstream decisions. No complete-platform support certification is promised.
+The [installed contract handoff](planning/wayfinder/fight-package-baseline-1.4-0.8.md) describes current public contracts,
+retained integration, breaking pre-v1 migration boundaries, and downstream decisions. Only the two Fight packages
+changed in this upgrade; three reported advisories in unchanged CommonMark/HttpFoundation dependencies remain
+explicit follow-up risks. No complete-platform support certification is promised.
 
 The existing credential boundary requires explicit `FIGHT_HMAC_PUBLIC`, hex-encoded `FIGHT_HMAC_PRIVATE`, and
 hex-encoded `FIGHT_JWT_SECRET` when those services are used. Use independent secure keys of the required length

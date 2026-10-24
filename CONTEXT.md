@@ -5,10 +5,11 @@ and Fight AccessControl. It is not their implementation home or a framework-supp
 Laravel owns providers, routing, HTTP, security integration, persistence, queues, presentation, and operations.
 Package Domain/Application behavior remains upstream-owned.
 
-The lock selects Common `v1.2.0` at `a2cd615d9b5064c9c30e994655536176249cd73b` and AccessControl `v0.4.0` at
-`380b134b35c722e6416787b13f5c20c64bd05388`, with constraints `^1.2` and `^0.4` and PHP `^8.5`. Both are published
-Packagist releases; no development alias or candidate-warning exception remains. See the
-[installed contract handoff](planning/wayfinder/fight-package-baseline.md) for inspected signatures and limits.
+The lock selects Common `v1.4.0` at `87b9580c072f3149d574e09865daa79620c92118` and AccessControl `v0.8.0` at
+`319738255e682d587642b67856039f882b9588d6`, with constraints `^1.4` and `^0.8` and PHP `^8.5`. Both are published
+Packagist releases; lock and installed metadata agree. See the
+[current installed contract handoff](planning/wayfinder/fight-package-baseline-1.4-0.8.md) for inspected signatures,
+breaking pre-v1 migration boundaries and outstanding advisories in unchanged third-party dependencies.
 
 The application currently serves the HTML homepage. Retained Fight integration is deliberately bounded to the
 Laravel default transaction connection and existing fail-closed JWT/HMAC credential selection. These primitives
@@ -27,3 +28,8 @@ production boot. T-00007 owns the separate approved transition to a thin running
 orchestrator. T-00007 and the migrated develop-side T-00011 must reconcile their coverage/CI requirements before
 gate implementation. Historical receipts and prior success claims in migrated TASK records are historical only.
 All live planning now uses EPIC → TICKET → TASK; `planning/MIGRATION.md` traces the converted identities.
+
+EPIC-00001's 2026-10-24 amendment approves broad Agent OS adoption with narrow Laravel exceptions. TASK-00006
+owns the first current-package upgrade; workflow binding, standalone-bug planning and future closeout adaptation
+remain follow-up planning, not implemented conventions. The existing lifecycle and gates remain authoritative
+until their replacements land. No harness enrollment or global installation is implied.
