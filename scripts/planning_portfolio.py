@@ -98,7 +98,13 @@ def validate_records(records: Records, errors: list[str]) -> None:
             required_parent = "epic"
             allowed_parents = {"epic", "prd"}
         elif prefix == "TASK":
-            required_parent = "ticket"
+            kind = data.get("kind", "feature")
+            if kind not in {"feature", "bug"}:
+                errors.append(f"{label}: kind must be feature or bug")
+            if kind != "bug":
+                required_parent = "ticket"
+            elif "ticket" not in data:
+                errors.append(f"{label}: standalone bug requires an explicit empty ticket field")
             allowed_parents = {"ticket"}
         elif prefix == "PRD":
             allowed_parents = {"epic"}
@@ -175,7 +181,9 @@ def validate_links(errors: list[str]) -> None:
 
 def task_waiting(data: dict[str, str], records: Records) -> list[str]:
     reasons = [dependency for dependency in blockers(data) if records[dependency][1]["status"] not in TERMINAL]
-    ticket_id = data["ticket"]
+    ticket_id = data.get("ticket")
+    if not ticket_id:
+        return reasons
     ticket = records[ticket_id][1]
     epic_id = ticket["epic"]
     if ticket["status"] not in ACCEPTED:
@@ -239,8 +247,9 @@ def board(source: Path, records: Records) -> str:
                 dependencies = ", ".join(link(dependency, source, records) for dependency in blockers(data))
                 waiting = task_waiting(data, records) if data["status"] not in TERMINAL else []
                 readiness = "; ".join(filter(None, [dependencies, ", ".join(waiting)])) or "—"
+                parent = link(data['ticket'], source, records) if data.get('ticket') else "—"
                 text.append(f"| {cell(data.get('order', ''))} | {link(identifier, source, records)} | {cell(data['title'])} | "
-                            f"{link(data['ticket'], source, records)} | {data['status']} | {readiness} | {cell(data.get('pr', ''))} |")
+                            f"{parent} | {data['status']} | {readiness} | {cell(data.get('pr', ''))} |")
         sections.append("\n".join(text))
     return "\n\n".join(sections)
 

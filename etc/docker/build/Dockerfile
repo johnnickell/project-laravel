@@ -1,6 +1,6 @@
-FROM node:24-bookworm-slim AS node
+FROM node:24.22.1-bookworm-slim AS node
 
-FROM php:8.5-cli-bookworm
+FROM php:8.5.12-cli-bookworm
 
 RUN apt-get update \
     && apt-get install --no-install-recommends --yes \

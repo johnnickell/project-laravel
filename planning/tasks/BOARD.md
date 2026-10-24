@@ -25,7 +25,13 @@ including the complete planning migration and local/hosted proof. Under the main
 metadata-head hosted proof and independent final-delivery review. Approval/merge remain human actions;
 accepted implementation is not a claim of successful final delivery.
 
-There is no active or executable TASK. Settle the successor-gate policy differences between [T-00007](../tickets/00007-TICKET.md) and
+[TASK-00007](00007-TASK.md) is ready for independent review in its isolated worktree from develop: patched
+PHP/Node/NGINX baselines, standalone-bug planning support, direct failure probes, the local gate and isolated
+HTTP checks passed. It is not independently accepted or deployed. Its separate pre-existing CLI entrypoint
+finding needs its own scope decision. TASK-00006 is reserved on the concurrent package-upgrade branch; this
+branch neither imports nor completes that work. No successor-gate policy is settled by this repair.
+
+Separately, settle the successor-gate policy differences between [T-00007](../tickets/00007-TICKET.md) and
 [T-00011](../tickets/00011-TICKET.md) before decomposing them. Separately, the real read/write journey and its
 permission policy still need joint selection for T-00008/T-00009/T-00010. These downstream decisions do not
 expand TASK-00001 into implementing a new gate or business journey.
@@ -58,7 +64,9 @@ No TASKs.
 
 ## Human Action
 
-No TASKs.
+| Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | — | ready-for-human | — | — |
 
 ## Needs Triage
 

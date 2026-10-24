@@ -2,8 +2,8 @@
 set -eu
 
 mkdir -p var/cache/laravel var/cache/phpunit
-image=project-laravel-build
-docker build --file etc/docker/build/Dockerfile --tag "$image" .
+image=${COMPOSE_PROJECT_NAME:-project-laravel}-build
+docker build --pull --file etc/docker/build/Dockerfile --tag "$image" .
 # Pest's explicit test environment must not inherit Laravel's development config cache.
 docker run --rm \
     --user "$(id -u):$(id -g)" \
