@@ -74,7 +74,7 @@ No TASKs.
 | Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | [TASK-00001](00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | [T-00006](../tickets/00006-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/10 |
-| 1 | [TASK-00006](00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | [T-00012](../tickets/00012-TICKET.md) | done | [TASK-00001](00001-TASK.md) | — |
+| 1 | [TASK-00006](00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | [T-00012](../tickets/00012-TICKET.md) | done | [TASK-00001](00001-TASK.md) | https://github.com/johnnickell/project-laravel/pull/13 |
 | — | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | [T-00001](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | [T-00002](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | [T-00004](../tickets/00004-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/7 |
