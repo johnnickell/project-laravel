@@ -3,13 +3,13 @@
 **Labels:** `wayfinder:research`, `area:access-control`
 **Mode:** AFK
 **Status:** Open
-**Gate:** Selected Common 1.2.0 / AccessControl 0.4.0 are installed locally under T-00006; complete inventory remains open
+**Gate:** Selected Common 1.4.0 / AccessControl 0.8.0 are installed locally under T-00012/TASK-00006; complete inventory remains open
 **Map:** [Complete Laravel AccessControl API and SPA](../complete-access-control-api-and-spa-map.md)
 **Depends on:** —
 
 ## Question
 
-What is the complete public Fight AccessControl `0.4.0` command, query, and service-entrypoint inventory, and
+What is the complete public Fight AccessControl `0.8.0` command, query, and service-entrypoint inventory, and
 which capabilities belong to the external resource-oriented HTTP API versus workers or the scheduler?
 
 ## Must decide
@@ -45,7 +45,9 @@ WF-001 because package capability discovery does not require the runtime topolog
 
 ## Resolution
 
-Open. [TASK-00001](../../tasks/00001-TASK.md) installs the approved Common 1.2.0 / AccessControl 0.4.0 baseline.
-The [bounded installed-contract handoff](../fight-package-baseline.md) records transaction, principal/permission,
-and representative message/handler/View observations. It supersedes this decision's former 0.2 package gate but
-is not the complete capability matrix or approval of API routes. Complete the matrix before closing this ticket.
+Open. [TASK-00006](../../tasks/00006-TASK.md) upgrades the installed baseline to Common 1.4.0 / AccessControl
+0.8.0. The [current bounded handoff](../fight-package-baseline-1.4-0.8.md) records retained transaction/security
+integration, principal/permission and representative message/handler/View observations, plus breaking Role,
+registration, recovery and Agent contract boundaries. It is not the complete matrix or approval of API routes.
+Complete the current-release inventory before closing this ticket. TASK-00001's earlier 1.2.0/0.4.0 inspection
+remains [historical evidence](../fight-package-baseline.md), not the current inventory input.

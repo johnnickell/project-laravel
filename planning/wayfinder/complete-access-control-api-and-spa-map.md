@@ -22,16 +22,16 @@ requirements TICKETs, and subsequent bounded TASK handoff.
 ## Notes
 
 - The approved [foundation epic](../epics/00001-EPIC.md) and
-  [T-00006](../tickets/00006-TICKET.md) supersede the old package-baseline assumptions below with approved
-  Common 1.2.0 / AccessControl 0.4.0. Both are installed; the
-  [bounded contract handoff](fight-package-baseline.md) records local integration and its limits. Full capability,
-  persistence, and security decisions remain pending; reconcile them before dependent implementation.
+  [T-00012](../tickets/00012-TICKET.md) select Common 1.4.0 / AccessControl 0.8.0. Both are installed by
+  TASK-00006; the [current bounded handoff](fight-package-baseline-1.4-0.8.md) records local integration,
+  pre-v1 breaking contract boundaries and limits. The prior T-00006 cutover remains historical evidence.
+  Full capability, persistence, and security decisions remain pending; reconcile them before dependent implementation.
   The EPIC → TICKET → TASK lifecycle changes handoff terminology, not this map's unresolved technical decisions.
 - This is a planning-only map. It does not authorize production-code changes, dependency publication, release,
   deployment, or copying package-owned source.
-- The selected package baseline is Common `1.2.0` / AccessControl `0.4.0`; WF-002's complete inventory is open.
+- The selected package baseline is Common `1.4.0` / AccessControl `0.8.0`; WF-002's complete inventory is open.
 - The original OpenAPI plan assumed AccessControl `0.2.0` scan-only reusable component schemas. WF-003 must
-  verify the selected 0.4.0 catalog before retaining that handshake. Laravel owns paths, operations,
+  verify the selected 0.8.0 catalog before retaining that handshake. Laravel owns paths, operations,
   operation IDs, security schemes, status codes, framework errors, servers, tags, the generator command, the one
   checked-in OpenAPI 3.1 document, Swagger UI, and drift checks.
 - A Laravel-owned Artisan generator scans the installed package `resources/openapi/` carriers and Laravel Actions,
@@ -73,7 +73,7 @@ requirements TICKETs, and subsequent bounded TASK handoff.
 | Ticket | Type | Mode | Status | Depends On | Gate |
 |---|---|---|---|---|---|
 | [WF-001 — Development runtime topology](tickets/WF-001-development-runtime-topology.md) | Grilling | HITL | **Open** | — | Agent OS ingress contract and shared database/cache/test-isolation decisions pending |
-| [WF-002 — AccessControl capability inventory](tickets/WF-002-access-control-capability-inventory.md) | Research | AFK | **Open** | — | Common 1.2.0 / AccessControl 0.4.0 installed; complete inventory pending |
+| [WF-002 — AccessControl capability inventory](tickets/WF-002-access-control-capability-inventory.md) | Research | AFK | **Open** | — | Common 1.4.0 / AccessControl 0.8.0 installed; complete inventory pending |
 | [WF-003 — OpenAPI and release handshake](tickets/WF-003-openapi-and-release-handshake.md) | Grilling | HITL | **Open** | WF-002 | Symfony canonical wire contract |
 | [WF-004 — Persistence and transaction model](tickets/WF-004-persistence-and-transaction-model.md) | Prototype | HITL | **Open** | WF-002 | — |
 | [WF-005 — HTTP and security conventions](tickets/WF-005-http-and-security-conventions.md) | Grilling | HITL | **Open** | WF-002, WF-003, WF-004 | Symfony authentication contract |
@@ -106,7 +106,7 @@ decision.
 
 - Agent OS shared-ingress integration details and upstream database/cache ownership, worktree identity, test
   isolation, persistence, and cleanup contract; WF-001 must consume these rather than preempt their design.
-- Exact AccessControl `0.4.0` component manifest and compatibility with the original OpenAPI plan.
+- Exact AccessControl `0.8.0` component manifest and compatibility with the original OpenAPI plan.
 - Exact Symfony client baseline reference and its generated-contract/adoption artifacts.
 - Final route matrix, schemas, record shapes, channel names, queue names, retry budgets, and supervisor sizing;
   the linked decision tickets must settle these before implementation TASK generation.

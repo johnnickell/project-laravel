@@ -19,25 +19,29 @@ substitute a requirements TICKET for an approved implementation TASK.
 
 ## Now
 
-[TASK-00001](00001-TASK.md) and T-00006 are done for independently accepted implementation `03207b9`,
-including the complete planning migration and local/hosted proof. Under the maintainer-approved closeout contract,
-[PR #10](https://github.com/johnnickell/project-laravel/pull/10) remains draft at this checkpoint pending fresh
-metadata-head hosted proof and independent final-delivery review. Approval/merge remain human actions;
-accepted implementation is not a claim of successful final delivery.
+[TASK-00006](00006-TASK.md) and [T-00012](../tickets/00012-TICKET.md) record accepted completion of the
+Common 1.4.0 / AccessControl 0.8.0 upgrade at `4afe8af`; independent review accepts and behavioral QA passes.
+**Authorized land owns publication and exact published-head hosted verification**, pending at this checkpoint;
+resume `/skill:land TASK-00006` for delivery, not another implementation or review cycle. Its
+[completion notes](00006-TASK.md#completion-notes) own accepted-candidate provenance and unchanged-dependency
+advisories. Keep the PR draft until required delivery proof succeeds; human PR review/merge follows.
+No executable TASK remains in this branch's planning frontier; do not invent a successor TASK.
 
-[TASK-00007](00007-TASK.md) is done for independently accepted candidate `5e30a149`: Review accepted it and
-affected QA passed six behavioral scenarios (visual evidence N/A). QA-01 remains preserved as the prior-candidate
-finding; the bounded build-cache cleanup is independently verified and no longer reproducible. This completion
-records accepted local delivery only, not PR approval, merge, release, deployment, or resolution of the separate
-pre-existing CLI entrypoint finding. TASK-00006 is reserved on the concurrent package-upgrade branch; this branch
-neither imports nor completes that work. No successor-gate policy is settled by this repair.
+[TASK-00007](00007-TASK.md) is done for independently accepted candidate `5e30a149`; affected QA passed
+six behavioral scenarios (visual N/A), including the QA-01 build-cache cleanup repair. PR #14 merged into
+`develop` at `5d02edc` and is integrated here without changing its runtime fixes or standalone-bug support.
+Its separate pre-existing CLI entrypoint finding and Composer advisories remain unresolved; no deployment or
+successor-gate implementation is claimed.
 
-Separately, settle the successor-gate policy differences between [T-00007](../tickets/00007-TICKET.md) and
-[T-00011](../tickets/00011-TICKET.md) before decomposing them. Separately, the real read/write journey and its
-permission policy still need joint selection for T-00008/T-00009/T-00010. These downstream decisions do not
-expand TASK-00001 into implementing a new gate or business journey.
-T-00006 is now terminal, but all successor requirements remain `needs-info`; preserve their dependency edges.
-See the [Roadmap planning frontier](../ROADMAP.md#planning-frontier) for requirement readiness.
+The maintainer approved broad Agent OS adoption with Laravel-native exceptions in
+[EPIC-00001's amendment](../epics/00001-EPIC.md#approved-broad-adoption-amendment--2026-10-24).
+After the package slice, the planning owner must decompose remaining workflow/binding changes and reconcile
+[T-00007](../tickets/00007-TICKET.md)/[T-00011](../tickets/00011-TICKET.md) gate policies before their TASKs.
+The shared real journey/permission decisions for T-00008/T-00009/T-00010 remain open; preserve dependency edges.
+
+TASK-00001/T-00006 remain complete. Local develop contains PR #10's merge at `f13a727`; the canonical independent
+review accepts final-delivery candidate `fbd110f`. Their earlier delivery-pending checkpoint is historical,
+not a request to resume delivery. See the [Roadmap](../ROADMAP.md) for the current planning handoff.
 
 ## Wayfinder Review
 
@@ -76,6 +80,7 @@ No TASKs.
 | Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | [TASK-00001](00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | [T-00006](../tickets/00006-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/10 |
+| 1 | [TASK-00006](00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | [T-00012](../tickets/00012-TICKET.md) | done | [TASK-00001](00001-TASK.md) | https://github.com/johnnickell/project-laravel/pull/13 |
 | 1 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | — | done | — | https://github.com/johnnickell/project-laravel/pull/14 |
 | — | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | [T-00001](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | [T-00002](../tickets/00002-TICKET.md) | done | — | — |

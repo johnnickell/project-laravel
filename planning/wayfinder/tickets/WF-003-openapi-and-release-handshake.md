@@ -15,8 +15,10 @@ Laravel?
 
 ## Must decide
 
-- The Fight AccessControl `0.2.0` installed `resources/openapi/` component path, manifest, version compatibility,
-  dependency constraint, and clean-install verification before Laravel implementation begins.
+- The selected Fight AccessControl `0.8.0` installed `resources/openapi/` component path, manifest, version
+  compatibility, dependency constraint, and clean-install verification before Laravel implementation begins.
+  The original 0.2.0 assumption is superseded by the [current package handoff](../fight-package-baseline-1.4-0.8.md);
+  this does not approve the current catalog or close the wire-contract decision.
 - A Laravel-native Artisan generator that builds exactly one OpenAPI 3.1 document in one pass from the package
   schemas plus Laravel-owned Actions, request/response DTOs, routes, security declarations, and local components.
 - Operation IDs, resource paths beneath `/api/v1/access/*`, parameters, request bodies, response codes, and
