@@ -29,8 +29,15 @@ orchestrator. T-00007 and the migrated develop-side T-00011 must reconcile their
 gate implementation. Historical receipts and prior success claims in migrated TASK records are historical only.
 All live planning now uses EPIC → TICKET → TASK; `planning/MIGRATION.md` traces the converted identities.
 
-EPIC-00001's 2026-10-24 amendment approves broad Agent OS adoption with narrow Laravel exceptions. TASK-00006
-owns the first current-package upgrade; workflow binding and future closeout adaptation remain follow-up
-planning, not implemented conventions. Integrated TASK-00007 supplies narrow standalone-bug planning support
-and patched container baselines, without implementing the successor gate. The existing lifecycle and gates remain authoritative
-until their replacements land. No harness enrollment or global installation is implied.
+EPIC-00001's 2026-10-24 amendment approves broad Agent OS adoption with narrow Laravel exceptions. TASK-00006's
+current-package upgrade is delivered and merged through PR #13 at `3fa576d`; its owning completion notes retain
+review/QA acceptance and hosted-delivery provenance. Integrated TASK-00007 supplies standalone-bug planning support
+and patched container baselines, without implementing the successor gate.
+
+TASK-00008 adapts bounded planning synchronization: generated Board/Roadmap current TASK summaries, explicit
+`delivery: awaiting-merge` markers, and `./bin/planning-check --check-delivery` for read-only live handoff checks.
+The build's fail-fast planning check remains offline. Local [delivery pre-submit](planning/CONVENTIONS.md#delivery-pre-submit-and-final-handoff)
+requires Land to reconcile affected authored handoffs as well as generated views; human merge remains separate.
+These safeguards do not complete broader workflow adoption or change acceptance/hosted-proof requirements.
+Remaining workflow bindings need decomposition; the existing lifecycle and gates remain authoritative until
+replacements land. No provider change, harness enrollment or global installation is implied.

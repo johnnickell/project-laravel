@@ -22,6 +22,10 @@ no new verification or independent acceptance is fabricated. There is no second 
 PRDs are optional supporting specifications, never substitutes for EPIC parents.
 
 Use each directory's `_…_TEMPLATE.md`. After changes, run `./bin/planning-check --write`, then
-`./bin/planning-check`. Record metadata is authoritative; marked generated views must not be hand-edited.
+`./bin/planning-check`. Before routing or publication use `./bin/planning-check --check-delivery` for explicit
+current handoffs; the offline check does not verify live PR state. Record metadata is authoritative; marked
+generated views must not be hand-edited. Land reconciles affected authored Board/Roadmap/README handoffs under
+[delivery pre-submit](CONVENTIONS.md#delivery-pre-submit-and-final-handoff); later human merge/closure requires
+authorized marker reconciliation, not a new acceptance cycle.
 Never archive as a completion side effect. Use `./bin/archive-planning` only on an explicit request, review its
 dry run, then apply it. Ignored coordination scratch stays under `.runs/` and must not be staged.

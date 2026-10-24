@@ -1,5 +1,16 @@
 # Roadmap
 
+## Current execution
+
+<!-- planning:execution -->
+| Route | TASK | Title | Status | Readiness |
+| --- | --- | --- | --- | --- |
+| Active Work | [TASK-00008](tasks/00008-TASK.md) | Keep planning routing and delivery handoffs synchronized | in-progress | — |
+<!-- /planning:execution -->
+
+The [TASK Board](tasks/BOARD.md) owns execution order and explicit current delivery handoffs. Validate current
+routing with `./bin/planning-check --check-delivery`; historical milestone notes below are not pending actions.
+
 ## In progress
 
 <!-- planning:epics -->
@@ -19,13 +30,14 @@ merge at `f13a727`; the canonical independent review accepts final-delivery cand
 implementation acceptance at `03207b9`. Earlier tracked delivery-pending notes are historical checkpoints.
 
 The maintainer approved [broad Agent OS adoption with Laravel exceptions](epics/00001-EPIC.md#approved-broad-adoption-amendment--2026-10-24)
-on 2026-10-24. [T-00012](tickets/00012-TICKET.md) / [TASK-00006](tasks/00006-TASK.md) is the accepted first
-slice: Common 1.4.0 / AccessControl 0.8.0 in the main checkout on a feature branch. Candidate `4afe8af` now has
-independent review acceptance and behavioral QA PASS; TASK-00006/T-00012 are done, with final publication and
-exact-head hosted delivery verification pending at the administrative checkpoint. EPIC-00001 remains open.
-Remaining workflow/binding and future closeout changes need bounded decomposition after this slice.
-TASK-00007 supplies the narrow standalone-bug planning support; the broader amendment does not claim its other
-mechanisms are implemented or authorize changing the harness provider.
+on 2026-10-24. [T-00012](tickets/00012-TICKET.md) / [TASK-00006](tasks/00006-TASK.md) delivered the first
+slice: Common 1.4.0 / AccessControl 0.8.0, independently accepted at `4afe8af` with behavioral QA PASS.
+Required hosted delivery proof passed for reconciled published head `a93e222` under the maintainer-approved
+identical-tree merge-candidate contract; PR #13 merged into develop at `3fa576d`. See the TASK's completion
+notes for provenance. Neither Land nor another review cycle remains pending for that slice.
+EPIC-00001 remains open. Remaining workflow/binding changes need bounded decomposition; TASK-00007 supplies
+standalone-bug planning support and TASK-00008 owns the bounded routing/delivery synchronization repair.
+These slices do not implement the entire amendment or authorize changing the harness provider.
 
 [EPIC-00003](epics/00003-EPIC.md), formerly PRD-00002, preserves historical package/gate evidence and the
 unresolved Common 2.0 requirement [T-00003](tickets/00003-TICKET.md). EPIC-00001 supersedes continuing
@@ -42,10 +54,9 @@ entrypoint finding remains a separate scope decision.
 
 ## Route to 1.0
 
-1. Complete authorized publication and exact published-head hosted delivery verification for accepted
-   TASK-00006, then human PR review/merge. Its review/QA acceptance is complete; do not reopen it solely for
-   administrative closeout. The planning owner next decomposes the remaining approved workflow adoption into
-   requirements and TASKs; preserve the existing gate until its replacement lands.
+1. Decompose the remaining approved workflow adoption into requirements and TASKs, accounting for the
+   standalone-bug support and bounded planning-synchronization repair without treating them as the entire
+   adoption. The package-upgrade slice is delivered and merged; preserve the existing gate until its replacement lands.
 2. Reconcile the successor-gate requirements in [T-00007](tickets/00007-TICKET.md) and
    [T-00011](tickets/00011-TICKET.md): exact Unit-only versus all-suite coverage, Covers annotations, PHPCS
    standard, production-install inspection and explicit CI setup/lifecycle. Both scopes remain preserved;

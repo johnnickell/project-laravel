@@ -6,7 +6,9 @@ For “What's next?”, `next`, or an unqualified `/ask-matt`, go straight to th
 before general project orientation. Read its current human decision and active work; otherwise select the first
 executable ready TASK in Board order. Use the [Wayfinder index](planning/wayfinder/README.md) for map status and current frontier pointers.
 Follow [lightweight work routing](planning/CONVENTIONS.md#lightweight-work-routing) for validation,
-bounded evidence reads and planning handoffs. Recommend and stop; load execution guidance when work is invoked.
+bounded evidence reads and planning handoffs. Run `./bin/planning-check --check-delivery` before selection;
+an offline planning/build pass does not establish live delivery freshness. Recommend and stop; load execution
+guidance when work is invoked.
 This routing path does not require reading README, architecture, full project context, task history or receiving skills.
 
 ## Project guidance
@@ -52,10 +54,13 @@ Before final commit and PR for any feature or bug fix:
 1. Record verified TASK acceptance, evidence, and actual review state; mark `done` only when its criteria are met
 2. Apply automatic parent completion and reconcile parent progress in the same operation
 3. Recalculate the Board's "What's Next?" contract and authored human-decision/Wayfinder pointers
-4. Update affected supporting PRDs and `planning/ROADMAP.md` when progress changed
+4. Update affected supporting PRDs, `planning/ROADMAP.md`, README/context and current record handoffs when progress changed
 5. Preserve dependency edges and derive which blockers remain unfinished
 6. Refresh generated views with `./bin/planning-check --write`
 7. Run `./bin/planning-check`; retain the canonical build requirement above
+8. For Land/publication follow [delivery pre-submit](planning/CONVENTIONS.md#delivery-pre-submit-and-final-handoff):
+   live delivery checks at intake, immediately before publication and after final metadata/view changes;
+   reconcile affected authored handoffs as well as generated sections
 
 When completing a TASK, apply [Automatic parent completion](planning/CONVENTIONS.md#automatic-parent-completion)
 in the same operation; do not leave a separate parent assessment or closeout action for the user.

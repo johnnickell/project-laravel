@@ -6,9 +6,10 @@ For “What's next?”, `next`, or an unqualified `/ask-matt`, use the routing e
 This read-only path precedes general orientation; full implementation, review, QA and delivery requirements
 still apply when the selected workflow is invoked.
 
-1. Run the documented read-only planning validator once when available. Failure stops selection with the
-   actual error and planning-owner handoff; do not refresh views. Without a validator, disclose that limitation
-   and check selected record metadata against the authored Board; do not claim generated freshness.
+1. Run `./bin/planning-check --check-delivery` once before selection. It validates local views and live PR state
+   for explicit current delivery handoffs only. Failure or unavailable evidence stops selection with the actual
+   error and planning-owner handoff; do not refresh views or infer a merge. An ordinary offline planning/build
+   pass is not delivery freshness. With no current delivery markers, no hosted query or credentials are needed.
 2. Read only the Board's current human decision, active work, and (if no active work) first ready entry.
    Use local section names and authoritative order. Return all active TASKs, not a new winner. Inspect selected
    TASK metadata and its current handoff, plus blocker metadata only as needed. An unresolved contradiction
@@ -31,9 +32,12 @@ a deeper audit. Do not read append-only task histories, other worktrees' entire 
 or all receiving skills to produce a recommendation. Return TASK, WAYFINDER, and relevant PLANNING/HUMAN INPUT;
 stop without invoking a workflow or changing files. Missing indexes are reported, not fabricated.
 
-During authorized planning updates, keep current Board/Roadmap handoffs source-linked and concise: target,
-phase, pending decision/owner. Keep Wayfinder inventory/frontier pointers current. These are navigation aids,
-not another backlog or proof of delivery. Preserve generated sections and all historical decisions.
+During authorized planning updates, keep authored planning/decomposition handoffs source-linked and concise:
+target, phase, pending decision/owner. Generated Board/Roadmap summaries own current TASK selection; do not
+repeat it in authored prose. The Board's generated delivery section owns explicit current merge handoffs;
+TASK completion notes preserve acceptance and historical delivery checkpoints, not a second live routing source.
+Keep Wayfinder pointers current. These views are navigation aids, not acceptance or delivery proof. Preserve
+historical decisions and label superseded checkpoints; reconcile affected READMEs rather than copying live state.
 
 Routing sources: [TASK Board](tasks/BOARD.md), [Wayfinder inventory](wayfinder/README.md), [Roadmap](ROADMAP.md).
 
@@ -94,6 +98,28 @@ TASK metadata also includes `order` (optional positive integer, lower first) and
 Those fields do not claim review, merge, release, or deployment. Each TASK's acceptance/evidence and completion
 notes record actual implementation and review state. No implicit execution or publication follows from planning.
 
+### Current delivery handoffs
+
+A live `done` TASK may set optional `delivery: awaiting-merge` with its verified `pr` URL to identify the current
+human review/merge handoff. Omit or clear it when that handoff ends. Neither `done`, a historical PR link nor a
+completion checkpoint creates a current delivery claim. The generated Board `planning:delivery` block mirrors
+these markers. The marker does not assert final-head CI success or authorize merge; pending delivery proof stays
+explicit in the owning TASK/PR and remains blocking under the existing acceptance/delivery contract.
+
+Offline validation checks marker/TASK/PR/origin identity and generated views. `--check-delivery` additionally
+uses existing operator `gh` access for at most 16 current handoffs, one read-only 15-second request per PR.
+GitHub URL, number, repository and TASK-prefixed title must agree. OPEN permits the current human handoff;
+MERGED and CLOSED WITHOUT MERGE reject it with distinct planning-owner corrections. Missing CLI/authentication,
+API/network failure, malformed/contradictory metadata or identity mismatch is INCOMPLETE, never inferred merge
+or a fresh pass. No historical PRs are queried and no fetch, publish, merge or record mutation occurs.
+
+`--write` and `--check-delivery` are mutually exclusive. Ordinary checks, including the existing fail-fast
+planning step in `./bin/build`, remain offline; the rest of the build still requires registry/dependency access.
+Land sets the marker in its authorized publication closeout and follows [delivery pre-submit](#delivery-pre-submit-and-final-handoff).
+After human merge/closure, the authorized planning owner verifies identity/evidence, reconciles the TASK's
+current notes and affected docs, clears the marker and refreshes views. Read-only `next` reports the needed
+reconciliation without making it; neither a marker nor its removal establishes acceptance.
+
 ## Status and readiness
 
 The same status vocabulary has level-specific readiness:
@@ -130,9 +156,12 @@ Record frontmatter owns status, hierarchy, dependencies, and TASK priority. Auth
 acceptance. Generated sections are bounded by `<!-- planning:NAME -->` / `<!-- /planning:NAME -->` markers.
 
 `tasks/BOARD.md` is the canonical execution frontier. It has an authored **"What's Next?" Contract**, **Now**
-human-decision section, and **Wayfinder Review** pointer. Its generated sections are **Active Work**,
-**Ready Frontier**, **Waiting**, **Needs Info**, **Human Action**, **Needs Triage**, and **Recently Done**.
-Only TASKs are execution rows. Never substitute a requirement TICKET because no TASK exists.
+human-decision section, and **Wayfinder Review** pointer. Its `planning:next` summary in **Now** and Roadmap
+`planning:execution` summary share the same priority/readiness grouping as **Active Work**, **Ready Frontier**,
+**Waiting**, **Needs Info**, **Human Action**, **Needs Triage**, and **Recently Done**. They show all active TASKs,
+otherwise the first ready TASK, plus human/needs-info inputs and the first waiting/triage reasons when idle.
+The Board's **Current delivery** is generated separately from explicit delivery markers. Only TASKs are
+execution rows. Never substitute a requirement TICKET because no TASK exists.
 
 For "What's next?" or an unqualified invocation, return the human decision under **Now** and the active TASK,
 if any; otherwise return the first executable TASK under **Ready Frontier**. If neither exists, say there is no
@@ -152,7 +181,9 @@ After editing planning records:
 
 `--write` validates records/links before refreshing marked views. The read-only command fails on invalid
 identities, parents, dependency cycles, impossible parent completion, broken links, or stale generated sections.
-The write command derives eligible parent completion; neither command invents child acceptance, decisions or records. The canonical build uses the read-only check.
+The write command derives eligible parent completion; neither command invents child acceptance, decisions or records.
+Current TASK summaries and delivery rows are checked alongside indexes. The canonical build uses the offline
+read-only check; it cannot certify authored prose or live hosting state.
 Validate planning tooling through these owning commands and direct inspection, not product-suite meta-tests.
 
 ## Migrated records and historical evidence
@@ -216,10 +247,37 @@ Before a commit or PR:
    multi-TASK requirement. Update any affected supporting PRD without rewriting historical outcomes.
 3. Preserve dependency edges, recalculate readiness, and update the Board's authored **Now** decision and
    Wayfinder pointer if their authority changed.
-4. Update `ROADMAP.md` strategy when the milestone changed; refresh generated views with `--write`, then run
-   the read-only planning check.
+4. Update `ROADMAP.md` strategy and affected README/context/current record handoffs when the milestone changed;
+   remove obsolete current actions while preserving historical checkpoints. Refresh generated views with
+   `--write`, then run the read-only planning check. Generated consistency is not a prose audit.
 5. Run the complete repository-owned `./bin/build` using the prescribed detached execution/exit-artifact check.
    Focused checks are iteration evidence, not a substitute for the pre-submit gate.
+
+### Delivery pre-submit and final handoff
+
+These target-specific steps apply to shared Land in this repository, without modifying or copying the provider
+skill. Land owns authorized TASK/parent closeout, generated views and affected authored documentation together:
+
+1. At intake and immediately before push/PR publication, run `./bin/planning-check --check-delivery`. An offline
+   build or an earlier live check does not substitute. If it reports an ended handoff, verify the exact PR's
+   merge/closure evidence; within authorized planning scope reconcile current TASK notes, clear its marker,
+   and update affected Board/Roadmap/README/context and parent handoffs. Missing scope/evidence stops publication
+   with the precise owner/input. Preserve historical review/QA reports and acceptance identities.
+2. Before closeout commits, reconcile these same authored documents with the verified implementation and actual
+   stage; point readers to current generated routing rather than repeating a transient Land/merge instruction.
+   Label any retained delivery-pending note as a checkpoint in its owning record, not the next action in Board,
+   Roadmap or READMEs. Refresh views with `--write`, inspect the resulting diff/parent rollup, and rerun validation.
+3. Record the actual PR URL and current `delivery: awaiting-merge` marker as part of authorized closeout. Run the
+   canonical gate before every commit/PR as above. Any metadata commit moves the delivery candidate: retain the
+   draft and resources until required final-head proof covers that candidate. This changes no acceptance or
+   hosted-verification requirement and authorizes no extra commit merely to record successful CI.
+4. After final metadata/view changes and publication, rerun `--check-delivery` and inspect affected authored
+   handoffs. Verify the intended published head and required delivery proof separately; an OPEN PR is not CI,
+   independent acceptance, QA or merge approval. Record final proof in the ignored receipt/PR body under the
+   existing finite closeout contract. No successful Land handoff while required verification is incomplete.
+5. Hand off the actual PR to human review/merge. A later human merge or closure ends the marker; subsequent
+   routing catches it and requests authorized reconciliation, never another implementation/review cycle merely
+   because delivery history moved. Land does not merge and cannot promise freshness after a concurrent change.
 
 Planning-only changes may update guidance and records under explicit human approval without fabricating an
 implementation TASK for the migration itself. They still require the canonical gate before any commit or PR.
