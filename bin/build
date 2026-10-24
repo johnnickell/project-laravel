@@ -2,8 +2,8 @@
 set -eu
 
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-build_image=project-laravel-build
-runtime_image=project-laravel-runtime
+build_image=${COMPOSE_PROJECT_NAME:-project-laravel}-build
+runtime_image=${COMPOSE_PROJECT_NAME:-project-laravel}-runtime
 
 cd "$root"
 export APP_NAME='Fight Laravel Starter'
@@ -19,8 +19,8 @@ mkdir -p \
     var/cache/phpstan \
     var/cache/phpunit
 
-docker build --file etc/docker/build/Dockerfile --tag "$build_image" .
-docker build --file etc/docker/fpm/Dockerfile --tag "$runtime_image" .
+docker build --pull --file etc/docker/build/Dockerfile --tag "$build_image" .
+docker build --pull --file etc/docker/fpm/Dockerfile --tag "$runtime_image" .
 
 services=$(docker compose config --services)
 if [ "$services" != "api
@@ -67,6 +67,8 @@ printf '%s' "$composer_auth" | docker run --rm -i \
         export COMPOSER_AUTH
         composer validate --strict
         composer install --no-interaction --prefer-dist --no-progress
+        # Do not leave build-environment configuration in the bind-mounted local runtime.
+        trap "rm -f -- \"$APP_CONFIG_CACHE\"" EXIT
         php scripts/artisan config:cache
         test -f var/cache/laravel/config.php
         php scripts/artisan about --only=environment

@@ -1,4 +1,4 @@
-FROM php:8.5-fpm-alpine
+FROM php:8.5.12-fpm-alpine
 
 RUN addgroup --gid 1000 --system systemuser \
     && adduser --uid 1000 --system --ingroup systemuser systemuser \

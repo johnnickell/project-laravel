@@ -7,7 +7,8 @@ a release, Packagist publication, template enablement, or create-project distrib
 
 Prerequisites: Docker with Compose, Git, and host Python 3 for planning validation. The current gate prepares
 its own PHP 8.5/Node build images and installs the committed Composer/npm locks; host PHP and Node are not
-required for that gate. Internet access is needed on the first uncached setup.
+required for that gate. Image-building commands explicitly pull base images and require registry access even
+with a warm cache; a failed pull stops the command.
 
 ```sh
 ./bin/build                 # Current setup plus canonical verification, including frontend assets
@@ -25,6 +26,19 @@ not normal setup. Optional frontend development uses host Node and `npm --prefix
 
 `./bin/build` is the canonical noninteractive gate used by CI. It still builds images and installs dependencies;
 the running-stack replacement belongs to T-00007 and is not implemented by the package-adoption change.
+
+### Container security and worktree isolation
+
+Reviewed baselines are PHP **8.5.12** (CLI and FPM), Node **24.22.1** (build tooling), and NGINX **1.30.6**.
+Dockerfiles pin patch versions; `--pull` refreshes those tags but does not advance to future patch versions.
+Future security releases require a deliberate Dockerfile update, rebuild, and replacement of affected workers.
+This local workflow does not deploy or restart production.
+
+For an isolated worktree, export a unique `COMPOSE_PROJECT_NAME` before running **all** `./bin/` commands.
+Build/test/Composer image tags use that prefix too; the default remains `project-laravel`.
+If another stack uses port 18084, supply a separate Compose override through `COMPOSE_FILE` that replaces the
+server's port mapping with an unused loopback port. Use `./bin/down` with the same project and files; never stop
+another checkout's stack. Source, dependencies and caches remain inside the selected checkout.
 
 ## Package integration and verification
 

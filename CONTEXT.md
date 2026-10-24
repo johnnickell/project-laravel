@@ -30,6 +30,7 @@ gate implementation. Historical receipts and prior success claims in migrated TA
 All live planning now uses EPIC → TICKET → TASK; `planning/MIGRATION.md` traces the converted identities.
 
 EPIC-00001's 2026-10-24 amendment approves broad Agent OS adoption with narrow Laravel exceptions. TASK-00006
-owns the first current-package upgrade; workflow binding, standalone-bug planning and future closeout adaptation
-remain follow-up planning, not implemented conventions. The existing lifecycle and gates remain authoritative
+owns the first current-package upgrade; workflow binding and future closeout adaptation remain follow-up
+planning, not implemented conventions. Integrated TASK-00007 supplies narrow standalone-bug planning support
+and patched container baselines, without implementing the successor gate. The existing lifecycle and gates remain authoritative
 until their replacements land. No harness enrollment or global installation is implied.

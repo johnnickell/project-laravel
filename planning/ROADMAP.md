@@ -23,13 +23,22 @@ on 2026-10-24. [T-00012](tickets/00012-TICKET.md) / [TASK-00006](tasks/00006-TAS
 slice: Common 1.4.0 / AccessControl 0.8.0 in the main checkout on a feature branch. Candidate `4afe8af` now has
 independent review acceptance and behavioral QA PASS; TASK-00006/T-00012 are done, with final publication and
 exact-head hosted delivery verification pending at the administrative checkpoint. EPIC-00001 remains open.
-Remaining workflow/binding,
-standalone-bug and future closeout changes need bounded decomposition after this slice; the amendment does not
-claim they are implemented or authorize changing the harness provider.
+Remaining workflow/binding and future closeout changes need bounded decomposition after this slice.
+TASK-00007 supplies the narrow standalone-bug planning support; the broader amendment does not claim its other
+mechanisms are implemented or authorize changing the harness provider.
 
 [EPIC-00003](epics/00003-EPIC.md), formerly PRD-00002, preserves historical package/gate evidence and the
 unresolved Common 2.0 requirement [T-00003](tickets/00003-TICKET.md). EPIC-00001 supersedes continuing
 certification and the self-provisioning gate design; historical success does not certify their replacements.
+
+## Security maintenance
+
+[TASK-00007](tasks/00007-TASK.md) is done for the independently accepted PHP/Node/NGINX container-baseline
+repair and narrow standalone-bug planning support. QA-01 remains preserved as the prior-candidate finding; the
+cycle-1 bounded build-cache cleanup was independently reviewed and affected QA passed on the repaired candidate.
+Completion records accepted local delivery, not production deployment, release, merge, or resolution of existing
+Composer advisories. It remains independent of successor-gate and package-upgrade work; its pre-existing CLI
+entrypoint finding remains a separate scope decision.
 
 ## Route to 1.0
 

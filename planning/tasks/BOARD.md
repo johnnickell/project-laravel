@@ -27,6 +27,12 @@ resume `/skill:land TASK-00006` for delivery, not another implementation or revi
 advisories. Keep the PR draft until required delivery proof succeeds; human PR review/merge follows.
 No executable TASK remains in this branch's planning frontier; do not invent a successor TASK.
 
+[TASK-00007](00007-TASK.md) is done for independently accepted candidate `5e30a149`; affected QA passed
+six behavioral scenarios (visual N/A), including the QA-01 build-cache cleanup repair. PR #14 merged into
+`develop` at `5d02edc` and is integrated here without changing its runtime fixes or standalone-bug support.
+Its separate pre-existing CLI entrypoint finding and Composer advisories remain unresolved; no deployment or
+successor-gate implementation is claimed.
+
 The maintainer approved broad Agent OS adoption with Laravel-native exceptions in
 [EPIC-00001's amendment](../epics/00001-EPIC.md#approved-broad-adoption-amendment--2026-10-24).
 After the package slice, the planning owner must decompose remaining workflow/binding changes and reconcile
@@ -75,6 +81,7 @@ No TASKs.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | [TASK-00001](00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | [T-00006](../tickets/00006-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/10 |
 | 1 | [TASK-00006](00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | [T-00012](../tickets/00012-TICKET.md) | done | [TASK-00001](00001-TASK.md) | https://github.com/johnnickell/project-laravel/pull/13 |
+| 1 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | — | done | — | https://github.com/johnnickell/project-laravel/pull/14 |
 | — | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | [T-00001](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | [T-00002](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | [T-00004](../tickets/00004-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/7 |
