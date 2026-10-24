@@ -67,6 +67,8 @@ printf '%s' "$composer_auth" | docker run --rm -i \
         export COMPOSER_AUTH
         composer validate --strict
         composer install --no-interaction --prefer-dist --no-progress
+        # Do not leave build-environment configuration in the bind-mounted local runtime.
+        trap "rm -f -- \"$APP_CONFIG_CACHE\"" EXIT
         php scripts/artisan config:cache
         test -f var/cache/laravel/config.php
         php scripts/artisan about --only=environment

@@ -25,11 +25,13 @@ including the complete planning migration and local/hosted proof. Under the main
 metadata-head hosted proof and independent final-delivery review. Approval/merge remain human actions;
 accepted implementation is not a claim of successful final delivery.
 
-[TASK-00007](00007-TASK.md) is ready for independent review in its isolated worktree from develop: patched
-PHP/Node/NGINX baselines, standalone-bug planning support, direct failure probes, the local gate and isolated
-HTTP checks passed. It is not independently accepted or deployed. Its separate pre-existing CLI entrypoint
-finding needs its own scope decision. TASK-00006 is reserved on the concurrent package-upgrade branch; this
-branch neither imports nor completes that work. No successor-gate policy is settled by this repair.
+[TASK-00007](00007-TASK.md) remains ready-for-human in its isolated worktree from develop. Independent Review
+accepted the original candidate, but QA-01 invalidated criterion 3: the normal build-then-up journey served HTTP
+500 from leaked build configuration. Cycle-1 repair adds bounded build-cache cleanup; fresh independent Review
+and affected QA are required after local verification. The repair is not independently accepted or deployed;
+canonical QA remains FAIL. Its separate pre-existing CLI entrypoint finding still needs its own scope decision. TASK-00006 is
+reserved on the concurrent package-upgrade branch; this branch neither imports nor completes that work.
+No successor-gate policy is settled by this repair.
 
 Separately, settle the successor-gate policy differences between [T-00007](../tickets/00007-TICKET.md) and
 [T-00011](../tickets/00011-TICKET.md) before decomposing them. Separately, the real read/write journey and its
