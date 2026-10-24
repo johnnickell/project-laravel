@@ -19,12 +19,13 @@ substitute a requirements TICKET for an approved implementation TASK.
 
 ## Now
 
-[TASK-00006](00006-TASK.md) is the approved active slice: upgrade Common to 1.4.0 and AccessControl to 0.8.0
-under [T-00012](../tickets/00012-TICKET.md), using the main checkout on a feature branch. Implementation and the
-local gate pass; **independent review is next** (`/skill:review TASK-00006`), followed by applicable behavioral QA
-and authorized hosted delivery verification. Its [completion notes](00006-TASK.md#completion-notes) own evidence,
-including unchanged-dependency advisories. No independent acceptance or publication is claimed; do not start a
-second TASK.
+[TASK-00006](00006-TASK.md) and [T-00012](../tickets/00012-TICKET.md) record accepted completion of the
+Common 1.4.0 / AccessControl 0.8.0 upgrade at `4afe8af`; independent review accepts and behavioral QA passes.
+**Authorized land owns publication and exact published-head hosted verification**, pending at this checkpoint;
+resume `/skill:land TASK-00006` for delivery, not another implementation or review cycle. Its
+[completion notes](00006-TASK.md#completion-notes) own accepted-candidate provenance and unchanged-dependency
+advisories. Keep the PR draft until required delivery proof succeeds; human PR review/merge follows.
+No executable TASK remains in this branch's planning frontier; do not invent a successor TASK.
 
 The maintainer approved broad Agent OS adoption with Laravel-native exceptions in
 [EPIC-00001's amendment](../epics/00001-EPIC.md#approved-broad-adoption-amendment--2026-10-24).
@@ -46,9 +47,7 @@ on the installed package baseline; neither the map nor any WF decision closes wi
 <!-- planning:tasks -->
 ## Active Work
 
-| Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | [TASK-00006](00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | [T-00012](../tickets/00012-TICKET.md) | in-progress | [TASK-00001](00001-TASK.md) | — |
+No TASKs.
 
 ## Ready Frontier
 
@@ -75,6 +74,7 @@ No TASKs.
 | Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | [TASK-00001](00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | [T-00006](../tickets/00006-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/10 |
+| 1 | [TASK-00006](00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | [T-00012](../tickets/00012-TICKET.md) | done | [TASK-00001](00001-TASK.md) | — |
 | — | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | [T-00001](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | [T-00002](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | [T-00004](../tickets/00004-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/7 |

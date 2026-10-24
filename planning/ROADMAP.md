@@ -20,7 +20,10 @@ implementation acceptance at `03207b9`. Earlier tracked delivery-pending notes a
 
 The maintainer approved [broad Agent OS adoption with Laravel exceptions](epics/00001-EPIC.md#approved-broad-adoption-amendment--2026-10-24)
 on 2026-10-24. [T-00012](tickets/00012-TICKET.md) / [TASK-00006](tasks/00006-TASK.md) is the accepted first
-slice: Common 1.4.0 / AccessControl 0.8.0 in the main checkout on a feature branch. Remaining workflow/binding,
+slice: Common 1.4.0 / AccessControl 0.8.0 in the main checkout on a feature branch. Candidate `4afe8af` now has
+independent review acceptance and behavioral QA PASS; TASK-00006/T-00012 are done, with final publication and
+exact-head hosted delivery verification pending at the administrative checkpoint. EPIC-00001 remains open.
+Remaining workflow/binding,
 standalone-bug and future closeout changes need bounded decomposition after this slice; the amendment does not
 claim they are implemented or authorize changing the harness provider.
 
@@ -30,9 +33,10 @@ certification and the self-provisioning gate design; historical success does not
 
 ## Route to 1.0
 
-1. Implement and independently verify TASK-00006's current stable package upgrade. Preserve Laravel behavior,
-   exact configured coverage and separate review/QA/hosted delivery evidence. Decompose the remaining approved
-   workflow adoption into requirements and TASKs; preserve the existing gate until its replacement lands.
+1. Complete authorized publication and exact published-head hosted delivery verification for accepted
+   TASK-00006, then human PR review/merge. Its review/QA acceptance is complete; do not reopen it solely for
+   administrative closeout. The planning owner next decomposes the remaining approved workflow adoption into
+   requirements and TASKs; preserve the existing gate until its replacement lands.
 2. Reconcile the successor-gate requirements in [T-00007](tickets/00007-TICKET.md) and
    [T-00011](tickets/00011-TICKET.md): exact Unit-only versus all-suite coverage, Covers annotations, PHPCS
    standard, production-install inspection and explicit CI setup/lifecycle. Both scopes remain preserved;

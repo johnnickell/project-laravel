@@ -2,7 +2,7 @@
 id: T-00012
 epic: EPIC-00001
 title: Upgrade the Laravel Consumer to Current Stable Fight Packages
-status: in-progress
+status: done
 blocked_by: T-00006
 ---
 
@@ -66,7 +66,7 @@ package adoption does not choose their winner. Broader workflow adoption remains
 <!-- planning:children -->
 | ID | Title | Status | Parent | Blocked by |
 | --- | --- | --- | --- | --- |
-| [TASK-00006](../tasks/00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | in-progress | [T-00012](00012-TICKET.md) | [TASK-00001](../tasks/00001-TASK.md) |
+| [TASK-00006](../tasks/00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | done | [T-00012](00012-TICKET.md) | [TASK-00001](../tasks/00001-TASK.md) |
 <!-- /planning:children -->
 
 ## Progress
@@ -75,6 +75,10 @@ Requirements and the single-TASK slice accepted by the maintainer on 2026-10-24.
 in the main checkout now installs both selected releases with only two package-record changes. Existing behavior
 passes 13 tests / 27 assertions with 38/38 statements covered; the canonical local gate and production boot pass.
 The [current contract handoff](../wayfinder/fight-package-baseline-1.4-0.8.md) records migration boundaries and
-unresolved advisories in two unchanged third-party dependencies. Independent review/behavioral QA and required
-exact-head hosted delivery proof remain outstanding; no accepted completion, PR or merge is claimed for this slice.
-The unfinished child keeps this TICKET and EPIC-00001 open; no separate parent-closeout action is needed.
+unresolved advisories in two unchanged third-party dependencies. Independent review accepts candidate
+`4afe8af9b8673ef9a188acbd8516c64eb774ca34`; independent behavioral QA passes all seven scenarios, with visual
+N/A and no findings. TASK-00006 records accepted completion and this TICKET closes automatically with its only
+child. The final acceptance checkbox retains the outstanding exact-head hosted delivery portion, not missing
+local review/QA. Publication/final-head verification are pending at this administrative checkpoint; no merge
+is claimed. EPIC-00001 remains in progress because T-00007–T-00011 are unfinished. See the child's current
+completion notes and eventual PR for delivery provenance; no separate parent-closeout action is needed.

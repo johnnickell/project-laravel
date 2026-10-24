@@ -21,5 +21,5 @@ executable merely because its old record used the word ticket. Use [_TICKET_TEMP
 | [T-00009](00009-TICKET.md) | Persist Authoritative AccessControl State and Required Effects | needs-info | [EPIC-00001](../epics/00001-EPIC.md) | [T-00006](00006-TICKET.md), [T-00008](00008-TICKET.md) |
 | [T-00010](00010-TICKET.md) | Deliver a Real Permission-Protected API Slice | needs-info | [EPIC-00001](../epics/00001-EPIC.md) | [T-00007](00007-TICKET.md), [T-00008](00008-TICKET.md), [T-00009](00009-TICKET.md) |
 | [T-00011](00011-TICKET.md) | Establish the Lean Laravel Pre-Submit Quality Gate | needs-info | [EPIC-00001](../epics/00001-EPIC.md) | [T-00006](00006-TICKET.md) |
-| [T-00012](00012-TICKET.md) | Upgrade the Laravel Consumer to Current Stable Fight Packages | in-progress | [EPIC-00001](../epics/00001-EPIC.md) | [T-00006](00006-TICKET.md) |
+| [T-00012](00012-TICKET.md) | Upgrade the Laravel Consumer to Current Stable Fight Packages | done | [EPIC-00001](../epics/00001-EPIC.md) | [T-00006](00006-TICKET.md) |
 <!-- /planning:index -->
