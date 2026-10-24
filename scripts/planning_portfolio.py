@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import argparse
+import datetime
+import json
 import os
 import re
 import subprocess
@@ -141,6 +143,13 @@ def validate_records(records: Records, errors: list[str]) -> None:
                     valid_url = False
                 if not valid_url:
                     errors.append(f"{label}: pr must be a full URL")
+        if data.get("delivery"):
+            if prefix != "TASK" or not is_live(path) or data["delivery"] != "awaiting-merge":
+                errors.append(f"{label}: delivery must be awaiting-merge on a live TASK, or empty")
+            if data.get("status") != "done":
+                errors.append(f"{label}: awaiting-merge delivery requires done acceptance status")
+            if not data.get("pr"):
+                errors.append(f"{label}: an awaiting-merge delivery handoff requires its PR URL")
         if data.get("status") in TERMINAL:
             unfinished = [child_id for child_id, (_, child) in records.items()
                           if identifier in parent_ids(child) and child.get("status") not in TERMINAL]
@@ -215,7 +224,8 @@ def table(identifiers: list[str], source: Path, records: Records) -> str:
     return "\n".join(lines)
 
 
-def board(source: Path, records: Records) -> str:
+def task_groups(records: Records) -> dict[str, list[str]]:
+    """Share ordering and Laravel ancestor/blocker readiness across current routing views."""
     groups: dict[str, list[str]] = {name: [] for name in (
         "Active Work", "Ready Frontier", "Waiting", "Needs Info", "Human Action", "Needs Triage", "Recently Done",
     )}
@@ -234,6 +244,43 @@ def board(source: Path, records: Records) -> str:
             section = {"in-progress": "Active Work", "needs-info": "Needs Info", "ready-for-human": "Human Action",
                        "needs-triage": "Needs Triage", "done": "Recently Done", "wontfix": "Recently Done"}[status]
         groups[section].append(identifier)
+    return groups
+
+
+def routing_summary(source: Path, records: Records, groups: dict[str, list[str]]) -> str:
+    selected = [(name, identifier) for name in ("Human Action", "Needs Info") for identifier in groups[name]]
+    active, ready = groups["Active Work"], groups["Ready Frontier"]
+    if active:
+        selected.extend(("Active Work", identifier) for identifier in active)
+    elif ready:
+        selected.append(("Ready Frontier", ready[0]))
+    else:
+        for name in ("Needs Triage", "Waiting"):
+            selected.extend((name, identifier) for identifier in groups[name][:1])
+    lines = ["| Route | TASK | Title | Status | Readiness |", "| --- | --- | --- | --- | --- |"]
+    for name, identifier in selected:
+        data = records[identifier][1]
+        reasons = ", ".join(task_waiting(data, records))
+        lines.append(f"| {name} | {link(identifier, source, records)} | {cell(data['title'])} | "
+                     f"{data['status']} | {cell(reasons)} |")
+    if not selected:
+        lines.append("| None | — | — | — | — |")
+    if not active and not ready:
+        lines.extend(["", "No TASK is currently executable; unresolved planning or human decisions may remain."])
+    return "\n".join(lines)
+
+
+def delivery_summary(source: Path, records: Records) -> str:
+    handoffs = current_delivery(records)
+    if not handoffs:
+        return "No current delivery handoffs. Historical PR links do not imply pending delivery."
+    lines = ["| TASK | Current delivery | PR |", "| --- | --- | --- |"]
+    for identifier, _, data in handoffs:
+        lines.append(f"| {link(identifier, source, records)} | Awaiting human review/merge | {data['pr']} |")
+    return "\n".join(lines)
+
+
+def board(source: Path, records: Records, groups: dict[str, list[str]]) -> str:
     sections = []
     for heading, identifiers in groups.items():
         text = [f"## {heading}", ""]
@@ -284,9 +331,13 @@ def generated_views(records: Records) -> list[tuple[Path, str, str]]:
         path = PLANNING / directory / "README.md"
         identifiers = sorted(identifier for identifier in records if identifier.startswith(prefix + "-"))
         views.append((path, "index", table(identifiers, path, records)))
+    groups = task_groups(records)
     path = PLANNING / "tasks/BOARD.md"
-    views.append((path, "tasks", board(path, records)))
+    views.append((path, "tasks", board(path, records, groups)))
+    views.append((path, "next", routing_summary(path, records, groups)))
+    views.append((path, "delivery", delivery_summary(path, records)))
     path = PLANNING / "ROADMAP.md"
+    views.append((path, "execution", routing_summary(path, records, groups)))
     epics = sorted(identifier for identifier, (record_path, _) in records.items()
                    if identifier.startswith("EPIC-") and is_live(record_path) and records[identifier][1]["status"] not in TERMINAL)
     views.append((path, "epics", table(epics, path, records)))
@@ -350,9 +401,78 @@ def refresh_views(records: Records, write: bool, errors: list[str]) -> None:
         errors.extend(f"{path.relative_to(ROOT)}: stale generated view; run ./bin/planning-check --write" for path in sorted(stale))
 
 
+def current_delivery(records: Records) -> list[tuple[str, Path, dict[str, str]]]:
+    """Only explicit current handoffs, never historical prose, done status or PR links."""
+    return [(identifier, path, data) for identifier, (path, data) in sorted(records.items())
+            if data.get("delivery") == "awaiting-merge"]
+
+
+def delivery_identity(records: Records) -> tuple[list[tuple[str, Path, dict[str, str]]], str | None, list[str]]:
+    handoffs = current_delivery(records)
+    if not handoffs:
+        return handoffs, None, []
+    if len(handoffs) > 16:
+        return handoffs, None, ["at most 16 current delivery handoffs may be verified per invocation"]
+    try:
+        origin = subprocess.run(["git", "-c", f"safe.directory={ROOT.resolve()}", "remote", "get-url", "origin"],
+                                cwd=ROOT, capture_output=True, text=True, timeout=5, check=True).stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        return handoffs, None, ["delivery identity incomplete: cannot read target origin; planning owner must resolve it"]
+    match = re.fullmatch(r"(?:git@github\.com:|https://github\.com/)([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+?)(?:\.git)?", origin)
+    if not match:
+        return handoffs, None, ["delivery identity incomplete: origin must identify one GitHub repository"]
+    repository = match[1]
+    errors = []
+    for identifier, path, data in handoffs:
+        if not re.fullmatch(rf"https://github\.com/{re.escape(repository)}/pull/[1-9][0-9]*", data["pr"]):
+            errors.append(f"{path.relative_to(ROOT)} ({identifier}): delivery PR identity does not match target origin")
+    return handoffs, repository, errors
+
+
+def verify_delivery(handoffs: list[tuple[str, Path, dict[str, str]]], repository: str | None) -> list[str]:
+    """Bounded read-only hosting queries; failures never infer acceptance or merge."""
+    errors = []
+    for identifier, path, data in handoffs:
+        label = f"{path.relative_to(ROOT)} ({identifier})"
+        number = int(data["pr"].rsplit("/", 1)[1])
+        try:
+            result = subprocess.run(
+                ["gh", "pr", "view", str(number), "--repo", repository, "--json", "number,url,title,state,mergedAt"],
+                cwd=ROOT, capture_output=True, text=True, timeout=15, check=True,
+                env={**os.environ, "GH_PROMPT_DISABLED": "1"},
+            )
+            if len(result.stdout) > 16384:
+                raise ValueError("oversized metadata")
+            pr = json.loads(result.stdout)
+            if (not isinstance(pr, dict) or type(pr.get("number")) is not int or pr["number"] != number
+                    or pr.get("url") != data["pr"] or not isinstance(pr.get("title"), str)
+                    or not pr["title"].startswith(identifier + " — ")):
+                raise ValueError("identity mismatch")
+            state = pr.get("state")
+            if state not in {"OPEN", "MERGED", "CLOSED"} or "mergedAt" not in pr:
+                raise ValueError("invalid state")
+            if state == "MERGED":
+                if not isinstance(pr["mergedAt"], str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", pr["mergedAt"]):
+                    raise ValueError("invalid merge time")
+                datetime.datetime.fromisoformat(pr["mergedAt"].replace("Z", "+00:00"))
+                errors.append(f"{label}: stale awaiting-merge handoff; PR #{number} is MERGED. Planning owner must reconcile delivery and refresh views.")
+            elif pr["mergedAt"] is not None:
+                raise ValueError("contradictory merge evidence")
+            elif state == "CLOSED":
+                errors.append(f"{label}: stale awaiting-merge handoff; PR #{number} is CLOSED WITHOUT MERGE. Planning owner must correct the handoff and refresh views.")
+            else:
+                print(f"Delivery fresh: {identifier} PR #{number} is OPEN; human review/merge remains pending.")
+        except (OSError, subprocess.SubprocessError, ValueError, TypeError):
+            # Raw CLI/API diagnostics may contain credentials; do not echo them.
+            errors.append(f"{label}: delivery verification INCOMPLETE (tooling/authentication/API/metadata or identity unavailable); planning owner must recover authoritative evidence. No fresh pass or merge is inferred.")
+    return errors
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--write", action="store_true", help="refresh marked views after validating records and links")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--write", action="store_true", help="refresh marked views after validating records and links")
+    mode.add_argument("--check-delivery", action="store_true", help="read-only local validation plus live checks of explicit current delivery handoffs")
     args = parser.parse_args()
     errors: list[str] = []
     records = load_records(errors)
@@ -371,6 +491,10 @@ def main() -> int:
                 waiting = task_waiting(data, records)
                 if waiting:
                     errors.append(f"{identifier}: active TASK has unmet prerequisites: {', '.join(waiting)}")
+    handoffs, repository = [], None
+    if not errors:
+        handoffs, repository, identity_errors = delivery_identity(records)
+        errors.extend(identity_errors)
     if not errors:
         refresh_views(records, args.write, errors)
     if errors:
@@ -379,7 +503,17 @@ def main() -> int:
             print(f"- {error}")
         return 1
     active = sum(1 for _, data in records.values() if data["status"] not in TERMINAL)
-    print(f"Planning validation passed: {len(records)} records, {active} active")
+    print(f"Local planning validation passed (offline): {len(records)} records, {active} active")
+    if not args.check_delivery:
+        print("Delivery freshness NOT CHECKED; routing publication/merge handoffs requires --check-delivery.")
+        return 0
+    delivery_errors = verify_delivery(handoffs, repository)
+    if delivery_errors:
+        print("Delivery verification failed or incomplete:")
+        for error in delivery_errors:
+            print(f"- {error}")
+        return 1
+    print(f"Delivery verification passed: {len(handoffs)} explicit current handoff(s); no historical PRs queried.")
     return 0
 
 

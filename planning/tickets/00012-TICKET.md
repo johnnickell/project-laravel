@@ -45,7 +45,7 @@ behavior. Package APIs remain upstream-owned; incompatible required contracts ne
       distinguish retained integrations from unimplemented capabilities.
 - [x] Homepage, credential rejection/key selection/time tolerance, and transaction commit/rollback remain
       verified with exact 100% configured `app/` statement coverage; no coverage exclusions or meta-tests added.
-- [ ] The existing canonical local gate passes; independent review/QA and exact-head hosted delivery evidence
+- [x] The existing canonical local gate passes; independent review/QA and exact-head hosted delivery evidence
       remain distinct. Required final delivery proof is not waived by a successful local build.
 
 ## Decisions and dependencies
@@ -78,7 +78,9 @@ The [current contract handoff](../wayfinder/fight-package-baseline-1.4-0.8.md) r
 unresolved advisories in two unchanged third-party dependencies. Independent review accepts candidate
 `4afe8af9b8673ef9a188acbd8516c64eb774ca34`; independent behavioral QA passes all seven scenarios, with visual
 N/A and no findings. TASK-00006 records accepted completion and this TICKET closes automatically with its only
-child. The final acceptance checkbox retains the outstanding exact-head hosted delivery portion, not missing
-local review/QA. Publication/final-head verification are pending at this administrative checkpoint; no merge
-is claimed. EPIC-00001 remains in progress because T-00007–T-00011 are unfinished. See the child's current
-completion notes and eventual PR for delivery provenance; no separate parent-closeout action is needed.
+child. Delivery is now verified under the maintainer-approved identical-tree merge-candidate contract for
+published source `a93e222`; hosted run 40130260253 passed. PR #13 merged into develop at `3fa576d` on
+2026-10-24. The final acceptance checkbox's delivery portion is satisfied, not waived. See the child's
+[current completion notes](../tasks/00006-TASK.md#completion-notes) for the accepted-candidate bridge and
+exact hosted/merge identities. Earlier delivery-pending checkpoints in the child remain historical evidence.
+EPIC-00001 remains in progress because T-00007–T-00011 are unfinished; no separate parent-closeout action is needed.

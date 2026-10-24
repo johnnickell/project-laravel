@@ -65,4 +65,12 @@ inspection rather than product-suite meta-tests.
 
 [Planning](planning/README.md) names local authority; the [TASK Board](planning/tasks/BOARD.md) gives execution
 order for **EPIC → TICKET → TASK**. After planning edits run `./bin/planning-check --write`, then
-`./bin/planning-check`. Legacy certification records remain historical evidence, not current obligations.
+`./bin/planning-check`. The build runs that offline check before expensive preparation; generated Board and
+Roadmap execution summaries cannot silently drift from record status, priority or readiness.
+
+Before routing or a delivery handoff, run `./bin/planning-check --check-delivery`. It uses GitHub CLI (`gh`)
+and existing operator authentication only when explicit current delivery markers exist, queries those PRs rather
+than historical links, and fails on merged/closed or unverifiable handoffs without changing files. Land follows
+[delivery pre-submit](planning/CONVENTIONS.md#delivery-pre-submit-and-final-handoff), including affected authored
+Board/Roadmap/README updates. A later human merge still needs authorized marker/documentation reconciliation;
+a successful offline gate does not prove live PR state. Legacy certification records remain history, not gates.

@@ -7,6 +7,7 @@ status: needs-triage
 order:
 blocked_by:
 pr:
+delivery:
 ---
 
 # Brief independently reviewable outcome
@@ -49,4 +50,6 @@ Ignored `.runs/` notes may coordinate work but do not replace durable acceptance
 ## Completion notes
 
 Record actual evidence, independent review state, and the PR if known. `done` is not merge, release, or deployment.
-Reconcile parent progress and refresh generated views after updating this record.
+Reconcile parent progress and affected current Board/Roadmap/README handoffs, then refresh generated views.
+Use `delivery: awaiting-merge` only for the verified current human handoff under planning conventions; clear it
+after verified merge/closure. Keep historical acceptance checkpoints distinct from current routing.
