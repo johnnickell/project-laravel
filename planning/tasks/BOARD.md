@@ -25,13 +25,12 @@ including the complete planning migration and local/hosted proof. Under the main
 metadata-head hosted proof and independent final-delivery review. Approval/merge remain human actions;
 accepted implementation is not a claim of successful final delivery.
 
-[TASK-00007](00007-TASK.md) remains ready-for-human in its isolated worktree from develop. Independent Review
-accepted the original candidate, but QA-01 invalidated criterion 3: the normal build-then-up journey served HTTP
-500 from leaked build configuration. Cycle-1 repair adds bounded build-cache cleanup; fresh independent Review
-and affected QA are required after local verification. The repair is not independently accepted or deployed;
-canonical QA remains FAIL. Its separate pre-existing CLI entrypoint finding still needs its own scope decision. TASK-00006 is
-reserved on the concurrent package-upgrade branch; this branch neither imports nor completes that work.
-No successor-gate policy is settled by this repair.
+[TASK-00007](00007-TASK.md) is done for independently accepted candidate `5e30a149`: Review accepted it and
+affected QA passed six behavioral scenarios (visual evidence N/A). QA-01 remains preserved as the prior-candidate
+finding; the bounded build-cache cleanup is independently verified and no longer reproducible. This completion
+records accepted local delivery only, not PR approval, merge, release, deployment, or resolution of the separate
+pre-existing CLI entrypoint finding. TASK-00006 is reserved on the concurrent package-upgrade branch; this branch
+neither imports nor completes that work. No successor-gate policy is settled by this repair.
 
 Separately, settle the successor-gate policy differences between [T-00007](../tickets/00007-TICKET.md) and
 [T-00011](../tickets/00011-TICKET.md) before decomposing them. Separately, the real read/write journey and its
@@ -66,9 +65,7 @@ No TASKs.
 
 ## Human Action
 
-| Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | — | ready-for-human | — | — |
+No TASKs.
 
 ## Needs Triage
 
@@ -79,6 +76,7 @@ No TASKs.
 | Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | [TASK-00001](00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | [T-00006](../tickets/00006-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/10 |
+| 1 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | — | done | — | — |
 | — | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | [T-00001](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | [T-00002](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | [T-00004](../tickets/00004-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/7 |

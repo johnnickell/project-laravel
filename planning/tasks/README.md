@@ -14,5 +14,5 @@ creating its record does not start execution or select an implementation worktre
 | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | done | [T-00002](../tickets/00002-TICKET.md) | — |
 | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | done | [T-00004](../tickets/00004-TICKET.md) | — |
 | [TASK-00005](00005-TASK.md) | Re-certify Rewritten Fight Common Candidate | done | [T-00005](../tickets/00005-TICKET.md) | — |
-| [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | ready-for-human | — | — |
+| [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | done | — | — |
 <!-- /planning:index -->

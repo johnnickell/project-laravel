@@ -26,12 +26,12 @@ certification and the self-provisioning gate design; historical success does not
 
 ## Security maintenance
 
-[TASK-00007](tasks/00007-TASK.md) is the approved standalone PHP/Node/NGINX container-baseline repair and narrow
-standalone-bug planning support. Original technical Review accepted; QA-01 then invalidated criterion 3 by
-reproducing HTTP 500 after the documented build-then-up journey. Cycle-1 repair confines build configuration
-cache to its smoke-check lifetime. Fresh independent Review and affected QA remain pending; canonical QA is
-still FAIL. It is independent of successor-gate and package-upgrade work; local repair does not claim production
-deployment or resolve existing Composer advisories. Its pre-existing CLI entrypoint finding remains a separate scope decision.
+[TASK-00007](tasks/00007-TASK.md) is done for the independently accepted PHP/Node/NGINX container-baseline
+repair and narrow standalone-bug planning support. QA-01 remains preserved as the prior-candidate finding; the
+cycle-1 bounded build-cache cleanup was independently reviewed and affected QA passed on the repaired candidate.
+Completion records accepted local delivery, not production deployment, release, merge, or resolution of existing
+Composer advisories. It remains independent of successor-gate and package-upgrade work; its pre-existing CLI
+entrypoint finding remains a separate scope decision.
 
 ## Route to 1.0
 
