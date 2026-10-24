@@ -40,9 +40,7 @@ No TASK is currently executable; unresolved planning or human decisions may rema
 ## Current delivery
 
 <!-- planning:delivery -->
-| TASK | Current delivery | PR |
-| --- | --- | --- |
-| [TASK-00008](00008-TASK.md) | Awaiting human review/merge | https://github.com/johnnickell/project-laravel/pull/15 |
+No current delivery handoffs. Historical PR links do not imply pending delivery.
 <!-- /planning:delivery -->
 
 ## Wayfinder Review
@@ -98,6 +96,9 @@ TASK-00006/T-00012 delivered Common 1.4.0 / AccessControl 0.8.0 through
 Its [current completion notes](00006-TASK.md#completion-notes) retain acceptance and hosted-delivery provenance;
 the earlier delivery-pending checkpoints do not request another Land cycle. TASK-00001's PR #10 merged at
 `f13a727`; TASK-00007's PR #14 merged at `5d02edc`. Their runtime and acceptance evidence is unchanged.
+TASK-00008's planning-synchronization repair merged through [PR #15](https://github.com/johnnickell/project-laravel/pull/15)
+at `54a071d` on 2026-10-24; its [current completion notes](00008-TASK.md#current-acceptance-and-delivery-handoff)
+retain acceptance identities and merge evidence. Its earlier awaiting-merge checkpoint is historical, not a current action.
 Composer advisories and the separate pre-existing CLI entrypoint finding remain unresolved; no deployment,
 release or successor-gate implementation is claimed.
 
