@@ -28,27 +28,27 @@ and [TICKET-00014](../tickets/00014-TICKET.md) (prospective closeout). TICKET-00
 TASK-00009 adopts Agent OS naming, and dependent TASK-00010 delivers the workflow/report binding. TICKET-00014's
 complete single-TASK plan is approved as TASK-00011, with no TASK blockers. TASK decomposition is complete for
 this selected adoption slice. TASK-00009's naming migration and approved local default-Build routing clarification
-are independently accepted; its distinct delivery handoff is generated below. Workflow binding and general closeout
+are independently accepted and merged through PR #18; its completion notes preserve delivery provenance. Workflow binding and general closeout
 rollout remain unimplemented. See [implementation routing](../CONVENTIONS.md#implementation-routing) for recommendations and authority limits. The broader Wayfinder map stays Active with its earlier
 planning phases unfinished. Current execution is derived below.
 Separately, the maintainer must reconcile
 [TICKET-00007](../tickets/00007-TICKET.md)/[TICKET-00011](../tickets/00011-TICKET.md) gate policies before those TASKs.
 The shared real journey/permission decisions for TICKET-00008/TICKET-00009/TICKET-00010 remain open; preserve dependency edges.
-See the [Roadmap](../ROADMAP.md) for the current planning handoff. Current execution and delivery are derived
-below, not restated in authored prose; acceptance/verification checkpoints remain in the owning records.
+See the [Roadmap](../ROADMAP.md) for the current planning handoff. Standalone TASK-00012 owns the approved
+port of Fight Common's merged/integrated delivery resolution and evidence-preserving reconciliation, not the
+broader binding/closeout rollout. Current execution and delivery are derived below, not restated in authored
+prose; acceptance/verification checkpoints remain in the owning records.
 
 <!-- planning:next -->
 | Route | TASK | Title | Status | Readiness |
 | --- | --- | --- | --- | --- |
-| Ready Frontier | [TASK-00010](00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | — |
+| Active Work | [TASK-00012](00012-TASK.md) | Resolve Integrated Delivery Handoffs Without Cleanup Requests | in-progress | — |
 <!-- /planning:next -->
 
 ## Current delivery
 
 <!-- planning:delivery -->
-| TASK | Current delivery | PR |
-| --- | --- | --- |
-| [TASK-00009](00009-TASK.md) | Awaiting human review/merge | https://github.com/johnnickell/project-laravel/pull/18 |
+No current delivery handoffs. Historical PR links do not imply pending delivery.
 <!-- /planning:delivery -->
 
 ## Wayfinder Review
@@ -61,7 +61,9 @@ on the installed package baseline; neither the map nor any WF decision closes wi
 <!-- planning:tasks -->
 ## Active Work
 
-No TASKs.
+| Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | [TASK-00012](00012-TASK.md) | Resolve Integrated Delivery Handoffs Without Cleanup Requests | — | in-progress | — | — |
 
 ## Ready Frontier
 
@@ -111,6 +113,9 @@ the earlier delivery-pending checkpoints do not request another Land cycle. TASK
 TASK-00008's planning-synchronization repair merged through [PR #15](https://github.com/johnnickell/project-laravel/pull/15)
 at `54a071d` on 2026-10-24; its [current completion notes](00008-TASK.md#current-acceptance-and-delivery-handoff)
 retain acceptance identities and merge evidence. Its earlier awaiting-merge checkpoint is historical, not a current action.
+TASK-00009's PR #18 merged into develop at `8b372b3` on 2026-10-25; its
+[delivery reconciliation](00009-TASK.md#delivery-reconciliation--pr-18) records the published-head/merge/local-HEAD
+ancestry and retirement of the ended publication marker. Its earlier draft/delivery-pending note is historical.
 Composer advisories and the separate pre-existing CLI entrypoint finding remain unresolved; no deployment,
 release or successor-gate implementation is claimed.
 

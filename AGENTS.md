@@ -21,7 +21,11 @@ evidence-specific routes and authority boundaries; recommending a workflow does 
 For execution or substantive planning changes, load the applicable guidance below. The read-only routing
 path above takes precedence over broad orientation reads; it does not waive engineering or delivery rules.
 
-Read `CONTEXT.md`, `planning/CONVENTIONS.md`, and `planning/agents/` before changing behavior. Work in independently verifiable vertical slices. Use the repository-owned `./bin/build`, `./bin/phpunit`, `./bin/up`, `./bin/down`, `./bin/composer`, `./bin/artisan`, and `./bin/exec` commands; `./bin/build` is the single noninteractive local and hosted gate.
+Read `CONTEXT.md`, `planning/CONVENTIONS.md`, and `planning/agents/` before changing behavior. At authorized Work,
+Land or substantive planning intake, follow [delivery reconciliation](planning/CONVENTIONS.md#current-delivery-handoffs)
+on the selected feature branch; read-only routing/Review/QA never run the writing mode. Work in independently
+verifiable vertical slices. Use the repository-owned `./bin/build`, `./bin/phpunit`, `./bin/up`, `./bin/down`,
+`./bin/composer`, `./bin/artisan`, and `./bin/exec` commands; `./bin/build` is the single noninteractive local and hosted gate.
 
 Fight Common and Fight AccessControl are consumed only as Composer packages. Do not copy their Domain or Application source, and do not add a Fight Laravel package or framework adapter. Laravel owns its providers, container, routing, middleware, handlers, HTTP, security, persistence, queues, realtime, presentation, and operational composition.
 

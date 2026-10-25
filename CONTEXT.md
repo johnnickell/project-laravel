@@ -37,7 +37,11 @@ and patched container baselines, without implementing the successor gate.
 TASK-00008 delivered bounded planning synchronization through PR #15, merged at `54a071d`:
 generated Board/Roadmap current TASK summaries, explicit
 `delivery: awaiting-merge` markers, and `./bin/planning-check --check-delivery` for read-only live handoff checks.
-The build's fail-fast planning check remains offline. Local [delivery pre-submit](planning/CONVENTIONS.md#delivery-pre-submit-and-final-handoff)
+The build's fail-fast planning check remains offline. TASK-00012 implements Fight Common's corrected read-only
+resolution of exact merged/integrated done publication snapshots and explicit, evidence-preserving
+`--reconcile-delivery` at authorized Work/Land/substantive planning intake; independent Review/QA remain pending.
+Normal human merge no longer requires a routine cleanup request. Closed-unmerged, uncertain or unintegrated
+handoffs remain blocking. Local [delivery pre-submit](planning/CONVENTIONS.md#delivery-pre-submit-and-final-handoff)
 requires Land to reconcile affected authored handoffs as well as generated views; human merge remains separate.
 These safeguards do not complete broader workflow adoption or change acceptance/hosted-proof requirements.
 The remaining adoption requirements split is approved in
@@ -51,7 +55,8 @@ maintainer's coherent Agent OS naming migration: `TICKET-NNNNN` identities with 
 `NNNNN-TICKET.md` filenames, relationships and classified historical provenance. It also delivered the approved
 local default-Build recommendation for new implementation and confirmed defects, with Work reserved for explicit
 implementation-alone requests. Independent Review accepted A, applicable QA passed, and required hosted proof
-is recorded; PR #18 remains a separate `delivery: awaiting-merge` handoff. TICKET-00013 stays in progress because
+is recorded; PR #18 merged into develop at `8b372b3` and its published head/merge/local-integration evidence is
+retained in TASK-00009's delivery reconciliation. Its ended marker is retired. TICKET-00013 stays in progress because
 TASK-00010's full binding is unimplemented; TASK-00011's general closeout rollout also remains unimplemented.
 The naming migration does not complete those requirements.
 The existing lifecycle and gates remain authoritative until approved replacements land. No provider change, harness enrollment or

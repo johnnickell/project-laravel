@@ -5,7 +5,7 @@
 <!-- planning:execution -->
 | Route | TASK | Title | Status | Readiness |
 | --- | --- | --- | --- | --- |
-| Ready Frontier | [TASK-00010](tasks/00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | — |
+| Active Work | [TASK-00012](tasks/00012-TASK.md) | Resolve Integrated Delivery Handoffs Without Cleanup Requests | in-progress | — |
 <!-- /planning:execution -->
 
 The [TASK Board](tasks/BOARD.md) owns execution order and explicit current delivery handoffs. Validate current
@@ -41,10 +41,14 @@ EPIC-00001 remains open. The approved remaining adoption split is recorded in
 TASK-00009 migrates naming and TASK-00010 delivers the workflow/report binding after TASK-00009. TICKET-00014's
 complete single-TASK plan is approved as TASK-00011, with no TASK blockers. TASK plans for this selected slice
 are complete; the TASK Board owns execution order. TASK-00009 delivered coherent naming and the approved local default-Build recommendation, independently
-accepted with QA PASS and required hosted A proof; its separate delivery handoff is [PR #18](https://github.com/johnnickell/project-laravel/pull/18).
+accepted with QA PASS and required hosted A proof; [PR #18](https://github.com/johnnickell/project-laravel/pull/18)
+merged into develop at `8b372b3`. TASK-00009 retains verified published-head/merge/local-integration evidence;
+its ended publication marker is retired.
 TICKET-00013 remains in progress because TASK-00010's binding is now unblocked but unimplemented; TASK-00011's
 general closeout rollout also remains unimplemented. TASK-00007 supplies standalone-bug planning support. TASK-00008's bounded routing/delivery
 synchronization repair is delivered and merged through PR #15 at `54a071d`; its completion notes preserve acceptance and merge evidence.
+Standalone [TASK-00012](tasks/00012-TASK.md) implements corrected merged/integrated handoff resolution and
+explicit evidence-preserving reconciliation, ported from Fight Common; independent Review/QA remain pending.
 These slices do not implement the entire amendment or authorize changing the harness provider.
 
 [EPIC-00003](epics/00003-EPIC.md), formerly PRD-00002, preserves historical package/gate evidence and the

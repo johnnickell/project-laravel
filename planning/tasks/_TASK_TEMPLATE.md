@@ -54,5 +54,7 @@ this record's ID and follow [routing boundaries](../CONVENTIONS.md#implementatio
 
 Record actual evidence, independent review state, and the PR if known. `done` is not merge, release, or deployment.
 Reconcile parent progress and affected current Board/Roadmap/README handoffs, then refresh generated views.
-Use `delivery: awaiting-merge` only for the verified current human handoff under planning conventions; clear it
-after verified merge/closure. Keep historical acceptance checkpoints distinct from current routing.
+Land uses `delivery: awaiting-merge` as the verified OPEN publication snapshot under planning conventions.
+Read-only verification resolves exact merged/integrated done work; authorized intake retires its marker with
+`--reconcile-delivery`. Closed-unmerged/uncertain evidence needs actual disposition/recovery. Keep historical
+acceptance checkpoints distinct from current routing.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate planning records and optionally refresh their explicitly marked views."""
+"""Validate planning, refresh views, or explicitly reconcile verified delivery handoffs."""
 
 from __future__ import annotations
 
@@ -32,7 +32,11 @@ Records = dict[str, Record]
 
 
 def frontmatter(path: Path) -> dict[str, str]:
-    text = path.read_text(encoding="utf-8")
+    return parse_frontmatter(path.read_text(encoding="utf-8"))
+
+
+def parse_frontmatter(text: str) -> dict[str, str]:
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
     match = re.match(r"\A---\n(.*?)\n---(?:\n|$)", text, re.DOTALL)
     if not match:
         raise ValueError("missing or unclosed frontmatter")
@@ -276,7 +280,7 @@ def delivery_summary(source: Path, records: Records) -> str:
         return "No current delivery handoffs. Historical PR links do not imply pending delivery."
     lines = ["| TASK | Current delivery | PR |", "| --- | --- | --- |"]
     for identifier, _, data in handoffs:
-        lines.append(f"| {link(identifier, source, records)} | Awaiting human review/merge | {data['pr']} |")
+        lines.append(f"| {link(identifier, source, records)} | Published; verify live state | {data['pr']} |")
     return "\n".join(lines)
 
 
@@ -372,8 +376,9 @@ def complete_parents(records: dict) -> dict[Path, str]:
     return pending
 
 
-def refresh_views(records: Records, write: bool, errors: list[str]) -> None:
+def refresh_views(records: Records, write: bool, errors: list[str], pending: dict[Path, str] | None = None) -> None:
     changes = complete_parents(records)
+    changes.update(pending or {})
     stale = set(changes)
     for path, name, content in generated_views(records):
         if not path.is_file():
@@ -395,7 +400,7 @@ def refresh_views(records: Records, write: bool, errors: list[str]) -> None:
         return
     if write:
         for path in sorted(stale):
-            path.write_text(changes[path], encoding="utf-8")
+            path.write_bytes(changes[path].encode("utf-8"))
             print(f"Refreshed {path.relative_to(ROOT)}")
     else:
         errors.extend(f"{path.relative_to(ROOT)}: stale generated view; run ./bin/planning-check --write" for path in sorted(stale))
@@ -429,15 +434,29 @@ def delivery_identity(records: Records) -> tuple[list[tuple[str, Path, dict[str,
     return handoffs, repository, errors
 
 
-def verify_delivery(handoffs: list[tuple[str, Path, dict[str, str]]], repository: str | None) -> list[str]:
-    """Bounded read-only hosting queries; failures never infer acceptance or merge."""
+def local_git(*arguments: str) -> str:
+    """Inspect local objects only, without replacement ancestry or implicit partial-clone fetches."""
+    return subprocess.run(
+        ["git", "--no-replace-objects", "-c", f"safe.directory={ROOT.resolve()}", *arguments],
+        cwd=ROOT, capture_output=True, text=True, timeout=5, check=True,
+        env={**os.environ, "GIT_NO_LAZY_FETCH": "1"},
+    ).stdout.strip()
+
+
+ResolvedDelivery = tuple[str, Path, dict]
+
+
+def verify_delivery(handoffs: list[tuple[str, Path, dict[str, str]]], repository: str | None) -> tuple[list[ResolvedDelivery], list[str]]:
+    """Observe live delivery; only exact merged, accepted and locally integrated work is resolved."""
+    resolved: list[ResolvedDelivery] = []
     errors = []
     for identifier, path, data in handoffs:
         label = f"{path.relative_to(ROOT)} ({identifier})"
         number = int(data["pr"].rsplit("/", 1)[1])
         try:
             result = subprocess.run(
-                ["gh", "pr", "view", str(number), "--repo", repository, "--json", "number,url,title,state,mergedAt"],
+                ["gh", "pr", "view", str(number), "--repo", repository, "--json",
+                 "number,url,title,state,mergedAt,baseRefName,headRefName,headRefOid,mergeCommit"],
                 cwd=ROOT, capture_output=True, text=True, timeout=15, check=True,
                 env={**os.environ, "GH_PROMPT_DISABLED": "1"},
             )
@@ -446,17 +465,38 @@ def verify_delivery(handoffs: list[tuple[str, Path, dict[str, str]]], repository
             pr = json.loads(result.stdout)
             if (not isinstance(pr, dict) or type(pr.get("number")) is not int or pr["number"] != number
                     or pr.get("url") != data["pr"] or not isinstance(pr.get("title"), str)
-                    or not pr["title"].startswith(identifier + " — ")):
+                    or pr["title"] != identifier + " — " + data["title"]
+                    or pr.get("baseRefName") != "develop"
+                    or not isinstance(pr.get("headRefName"), str)
+                    or not re.fullmatch(rf"feature/task-{identifier[5:]}-[a-z0-9][a-z0-9-]*", pr["headRefName"])
+                    or not isinstance(pr.get("headRefOid"), str)
+                    or not re.fullmatch(r"[0-9a-f]{40}", pr["headRefOid"])):
                 raise ValueError("identity mismatch")
             state = pr.get("state")
-            if state not in {"OPEN", "MERGED", "CLOSED"} or "mergedAt" not in pr:
+            if state not in {"OPEN", "MERGED", "CLOSED"} or "mergedAt" not in pr or "mergeCommit" not in pr:
                 raise ValueError("invalid state")
             if state == "MERGED":
                 if not isinstance(pr["mergedAt"], str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", pr["mergedAt"]):
                     raise ValueError("invalid merge time")
                 datetime.datetime.fromisoformat(pr["mergedAt"].replace("Z", "+00:00"))
-                errors.append(f"{label}: stale awaiting-merge handoff; PR #{number} is MERGED. Planning owner must reconcile delivery and refresh views.")
-            elif pr["mergedAt"] is not None:
+                commit = pr.get("mergeCommit")
+                if (not isinstance(commit, dict) or not isinstance(commit.get("oid"), str)
+                        or not re.fullmatch(r"[0-9a-f]{40}", commit["oid"])):
+                    raise ValueError("invalid merge commit")
+                if data["status"] != "done":
+                    errors.append(f"{label}: PR #{number} is MERGED but TASK is not done; resolve the current TASK scope before routing.")
+                    continue
+                try:
+                    local_head = local_git("rev-parse", "--verify", "HEAD^{commit}")
+                    local_git("merge-base", "--is-ancestor", pr["headRefOid"], commit["oid"])
+                    local_git("merge-base", "--is-ancestor", commit["oid"], local_head)
+                except (OSError, subprocess.SubprocessError):
+                    errors.append(f"{label}: PR #{number} is MERGED but local integration is UNVERIFIED; obtain/integrate the exact merge through authorized Git work, then rerun. No fetch or merge was performed.")
+                    continue
+                pr["localHead"] = local_head
+                resolved.append((identifier, path, pr))
+                print(f"Delivery resolved: {identifier} PR #{number} is MERGED and locally integrated ({commit['oid']}); no human merge or cleanup request remains.")
+            elif pr["mergedAt"] is not None or pr.get("mergeCommit") is not None:
                 raise ValueError("contradictory merge evidence")
             elif state == "CLOSED":
                 errors.append(f"{label}: stale awaiting-merge handoff; PR #{number} is CLOSED WITHOUT MERGE. Planning owner must correct the handoff and refresh views.")
@@ -465,15 +505,44 @@ def verify_delivery(handoffs: list[tuple[str, Path, dict[str, str]]], repository
         except (OSError, subprocess.SubprocessError, ValueError, TypeError):
             # Raw CLI/API diagnostics may contain credentials; do not echo them.
             errors.append(f"{label}: delivery verification INCOMPLETE (tooling/authentication/API/metadata or identity unavailable); planning owner must recover authoritative evidence. No fresh pass or merge is inferred.")
-    return errors
+    return resolved, errors
+
+
+def reconcile_delivery(records: Records, resolved: list[ResolvedDelivery]) -> dict[Path, str]:
+    """Plan explicit administrative retirement, retaining exact observed merge/integration facts."""
+    pending = {}
+    observed = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    for identifier, path, pr in resolved:
+        text = path.read_bytes().decode("utf-8")
+        header, boundary, body = re.split(r"((?:\r\n|\r|\n)---(?:(?:\r\n|\r|\n)|$))", text, maxsplit=1)
+        end = boundary.index("---")
+        # Match the reader's stripped-key semantics; retain other bytes and line endings.
+        header = "".join(line for line in (header + boundary[:end]).splitlines(keepends=True)
+                         if line.partition(":")[0].strip() != "delivery")
+        retired = header + boundary[end:] + body
+        expected = {key: value for key, value in records[identifier][1].items() if key != "delivery"}
+        if parse_frontmatter(retired) != expected:
+            raise ValueError(f"{path.relative_to(ROOT)}: planned delivery retirement did not preserve the expected frontmatter")
+        pending[path] = retired + "\n\n" + (
+            f"### Delivery reconciliation — PR #{pr['number']}\n\n"
+            f"Observed {observed}: {pr['url']} is MERGED into `{pr['baseRefName']}` at "
+            f"`{pr['mergedAt']}`. Published head `{pr['headRefOid']}` is an ancestor of merge "
+            f"`{pr['mergeCommit']['oid']}`, which is integrated in local HEAD `{pr['localHead']}`. "
+            "Retired the ended delivery marker; implementation acceptance/QA and historical publication "
+            "remain separate. No approval, merge, release or deployment was performed by reconciliation.\n"
+        )
+        records[identifier][1].pop("delivery")
+    return pending
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--write", action="store_true", help="refresh marked views after validating records and links")
-    mode.add_argument("--check-delivery", action="store_true", help="read-only local validation plus live checks of explicit current delivery handoffs")
+    mode.add_argument("--check-delivery", action="store_true", help="read-only local validation plus live verification of explicit current delivery handoffs")
+    mode.add_argument("--reconcile-delivery", action="store_true", help="authorized write: retire exact merged/integrated done handoffs, retain evidence and refresh views; fail closed otherwise")
     args = parser.parse_args()
+    writing = args.write or args.reconcile_delivery
     errors: list[str] = []
     records = load_records(errors)
     validate_records(records, errors)
@@ -495,8 +564,18 @@ def main() -> int:
     if not errors:
         handoffs, repository, identity_errors = delivery_identity(records)
         errors.extend(identity_errors)
+    resolved: list[ResolvedDelivery] = []
+    pending: dict[Path, str] = {}
+    if not errors and args.reconcile_delivery:
+        resolved, delivery_errors = verify_delivery(handoffs, repository)
+        errors.extend(delivery_errors)
+        if not errors:
+            try:
+                pending = reconcile_delivery(records, resolved)
+            except ValueError as exception:
+                errors.append(str(exception))
     if not errors:
-        refresh_views(records, args.write, errors)
+        refresh_views(records, writing, errors, pending)
     if errors:
         print("Planning validation failed:")
         for error in errors:
@@ -504,16 +583,19 @@ def main() -> int:
         return 1
     active = sum(1 for _, data in records.values() if data["status"] not in TERMINAL)
     print(f"Local planning validation passed (offline): {len(records)} records, {active} active")
+    if args.reconcile_delivery:
+        print(f"Delivery reconciliation passed: {len(resolved)} ended handoff(s) retired; OPEN handoffs preserved. No historical PRs queried.")
+        return 0
     if not args.check_delivery:
         print("Delivery freshness NOT CHECKED; routing publication/merge handoffs requires --check-delivery.")
         return 0
-    delivery_errors = verify_delivery(handoffs, repository)
+    resolved, delivery_errors = verify_delivery(handoffs, repository)
     if delivery_errors:
         print("Delivery verification failed or incomplete:")
         for error in delivery_errors:
             print(f"- {error}")
         return 1
-    print(f"Delivery verification passed: {len(handoffs)} explicit current handoff(s); no historical PRs queried.")
+    print(f"Delivery verification passed: {len(handoffs) - len(resolved)} OPEN handoff(s), {len(resolved)} merged/integrated handoff(s) resolved read-only; no historical PRs queried.")
     return 0
 
 

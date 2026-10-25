@@ -69,8 +69,10 @@ order for **EPIC → TICKET → TASK**. After planning edits run `./bin/planning
 Roadmap execution summaries cannot silently drift from record status, priority or readiness.
 
 Before routing or a delivery handoff, run `./bin/planning-check --check-delivery`. It uses GitHub CLI (`gh`)
-and existing operator authentication only when explicit current delivery markers exist, queries those PRs rather
-than historical links, and fails on merged/closed or unverifiable handoffs without changing files. Land follows
+and existing operator authentication only for explicit publication snapshots, not historical links. Exact
+merged/integrated done handoffs resolve without writes or cleanup requests; closed-unmerged or unverifiable
+handoffs remain blocking. Authorized Work/Land/substantive planning intake uses `--reconcile-delivery` to retire
+resolved markers, preserve evidence and refresh views under
+[current delivery handoffs](planning/CONVENTIONS.md#current-delivery-handoffs). Land also follows
 [delivery pre-submit](planning/CONVENTIONS.md#delivery-pre-submit-and-final-handoff), including affected authored
-Board/Roadmap/README updates. A later human merge still needs authorized marker/documentation reconciliation;
-a successful offline gate does not prove live PR state. Legacy certification records remain history, not gates.
+Board/Roadmap/README updates. An offline gate does not prove live PR state. Legacy certification is history, not a gate.
