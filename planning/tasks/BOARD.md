@@ -23,28 +23,32 @@ substitute a requirements TICKET for an approved implementation TASK.
 
 The maintainer approved broad Agent OS adoption with Laravel-native exceptions in
 [EPIC-00001's amendment](../epics/00001-EPIC.md#approved-broad-adoption-amendment--2026-10-24).
-The remaining adoption split is approved in [T-00013](../tickets/00013-TICKET.md) (workflow/evidence binding)
-and [T-00014](../tickets/00014-TICKET.md) (prospective closeout). T-00013's complete two-TASK plan is approved:
-TASK-00009 adopts Agent OS naming, and dependent TASK-00010 delivers the workflow/report binding. T-00014's
+The remaining adoption split is approved in [TICKET-00013](../tickets/00013-TICKET.md) (workflow/evidence binding)
+and [TICKET-00014](../tickets/00014-TICKET.md) (prospective closeout). TICKET-00013's complete two-TASK plan is approved:
+TASK-00009 adopts Agent OS naming, and dependent TASK-00010 delivers the workflow/report binding. TICKET-00014's
 complete single-TASK plan is approved as TASK-00011, with no TASK blockers. TASK decomposition is complete for
-this selected adoption slice, not implementation. The broader Wayfinder map stays Active with its earlier
+this selected adoption slice. TASK-00009's naming migration and approved local default-Build routing clarification
+are independently accepted; its distinct delivery handoff is generated below. Workflow binding and general closeout
+rollout remain unimplemented. See [implementation routing](../CONVENTIONS.md#implementation-routing) for recommendations and authority limits. The broader Wayfinder map stays Active with its earlier
 planning phases unfinished. Current execution is derived below.
 Separately, the maintainer must reconcile
-[T-00007](../tickets/00007-TICKET.md)/[T-00011](../tickets/00011-TICKET.md) gate policies before those TASKs.
-The shared real journey/permission decisions for T-00008/T-00009/T-00010 remain open; preserve dependency edges.
+[TICKET-00007](../tickets/00007-TICKET.md)/[TICKET-00011](../tickets/00011-TICKET.md) gate policies before those TASKs.
+The shared real journey/permission decisions for TICKET-00008/TICKET-00009/TICKET-00010 remain open; preserve dependency edges.
 See the [Roadmap](../ROADMAP.md) for the current planning handoff. Current execution and delivery are derived
 below, not restated in authored prose; acceptance/verification checkpoints remain in the owning records.
 
 <!-- planning:next -->
 | Route | TASK | Title | Status | Readiness |
 | --- | --- | --- | --- | --- |
-| Ready Frontier | [TASK-00009](00009-TASK.md) | Adopt Agent OS Planning Identities | ready-for-agent | — |
+| Ready Frontier | [TASK-00010](00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | — |
 <!-- /planning:next -->
 
 ## Current delivery
 
 <!-- planning:delivery -->
-No current delivery handoffs. Historical PR links do not imply pending delivery.
+| TASK | Current delivery | PR |
+| --- | --- | --- |
+| [TASK-00009](00009-TASK.md) | Awaiting human review/merge | https://github.com/johnnickell/project-laravel/pull/18 |
 <!-- /planning:delivery -->
 
 ## Wayfinder Review
@@ -63,14 +67,12 @@ No TASKs.
 
 | Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | [TASK-00009](00009-TASK.md) | Adopt Agent OS Planning Identities | [T-00013](../tickets/00013-TICKET.md) | ready-for-agent | — | — |
-| 3 | [TASK-00011](00011-TASK.md) | Adopt Prospective Acceptance and Closeout Rules | [T-00014](../tickets/00014-TICKET.md) | ready-for-agent | — | — |
+| 2 | [TASK-00010](00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | [TICKET-00013](../tickets/00013-TICKET.md) | ready-for-agent | [TASK-00009](00009-TASK.md) | — |
+| 3 | [TASK-00011](00011-TASK.md) | Adopt Prospective Acceptance and Closeout Rules | [TICKET-00014](../tickets/00014-TICKET.md) | ready-for-agent | — | — |
 
 ## Waiting
 
-| Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
-| --- | --- | --- | --- | --- | --- | --- |
-| 2 | [TASK-00010](00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | [T-00013](../tickets/00013-TICKET.md) | ready-for-agent | [TASK-00009](00009-TASK.md); TASK-00009 | — |
+No TASKs.
 
 ## Needs Info
 
@@ -88,19 +90,20 @@ No TASKs.
 
 | Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | [TASK-00001](00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | [T-00006](../tickets/00006-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/10 |
-| 1 | [TASK-00006](00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | [T-00012](../tickets/00012-TICKET.md) | done | [TASK-00001](00001-TASK.md) | https://github.com/johnnickell/project-laravel/pull/13 |
+| 1 | [TASK-00001](00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | [TICKET-00006](../tickets/00006-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/10 |
+| 1 | [TASK-00006](00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | [TICKET-00012](../tickets/00012-TICKET.md) | done | [TASK-00001](00001-TASK.md) | https://github.com/johnnickell/project-laravel/pull/13 |
 | 1 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | — | done | — | https://github.com/johnnickell/project-laravel/pull/14 |
 | 1 | [TASK-00008](00008-TASK.md) | Keep planning routing and delivery handoffs synchronized | — | done | — | https://github.com/johnnickell/project-laravel/pull/15 |
-| — | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | [T-00001](../tickets/00001-TICKET.md) | done | — | — |
-| — | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | [T-00002](../tickets/00002-TICKET.md) | done | — | — |
-| — | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | [T-00004](../tickets/00004-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/7 |
-| — | [TASK-00005](00005-TASK.md) | Re-certify Rewritten Fight Common Candidate | [T-00005](../tickets/00005-TICKET.md) | done | — | — |
+| 1 | [TASK-00009](00009-TASK.md) | Adopt Agent OS Planning Identities | [TICKET-00013](../tickets/00013-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/18 |
+| — | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | [TICKET-00001](../tickets/00001-TICKET.md) | done | — | — |
+| — | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | [TICKET-00002](../tickets/00002-TICKET.md) | done | — | — |
+| — | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | [TICKET-00004](../tickets/00004-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/7 |
+| — | [TASK-00005](00005-TASK.md) | Re-certify Rewritten Fight Common Candidate | [TICKET-00005](../tickets/00005-TICKET.md) | done | — | — |
 <!-- /planning:tasks -->
 
 ## Historical delivery
 
-TASK-00006/T-00012 delivered Common 1.4.0 / AccessControl 0.8.0 through
+TASK-00006/TICKET-00012 delivered Common 1.4.0 / AccessControl 0.8.0 through
 [PR #13](https://github.com/johnnickell/project-laravel/pull/13), merged at `3fa576d` on 2026-10-24.
 Its [current completion notes](00006-TASK.md#completion-notes) retain acceptance and hosted-delivery provenance;
 the earlier delivery-pending checkpoints do not request another Land cycle. TASK-00001's PR #10 merged at
@@ -113,5 +116,5 @@ release or successor-gate implementation is claimed.
 
 TASK-00002–TASK-00005 carry already completed implementation evidence migrated from the old executable tickets.
 Their generated Recently Done placement reflects retained `done` status, not a claim of recent execution or
-fresh independent acceptance. Common 2.0 remains an unresolved requirement under T-00003/EPIC-00003, with no
+fresh independent acceptance. Common 2.0 remains an unresolved requirement under TICKET-00003/EPIC-00003, with no
 executable TASK. See [the identity map](../MIGRATION.md); there is no legacy ticket execution board.

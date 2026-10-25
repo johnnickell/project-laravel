@@ -23,7 +23,7 @@ TERMINAL = {"done", "wontfix"}
 ACCEPTED = {"ready-for-agent", "in-progress"}
 KINDS = {
     "epics": ("EPIC", "EPIC"),
-    "tickets": ("T", "TICKET"),
+    "tickets": ("TICKET", "TICKET"),
     "tasks": ("TASK", "TASK"),
     "specs": ("PRD", "PRD"),
 }
@@ -96,7 +96,7 @@ def validate_records(records: Records, errors: list[str]) -> None:
         prefix = identifier.rsplit("-", 1)[0]
         required_parent = ""
         allowed_parents: set[str] = set()
-        if prefix == "T":
+        if prefix == "TICKET":
             required_parent = "epic"
             allowed_parents = {"epic", "prd"}
         elif prefix == "TASK":
@@ -112,7 +112,7 @@ def validate_records(records: Records, errors: list[str]) -> None:
             allowed_parents = {"epic"}
         if required_parent and not data.get(required_parent):
             errors.append(f"{label}: missing {required_parent} parent")
-        for field, expected_prefix in (("epic", "EPIC-"), ("ticket", "T-"), ("prd", "PRD-")):
+        for field, expected_prefix in (("epic", "EPIC-"), ("ticket", "TICKET-"), ("prd", "PRD-")):
             parent = data.get(field)
             if not parent:
                 continue
@@ -124,7 +124,7 @@ def validate_records(records: Records, errors: list[str]) -> None:
         if len(set(dependencies)) != len(dependencies):
             errors.append(f"{label}: duplicate blocker")
         for dependency in dependencies:
-            if prefix not in {"T", "TASK"} or not re.fullmatch(rf"{prefix}-\d{{5}}", dependency):
+            if prefix not in {"TICKET", "TASK"} or not re.fullmatch(rf"{prefix}-\d{{5}}", dependency):
                 errors.append(f"{label}: blocker must be a same-level TICKET or TASK: {dependency}")
             elif dependency not in records:
                 errors.append(f"{label}: unknown blocker {dependency}")
@@ -306,10 +306,10 @@ def planning_frontier(source: Path, records: Records) -> str:
     for identifier, (path, data) in sorted(records.items()):
         if not is_live(path) or data["status"] in TERMINAL:
             continue
-        if not identifier.startswith(("EPIC-", "T-")):
+        if not identifier.startswith(("EPIC-", "TICKET-")):
             continue
         field = "epic" if identifier.startswith("EPIC-") else "ticket"
-        child_prefix = "T-" if field == "epic" else "TASK-"
+        child_prefix = "TICKET-" if field == "epic" else "TASK-"
         children = [child for child_id, (_, child) in records.items()
                     if child_id.startswith(child_prefix) and child.get(field) == identifier]
         if not children:
@@ -343,10 +343,10 @@ def generated_views(records: Records) -> list[tuple[Path, str, str]]:
     views.append((path, "epics", table(epics, path, records)))
     views.append((path, "frontier", planning_frontier(path, records)))
     for identifier, (path, _) in records.items():
-        if not is_live(path) or not identifier.startswith(("EPIC-", "T-")):
+        if not is_live(path) or not identifier.startswith(("EPIC-", "TICKET-")):
             continue
         field = "epic" if identifier.startswith("EPIC-") else "ticket"
-        child_prefix = "T-" if field == "epic" else "TASK-"
+        child_prefix = "TICKET-" if field == "epic" else "TASK-"
         children = sorted(child_id for child_id, (_, data) in records.items()
                           if child_id.startswith(child_prefix) and data.get(field) == identifier)
         views.append((path, "children", table(children, path, records)))
@@ -356,7 +356,7 @@ def generated_views(records: Records) -> list[tuple[Path, str, str]]:
 def complete_parents(records: dict) -> dict[Path, str]:
     """Plan bottom-up parent closure from all live and archived child records."""
     pending = {}
-    for kind, parent_key in (("T-", "ticket"), ("EPIC-", "epic")):
+    for kind, parent_key in (("TICKET-", "ticket"), ("EPIC-", "epic")):
         for identifier, (path, data) in sorted(records.items()):
             if not identifier.startswith(kind) or "archive" in path.parts or data["status"] in TERMINAL:
                 continue

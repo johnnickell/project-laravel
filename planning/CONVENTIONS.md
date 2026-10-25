@@ -23,8 +23,9 @@ still apply when the selected workflow is invoked.
    and child counts do not prove complete decomposition. If the handoff is missing or contradictory, report
    the missing phase/owner; do not reconstruct it by reading every closed map and descendant.
 5. Read canonical review/QA identity and disposition only when they change the selected route. Unresolved
-   identity is an evidence handoff, never acceptance. Confirm a suggested skill from supplied capability
-   metadata/bindings; load its full instructions and references when invoked, not merely to recommend it.
+   identity is an evidence handoff, never acceptance. Resolve capabilities under
+   [implementation routing](#implementation-routing); load full skill instructions and references when invoked,
+   not merely to recommend them.
 
 Prefer heading searches and bounded section reads. Aim to retrieve no more than about 24,000 characters
 of routing evidence; stop with a precise unresolved input before exceeding that scope unless the user requests
@@ -46,12 +47,34 @@ This document is the canonical planning authority for Fight Laravel Starter. The
 [complete migration map](MIGRATION.md) records renamed/moved identities and inherited evidence without claiming
 unfinished work is complete. There is no live legacy-record exception.
 
+## Implementation routing
+
+For an approved executable TASK needing new implementation or confirmed implementation/QA defect repair,
+recommend `/skill:build TASK-NNNNN` with its actual ID by default. Use `/skill:work TASK-NNNNN` only when the
+operator explicitly requests implementation alone. A recommendation neither invokes a workflow nor grants
+mutation, delegation or publication authority. During an already authorized Build, its coordinator owns stage
+continuation and the shared revision allowance; do not start a nested Build or reset that allowance.
+
+Resolve the actual configured provider's resources from harness/operator metadata or its supplied synopsis.
+Explicit-only installed skills may be absent from the model-advertised list; absence alone is not evidence of
+unavailability. Do not guess installation paths, copy a provider catalog or silently substitute Work for Build.
+If the resource or authority cannot be established, name the missing prerequisite and stop the affected action.
+
+Preserve evidence-specific routes: committed Work goes to independent `/skill:review TASK-NNNNN`; accepted
+implementation with applicable QA outstanding goes to independent `/skill:qa TASK-NNNNN`; accepted implementation
+with satisfied QA goes to authorized `/skill:land TASK-NNNNN`. Missing initial hosted proof alone uses the
+authorized Land draft-evidence route then focused independent Review, not implementation repair. QA INCOMPLETE
+names its prerequisite before QA resumes. Accepted A with administrative B awaiting final delivery proof stays
+Land-owned. Planning, unavailable evidence and human decisions keep their actual owner; no default Build
+recommendation overrides these routes or an explicit implementation-alone request. Full workflow/report binding
+remains TASK-00010 scope, not a capability installed by these routing instructions.
+
 ## Hierarchy and ownership
 
 | Level | Owns | Path and ID |
 | --- | --- | --- |
 | EPIC | Approved destination, outcome, boundaries | `epics/00001-EPIC.md` · `EPIC-00001` |
-| TICKET | Cohesive use cases, requirements, acceptance evidence | `tickets/00006-TICKET.md` · `T-00006` |
+| TICKET | Cohesive use cases, requirements, acceptance evidence | `tickets/00006-TICKET.md` · `TICKET-00006` |
 | TASK | Independently implementable/reviewable slice, normally one PR | `tasks/00001-TASK.md` · `TASK-00001` |
 | PRD | Optional supporting specification, not a mandatory parent | `specs/00003-PRD.md` · `PRD-00003` (next available) |
 
@@ -82,18 +105,17 @@ Then run the read-only `./bin/planning-check`. Read-only validation never writes
 
 ## Identity and templates
 
-EPIC, TICKET, TASK, and PRD IDs have independent five-digit sequences. The maintainer approved Agent OS naming
-in [T-00013](tickets/00013-TICKET.md): `TICKET-NNNNN` identities with numeric `NNNNN-TICKET.md` filenames,
-replacing the earlier preserve-`T-` exception. Numeric filenames already match. Its implementation must migrate
-records, references, templates and planning/archive tooling coherently, preserving suffixes and provenance.
-Until that delivery, current records/tooling still encode `T-NNNNN`; do not partially rename records or claim the
-migration is implemented. Inspect live and archived records before allocating IDs, including retired aliases in
+EPIC, TICKET, TASK, and PRD IDs have independent five-digit sequences. TICKETs use `TICKET-NNNNN` identities
+and numeric `NNNNN-TICKET.md` filenames, as approved in [TICKET-00013](tickets/00013-TICKET.md) and implemented
+by TASK-00009. The former `T-NNNNN` encoding is historical provenance only, not an accepted metadata alias.
+Suffixes, filenames and dependency semantics are preserved. Inspect live and archived records before allocating
+IDs, including retired aliases in
 [MIGRATION.md](MIGRATION.md). Preserve gaps and never reuse an archived or migrated-away identity
 (PRD-00001/00002 are reserved; the next optional PRD is PRD-00003). File numbers must match record IDs.
 
 Copy the directory's `_…_TEMPLATE.md` before authoring a record. Templates are not records and receive no ID.
 Every record requires `id`, `title`, and `status`. EPICs also require `target` (use `TBD` until a version is selected).
-New TICKETs require `epic: EPIC-NNNNN`; feature TASKs require `ticket: T-NNNNN`. Standalone bug TASKs use
+New TICKETs require `epic: EPIC-NNNNN`; feature TASKs require `ticket: TICKET-NNNNN`. Standalone bug TASKs use
 `kind: bug` and an explicit empty `ticket:` field; do not invent a parent merely to track a small repair.
 TASK `kind` may be `feature` or `bug`; omitted kind means feature for existing records. An optional `prd: PRD-NNNNN` on a TICKET
 links supporting material without replacing its EPIC parent. PRDs may optionally link an EPIC.
@@ -197,9 +219,9 @@ The maintainer authorized complete conversion of non-archived planning, includin
 historical TASKs. Original acceptance bodies, source references, counts and hosted links remain in those TASKs;
 `done` is inherited historical acceptance, not fresh verification or an invented independent review.
 
-T-00003 remains the EPIC-00003-linked Common 2.0 requirement, `needs-info` until its upstream artifacts exist.
-Do not create an executable TASK before accepting its requirements. T-00011 preserves the concurrent develop-side
-lean-gate requirement formerly named T-00006; reconcile its policy with T-00007 before successor-gate decomposition.
+TICKET-00003 remains the EPIC-00003-linked Common 2.0 requirement, `needs-info` until its upstream artifacts exist.
+Do not create an executable TASK before accepting its requirements. TICKET-00011 preserves the concurrent develop-side
+lean-gate requirement formerly named T-00006; reconcile its policy with TICKET-00007 before successor-gate decomposition.
 The old `tickets/BOARD.md` is removed; only `tasks/BOARD.md` routes execution. No archive or new completion follows
 from conversion. Archived records, if present during a future migration, are not moved as an implicit side effect.
 
@@ -227,7 +249,7 @@ Never move records manually or archive as a completion side effect.
 | Records | Command shape | Destination |
 | --- | --- | --- |
 | TASKs | `./bin/archive-planning tasks TASK-00001 … [--apply]` | `tasks/archive/` |
-| TICKETs | `./bin/archive-planning tickets T-00006 … [--apply]` | `tickets/archive/` |
+| TICKETs | `./bin/archive-planning tickets TICKET-00006 … [--apply]` | `tickets/archive/` |
 | EPICs | `./bin/archive-planning epics EPIC-00001 … [--apply]` | `epics/archive/` |
 | PRDs | `./bin/archive-planning specs PRD-00001 … [--apply]` | `specs/archive/` |
 | Wayfinder | `./bin/archive-planning wayfinder map-name [--apply]` | Existing Wayfinder archive directories |

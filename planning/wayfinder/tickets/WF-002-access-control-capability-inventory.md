@@ -3,7 +3,7 @@
 **Labels:** `wayfinder:research`, `area:access-control`
 **Mode:** AFK
 **Status:** Open
-**Gate:** Selected Common 1.4.0 / AccessControl 0.8.0 are installed locally under T-00012/TASK-00006; complete inventory remains open
+**Gate:** Selected Common 1.4.0 / AccessControl 0.8.0 are installed locally under TICKET-00012/TASK-00006; complete inventory remains open
 **Map:** [Complete Laravel AccessControl API and SPA](../complete-access-control-api-and-spa-map.md)
 **Depends on:** —
 

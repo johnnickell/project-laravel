@@ -1,5 +1,5 @@
 ---
-id: T-00004
+id: TICKET-00004
 epic: EPIC-00003
 title: Establish the Canonical Laravel Pre-Submit Quality Gate
 status: done
@@ -45,7 +45,7 @@ keep credentials out of diagnostics. No business actor/target authorization or n
 ## Decisions and dependencies
 
 Migrated under [EPIC-00003](../epics/00003-EPIC.md), formerly PRD-00002. EPIC-00001 supersedes the future
-self-provisioning/certification obligations, not this successful historical delivery. T-00007 and T-00011 retain
+self-provisioning/certification obligations, not this successful historical delivery. TICKET-00007 and TICKET-00011 retain
 the successor-gate requirements and their unresolved policy reconciliation.
 
 ## TASKs
@@ -53,7 +53,7 @@ the successor-gate requirements and their unresolved policy reconciliation.
 <!-- planning:children -->
 | ID | Title | Status | Parent | Blocked by |
 | --- | --- | --- | --- | --- |
-| [TASK-00004](../tasks/00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | done | [T-00004](00004-TICKET.md) | — |
+| [TASK-00004](../tasks/00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | done | [TICKET-00004](00004-TICKET.md) | — |
 <!-- /planning:children -->
 
 ## Progress

@@ -1,9 +1,9 @@
 ---
-id: T-00010
+id: TICKET-00010
 epic: EPIC-00001
 title: Deliver a Real Permission-Protected API Slice
 status: needs-info
-blocked_by: T-00007, T-00008, T-00009
+blocked_by: TICKET-00007, TICKET-00008, TICKET-00009
 ---
 
 # Deliver a Real Permission-Protected API Slice
@@ -38,7 +38,7 @@ cannot establish this outcome.
 
 Authentication establishes trusted actor context using approved package and application contracts. Client actor,
 target, role, or permission input must not become authority by assertion. Every exposed operation has an explicit
-access classification and permission/ownership rule from T-00008; Actions/Gates/Policies must not bypass or
+access classification and permission/ownership rule from TICKET-00008; Actions/Gates/Policies must not bypass or
 reimplement that rule. Include stale/revoked-authority and target-information-leak behavior where applicable.
 
 Validate transport shape without duplicating Domain invariants. Responders own status, headers, JSend, and safe
@@ -66,13 +66,13 @@ messages. Keep the existing homepage HTML and map transport fields explicitly.
 
 ## Decisions and dependencies
 
-Depends on [T-00007](00007-TICKET.md), [T-00008](00008-TICKET.md), and [T-00009](00009-TICKET.md).
+Depends on [TICKET-00007](00007-TICKET.md), [TICKET-00008](00008-TICKET.md), and [TICKET-00009](00009-TICKET.md).
 Coordinate [WF-005](../wayfinder/tickets/WF-005-http-and-security-conventions.md) and the existing
 [API/SPA map](../wayfinder/complete-access-control-api-and-spa-map.md); do not bypass unresolved authentication
 or wire-contract authority by introducing an incompatible endpoint.
 
 The precise real journey, public route/representation, trusted authentication context, and exception mapping
-remain undecided. Select the journey jointly with T-00008/T-00009 before their implementation plans, rather than
+remain undecided. Select the journey jointly with TICKET-00008/TICKET-00009 before their implementation plans, rather than
 waiting for this downstream implementation to choose it. Requirements split approval does not authorize an
 invented user journey or a test-only production route.
 

@@ -1,5 +1,5 @@
 ---
-id: T-NNNNN
+id: TICKET-NNNNN
 epic: EPIC-NNNNN
 title: Brief requirement outcome
 status: needs-triage
@@ -43,5 +43,6 @@ while decisions are missing. `blocked_by` contains only prerequisite TICKET IDs,
 
 ## Progress
 
-Record requirement acceptance and actual delivery evidence. Child completion does not automatically close the
-TICKET. Do not claim implementation or merge from an approved requirement.
+Record requirement acceptance and actual delivery evidence. Apply
+[automatic parent completion](../CONVENTIONS.md#automatic-parent-completion) with terminal children and refresh
+views in the same operation. Do not claim implementation or merge from an approved requirement.

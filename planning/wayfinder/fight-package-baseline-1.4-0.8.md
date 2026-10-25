@@ -1,6 +1,6 @@
 # Current Fight consumer baseline — Common 1.4.0 / AccessControl 0.8.0
 
-Bounded installed-contract handoff for [T-00012](../tickets/00012-TICKET.md) /
+Bounded installed-contract handoff for [TICKET-00012](../tickets/00012-TICKET.md) /
 [TASK-00006](../tasks/00006-TASK.md), inspected on 2026-10-24. This supersedes the
 [1.2.0/0.4.0 handoff](fight-package-baseline.md) for current development without rewriting its historical evidence.
 It supports open [WF-002](tickets/WF-002-access-control-capability-inventory.md); it is not a full capability matrix,
@@ -58,7 +58,7 @@ guides were inspected. New capability availability is not authorization to expos
 | Common 1.4 StreamId equality/hash/JSON change | No owned StreamId use or persisted event streams exist. No migration needed for this application; future adopters must use current identity/serialization semantics. Do not assume every minor-release change is behavior-preserving. |
 | Common 1.4 strict Pagination, immutable JSON snapshots, values and safe HTTP errors | Additive/opt-in except the documented legacy-constructor deprecation. No existing owned caller needs migration. Select safe error presentation during real API design; do not install an unused handler or restore legacy error exposure. |
 | Common 1.3 MCP and OAuth boundaries | No local consumers. No automatic endpoint, identity, permission or disclosure policy is supplied or enabled. |
-| AccessControl 0.5 Agent/Feature/delivery and repository changes | No local Agent/grant/Feature storage or adapters exist to migrate. WF-002 must inventory the current API; T-00008/T-00009 must honor current operation/cohort, reference-fence and complete-state contracts, not recreate old compatibility paths. |
+| AccessControl 0.5 Agent/Feature/delivery and repository changes | No local Agent/grant/Feature storage or adapters exist to migrate. WF-002 must inventory the current API; TICKET-00008/TICKET-00009 must honor current operation/cohort, reference-fence and complete-state contracts, not recreate old compatibility paths. |
 | AccessControl 0.6 retry Clock dependency | `RetryInvitationDeliveryHandler` requires Clock before the dispatcher. No existing local binding; future worker composition must use the installed signature. |
 | AccessControl 0.7 registration/origin contracts | Activation origin, delivery invocation, pending-registration replacement and initial Role assignment now have explicit contracts. No local stored grants or registration flow exists. Future persistence must retain origin and shared transaction-duration fences. |
 | AccessControl 0.8 Role revisions | Role Views require `RoleRevision`; rename/remove require displayed `expectedRevision`. Persist incarnation/sequence and implement non-writing `RoleRepository::validateCurrent(Role): bool`; stale intent must not silently adopt a fresh token. No local Role API or schema currently requires migration. |
@@ -90,7 +90,7 @@ Sources: [principal provider](https://github.com/johnnickell/fight-access-contro
 
 ## Remaining decisions and risks
 
-WF-002's full inventory, WF-003's OpenAPI/wire handshake and T-00008/T-00009/T-00010's actual journey remain open.
+WF-002's full inventory, WF-003's OpenAPI/wire handshake and TICKET-00008/TICKET-00009/TICKET-00010's actual journey remain open.
 Package versions do not settle authorization, schemas, locking, retry, recovery or API compatibility. No data reset,
 consumer certification, upstream modification or full-provider inventory is introduced.
 

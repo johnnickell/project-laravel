@@ -1,5 +1,5 @@
 ---
-id: T-00006
+id: TICKET-00006
 epic: EPIC-00001
 title: Adopt Current Fight Packages as an Application Consumer
 status: done
@@ -64,7 +64,7 @@ API behavior must not change accidentally as a side effect of dependency adoptio
 - [x] Instructions/current context describe an application consumer, distinguish historical receipts from current
       authority, and name explicit setup requirements without rewriting completed historical records.
 - [x] Required local and hosted verification is recorded for the delivered TASKs. Gate changes needed to stop
-      invoking removed certification checks occur with retirement; the larger gate redesign belongs to T-00007.
+      invoking removed certification checks occur with retirement; the larger gate redesign belongs to TICKET-00007.
 
 ## Decisions and dependencies
 
@@ -123,7 +123,7 @@ duplicate package inventory or certification authorities.
 <!-- planning:children -->
 | ID | Title | Status | Parent | Blocked by |
 | --- | --- | --- | --- | --- |
-| [TASK-00001](../tasks/00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | done | [T-00006](00006-TICKET.md) | — |
+| [TASK-00001](../tasks/00001-TASK.md) | Adopt Released Fight Packages and Retire Certification | done | [TICKET-00006](00006-TICKET.md) | — |
 <!-- /planning:children -->
 
 ## Progress
@@ -140,7 +140,7 @@ The current independent `accept` resolves the original missing-hosted R1; hosted
 
 This TICKET is done for accepted implementation A under the TASK's approved closeout contract, not merely
 because its child changed status. Final metadata-head delivery remains pending; PR #10 is not approved or merged.
-Preserve all downstream dependency edges: T-00006 is now terminal, but T-00007/T-00011 still need gate-policy
-reconciliation, T-00008 still needs the shared authorization journey, T-00009 still depends on unfinished T-00008,
-and T-00010 still depends on unfinished T-00007/T-00008/T-00009. No downstream TASK becomes executable.
+Preserve all downstream dependency edges: TICKET-00006 is now terminal, but TICKET-00007/TICKET-00011 still need gate-policy
+reconciliation, TICKET-00008 still needs the shared authorization journey, TICKET-00009 still depends on unfinished TICKET-00008,
+and TICKET-00010 still depends on unfinished TICKET-00007/TICKET-00008/TICKET-00009. No downstream TASK becomes executable.
 EPIC-00001 remains in progress. See [the migration mapping](../MIGRATION.md).

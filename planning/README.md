@@ -13,13 +13,17 @@ This directory is the committed planning authority for Fight Laravel Starter.
 
 Read [CONVENTIONS.md](CONVENTIONS.md) for EPIC → TICKET → TASK ownership, approval/readiness, metadata,
 completion synchronization, and explicit-only archives. Each record level has an independent five-digit ID
-sequence. TICKETs keep `T-NNNNN`; TASKs use `TASK-NNNNN`. Inspect live and archived records before allocation.
+sequence. TICKETs use `TICKET-NNNNN`; TASKs use `TASK-NNNNN`. Inspect live and archived records before allocation.
 
 All non-archived records use this structure, including historical completed work. The
 [complete migration map](MIGRATION.md) traces former destination PRDs to EPICs and executable tickets to
 requirements plus historical TASKs. Counts, acceptance and source references retain their historical meaning;
 no new verification or independent acceptance is fabricated. There is no second ticket execution board.
 PRDs are optional supporting specifications, never substitutes for EPIC parents.
+
+For implementation/confirmed defects, default to recommending `/skill:build TASK-NNNNN`; implementation alone
+uses `/skill:work TASK-NNNNN` only on explicit request. See
+[implementation routing](CONVENTIONS.md#implementation-routing) for capability, evidence and authority boundaries.
 
 Use each directory's `_…_TEMPLATE.md`. After changes, run `./bin/planning-check --write`, then
 `./bin/planning-check`. Before routing or publication use `./bin/planning-check --check-delivery` for explicit

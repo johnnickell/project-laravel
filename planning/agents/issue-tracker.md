@@ -17,3 +17,8 @@ Generated summaries own TASK selection; explicit delivery markers own current me
 authored Board/Roadmap/README/current record notes alongside generated views; preserve historical acceptance.
 Do not create feature TASKs while requirements remain unaccepted or decision-incomplete. Standalone bug records
 require accepted bounded repair scope. An empty implementation frontier is a valid outcome.
+
+For executable new implementation or confirmed implementation/QA defects, recommend `/skill:build TASK-NNNNN`
+with the actual ID; `/skill:work TASK-NNNNN` is for explicit implementation-alone requests. Follow
+[implementation routing](../CONVENTIONS.md#implementation-routing) for configured-provider resolution,
+evidence-specific Review/QA/Land continuations and authority limits. A recommendation does not invoke a skill.

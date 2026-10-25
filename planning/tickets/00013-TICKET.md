@@ -1,8 +1,8 @@
 ---
-id: T-00013
+id: TICKET-00013
 epic: EPIC-00001
 title: Bind Shared Engineering Workflows to Laravel
-status: ready-for-agent
+status: in-progress
 blocked_by:
 ---
 
@@ -84,8 +84,9 @@ These are accepted implementation requirements, not a claim that migration or bi
   EPIC/TASK names. Preserve each numeric suffix and identity history; do not allocate replacement numbers.
   Migrate authoritative records, references and tooling together, including any archived records. Record the
   mapping from `T-NNNNN` to `TICKET-NNNNN` and classify retained historical text rather than rewriting evidence.
-  This supersedes the earlier preserve-`T-` direction for the approved migration. Until that coherent delivery,
-  existing records and validators retain their current encoding; do not leave a partially renamed portfolio.
+  This supersedes the earlier preserve-`T-` direction. TASK-00009 now implements the coherent migration;
+  independent acceptance and required hosted proof remain pending. Do not introduce old-prefix aliases into
+  authoritative metadata.
 - **Binding owner/location:** the project planning owner maintains `planning/agents/workflow-binding.md`;
   root AGENTS.md explicitly links it. Shared workflow/report rules stay with the provider. Resolve exact provider
   resources from harness/operator-supplied skill metadata, not guessed paths, copied catalogs or global changes.
@@ -94,7 +95,7 @@ These are accepted implementation requirements, not a claim that migration or bi
   causes a named prerequisite hold, not silent fallback, a new installation or an expanded authority grant.
 - **Laravel substitutions:** retain Laravel/Eloquent/Pint, native entrypoints, `App\` mapped to `app/`, MySQL
   direction, repository commands, `var/cache/`, exact owned-production coverage and existing hosted/public-contract
-  requirements. T-00007/T-00011 still own disputed successor-gate policy; provider defaults cannot settle it.
+  requirements. TICKET-00007/TICKET-00011 still own disputed successor-gate policy; provider defaults cannot settle it.
 - **Canonical base:** resolve the main/base worktree using Git's common directory and registered worktrees,
   not the selected disposable checkout or a matching TASK number in another repository. Ambiguous/unwritable
   base or unsafe symlink resolution is an incomplete handoff, not permission to choose another canonical path.
@@ -114,10 +115,10 @@ Applicable shared contracts were inspected at provider resources `docs/engineeri
 confirm numeric filenames and `TICKET-NNNNN` identities. Resolve these from the actual supplied provider when
 implementing; resource names here do not select a target checkout.
 
-Coordinate evidence identity with [T-00014](00014-TICKET.md). Neither requirement needs the other's
+Coordinate evidence identity with [TICKET-00014](00014-TICKET.md). Neither requirement needs the other's
 implementation merely to settle its requirements, so no new execution dependency is imposed here.
-[T-00012](00012-TICKET.md)'s package upgrade and standalone TASK-00007/TASK-00008 are delivered context,
-not unfinished blockers. [T-00007](00007-TICKET.md)/[T-00011](00011-TICKET.md) retain gate-policy ownership.
+[TICKET-00012](00012-TICKET.md)'s package upgrade and standalone TASK-00007/TASK-00008 are delivered context,
+not unfinished blockers. [TICKET-00007](00007-TICKET.md)/[TICKET-00011](00011-TICKET.md) retain gate-policy ownership.
 
 This is an explicitly selected foundation slice under [EPIC-00001](../epics/00001-EPIC.md), not approval of the
 complete [API/SPA map](../wayfinder/complete-access-control-api-and-spa-map.md). That map remains Active with
@@ -129,25 +130,28 @@ or bypassed by this decomposition.
 <!-- planning:children -->
 | ID | Title | Status | Parent | Blocked by |
 | --- | --- | --- | --- | --- |
-| [TASK-00009](../tasks/00009-TASK.md) | Adopt Agent OS Planning Identities | ready-for-agent | [T-00013](00013-TICKET.md) | — |
-| [TASK-00010](../tasks/00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | [T-00013](00013-TICKET.md) | [TASK-00009](../tasks/00009-TASK.md) |
+| [TASK-00009](../tasks/00009-TASK.md) | Adopt Agent OS Planning Identities | done | [TICKET-00013](00013-TICKET.md) | — |
+| [TASK-00010](../tasks/00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | [TICKET-00013](00013-TICKET.md) | [TASK-00009](../tasks/00009-TASK.md) |
 <!-- /planning:children -->
 
 ## Progress
 
 Requirements and the complete two-TASK decomposition are accepted by the maintainer. Status remains
-`ready-for-agent`: implementation has not started. Agent OS naming explicitly replaces preservation of `T-`
-identities; this record uses its pre-migration ID only until TASK-00009 delivers the coherent migration.
+`in-progress`: TASK-00009's coherent identity/tooling migration and approved default-Build routing clarification
+are independently accepted, with QA PASS and required A hosted proof; its separate PR delivery is tracked at
+[PR #18](https://github.com/johnnickell/project-laravel/pull/18). Numeric filenames and relationships are
+preserved. This completion does not claim TASK-00010's binding or TICKET-00014's general rollout.
 
-- [TASK-00009](../tasks/00009-TASK.md) owns the complete identity/reference/tooling migration and its naming,
-  provenance, hierarchy and routing evidence; it has no TASK blockers.
+- [TASK-00009](../tasks/00009-TASK.md) delivered the complete identity/reference/tooling migration and its naming,
+  provenance, hierarchy and routing evidence; its current `delivery: awaiting-merge` marker identifies PR #18.
 - [TASK-00010](../tasks/00010-TASK.md) owns the remaining binding, Laravel substitutions, canonical reports,
-  evidence storage and handoff walkthroughs; it depends on TASK-00009's delivered naming conventions.
+  evidence storage and handoff walkthroughs; it is now unblocked and remains unfinished.
 
 Together these cover all accepted requirement criteria; no additional child slice is pending in this approved
-split. Both explicitly adopt T-00014's prospective contract for their own acceptance/delivery without implementing
-its repository-wide rollout. T-00014's complete single-TASK plan is now approved as TASK-00011. The selected
+split. Both explicitly adopt TICKET-00014's prospective contract for their own acceptance/delivery without implementing
+its repository-wide rollout. TICKET-00014's complete single-TASK plan is now approved as TASK-00011. The selected
 adoption slice has complete accepted TASK plans; consult the TASK Board for execution. The broader API/SPA map
 remains Active and its earlier unfinished decisions/EPIC handoff are not completed by this foundation slice.
-No binding implementation, identity migration, provider changes or new independent implementation review/QA
-acceptance are claimed. Parent completion remains pending both children's verified acceptance.
+TASK-00010's binding and TASK-00011's general closeout rollout remain unimplemented. No provider changes are
+claimed. Parent completion remains pending TASK-00010's verified acceptance; its former TASK-00009 blocker is
+preserved as delivered provenance, not a current readiness hold.

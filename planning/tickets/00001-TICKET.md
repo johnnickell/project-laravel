@@ -1,5 +1,5 @@
 ---
-id: T-00001
+id: TICKET-00001
 epic: EPIC-00002
 title: Establish the Canonical Full-Stack Laravel Starter Foundation
 status: done
@@ -50,7 +50,7 @@ The [migration](../MIGRATION.md) changes ownership/placement, not the historical
 <!-- planning:children -->
 | ID | Title | Status | Parent | Blocked by |
 | --- | --- | --- | --- | --- |
-| [TASK-00002](../tasks/00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | done | [T-00001](00001-TICKET.md) | — |
+| [TASK-00002](../tasks/00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | done | [TICKET-00001](00001-TICKET.md) | — |
 <!-- /planning:children -->
 
 ## Progress
