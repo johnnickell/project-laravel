@@ -13,8 +13,11 @@ Do not synchronize local planning details back into Fight Common.
 
 After record changes, run `./bin/planning-check --write` and `./bin/planning-check`. Before routing or publication,
 use `./bin/planning-check --check-delivery` and the [delivery pre-submit rules](../CONVENTIONS.md#delivery-pre-submit-and-final-handoff).
-Generated summaries own TASK selection; explicit delivery markers own current merge handoffs. Reconcile affected
-authored Board/Roadmap/README/current record notes alongside generated views; preserve historical acceptance.
+Generated summaries own TASK selection; delivery markers are publication snapshots, not permanent OPEN claims.
+At authorized Work/Land/substantive planning intake run `./bin/planning-check --reconcile-delivery` under
+[current delivery handoffs](../CONVENTIONS.md#current-delivery-handoffs). Read-only routing resolves exact verified
+merged/integrated done work without cleanup requests; closed-unmerged or uncertain evidence still blocks.
+Reconcile affected authored Board/Roadmap/README/current record notes alongside views; preserve historical acceptance.
 Do not create feature TASKs while requirements remain unaccepted or decision-incomplete. Standalone bug records
 require accepted bounded repair scope. An empty implementation frontier is a valid outcome.
 

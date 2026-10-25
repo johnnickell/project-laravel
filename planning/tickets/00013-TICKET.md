@@ -84,9 +84,9 @@ These are accepted implementation requirements, not a claim that migration or bi
   EPIC/TASK names. Preserve each numeric suffix and identity history; do not allocate replacement numbers.
   Migrate authoritative records, references and tooling together, including any archived records. Record the
   mapping from `T-NNNNN` to `TICKET-NNNNN` and classify retained historical text rather than rewriting evidence.
-  This supersedes the earlier preserve-`T-` direction. TASK-00009 now implements the coherent migration;
-  independent acceptance and required hosted proof remain pending. Do not introduce old-prefix aliases into
-  authoritative metadata.
+  This supersedes the earlier preserve-`T-` direction. TASK-00009 delivered the independently accepted coherent
+  migration with applicable QA and required hosted proof; its completion notes own provenance. Do not introduce
+  old-prefix aliases into authoritative metadata.
 - **Binding owner/location:** the project planning owner maintains `planning/agents/workflow-binding.md`;
   root AGENTS.md explicitly links it. Shared workflow/report rules stay with the provider. Resolve exact provider
   resources from harness/operator-supplied skill metadata, not guessed paths, copied catalogs or global changes.
@@ -138,12 +138,13 @@ or bypassed by this decomposition.
 
 Requirements and the complete two-TASK decomposition are accepted by the maintainer. Status remains
 `in-progress`: TASK-00009's coherent identity/tooling migration and approved default-Build routing clarification
-are independently accepted, with QA PASS and required A hosted proof; its separate PR delivery is tracked at
-[PR #18](https://github.com/johnnickell/project-laravel/pull/18). Numeric filenames and relationships are
+are independently accepted, with QA PASS and required A hosted proof;
+[PR #18](https://github.com/johnnickell/project-laravel/pull/18) merged into develop at `8b372b3` and its ended
+publication marker is retired with verified local-integration evidence in TASK-00009. Numeric filenames and relationships are
 preserved. This completion does not claim TASK-00010's binding or TICKET-00014's general rollout.
 
 - [TASK-00009](../tasks/00009-TASK.md) delivered the complete identity/reference/tooling migration and its naming,
-  provenance, hierarchy and routing evidence; its current `delivery: awaiting-merge` marker identifies PR #18.
+  provenance, hierarchy and routing evidence; its completion notes preserve PR #18 merge/integration provenance.
 - [TASK-00010](../tasks/00010-TASK.md) owns the remaining binding, Laravel substitutions, canonical reports,
   evidence storage and handoff walkthroughs; it is now unblocked and remains unfinished.
 

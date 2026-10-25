@@ -5,8 +5,10 @@ Approved standalone bugs may use `kind: bug` with an empty `ticket:`; see the sa
 Use `_TASK_TEMPLATE.md` and the readiness rules in [planning conventions](../CONVENTIONS.md).
 [BOARD.md](BOARD.md) is the canonical execution frontier; its generated summary owns current TASK selection.
 Before routing run `./bin/planning-check --check-delivery` from the repository root. Explicit delivery markers
-own current merge handoffs; historical PR links and terminal status do not imply pending publication. Creating a TASK alone does
-not start execution or select an implementation worktree.
+are publication snapshots: exact verified merged/integrated done work resolves read-only without cleanup requests.
+Authorized intake retires resolved markers under [current delivery handoffs](../CONVENTIONS.md#current-delivery-handoffs).
+Historical PR links and terminal status do not imply pending publication. Creating a TASK alone does not start
+execution or select an implementation worktree.
 
 <!-- planning:index -->
 | ID | Title | Status | Parent | Blocked by |
@@ -22,4 +24,5 @@ not start execution or select an implementation worktree.
 | [TASK-00009](00009-TASK.md) | Adopt Agent OS Planning Identities | done | [TICKET-00013](../tickets/00013-TICKET.md) | — |
 | [TASK-00010](00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | [TICKET-00013](../tickets/00013-TICKET.md) | [TASK-00009](00009-TASK.md) |
 | [TASK-00011](00011-TASK.md) | Adopt Prospective Acceptance and Closeout Rules | ready-for-agent | [TICKET-00014](../tickets/00014-TICKET.md) | — |
+| [TASK-00012](00012-TASK.md) | Resolve Integrated Delivery Handoffs Without Cleanup Requests | done | — | — |
 <!-- /planning:index -->
