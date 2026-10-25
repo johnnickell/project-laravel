@@ -49,7 +49,9 @@ prose; acceptance/verification checkpoints remain in the owning records.
 ## Current delivery
 
 <!-- planning:delivery -->
-No current delivery handoffs. Historical PR links do not imply pending delivery.
+| TASK | Current delivery | PR |
+| --- | --- | --- |
+| [TASK-00012](00012-TASK.md) | Published; verify live state | https://github.com/johnnickell/project-laravel/pull/19 |
 <!-- /planning:delivery -->
 
 ## Wayfinder Review
@@ -96,7 +98,7 @@ No TASKs.
 | 1 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | — | done | — | https://github.com/johnnickell/project-laravel/pull/14 |
 | 1 | [TASK-00008](00008-TASK.md) | Keep planning routing and delivery handoffs synchronized | — | done | — | https://github.com/johnnickell/project-laravel/pull/15 |
 | 1 | [TASK-00009](00009-TASK.md) | Adopt Agent OS Planning Identities | [TICKET-00013](../tickets/00013-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/18 |
-| 1 | [TASK-00012](00012-TASK.md) | Resolve Integrated Delivery Handoffs Without Cleanup Requests | — | done | — | — |
+| 1 | [TASK-00012](00012-TASK.md) | Resolve Integrated Delivery Handoffs Without Cleanup Requests | — | done | — | https://github.com/johnnickell/project-laravel/pull/19 |
 | — | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | [TICKET-00001](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | [TICKET-00002](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | [TICKET-00004](../tickets/00004-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/7 |
