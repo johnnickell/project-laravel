@@ -1,9 +1,9 @@
 ---
-id: T-00011
+id: TICKET-00011
 epic: EPIC-00001
 title: Establish the Lean Laravel Pre-Submit Quality Gate
 status: needs-info
-blocked_by: T-00006
+blocked_by: TICKET-00006
 ---
 
 # Establish the Lean Laravel Pre-Submit Quality Gate
@@ -18,7 +18,7 @@ scope, exclusions and unchecked criteria are preserved below; none is silently d
 See the [migration mapping](../MIGRATION.md) for immutable provenance.
 
 The source was `ready-for-agent` under the old executable-ticket lifecycle. It is now `needs-info` because it
-collides semantically with [T-00007](00007-TICKET.md): direct Unit-only exact coverage and Covers attributes versus
+collides semantically with [TICKET-00007](00007-TICKET.md): direct Unit-only exact coverage and Covers attributes versus
 all-suite statement coverage with separately reported unit evidence; removal of clean production-install
 inspection; installed `FightCommon` PHPCS rules versus the existing compatible local rules; and CI-only gate
 invocation versus explicit CI setup/startup/cleanup. The human must reconcile these requirements before either
@@ -61,7 +61,7 @@ and [ADR 0026](https://github.com/johnnickell/fight-common/blob/develop/planning
 
 Preserve native framework boundaries, credentials and runtime/cache ownership. No new business actor/target,
 permission or API entrypoint is introduced. Do not manufacture tests to satisfy a coverage denominator. Resolve
-the proving seams with T-00007 before implementation; no source or gate changes are authorized by this migration.
+the proving seams with TICKET-00007 before implementation; no source or gate changes are authorized by this migration.
 
 ## Acceptance Criteria
 
@@ -89,5 +89,5 @@ None.
 ## Progress
 
 Requirements migrated, not delivered or rejected. No checkboxes are newly completed. Human reconciliation with
-T-00007 is next; requirement blockers and missing decisions remain visible. Publication of this planning
+TICKET-00007 is next; requirement blockers and missing decisions remain visible. Publication of this planning
 correction does not approve a gate rewrite or substitute integration coverage for the requested Unit-only result.

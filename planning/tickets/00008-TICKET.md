@@ -1,9 +1,9 @@
 ---
-id: T-00008
+id: TICKET-00008
 epic: EPIC-00001
 title: Enforce Shared Application Permission Policy
 status: needs-info
-blocked_by: T-00006
+blocked_by: TICKET-00006
 ---
 
 # Enforce Shared Application Permission Policy
@@ -55,18 +55,18 @@ or job so revocation and user context cannot leak across long-running processes.
       or independent transport-specific decisions.
 - [ ] Tests prove allowed and denied outcomes, unclassified operations, target mismatch, and request/job authority
       isolation. Tests assert effects/results, not merely an authorization mock's call sequence.
-- [ ] Authoritative-state and stale/revoked-authority requirements are explicit; T-00009 provides the real
-      persistence evidence and T-00010 the HTTP interaction evidence. Unit tests alone do not establish either.
+- [ ] Authoritative-state and stale/revoked-authority requirements are explicit; TICKET-00009 provides the real
+      persistence evidence and TICKET-00010 the HTTP interaction evidence. Unit tests alone do not establish either.
 - [ ] Safe application denial/failure contracts can be mapped separately by HTTP and a future MCP adapter.
       No MCP server, fake HTTP route, or package message alias is required for this outcome.
 
 ## Decisions and dependencies
 
-Depends on [T-00006](00006-TICKET.md)'s verified public contracts. Coordinate with
+Depends on [TICKET-00006](00006-TICKET.md)'s verified public contracts. Coordinate with
 [WF-002](../wayfinder/tickets/WF-002-access-control-capability-inventory.md) and
 [WF-005](../wayfinder/tickets/WF-005-http-and-security-conventions.md).
 
-Before TASK decomposition, select the bounded real read/write journey also exercised by T-00009/T-00010 and
+Before TASK decomposition, select the bounded real read/write journey also exercised by TICKET-00009/TICKET-00010 and
 settle its permissions, target/ownership rules, trusted-context origin, revocation freshness, and public/system
 exceptions. Select safe application failures and the supported principal API. The approved split is not approval
 of unspecified permission names or authentication mechanics. These decisions may be settled jointly for the

@@ -1,9 +1,9 @@
 ---
-id: T-00012
+id: TICKET-00012
 epic: EPIC-00001
 title: Upgrade the Laravel Consumer to Current Stable Fight Packages
 status: done
-blocked_by: T-00006
+blocked_by: TICKET-00006
 ---
 
 # Upgrade the Laravel Consumer to Current Stable Fight Packages
@@ -13,7 +13,7 @@ blocked_by: T-00006
 Use the latest published stable Fight package baseline as the first implementation slice of the maintainer's
 approved broad Agent OS adoption, retaining Laravel-native composition and existing observable behavior.
 The 2026-10-24 release selection is Common 1.4.0 and AccessControl 0.8.0; this is not a floating promise to
-adopt later releases without verification. T-00006's completed 1.2.0/0.4.0 cutover remains historical acceptance.
+adopt later releases without verification. TICKET-00006's completed 1.2.0/0.4.0 cutover remains historical acceptance.
 
 ## Scope
 
@@ -58,7 +58,7 @@ which admits 1.4.0. A successful consumer solve and owned behavior checks are st
 Sources: [Common metadata](https://repo.packagist.org/p2/johnnickell/fight-common.json) and
 [AccessControl metadata](https://repo.packagist.org/p2/johnnickell/fight-access-control.json).
 
-One approved TASK covers this bounded requirement. T-00007/T-00011 retain their unresolved gate policies;
+One approved TASK covers this bounded requirement. TICKET-00007/TICKET-00011 retain their unresolved gate policies;
 package adoption does not choose their winner. Broader workflow adoption remains an explicit EPIC planning handoff.
 
 ## TASKs
@@ -66,7 +66,7 @@ package adoption does not choose their winner. Broader workflow adoption remains
 <!-- planning:children -->
 | ID | Title | Status | Parent | Blocked by |
 | --- | --- | --- | --- | --- |
-| [TASK-00006](../tasks/00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | done | [T-00012](00012-TICKET.md) | [TASK-00001](../tasks/00001-TASK.md) |
+| [TASK-00006](../tasks/00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | done | [TICKET-00012](00012-TICKET.md) | [TASK-00001](../tasks/00001-TASK.md) |
 <!-- /planning:children -->
 
 ## Progress
@@ -83,4 +83,4 @@ published source `a93e222`; hosted run 40130260253 passed. PR #13 merged into de
 2026-10-24. The final acceptance checkbox's delivery portion is satisfied, not waived. See the child's
 [current completion notes](../tasks/00006-TASK.md#completion-notes) for the accepted-candidate bridge and
 exact hosted/merge identities. Earlier delivery-pending checkpoints in the child remain historical evidence.
-EPIC-00001 remains in progress because T-00007–T-00011 are unfinished; no separate parent-closeout action is needed.
+EPIC-00001 remains in progress because TICKET-00007–TICKET-00011 are unfinished; no separate parent-closeout action is needed.

@@ -25,7 +25,7 @@ not normal setup. Optional frontend development uses host Node and `npm --prefix
 `npm --prefix client run dev`.
 
 `./bin/build` is the canonical noninteractive gate used by CI. It still builds images and installs dependencies;
-the running-stack replacement belongs to T-00007 and is not implemented by the package-adoption change.
+the running-stack replacement belongs to TICKET-00007 and is not implemented by the package-adoption change.
 
 ### Container security and worktree isolation
 

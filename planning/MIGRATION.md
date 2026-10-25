@@ -64,3 +64,54 @@ Common 2.0 remains needs-info under T-00003; the API/SPA map remains Active with
 completed delivery evidence is inherited history, not fresh verification or a reconstructed independent review.
 The original TASK-00001 review remains `revise` for its original head. The planning correction changes the
 reviewed scope and therefore requires fresh independent review, even if hosted CI becomes green.
+
+## Agent OS ticket identity migration
+
+TASK-00009 implements the maintainer-approved prefix migration from `T-NNNNN` to `TICKET-NNNNN`.
+The preceding September migration narrative and tables are preserved verbatim as a historical checkpoint,
+including their then-current statuses and names; they are not today's identity or review authority.
+The table below resolves the adopted identities. [The Board](tasks/BOARD.md) owns current execution and
+owning records retain acceptance evidence. Implementation awaits independent Review, applicable QA and
+required hosted proof; no new acceptance is inferred from a renamed identity.
+
+### Identity map
+
+| Former requirement ID | Adopted requirement ID | Unchanged numeric filename |
+| --- | --- | --- |
+| T-00001 | [TICKET-00001](tickets/00001-TICKET.md) | `00001-TICKET.md` |
+| T-00002 | [TICKET-00002](tickets/00002-TICKET.md) | `00002-TICKET.md` |
+| T-00003 | [TICKET-00003](tickets/00003-TICKET.md) | `00003-TICKET.md` |
+| T-00004 | [TICKET-00004](tickets/00004-TICKET.md) | `00004-TICKET.md` |
+| T-00005 | [TICKET-00005](tickets/00005-TICKET.md) | `00005-TICKET.md` |
+| T-00006 | [TICKET-00006](tickets/00006-TICKET.md) | `00006-TICKET.md` |
+| T-00007 | [TICKET-00007](tickets/00007-TICKET.md) | `00007-TICKET.md` |
+| T-00008 | [TICKET-00008](tickets/00008-TICKET.md) | `00008-TICKET.md` |
+| T-00009 | [TICKET-00009](tickets/00009-TICKET.md) | `00009-TICKET.md` |
+| T-00010 | [TICKET-00010](tickets/00010-TICKET.md) | `00010-TICKET.md` |
+| T-00011 | [TICKET-00011](tickets/00011-TICKET.md) | `00011-TICKET.md` |
+| T-00012 | [TICKET-00012](tickets/00012-TICKET.md) | `00012-TICKET.md` |
+| T-00013 | [TICKET-00013](tickets/00013-TICKET.md) | `00013-TICKET.md` |
+| T-00014 | [TICKET-00014](tickets/00014-TICKET.md) | `00014-TICKET.md` |
+
+All 28 EPIC/TICKET/TASK records remain live; no archive records existed at TASK-00009 intake. The 14 ticket
+suffixes, all 11 TASKs, three EPICs, dependency edges, numeric filenames and optional-PRD behavior are preserved.
+Only TASK-00009 and its unfinished parent TICKET-00013 move to `in-progress` for this implementation.
+The older develop-side lean-gate `T-00006` collision still resolves by source commit/title to TICKET-00011,
+not TICKET-00006. Retired PRD aliases and all allocation gaps remain reserved. Old ticket spellings are not
+validator aliases and must not be used in new metadata, blockers, templates or archive selections.
+
+### Occurrence and reference classification
+
+| Class | Locations / treatment |
+| --- | --- |
+| Authoritative current identities | All ticket frontmatter, TASK parents, requirement blockers, templates, indexes, generated child/frontier/Board/Roadmap views and owning planning parser use `TICKET-`. Archive selection already reads metadata IDs and parent fields; its implementation and numeric file selection remain unchanged. |
+| Current authored references | Root README/CONTEXT, planning entrypoints/conventions, current record requirements/progress, the active Wayfinder map, current package handoff and WF-002 use adopted IDs. Local references in older evidence resolve through this map, not a second identity scheme. |
+| Immutable historical acceptance and results | TASK-00001 and TASK-00006 completion sections; TASK-00002–TASK-00005 original Outcome-through-completion bodies; TASK-00007/TASK-00008 delivered bodies; EPIC-00001's accepted TASK-00001/package-delivery checkpoints; EPIC-00003's historical delivery paragraphs; and the original Common 1.2/AccessControl 0.4 handoff body retain old spellings and original hashes/counts/commands. No historical `done`, report or hosted result becomes a fresh pass. |
+| Migration/source provenance | The September narrative above; TASK-00002–TASK-00005 “Migrated from” source names; TICKET-00011/EPIC-00003 collision descriptions; EPIC-00001's develop-PR-9 collision checkpoint; naming-policy explanations in conventions/TICKET-00013/TASK-00009 retain former IDs explicitly as former names. Current locators beside them use adopted IDs. |
+| External repository identities | Fight Common's `T-00087` citations in TASK-00004, TICKET-00011 and EPIC-00003 remain unchanged: they name upstream records, not this repository's requirements. External URLs, immutable source snapshots, independent-report identities and historical machine paths are not rewritten. |
+
+The ignored TASK-owned implementation evidence contains before/after line-level occurrence and relationship
+inventories, byte-preservation checks for historical blocks, direct owning-command results and disposable
+parent/readiness/archive probes. These are implementation evidence, not independent QA or a product-suite
+certification mechanism. No real archive operation is performed. Current parser/consumer checks reject the old
+metadata prefix; refresh is idempotent and live delivery behavior remains separate from offline validation.

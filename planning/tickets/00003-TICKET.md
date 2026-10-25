@@ -1,5 +1,5 @@
 ---
-id: T-00003
+id: TICKET-00003
 epic: EPIC-00003
 title: Prepare Fight Common 2.0 Migration
 status: needs-info

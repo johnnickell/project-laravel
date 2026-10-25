@@ -1,5 +1,5 @@
 ---
-id: T-00014
+id: TICKET-00014
 epic: EPIC-00001
 title: Define Prospective Acceptance and Administrative Closeout
 status: ready-for-agent
@@ -111,11 +111,11 @@ The shared `docs/engineering/LANDING.md`, `REVIEW.md` and `QA.md` contracts were
 policy. Use their provenance, independence and mechanical-reconciliation rules with the target substitutions;
 do not treat existing TASK-00006's identical-tree clarification as a blanket retrospective exception.
 
-Canonical evidence identity and resolution are accepted in [T-00013](00013-TICKET.md), including its approved
+Canonical evidence identity and resolution are accepted in [TICKET-00013](00013-TICKET.md), including its approved
 Agent OS naming migration. Implement these coordinated requirements without introducing a dependency cycle. No hard
 implementation ordering between these two requirements is approved by the split. Existing accepted contracts,
 including TASK-00001 and TASK-00006, are provenance/examples, not automatic templates for future exemptions.
-[T-00007](00007-TICKET.md)/[T-00011](00011-TICKET.md) retain the separate unresolved gate policy.
+[TICKET-00007](00007-TICKET.md)/[TICKET-00011](00011-TICKET.md) retain the separate unresolved gate policy.
 
 The explicit foundation slice leaves the broader [API/SPA map](../wayfinder/complete-access-control-api-and-spa-map.md)
 Active with open decisions and WF-001 as its authored first frontier. No broader map decision or EPIC destination
@@ -126,20 +126,20 @@ is resolved by creating this requirement.
 <!-- planning:children -->
 | ID | Title | Status | Parent | Blocked by |
 | --- | --- | --- | --- | --- |
-| [TASK-00011](../tasks/00011-TASK.md) | Adopt Prospective Acceptance and Closeout Rules | ready-for-agent | [T-00014](00014-TICKET.md) | — |
+| [TASK-00011](../tasks/00011-TASK.md) | Adopt Prospective Acceptance and Closeout Rules | ready-for-agent | [TICKET-00014](00014-TICKET.md) | — |
 <!-- /planning:children -->
 
 ## Progress
 
 The maintainer accepted the requirement, prospective policy and complete single-TASK plan:
 [TASK-00011](../tasks/00011-TASK.md) owns the authoritative local contract, entrypoint/template references and
-independent normal/failure walkthroughs. It has no TASK blockers; T-00013's accepted report conventions do not
+independent normal/failure walkthroughs. It has no TASK blockers; TICKET-00013's accepted report conventions do not
 require its implementation first. Board order leaves TASK-00009 first without inventing a dependency.
 
 Status remains `ready-for-agent`: implementation has not started. The single TASK covers every accepted
 requirement criterion; no additional child decomposition is pending in this approved split. TASK-00011 explicitly
 adopts this prospective contract for its own acceptance/delivery without amending historical TASKs. The selected
-T-00013/T-00014 adoption slice now has complete accepted TASK plans; consult the TASK Board for execution.
+TICKET-00013/TICKET-00014 adoption slice now has complete accepted TASK plans; consult the TASK Board for execution.
 The broader API/SPA map remains Active with unresolved decisions and an unfinished EPIC handoff.
 
 No implemented closeout changes, independent implementation acceptance, historical-contract amendments,

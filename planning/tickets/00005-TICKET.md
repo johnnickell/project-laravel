@@ -1,5 +1,5 @@
 ---
-id: T-00005
+id: TICKET-00005
 epic: EPIC-00003
 title: Re-certify Rewritten Fight Common Candidate
 status: done
@@ -40,7 +40,7 @@ permission, command/query/event, runtime failure-policy change or new external-d
 
 ## Decisions and dependencies
 
-The 2026-09-09 source rewrite superseded the identity from T-00002, not its historical acceptance. This record
+The 2026-09-09 source rewrite superseded the identity from TICKET-00002, not its historical acceptance. This record
 now belongs to [EPIC-00003](../epics/00003-EPIC.md), formerly PRD-00002. TASK-00001 later retires certification.
 
 ## TASKs
@@ -48,7 +48,7 @@ now belongs to [EPIC-00003](../epics/00003-EPIC.md), formerly PRD-00002. TASK-00
 <!-- planning:children -->
 | ID | Title | Status | Parent | Blocked by |
 | --- | --- | --- | --- | --- |
-| [TASK-00005](../tasks/00005-TASK.md) | Re-certify Rewritten Fight Common Candidate | done | [T-00005](00005-TICKET.md) | — |
+| [TASK-00005](../tasks/00005-TASK.md) | Re-certify Rewritten Fight Common Candidate | done | [TICKET-00005](00005-TICKET.md) | — |
 <!-- /planning:children -->
 
 ## Progress

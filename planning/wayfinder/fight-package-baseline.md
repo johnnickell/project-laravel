@@ -1,7 +1,8 @@
 # Installed Fight package baseline
 
 Historical Common 1.2.0 / AccessControl 0.4.0 snapshot. For current development, use the
-[Common 1.4.0 / AccessControl 0.8.0 handoff](fight-package-baseline-1.4-0.8.md) under T-00012/TASK-00006.
+[Common 1.4.0 / AccessControl 0.8.0 handoff](fight-package-baseline-1.4-0.8.md) under TICKET-00012/TASK-00006. Historical ticket spellings in the snapshot below resolve through
+[the identity map](../MIGRATION.md#agent-os-ticket-identity-migration); its original body is preserved.
 The original inspection and acceptance evidence below remains unchanged.
 
 Bounded consumer handoff for [T-00006](../tickets/00006-TICKET.md) and [TASK-00001](../tasks/00001-TASK.md),

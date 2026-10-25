@@ -22,9 +22,9 @@ requirements TICKETs, and subsequent bounded TASK handoff.
 ## Notes
 
 - The approved [foundation epic](../epics/00001-EPIC.md) and
-  [T-00012](../tickets/00012-TICKET.md) select Common 1.4.0 / AccessControl 0.8.0. Both are installed by
+  [TICKET-00012](../tickets/00012-TICKET.md) select Common 1.4.0 / AccessControl 0.8.0. Both are installed by
   TASK-00006; the [current bounded handoff](fight-package-baseline-1.4-0.8.md) records local integration,
-  pre-v1 breaking contract boundaries and limits. The prior T-00006 cutover remains historical evidence.
+  pre-v1 breaking contract boundaries and limits. The prior TICKET-00006 cutover remains historical evidence.
   Full capability, persistence, and security decisions remain pending; reconcile them before dependent implementation.
   The EPIC → TICKET → TASK lifecycle changes handoff terminology, not this map's unresolved technical decisions.
 - This is a planning-only map. It does not authorize production-code changes, dependency publication, release,

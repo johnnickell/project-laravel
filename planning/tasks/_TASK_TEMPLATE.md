@@ -1,6 +1,6 @@
 ---
 id: TASK-NNNNN
-ticket: T-NNNNN
+ticket: TICKET-NNNNN
 kind: feature
 title: Brief independently reviewable outcome
 status: needs-triage
@@ -46,6 +46,9 @@ through their owning commands without adding product-suite meta-tests.
 
 Record settled decisions and prerequisite TASK IDs. Missing decisions keep this TASK out of execution readiness.
 Ignored `.runs/` notes may coordinate work but do not replace durable acceptance or expand scope.
+For new implementation or confirmed implementation/QA defects, recommend `/skill:build TASK-NNNNN` by default;
+use `/skill:work TASK-NNNNN` only for an explicit implementation-alone request. Replace the placeholder with
+this record's ID and follow [routing boundaries](../CONVENTIONS.md#implementation-routing).
 
 ## Completion notes
 

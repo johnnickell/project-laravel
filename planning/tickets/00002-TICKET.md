@@ -1,5 +1,5 @@
 ---
-id: T-00002
+id: TICKET-00002
 epic: EPIC-00003
 title: Adopt Fight Common 1.2
 status: done
@@ -46,7 +46,7 @@ These checkboxes retain historical acceptance, not a claim about today's retired
 
 ## Decisions and dependencies
 
-Former PRD-00002 is now [EPIC-00003](../epics/00003-EPIC.md). T-00005/TASK-00005 record the subsequent
+Former PRD-00002 is now [EPIC-00003](../epics/00003-EPIC.md). TICKET-00005/TASK-00005 record the subsequent
 source-tree-equivalent authorship rewrite; EPIC-00001 owns the later application-consumer direction.
 
 ## TASKs
@@ -54,7 +54,7 @@ source-tree-equivalent authorship rewrite; EPIC-00001 owns the later application
 <!-- planning:children -->
 | ID | Title | Status | Parent | Blocked by |
 | --- | --- | --- | --- | --- |
-| [TASK-00003](../tasks/00003-TASK.md) | Adopt Fight Common 1.2 | done | [T-00002](00002-TICKET.md) | — |
+| [TASK-00003](../tasks/00003-TASK.md) | Adopt Fight Common 1.2 | done | [TICKET-00002](00002-TICKET.md) | — |
 <!-- /planning:children -->
 
 ## Progress

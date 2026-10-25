@@ -11,6 +11,11 @@ an offline planning/build pass does not establish live delivery freshness. Recom
 guidance when work is invoked.
 This routing path does not require reading README, architecture, full project context, task history or receiving skills.
 
+For new implementation and confirmed implementation/QA defects, recommend `/skill:build TASK-NNNNN` by default
+with the actual TASK ID. Use `/skill:work TASK-NNNNN` only for explicit implementation-alone requests.
+Follow [implementation routing](planning/CONVENTIONS.md#implementation-routing) for capability resolution,
+evidence-specific routes and authority boundaries; recommending a workflow does not invoke it.
+
 ## Project guidance
 
 For execution or substantive planning changes, load the applicable guidance below. The read-only routing

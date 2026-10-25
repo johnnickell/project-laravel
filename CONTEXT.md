@@ -24,8 +24,8 @@ and transaction commit/rollback on the SQLite test connection. Exact statement c
 
 `./bin/build` remains the existing self-provisioning local/hosted gate, minus certification. It still builds
 images, installs locked dependencies, runs quality tools/application tests, compiles the frontend, and verifies
-production boot. T-00007 owns the separate approved transition to a thin running-Compose wrapper and PHP
-orchestrator. T-00007 and the migrated develop-side T-00011 must reconcile their coverage/CI requirements before
+production boot. TICKET-00007 owns the separate approved transition to a thin running-Compose wrapper and PHP
+orchestrator. TICKET-00007 and the migrated develop-side TICKET-00011 must reconcile their coverage/CI requirements before
 gate implementation. Historical receipts and prior success claims in migrated TASK records are historical only.
 All live planning now uses EPIC → TICKET → TASK; `planning/MIGRATION.md` traces the converted identities.
 
@@ -41,15 +41,17 @@ The build's fail-fast planning check remains offline. Local [delivery pre-submit
 requires Land to reconcile affected authored handoffs as well as generated views; human merge remains separate.
 These safeguards do not complete broader workflow adoption or change acceptance/hosted-proof requirements.
 The remaining adoption requirements split is approved in
-[T-00013](planning/tickets/00013-TICKET.md) (workflow/evidence binding) and
-[T-00014](planning/tickets/00014-TICKET.md) (prospective closeout). Their concrete conventions are accepted;
-T-00013's complete plan is approved in [TASK-00009](planning/tasks/00009-TASK.md) (naming migration) and
-[TASK-00010](planning/tasks/00010-TASK.md) (workflow/report binding, dependent on TASK-00009). T-00014's complete
+[TICKET-00013](planning/tickets/00013-TICKET.md) (workflow/evidence binding) and
+[TICKET-00014](planning/tickets/00014-TICKET.md) (prospective closeout). Their concrete conventions are accepted;
+TICKET-00013's complete plan is approved in [TASK-00009](planning/tasks/00009-TASK.md) (naming migration) and
+[TASK-00010](planning/tasks/00010-TASK.md) (workflow/report binding, dependent on TASK-00009). TICKET-00014's complete
 single-TASK plan is approved as [TASK-00011](planning/tasks/00011-TASK.md), with no TASK blockers. The selected
-adoption slice has complete accepted TASK plans; the Board owns execution. None is implemented. The maintainer
-explicitly chose Agent OS naming:
-`TICKET-NNNNN` identities with numeric `NNNNN-TICKET.md` filenames, not preservation of `T-` prefixes.
-T-00013 must migrate records, references and tooling coherently; current IDs remain only until that delivery.
-TASK records establish approved plans, not migration or binding/closeout implementation. The existing lifecycle
-and gates remain authoritative until approved replacements land. No provider change, harness enrollment or
+adoption slice has complete accepted TASK plans; the Board owns execution. TASK-00009 now implements the
+maintainer's coherent Agent OS naming migration: `TICKET-NNNNN` identities with unchanged numeric
+`NNNNN-TICKET.md` filenames, relationships and classified historical provenance. It also implements the approved
+local default-Build recommendation for new implementation and confirmed defects, with Work reserved for explicit
+implementation-alone requests. Independent Review, applicable QA and required hosted proof remain pending;
+TASK-00009 and TICKET-00013 stay in progress. TASK-00010's full binding and TASK-00011's general closeout rollout
+remain unimplemented. The naming migration is not independent acceptance or completion of those requirements.
+The existing lifecycle and gates remain authoritative until approved replacements land. No provider change, harness enrollment or
 global installation is implied.

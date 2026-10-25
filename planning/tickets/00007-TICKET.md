@@ -1,9 +1,9 @@
 ---
-id: T-00007
+id: TICKET-00007
 epic: EPIC-00001
 title: Verify the Application Through a Running Compose Stack
 status: needs-info
-blocked_by: T-00006
+blocked_by: TICKET-00006
 ---
 
 # Verify the Application Through a Running Compose Stack
@@ -13,7 +13,7 @@ blocked_by: T-00006
 The existing build provisions images, installs dependencies, and runs package certification. Developers and CI
 need explicit setup followed by one predictable, read-only-in-intent application quality verdict inside an
 already running Compose stack. This direction was accepted, but TASK decomposition now waits on reconciliation
-with the concurrent develop-side lean-gate requirement preserved as T-00011.
+with the concurrent develop-side lean-gate requirement preserved as TICKET-00011.
 
 ## Scope
 
@@ -62,19 +62,19 @@ phase uses the read-only check, not `--write`.
 
 ## Decisions and dependencies
 
-**Newly integrated decision:** [T-00011](00011-TICKET.md) preserves PR #9's non-archived lean-gate requirements,
+**Newly integrated decision:** [TICKET-00011](00011-TICKET.md) preserves PR #9's non-archived lean-gate requirements,
 including direct Unit-only exact coverage/Covers attributes and installed FightCommon PHPCS rules. Its CI and
 production-install boundaries also differ from this record. Human reconciliation must settle those criteria
 before either ticket is decision-complete. Both scopes remain intact; migration does not select a winner or
 silently weaken coverage. Status is `needs-info`, not a claim that the earlier direction was never approved.
 
 The build direction is approved in [EPIC-00001](../epics/00001-EPIC.md). Deliver after
-[T-00006](00006-TICKET.md) removes package-certification obligations. Coordinate the bounded running-service,
+[TICKET-00006](00006-TICKET.md) removes package-certification obligations. Coordinate the bounded running-service,
 setup, and cache contract with [WF-001](../wayfinder/tickets/WF-001-development-runtime-topology.md); do not
 silently settle or implement the map's entire expanded runtime. If that coordination exposes an unresolved
 scope decision, return this record to `needs-info` before creating an executable TASK.
 
-This replaces the self-provisioning design in [T-00004](00004-TICKET.md), not its historical successful results.
+This replaces the self-provisioning design in [TICKET-00004](00004-TICKET.md), not its historical successful results.
 The current gate remains authoritative until the replacement lands.
 
 ## TASKs
@@ -85,6 +85,6 @@ None.
 
 ## Progress
 
-Earlier requirement direction accepted; now waiting on T-00006 and the T-00011 policy reconciliation above.
+Earlier requirement direction accepted; TICKET-00006 is terminal, but the TICKET-00011 policy reconciliation above remains open.
 No TASKs, build rewrite, CI changes, or runtime changes have been implemented. The migration correction changes
 planning readiness only, not the current canonical gate.
