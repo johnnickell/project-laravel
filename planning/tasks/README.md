@@ -24,5 +24,5 @@ execution or select an implementation worktree.
 | [TASK-00009](00009-TASK.md) | Adopt Agent OS Planning Identities | done | [TICKET-00013](../tickets/00013-TICKET.md) | — |
 | [TASK-00010](00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | [TICKET-00013](../tickets/00013-TICKET.md) | [TASK-00009](00009-TASK.md) |
 | [TASK-00011](00011-TASK.md) | Adopt Prospective Acceptance and Closeout Rules | ready-for-agent | [TICKET-00014](../tickets/00014-TICKET.md) | — |
-| [TASK-00012](00012-TASK.md) | Resolve Integrated Delivery Handoffs Without Cleanup Requests | in-progress | — | — |
+| [TASK-00012](00012-TASK.md) | Resolve Integrated Delivery Handoffs Without Cleanup Requests | done | — | — |
 <!-- /planning:index -->

@@ -34,15 +34,16 @@ planning phases unfinished. Current execution is derived below.
 Separately, the maintainer must reconcile
 [TICKET-00007](../tickets/00007-TICKET.md)/[TICKET-00011](../tickets/00011-TICKET.md) gate policies before those TASKs.
 The shared real journey/permission decisions for TICKET-00008/TICKET-00009/TICKET-00010 remain open; preserve dependency edges.
-See the [Roadmap](../ROADMAP.md) for the current planning handoff. Standalone TASK-00012 owns the approved
-port of Fight Common's merged/integrated delivery resolution and evidence-preserving reconciliation, not the
-broader binding/closeout rollout. Current execution and delivery are derived below, not restated in authored
+See the [Roadmap](../ROADMAP.md) for the current planning handoff. Standalone TASK-00012 delivered the independently
+accepted port of Fight Common's merged/integrated delivery resolution and evidence-preserving reconciliation,
+with behavioral QA PASS. Its completion checkpoint preserves provenance; publication and merge remain separate.
+This does not implement the broader binding/closeout rollout. Current execution and delivery are derived below, not restated in authored
 prose; acceptance/verification checkpoints remain in the owning records.
 
 <!-- planning:next -->
 | Route | TASK | Title | Status | Readiness |
 | --- | --- | --- | --- | --- |
-| Active Work | [TASK-00012](00012-TASK.md) | Resolve Integrated Delivery Handoffs Without Cleanup Requests | in-progress | — |
+| Ready Frontier | [TASK-00010](00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | — |
 <!-- /planning:next -->
 
 ## Current delivery
@@ -61,9 +62,7 @@ on the installed package baseline; neither the map nor any WF decision closes wi
 <!-- planning:tasks -->
 ## Active Work
 
-| Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | [TASK-00012](00012-TASK.md) | Resolve Integrated Delivery Handoffs Without Cleanup Requests | — | in-progress | — | — |
+No TASKs.
 
 ## Ready Frontier
 
@@ -97,6 +96,7 @@ No TASKs.
 | 1 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | — | done | — | https://github.com/johnnickell/project-laravel/pull/14 |
 | 1 | [TASK-00008](00008-TASK.md) | Keep planning routing and delivery handoffs synchronized | — | done | — | https://github.com/johnnickell/project-laravel/pull/15 |
 | 1 | [TASK-00009](00009-TASK.md) | Adopt Agent OS Planning Identities | [TICKET-00013](../tickets/00013-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/18 |
+| 1 | [TASK-00012](00012-TASK.md) | Resolve Integrated Delivery Handoffs Without Cleanup Requests | — | done | — | — |
 | — | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | [TICKET-00001](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | [TICKET-00002](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | [TICKET-00004](../tickets/00004-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/7 |

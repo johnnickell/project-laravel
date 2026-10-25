@@ -5,7 +5,7 @@
 <!-- planning:execution -->
 | Route | TASK | Title | Status | Readiness |
 | --- | --- | --- | --- | --- |
-| Active Work | [TASK-00012](tasks/00012-TASK.md) | Resolve Integrated Delivery Handoffs Without Cleanup Requests | in-progress | — |
+| Ready Frontier | [TASK-00010](tasks/00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | — |
 <!-- /planning:execution -->
 
 The [TASK Board](tasks/BOARD.md) owns execution order and explicit current delivery handoffs. Validate current
@@ -48,7 +48,9 @@ TICKET-00013 remains in progress because TASK-00010's binding is now unblocked b
 general closeout rollout also remains unimplemented. TASK-00007 supplies standalone-bug planning support. TASK-00008's bounded routing/delivery
 synchronization repair is delivered and merged through PR #15 at `54a071d`; its completion notes preserve acceptance and merge evidence.
 Standalone [TASK-00012](tasks/00012-TASK.md) implements corrected merged/integrated handoff resolution and
-explicit evidence-preserving reconciliation, ported from Fight Common; independent Review/QA remain pending.
+explicit evidence-preserving reconciliation, ported from Fight Common. Its implementation is independently
+accepted with behavioral QA PASS; the TASK's completion checkpoint preserves candidate/report provenance.
+Publication and human merge remain separate, with current delivery derived on the TASK Board and in the actual PR body.
 These slices do not implement the entire amendment or authorize changing the harness provider.
 
 [EPIC-00003](epics/00003-EPIC.md), formerly PRD-00002, preserves historical package/gate evidence and the

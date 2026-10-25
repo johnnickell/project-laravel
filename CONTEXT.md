@@ -39,7 +39,9 @@ generated Board/Roadmap current TASK summaries, explicit
 `delivery: awaiting-merge` markers, and `./bin/planning-check --check-delivery` for read-only live handoff checks.
 The build's fail-fast planning check remains offline. TASK-00012 implements Fight Common's corrected read-only
 resolution of exact merged/integrated done publication snapshots and explicit, evidence-preserving
-`--reconcile-delivery` at authorized Work/Land/substantive planning intake; independent Review/QA remain pending.
+`--reconcile-delivery` at authorized Work/Land/substantive planning intake. Its implementation is independently
+accepted with behavioral QA PASS; the TASK's completion checkpoint preserves candidate/report provenance.
+Current publication state is tracked separately by the generated Board delivery section and actual PR body.
 Normal human merge no longer requires a routine cleanup request. Closed-unmerged, uncertain or unintegrated
 handoffs remain blocking. Local [delivery pre-submit](planning/CONVENTIONS.md#delivery-pre-submit-and-final-handoff)
 requires Land to reconcile affected authored handoffs as well as generated views; human merge remains separate.
