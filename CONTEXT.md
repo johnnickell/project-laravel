@@ -40,5 +40,16 @@ generated Board/Roadmap current TASK summaries, explicit
 The build's fail-fast planning check remains offline. Local [delivery pre-submit](planning/CONVENTIONS.md#delivery-pre-submit-and-final-handoff)
 requires Land to reconcile affected authored handoffs as well as generated views; human merge remains separate.
 These safeguards do not complete broader workflow adoption or change acceptance/hosted-proof requirements.
-Remaining workflow bindings need decomposition; the existing lifecycle and gates remain authoritative until
-replacements land. No provider change, harness enrollment or global installation is implied.
+The remaining adoption requirements split is approved in
+[T-00013](planning/tickets/00013-TICKET.md) (workflow/evidence binding) and
+[T-00014](planning/tickets/00014-TICKET.md) (prospective closeout). Their concrete conventions are accepted;
+T-00013's complete plan is approved in [TASK-00009](planning/tasks/00009-TASK.md) (naming migration) and
+[TASK-00010](planning/tasks/00010-TASK.md) (workflow/report binding, dependent on TASK-00009). T-00014's complete
+single-TASK plan is approved as [TASK-00011](planning/tasks/00011-TASK.md), with no TASK blockers. The selected
+adoption slice has complete accepted TASK plans; the Board owns execution. None is implemented. The maintainer
+explicitly chose Agent OS naming:
+`TICKET-NNNNN` identities with numeric `NNNNN-TICKET.md` filenames, not preservation of `T-` prefixes.
+T-00013 must migrate records, references and tooling coherently; current IDs remain only until that delivery.
+TASK records establish approved plans, not migration or binding/closeout implementation. The existing lifecycle
+and gates remain authoritative until approved replacements land. No provider change, harness enrollment or
+global installation is implied.

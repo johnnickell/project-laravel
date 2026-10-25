@@ -23,8 +23,14 @@ substitute a requirements TICKET for an approved implementation TASK.
 
 The maintainer approved broad Agent OS adoption with Laravel-native exceptions in
 [EPIC-00001's amendment](../epics/00001-EPIC.md#approved-broad-adoption-amendment--2026-10-24).
-The planning owner must decompose remaining workflow/binding changes and reconcile
-[T-00007](../tickets/00007-TICKET.md)/[T-00011](../tickets/00011-TICKET.md) gate policies before their TASKs.
+The remaining adoption split is approved in [T-00013](../tickets/00013-TICKET.md) (workflow/evidence binding)
+and [T-00014](../tickets/00014-TICKET.md) (prospective closeout). T-00013's complete two-TASK plan is approved:
+TASK-00009 adopts Agent OS naming, and dependent TASK-00010 delivers the workflow/report binding. T-00014's
+complete single-TASK plan is approved as TASK-00011, with no TASK blockers. TASK decomposition is complete for
+this selected adoption slice, not implementation. The broader Wayfinder map stays Active with its earlier
+planning phases unfinished. Current execution is derived below.
+Separately, the maintainer must reconcile
+[T-00007](../tickets/00007-TICKET.md)/[T-00011](../tickets/00011-TICKET.md) gate policies before those TASKs.
 The shared real journey/permission decisions for T-00008/T-00009/T-00010 remain open; preserve dependency edges.
 See the [Roadmap](../ROADMAP.md) for the current planning handoff. Current execution and delivery are derived
 below, not restated in authored prose; acceptance/verification checkpoints remain in the owning records.
@@ -32,9 +38,7 @@ below, not restated in authored prose; acceptance/verification checkpoints remai
 <!-- planning:next -->
 | Route | TASK | Title | Status | Readiness |
 | --- | --- | --- | --- | --- |
-| None | — | — | — | — |
-
-No TASK is currently executable; unresolved planning or human decisions may remain.
+| Ready Frontier | [TASK-00009](00009-TASK.md) | Adopt Agent OS Planning Identities | ready-for-agent | — |
 <!-- /planning:next -->
 
 ## Current delivery
@@ -57,11 +61,16 @@ No TASKs.
 
 ## Ready Frontier
 
-No TASKs.
+| Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | [TASK-00009](00009-TASK.md) | Adopt Agent OS Planning Identities | [T-00013](../tickets/00013-TICKET.md) | ready-for-agent | — | — |
+| 3 | [TASK-00011](00011-TASK.md) | Adopt Prospective Acceptance and Closeout Rules | [T-00014](../tickets/00014-TICKET.md) | ready-for-agent | — | — |
 
 ## Waiting
 
-No TASKs.
+| Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2 | [TASK-00010](00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | [T-00013](../tickets/00013-TICKET.md) | ready-for-agent | [TASK-00009](00009-TASK.md); TASK-00009 | — |
 
 ## Needs Info
 

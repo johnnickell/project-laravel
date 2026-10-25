@@ -82,10 +82,14 @@ Then run the read-only `./bin/planning-check`. Read-only validation never writes
 
 ## Identity and templates
 
-EPIC, TICKET, TASK, and PRD IDs have independent five-digit sequences. Retain the repository's `T-` ticket prefix;
-do not renumber existing tickets to match another repository. Inspect live and archived records before allocating
-IDs, including retired aliases in [MIGRATION.md](MIGRATION.md). Preserve gaps and never reuse an archived or
-migrated-away identity (PRD-00001/00002 are reserved; the next optional PRD is PRD-00003). File numbers must match record IDs.
+EPIC, TICKET, TASK, and PRD IDs have independent five-digit sequences. The maintainer approved Agent OS naming
+in [T-00013](tickets/00013-TICKET.md): `TICKET-NNNNN` identities with numeric `NNNNN-TICKET.md` filenames,
+replacing the earlier preserve-`T-` exception. Numeric filenames already match. Its implementation must migrate
+records, references, templates and planning/archive tooling coherently, preserving suffixes and provenance.
+Until that delivery, current records/tooling still encode `T-NNNNN`; do not partially rename records or claim the
+migration is implemented. Inspect live and archived records before allocating IDs, including retired aliases in
+[MIGRATION.md](MIGRATION.md). Preserve gaps and never reuse an archived or migrated-away identity
+(PRD-00001/00002 are reserved; the next optional PRD is PRD-00003). File numbers must match record IDs.
 
 Copy the directory's `_…_TEMPLATE.md` before authoring a record. Templates are not records and receive no ID.
 Every record requires `id`, `title`, and `status`. EPICs also require `target` (use `TBD` until a version is selected).
