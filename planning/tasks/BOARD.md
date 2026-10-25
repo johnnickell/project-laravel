@@ -27,9 +27,9 @@ The remaining adoption split is approved in [TICKET-00013](../tickets/00013-TICK
 and [TICKET-00014](../tickets/00014-TICKET.md) (prospective closeout). TICKET-00013's complete two-TASK plan is approved:
 TASK-00009 adopts Agent OS naming, and dependent TASK-00010 delivers the workflow/report binding. TICKET-00014's
 complete single-TASK plan is approved as TASK-00011, with no TASK blockers. TASK decomposition is complete for
-this selected adoption slice. Naming migration and the approved local default-Build routing clarification are
-implemented awaiting independent assessment; workflow binding and general closeout rollout remain unimplemented.
-See [implementation routing](../CONVENTIONS.md#implementation-routing) for recommendations and authority limits. The broader Wayfinder map stays Active with its earlier
+this selected adoption slice. TASK-00009's naming migration and approved local default-Build routing clarification
+are independently accepted; its distinct delivery handoff is generated below. Workflow binding and general closeout
+rollout remain unimplemented. See [implementation routing](../CONVENTIONS.md#implementation-routing) for recommendations and authority limits. The broader Wayfinder map stays Active with its earlier
 planning phases unfinished. Current execution is derived below.
 Separately, the maintainer must reconcile
 [TICKET-00007](../tickets/00007-TICKET.md)/[TICKET-00011](../tickets/00011-TICKET.md) gate policies before those TASKs.
@@ -40,13 +40,15 @@ below, not restated in authored prose; acceptance/verification checkpoints remai
 <!-- planning:next -->
 | Route | TASK | Title | Status | Readiness |
 | --- | --- | --- | --- | --- |
-| Active Work | [TASK-00009](00009-TASK.md) | Adopt Agent OS Planning Identities | in-progress | — |
+| Ready Frontier | [TASK-00010](00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | — |
 <!-- /planning:next -->
 
 ## Current delivery
 
 <!-- planning:delivery -->
-No current delivery handoffs. Historical PR links do not imply pending delivery.
+| TASK | Current delivery | PR |
+| --- | --- | --- |
+| [TASK-00009](00009-TASK.md) | Awaiting human review/merge | https://github.com/johnnickell/project-laravel/pull/18 |
 <!-- /planning:delivery -->
 
 ## Wayfinder Review
@@ -59,21 +61,18 @@ on the installed package baseline; neither the map nor any WF decision closes wi
 <!-- planning:tasks -->
 ## Active Work
 
-| Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | [TASK-00009](00009-TASK.md) | Adopt Agent OS Planning Identities | [TICKET-00013](../tickets/00013-TICKET.md) | in-progress | — | — |
+No TASKs.
 
 ## Ready Frontier
 
 | Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2 | [TASK-00010](00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | [TICKET-00013](../tickets/00013-TICKET.md) | ready-for-agent | [TASK-00009](00009-TASK.md) | — |
 | 3 | [TASK-00011](00011-TASK.md) | Adopt Prospective Acceptance and Closeout Rules | [TICKET-00014](../tickets/00014-TICKET.md) | ready-for-agent | — | — |
 
 ## Waiting
 
-| Order | TASK | Title | Parent TICKET | Status | Blocked by / readiness | PR |
-| --- | --- | --- | --- | --- | --- | --- |
-| 2 | [TASK-00010](00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | [TICKET-00013](../tickets/00013-TICKET.md) | ready-for-agent | [TASK-00009](00009-TASK.md); TASK-00009 | — |
+No TASKs.
 
 ## Needs Info
 
@@ -95,6 +94,7 @@ No TASKs.
 | 1 | [TASK-00006](00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | [TICKET-00012](../tickets/00012-TICKET.md) | done | [TASK-00001](00001-TASK.md) | https://github.com/johnnickell/project-laravel/pull/13 |
 | 1 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | — | done | — | https://github.com/johnnickell/project-laravel/pull/14 |
 | 1 | [TASK-00008](00008-TASK.md) | Keep planning routing and delivery handoffs synchronized | — | done | — | https://github.com/johnnickell/project-laravel/pull/15 |
+| 1 | [TASK-00009](00009-TASK.md) | Adopt Agent OS Planning Identities | [TICKET-00013](../tickets/00013-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/18 |
 | — | [TASK-00002](00002-TASK.md) | Establish the Canonical Full-Stack Laravel Starter Foundation | [TICKET-00001](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00003](00003-TASK.md) | Adopt Fight Common 1.2 | [TICKET-00002](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00004](00004-TASK.md) | Establish the Canonical Laravel Pre-Submit Quality Gate | [TICKET-00004](../tickets/00004-TICKET.md) | done | — | https://github.com/johnnickell/project-laravel/pull/7 |

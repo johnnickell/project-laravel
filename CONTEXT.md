@@ -46,12 +46,13 @@ The remaining adoption requirements split is approved in
 TICKET-00013's complete plan is approved in [TASK-00009](planning/tasks/00009-TASK.md) (naming migration) and
 [TASK-00010](planning/tasks/00010-TASK.md) (workflow/report binding, dependent on TASK-00009). TICKET-00014's complete
 single-TASK plan is approved as [TASK-00011](planning/tasks/00011-TASK.md), with no TASK blockers. The selected
-adoption slice has complete accepted TASK plans; the Board owns execution. TASK-00009 now implements the
+adoption slice has complete accepted TASK plans; the Board owns execution. TASK-00009 delivered the
 maintainer's coherent Agent OS naming migration: `TICKET-NNNNN` identities with unchanged numeric
-`NNNNN-TICKET.md` filenames, relationships and classified historical provenance. It also implements the approved
+`NNNNN-TICKET.md` filenames, relationships and classified historical provenance. It also delivered the approved
 local default-Build recommendation for new implementation and confirmed defects, with Work reserved for explicit
-implementation-alone requests. Independent Review, applicable QA and required hosted proof remain pending;
-TASK-00009 and TICKET-00013 stay in progress. TASK-00010's full binding and TASK-00011's general closeout rollout
-remain unimplemented. The naming migration is not independent acceptance or completion of those requirements.
+implementation-alone requests. Independent Review accepted A, applicable QA passed, and required hosted proof
+is recorded; PR #18 remains a separate `delivery: awaiting-merge` handoff. TICKET-00013 stays in progress because
+TASK-00010's full binding is unimplemented; TASK-00011's general closeout rollout also remains unimplemented.
+The naming migration does not complete those requirements.
 The existing lifecycle and gates remain authoritative until approved replacements land. No provider change, harness enrollment or
 global installation is implied.

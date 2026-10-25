@@ -5,7 +5,7 @@
 <!-- planning:execution -->
 | Route | TASK | Title | Status | Readiness |
 | --- | --- | --- | --- | --- |
-| Active Work | [TASK-00009](tasks/00009-TASK.md) | Adopt Agent OS Planning Identities | in-progress | — |
+| Ready Frontier | [TASK-00010](tasks/00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | — |
 <!-- /planning:execution -->
 
 The [TASK Board](tasks/BOARD.md) owns execution order and explicit current delivery handoffs. Validate current
@@ -40,10 +40,10 @@ EPIC-00001 remains open. The approved remaining adoption split is recorded in
 (prospective closeout); both have accepted concrete requirements. TICKET-00013's complete two-TASK plan is approved:
 TASK-00009 migrates naming and TASK-00010 delivers the workflow/report binding after TASK-00009. TICKET-00014's
 complete single-TASK plan is approved as TASK-00011, with no TASK blockers. TASK plans for this selected slice
-are complete; the TASK Board owns execution order. TASK-00009 implements coherent naming and the approved
-local default-Build recommendation, awaiting independent Review, applicable QA and required hosted proof.
-TICKET-00013 remains in progress; TASK-00010's binding and TASK-00011's general closeout rollout remain
-unimplemented. TASK-00007 supplies standalone-bug planning support. TASK-00008's bounded routing/delivery
+are complete; the TASK Board owns execution order. TASK-00009 delivered coherent naming and the approved local default-Build recommendation, independently
+accepted with QA PASS and required hosted A proof; its separate delivery handoff is [PR #18](https://github.com/johnnickell/project-laravel/pull/18).
+TICKET-00013 remains in progress because TASK-00010's binding is now unblocked but unimplemented; TASK-00011's
+general closeout rollout also remains unimplemented. TASK-00007 supplies standalone-bug planning support. TASK-00008's bounded routing/delivery
 synchronization repair is delivered and merged through PR #15 at `54a071d`; its completion notes preserve acceptance and merge evidence.
 These slices do not implement the entire amendment or authorize changing the harness provider.
 
@@ -66,9 +66,9 @@ entrypoint finding remains a separate scope decision.
    [TICKET-00013](tickets/00013-TICKET.md)'s [TASK-00009](tasks/00009-TASK.md) and dependent
    [TASK-00010](tasks/00010-TASK.md), plus [TICKET-00014](tickets/00014-TICKET.md)'s independent
    [TASK-00011](tasks/00011-TASK.md). No further child decomposition remains in these accepted splits; no
-   acceptance is claimed for unfinished work. Naming implementation now reconciles records, references and tooling
-   while preserving numeric suffixes and history; independent assessment and hosted acceptance proof are pending.
-   Account for delivered standalone-bug support and bounded planning synchronization without duplicating them. Preserve the existing gate until its replacement lands. This
+   acceptance is claimed for unfinished work. TASK-00009 delivered the naming migration while preserving numeric
+   suffixes and history; TASK-00010 now owns the remaining binding. Account for delivered standalone-bug support and
+   bounded planning synchronization without duplicating them. Preserve the existing gate until its replacement lands. This
    explicitly selected foundation slice does not complete the broader API/SPA map's decisions or EPIC handoff.
 2. Reconcile the successor-gate requirements in [TICKET-00007](tickets/00007-TICKET.md) and
    [TICKET-00011](tickets/00011-TICKET.md): exact Unit-only versus all-suite coverage, Covers annotations, PHPCS

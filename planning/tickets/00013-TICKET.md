@@ -130,27 +130,28 @@ or bypassed by this decomposition.
 <!-- planning:children -->
 | ID | Title | Status | Parent | Blocked by |
 | --- | --- | --- | --- | --- |
-| [TASK-00009](../tasks/00009-TASK.md) | Adopt Agent OS Planning Identities | in-progress | [TICKET-00013](00013-TICKET.md) | — |
+| [TASK-00009](../tasks/00009-TASK.md) | Adopt Agent OS Planning Identities | done | [TICKET-00013](00013-TICKET.md) | — |
 | [TASK-00010](../tasks/00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | [TICKET-00013](00013-TICKET.md) | [TASK-00009](../tasks/00009-TASK.md) |
 <!-- /planning:children -->
 
 ## Progress
 
-Requirements and the complete two-TASK decomposition are accepted by the maintainer. Status is `in-progress`:
-TASK-00009 implements the coherent identity/tooling migration and the operator-approved default-Build routing
-clarification, awaiting independent Review, applicable QA and required hosted proof. Numeric filenames and
-relationships are preserved; naming implementation is not independent acceptance.
+Requirements and the complete two-TASK decomposition are accepted by the maintainer. Status remains
+`in-progress`: TASK-00009's coherent identity/tooling migration and approved default-Build routing clarification
+are independently accepted, with QA PASS and required A hosted proof; its separate PR delivery is tracked at
+[PR #18](https://github.com/johnnickell/project-laravel/pull/18). Numeric filenames and relationships are
+preserved. This completion does not claim TASK-00010's binding or TICKET-00014's general rollout.
 
-- [TASK-00009](../tasks/00009-TASK.md) owns the complete identity/reference/tooling migration and its naming,
-  provenance, hierarchy and routing evidence; it has no TASK blockers.
+- [TASK-00009](../tasks/00009-TASK.md) delivered the complete identity/reference/tooling migration and its naming,
+  provenance, hierarchy and routing evidence; its current `delivery: awaiting-merge` marker identifies PR #18.
 - [TASK-00010](../tasks/00010-TASK.md) owns the remaining binding, Laravel substitutions, canonical reports,
-  evidence storage and handoff walkthroughs; it depends on TASK-00009's delivered naming conventions.
+  evidence storage and handoff walkthroughs; it is now unblocked and remains unfinished.
 
 Together these cover all accepted requirement criteria; no additional child slice is pending in this approved
 split. Both explicitly adopt TICKET-00014's prospective contract for their own acceptance/delivery without implementing
 its repository-wide rollout. TICKET-00014's complete single-TASK plan is now approved as TASK-00011. The selected
 adoption slice has complete accepted TASK plans; consult the TASK Board for execution. The broader API/SPA map
 remains Active and its earlier unfinished decisions/EPIC handoff are not completed by this foundation slice.
-TASK-00010's binding and TASK-00011's general closeout rollout remain unimplemented. No provider changes or
-independent implementation acceptance are claimed. Parent completion remains pending both children's verified
-acceptance; TASK-00010 remains blocked by unfinished TASK-00009.
+TASK-00010's binding and TASK-00011's general closeout rollout remain unimplemented. No provider changes are
+claimed. Parent completion remains pending TASK-00010's verified acceptance; its former TASK-00009 blocker is
+preserved as delivered provenance, not a current readiness hold.
