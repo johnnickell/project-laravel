@@ -5,9 +5,7 @@
 <!-- planning:execution -->
 | Route | TASK | Title | Status | Readiness |
 | --- | --- | --- | --- | --- |
-| None | — | — | — | — |
-
-No TASK is currently executable; unresolved planning or human decisions may remain.
+| Ready Frontier | [TASK-00009](tasks/00009-TASK.md) | Adopt Agent OS Planning Identities | ready-for-agent | — |
 <!-- /planning:execution -->
 
 The [TASK Board](tasks/BOARD.md) owns execution order and explicit current delivery handoffs. Validate current
@@ -37,8 +35,14 @@ slice: Common 1.4.0 / AccessControl 0.8.0, independently accepted at `4afe8af` w
 Required hosted delivery proof passed for reconciled published head `a93e222` under the maintainer-approved
 identical-tree merge-candidate contract; PR #13 merged into develop at `3fa576d`. See the TASK's completion
 notes for provenance. Neither Land nor another review cycle remains pending for that slice.
-EPIC-00001 remains open. Remaining workflow/binding changes need bounded decomposition; TASK-00007 supplies
-standalone-bug planning support. TASK-00008's bounded routing/delivery synchronization repair is delivered
+EPIC-00001 remains open. The approved remaining adoption split is recorded in
+[T-00013](tickets/00013-TICKET.md) (workflow/evidence binding) and [T-00014](tickets/00014-TICKET.md)
+(prospective closeout); both have accepted concrete requirements. T-00013's complete two-TASK plan is approved:
+TASK-00009 migrates naming and TASK-00010 delivers the workflow/report binding after TASK-00009. T-00014's
+complete single-TASK plan is approved as TASK-00011, with no TASK blockers. TASK plans for this selected slice
+are complete; the TASK Board owns execution order. Naming, binding and prospective closeout changes are not yet
+implemented. TASK-00007 supplies standalone-bug planning support. TASK-00008's bounded routing/delivery
+synchronization repair is delivered
 and merged through PR #15 at `54a071d`; its completion notes preserve acceptance and merge evidence.
 These slices do not implement the entire amendment or authorize changing the harness provider.
 
@@ -57,9 +61,14 @@ entrypoint finding remains a separate scope decision.
 
 ## Route to 1.0
 
-1. Decompose the remaining approved workflow adoption into requirements and TASKs, accounting for the
-   standalone-bug support and bounded planning-synchronization repair without treating them as the entire
-   adoption. The package-upgrade slice is delivered and merged; preserve the existing gate until its replacement lands.
+1. Follow the [TASK Board](tasks/BOARD.md) for execution of the fully planned adoption slice:
+   [T-00013](tickets/00013-TICKET.md)'s [TASK-00009](tasks/00009-TASK.md) and dependent
+   [TASK-00010](tasks/00010-TASK.md), plus [T-00014](tickets/00014-TICKET.md)'s independent
+   [TASK-00011](tasks/00011-TASK.md). No further child decomposition remains in these accepted splits; no
+   implementation is claimed. Naming migration must reconcile records, references and tooling together while
+   preserving numeric suffixes and history. Account for delivered standalone-bug support and bounded planning
+   synchronization without duplicating them. Preserve the existing gate until its replacement lands. This
+   explicitly selected foundation slice does not complete the broader API/SPA map's decisions or EPIC handoff.
 2. Reconcile the successor-gate requirements in [T-00007](tickets/00007-TICKET.md) and
    [T-00011](tickets/00011-TICKET.md): exact Unit-only versus all-suite coverage, Covers annotations, PHPCS
    standard, production-install inspection and explicit CI setup/lifecycle. Both scopes remain preserved;

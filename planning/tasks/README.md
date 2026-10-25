@@ -19,4 +19,7 @@ not start execution or select an implementation worktree.
 | [TASK-00006](00006-TASK.md) | Upgrade Fight Common to 1.4 and AccessControl to 0.8 | done | [T-00012](../tickets/00012-TICKET.md) | [TASK-00001](00001-TASK.md) |
 | [TASK-00007](00007-TASK.md) | Refresh vulnerable PHP, Node and NGINX container baselines | done | — | — |
 | [TASK-00008](00008-TASK.md) | Keep planning routing and delivery handoffs synchronized | done | — | — |
+| [TASK-00009](00009-TASK.md) | Adopt Agent OS Planning Identities | ready-for-agent | [T-00013](../tickets/00013-TICKET.md) | — |
+| [TASK-00010](00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | [T-00013](../tickets/00013-TICKET.md) | [TASK-00009](00009-TASK.md) |
+| [TASK-00011](00011-TASK.md) | Adopt Prospective Acceptance and Closeout Rules | ready-for-agent | [T-00014](../tickets/00014-TICKET.md) | — |
 <!-- /planning:index -->
