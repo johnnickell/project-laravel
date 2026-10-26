@@ -49,9 +49,7 @@ prose; acceptance/verification checkpoints remain in the owning records.
 ## Current delivery
 
 <!-- planning:delivery -->
-| TASK | Current delivery | PR |
-| --- | --- | --- |
-| [TASK-00012](00012-TASK.md) | Published; verify live state | https://github.com/johnnickell/project-laravel/pull/19 |
+No current delivery handoffs. Historical PR links do not imply pending delivery.
 <!-- /planning:delivery -->
 
 ## Wayfinder Review
