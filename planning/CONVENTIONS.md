@@ -163,6 +163,24 @@ acceptance, checks CI, publishes, approves, merges or archives. Ordinary checks 
 step remain offline/read-only; the rest of the build still needs registry/dependency access. Land also follows
 [delivery pre-submit](#delivery-pre-submit-and-final-handoff), independently verifying required hosted proof.
 
+## Bound target and required retirement
+
+Before reconciliation, pre-publication and final handoff bind the live GitHub default against Laravel's `develop`
+policy and existing subject PR using the resolved provider's `.pi/skills/land/scripts/bind-target.py` with target
+`--root`, `--policy develop` and existing `--pr`/`--head`. Retain the observation and use the bound base throughout;
+stale `origin/HEAD` is not authority. Default/policy/PR conflicts need explicit disposition, not silent retargeting.
+
+Consume the provider's `docs/engineering/LANDING.md` cleanup-only intake, inventory/preservation, live-consumer,
+Git/Docker retirement and postcondition/resume contract (TASK-00534 plus qualified TASK-00537), alongside Laravel's
+gates. Publication, document synchronization and eligible local retirement are separate required obligations;
+held resources mean incomplete cleanup. Verified merged cleanup-only needs no metadata correction PR or repeated
+acceptance gate. Discover orphan stacks independently of worktrees with source/path/topology/data corroboration.
+After worker exit continue from the safe checkout with original model/ledger/authority; preserve active sessions.
+Positively qualify Docker VM read-only sharing against all containers (including stopped), parent mounts, host
+cwd/writers and stable preservation manifests. Unknown readers hold; never stop the shared VM. Preserve active,
+dirty/shared resources, independent reports, credentials and durable data. Reobserve current consumers, resume
+only missing effects and verify exact postconditions with finite recovery actions.
+
 ## Status and readiness
 
 The same status vocabulary has level-specific readiness:
