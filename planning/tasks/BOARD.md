@@ -110,8 +110,8 @@ retain acceptance identities and merge evidence. Its earlier awaiting-merge chec
 TASK-00009's PR #18 merged into develop at `8b372b3` on 2026-10-25; its
 [delivery reconciliation](00009-TASK.md#delivery-reconciliation--pr-18) records the published-head/merge/local-HEAD
 ancestry and retirement of the ended publication marker. Its earlier draft/delivery-pending note is historical.
-Composer advisories and the separate pre-existing CLI entrypoint finding remain unresolved; no deployment,
-release or successor-gate implementation is claimed.
+Composer advisories remain unresolved. The separate CLI entrypoint finding is addressed by the current
+disposable-command lifecycle change; no deployment, release or successor-gate implementation is claimed.
 
 TASK-00002–TASK-00005 carry already completed implementation evidence migrated from the old executable tickets.
 Their generated Recently Done placement reflects retained `done` status, not a claim of recent execution or

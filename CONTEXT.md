@@ -47,7 +47,7 @@ The build's fail-fast planning check remains offline. TASK-00012 implements Figh
 resolution of exact merged/integrated done publication snapshots and explicit, evidence-preserving
 `--reconcile-delivery` at authorized Work/Land/substantive planning intake. Its implementation is independently
 accepted with behavioral QA PASS; the TASK's completion checkpoint preserves candidate/report provenance.
-Current publication state is tracked separately by the generated Board delivery section and actual PR body.
+That historical checkpoint tracked publication in the former Board delivery section and PR body; the current contract uses the actual PR and ignored delivery evidence.
 Normal human merge no longer requires a routine cleanup request. Closed-unmerged, uncertain or unintegrated
 handoffs remain blocking. Local [delivery pre-submit](planning/CONVENTIONS.md#delivery-pre-submit-and-final-handoff)
 requires Land to reconcile affected authored handoffs as well as generated views; human merge remains separate.
