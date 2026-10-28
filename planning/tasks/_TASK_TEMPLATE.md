@@ -7,7 +7,6 @@ status: needs-triage
 order:
 blocked_by:
 pr:
-delivery:
 ---
 
 # Brief independently reviewable outcome
@@ -54,7 +53,6 @@ this record's ID and follow [routing boundaries](../CONVENTIONS.md#implementatio
 
 Record actual evidence, independent review state, and the PR if known. `done` is not merge, release, or deployment.
 Reconcile parent progress and affected current Board/Roadmap/README handoffs, then refresh generated views.
-Land uses `delivery: awaiting-merge` as the verified OPEN publication snapshot under planning conventions.
-Read-only verification resolves exact merged/integrated done work; authorized intake retires its marker with
-`--reconcile-delivery`. Closed-unmerged/uncertain evidence needs actual disposition/recovery. Keep historical
-acceptance checkpoints distinct from current routing.
+Land validates the exact live own PR/default/head/remote and retires eligible owned local resources during
+delivery. Keep results in ignored evidence and the actual PR, not a persistent pending-merge queue or recurring
+post-merge planning chore. Human merge stays separate; preserve historical acceptance/publication checkpoints.

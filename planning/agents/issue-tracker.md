@@ -11,12 +11,10 @@ specifications. All live records, including completed historical deliveries, use
 or present migrated TASK evidence as fresh review. Inspect live/archived records and the map before allocation.
 Do not synchronize local planning details back into Fight Common.
 
-After record changes, run `./bin/planning-check --write` and `./bin/planning-check`. Before routing or publication,
-use `./bin/planning-check --check-delivery` and the [delivery pre-submit rules](../CONVENTIONS.md#delivery-pre-submit-and-final-handoff).
-Generated summaries own TASK selection; delivery markers are publication snapshots, not permanent OPEN claims.
-At authorized Work/Land/substantive planning intake run `./bin/planning-check --reconcile-delivery` under
-[current delivery handoffs](../CONVENTIONS.md#current-delivery-handoffs). Read-only routing resolves exact verified
-merged/integrated done work without cleanup requests; closed-unmerged or uncertain evidence still blocks.
+After record changes, run offline `./bin/planning-check --write` and `./bin/planning-check`. Land owns
+[publication closeout](../CONVENTIONS.md#publication-closeout), exact live own-PR validation and eligible local
+retirement. No persistent delivery queue or recurring post-merge planning chore. Generated summaries own TASK
+selection; historical publication checkpoints are not live state or independent acceptance.
 Reconcile affected authored Board/Roadmap/README/current record notes alongside views; preserve historical acceptance.
 Do not create feature TASKs while requirements remain unaccepted or decision-incomplete. Standalone bug records
 require accepted bounded repair scope. An empty implementation frontier is a valid outcome.

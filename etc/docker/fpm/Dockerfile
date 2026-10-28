@@ -16,3 +16,5 @@ USER systemuser
 EXPOSE 9000
 
 ENTRYPOINT ["/entrypoint.sh"]
+# With no explicit command the entrypoint owns FPM startup; do not inherit the base CMD.
+CMD []

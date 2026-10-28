@@ -40,6 +40,17 @@ If another stack uses port 18084, supply a separate Compose override through `CO
 server's port mapping with an unused loopback port. Use `./bin/down` with the same project and files; never stop
 another checkout's stack. Source, dependencies and caches remain inside the selected checkout.
 
+## Disposable command lifecycle
+
+`./bin/exec COMMAND ...` and `./bin/artisan ...` execute their explicit command in an auto-removed one-off
+container; they no longer start FPM instead of the requested command. With no explicit command, the service
+entrypoint retains normal FPM startup. Compose init forwards interruption signals and reaps children, including
+commands that would otherwise become PID 1 and ignore TERM. Rebuild the selected checkout image after changes.
+Keep the same exact Compose project/config for startup, commands and shutdown. `./bin/down` does not cancel an
+active one-off workload: finish/cancel its owning caller, then repeat the selected teardown and verify absence.
+No volumes are declared; unknown/durable/shared storage is not disposable by association. Preserve exact creating
+mount/resource receipts and use qualified Land retirement for held resources, never force or prune.
+
 ## Package integration and verification
 
 Composer locks Fight Common **1.4.0** and Fight AccessControl **0.8.0** from published packages. Laravel owns
@@ -68,11 +79,8 @@ order for **EPIC → TICKET → TASK**. After planning edits run `./bin/planning
 `./bin/planning-check`. The build runs that offline check before expensive preparation; generated Board and
 Roadmap execution summaries cannot silently drift from record status, priority or readiness.
 
-Before routing or a delivery handoff, run `./bin/planning-check --check-delivery`. It uses GitHub CLI (`gh`)
-and existing operator authentication only for explicit publication snapshots, not historical links. Exact
-merged/integrated done handoffs resolve without writes or cleanup requests; closed-unmerged or unverifiable
-handoffs remain blocking. Authorized Work/Land/substantive planning intake uses `--reconcile-delivery` to retire
-resolved markers, preserve evidence and refresh views under
-[current delivery handoffs](planning/CONVENTIONS.md#current-delivery-handoffs). Land also follows
-[delivery pre-submit](planning/CONVENTIONS.md#delivery-pre-submit-and-final-handoff), including affected authored
-Board/Roadmap/README updates. An offline gate does not prove live PR state. Legacy certification is history, not a gate.
+[Land closeout](planning/CONVENTIONS.md#publication-closeout) owns accepted TASK/current-doc closure, exact live
+own-PR/default/head/remote validation and eligible owned local Git/Docker/storage retirement. Human merge
+remains separate, without a tracked pending-merge queue or recurring post-merge planning chore. Keep live
+results in ignored delivery evidence and the actual PR; preserve historical acceptance/publication. Planning
+checks remain offline and never infer merge or acceptance. Legacy certification is history, not a gate.

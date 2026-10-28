@@ -8,8 +8,9 @@
 | Ready Frontier | [TASK-00010](tasks/00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | — |
 <!-- /planning:execution -->
 
-The [TASK Board](tasks/BOARD.md) owns execution order and explicit current delivery handoffs. Validate current
-routing with `./bin/planning-check --check-delivery`; historical milestone notes below are not pending actions.
+The [TASK Board](tasks/BOARD.md) owns execution order; validate routing with offline `./bin/planning-check`.
+[Land closeout](CONVENTIONS.md#publication-closeout) owns exact live subject validation and eligible local
+retirement, not a persistent delivery queue. Historical milestone notes below are not pending actions.
 
 ## In progress
 

@@ -26,10 +26,9 @@ uses `/skill:work TASK-NNNNN` only on explicit request. See
 [implementation routing](CONVENTIONS.md#implementation-routing) for capability, evidence and authority boundaries.
 
 Use each directory's `_…_TEMPLATE.md`. After changes, run `./bin/planning-check --write`, then
-`./bin/planning-check`. Before routing or publication use `./bin/planning-check --check-delivery` for explicit
-publication snapshots; verified merged/integrated done work resolves read-only without cleanup requests. The
-offline check does not verify live PR state. At authorized Work/Land/substantive planning intake use
-`./bin/planning-check --reconcile-delivery` under [current delivery handoffs](CONVENTIONS.md#current-delivery-handoffs).
+`./bin/planning-check`. Planning stays offline; routing never scans historical PRs. Land owns
+[publication closeout](CONVENTIONS.md#publication-closeout), exact live own-PR validation and eligible local
+retirement, without a persistent delivery queue or recurring post-merge planning chore.
 Record metadata is authoritative; marked generated views must not be hand-edited. Land reconciles affected
 authored handoffs under [delivery pre-submit](CONVENTIONS.md#delivery-pre-submit-and-final-handoff). Closed-unmerged
 or unverifiable handoffs still need a real disposition/evidence decision, not an inferred acceptance cycle.
