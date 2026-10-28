@@ -8,8 +8,9 @@
 | Ready Frontier | [TASK-00010](tasks/00010-TASK.md) | Bind Laravel Workflows and Canonical Evidence | ready-for-agent | — |
 <!-- /planning:execution -->
 
-The [TASK Board](tasks/BOARD.md) owns execution order and explicit current delivery handoffs. Validate current
-routing with `./bin/planning-check --check-delivery`; historical milestone notes below are not pending actions.
+The [TASK Board](tasks/BOARD.md) owns execution order; validate routing with offline `./bin/planning-check`.
+[Land closeout](CONVENTIONS.md#publication-closeout) owns exact live subject validation and eligible local
+retirement, not a persistent delivery queue. Historical milestone notes below are not pending actions.
 
 ## In progress
 
@@ -50,7 +51,7 @@ synchronization repair is delivered and merged through PR #15 at `54a071d`; its 
 Standalone [TASK-00012](tasks/00012-TASK.md) implements corrected merged/integrated handoff resolution and
 explicit evidence-preserving reconciliation, ported from Fight Common. Its implementation is independently
 accepted with behavioral QA PASS; the TASK's completion checkpoint preserves candidate/report provenance.
-Publication and human merge remain separate, with current delivery derived on the TASK Board and in the actual PR body.
+That checkpoint keeps publication and human merge separate; current delivery is verified in the actual PR and ignored evidence, not a Board queue.
 These slices do not implement the entire amendment or authorize changing the harness provider.
 
 [EPIC-00003](epics/00003-EPIC.md), formerly PRD-00002, preserves historical package/gate evidence and the
@@ -63,8 +64,8 @@ certification and the self-provisioning gate design; historical success does not
 repair and narrow standalone-bug planning support. QA-01 remains preserved as the prior-candidate finding; the
 cycle-1 bounded build-cache cleanup was independently reviewed and affected QA passed on the repaired candidate.
 Completion records accepted local delivery, not production deployment, release, merge, or resolution of existing
-Composer advisories. It remains independent of successor-gate and package-upgrade work; its pre-existing CLI
-entrypoint finding remains a separate scope decision.
+Composer advisories. It remains independent of successor-gate and package-upgrade work. Its excluded CLI
+entrypoint finding is addressed by the current disposable-command lifecycle change; the original checkpoint remains history.
 
 ## Route to 1.0
 

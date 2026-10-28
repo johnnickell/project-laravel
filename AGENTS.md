@@ -6,9 +6,8 @@ For “What's next?”, `next`, or an unqualified `/ask-matt`, go straight to th
 before general project orientation. Read its current human decision and active work; otherwise select the first
 executable ready TASK in Board order. Use the [Wayfinder index](planning/wayfinder/README.md) for map status and current frontier pointers.
 Follow [lightweight work routing](planning/CONVENTIONS.md#lightweight-work-routing) for validation,
-bounded evidence reads and planning handoffs. Run `./bin/planning-check --check-delivery` before selection;
-an offline planning/build pass does not establish live delivery freshness. Recommend and stop; load execution
-guidance when work is invoked.
+bounded evidence reads and planning handoffs. Historical publication checkpoints do not create current merge
+actions or recurring post-merge planning work. Recommend and stop; load execution guidance when work is invoked.
 This routing path does not require reading README, architecture, full project context, task history or receiving skills.
 
 For new implementation and confirmed implementation/QA defects, recommend `/skill:build TASK-NNNNN` by default
@@ -21,9 +20,10 @@ evidence-specific routes and authority boundaries; recommending a workflow does 
 For execution or substantive planning changes, load the applicable guidance below. The read-only routing
 path above takes precedence over broad orientation reads; it does not waive engineering or delivery rules.
 
-Read `CONTEXT.md`, `planning/CONVENTIONS.md`, and `planning/agents/` before changing behavior. At authorized Work,
-Land or substantive planning intake, follow [delivery reconciliation](planning/CONVENTIONS.md#current-delivery-handoffs)
-on the selected feature branch; read-only routing/Review/QA never run the writing mode. Work in independently
+Read `CONTEXT.md`, `planning/CONVENTIONS.md`, and `planning/agents/` before changing behavior. Land owns
+[publication closeout](planning/CONVENTIONS.md#publication-closeout): accepted TASK/current-doc closure, exact live
+own-PR/default/head/remote validation and eligible owned local Git/Docker/storage retirement. Human merge and
+open-PR remote-head preservation remain separate; no tracked queue or recurring post-merge bookkeeping. Work in independently
 verifiable vertical slices. Use the repository-owned `./bin/build`, `./bin/phpunit`, `./bin/up`, `./bin/down`,
 `./bin/composer`, `./bin/artisan`, and `./bin/exec` commands; `./bin/build` is the single noninteractive local and hosted gate.
 
@@ -68,7 +68,7 @@ Before final commit and PR for any feature or bug fix:
 6. Refresh generated views with `./bin/planning-check --write`
 7. Run `./bin/planning-check`; retain the canonical build requirement above
 8. For Land/publication follow [delivery pre-submit](planning/CONVENTIONS.md#delivery-pre-submit-and-final-handoff):
-   live delivery checks at intake, immediately before publication and after final metadata/view changes;
+   exact live own-PR/default/head/remote checks at intake, before publication and final handoff;
    reconcile affected authored handoffs as well as generated sections
 
 When completing a TASK, apply [Automatic parent completion](planning/CONVENTIONS.md#automatic-parent-completion)

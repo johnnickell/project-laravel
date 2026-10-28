@@ -6,11 +6,10 @@ For “What's next?”, `next`, or an unqualified `/ask-matt`, use the routing e
 This read-only path precedes general orientation; full implementation, review, QA and delivery requirements
 still apply when the selected workflow is invoked.
 
-1. Run `./bin/planning-check --check-delivery` once before selection. It validates local views and live PR state
-   for explicit publication snapshots only. Exact merged/integrated `done` handoffs resolve read-only and do not
-   block selection or need routine cleanup requests. Failure or unavailable evidence stops selection with the
-   actual error and named missing fact; do not refresh views or infer merge/integration. An offline planning/build
-   pass is not delivery freshness. With no recorded delivery markers, no hosted query or credentials are needed.
+1. Run read-only `./bin/planning-check` once before selection. Failure stops selection with the actual error
+   and planning-owner handoff; do not refresh views. Historical publication checkpoints do not create current
+   merge actions. Land verifies its exact live subject during publication or explicit resume; routing never
+   scans historical PRs or requests recurring post-merge planning maintenance.
 2. Read only the Board's current human decision, active work, and (if no active work) first ready entry.
    Use local section names and authoritative order. Return all active TASKs, not a new winner. Inspect selected
    TASK metadata and its current handoff, plus blocker metadata only as needed. An unresolved contradiction
@@ -36,8 +35,8 @@ stop without invoking a workflow or changing files. Missing indexes are reported
 
 During authorized planning updates, keep authored planning/decomposition handoffs source-linked and concise:
 target, phase, pending decision/owner. Generated Board/Roadmap summaries own current TASK selection; do not
-repeat it in authored prose. The Board's generated delivery section owns explicit current merge handoffs;
-TASK completion notes preserve acceptance and historical delivery checkpoints, not a second live routing source.
+repeat it in authored prose. Live delivery results belong in the actual PR and ignored Land receipt;
+TASK completion notes preserve acceptance and historical publication, not a persistent pending-merge queue.
 Keep Wayfinder pointers current. These views are navigation aids, not acceptance or delivery proof. Preserve
 historical decisions and label superseded checkpoints; reconcile affected READMEs rather than copying live state.
 
@@ -125,43 +124,18 @@ TASK metadata also includes `order` (optional positive integer, lower first) and
 Those fields do not claim review, merge, release, or deployment. Each TASK's acceptance/evidence and completion
 notes record actual implementation and review state. No implicit execution or publication follows from planning.
 
-### Current delivery handoffs
+### Publication closeout
 
-On a live `done` TASK, Land sets optional `delivery: awaiting-merge` with its verified `pr` URL at the OPEN
-human review/merge handoff. This is a **publication snapshot**, not a perpetual assertion that the PR is open.
-Neither `done`, a historical PR link nor a completion checkpoint creates a current delivery claim. The generated
-Board `planning:delivery` block mirrors markers as "Published; verify live state"; only fresh live evidence owns
-the current action. The marker does not assert final-head CI success or authorize merge; required delivery proof
-stays explicit and blocking under the existing acceptance/delivery contract.
+Land closes independently accepted TASKs, eligible parents and applicable current Board/Roadmap/README/context
+handoffs during delivery under [delivery pre-submit](#delivery-pre-submit-and-final-handoff). Validate exact live
+own PR/repository/default/base/head/remote candidate and required proof; missing/conflicting identity holds the
+affected effect. Human merge remains separate; preserve the remote head of an open PR.
 
-Offline validation checks marker/TASK/PR/origin identity and generated views. `--check-delivery` is read-only
-and additionally uses existing operator `gh` access for at most 16 marked PRs, one 15-second request per PR.
-URL, number, repository, exact TASK/title, TASK feature branch, develop base and full head OID must agree.
-OPEN retains the human handoff. MERGED resolves it **without blocking selection or requiring a cleanup request**
-only with a valid merge time/OID, an already `done` TASK, published head -> merge -> local HEAD ancestry.
-Bounded local Git inspection disables replacement objects/lazy fetching and never fetches or merges. Merge and
-local integration are separately verified facts, not inferred acceptance or QA. Routing can continue even before
-a later authorized write retires the snapshot.
-
-At authorized Work, Land or substantive planning intake, run `./bin/planning-check --reconcile-delivery` on the
-selected feature branch before other record edits. This administrative operation is included in those scopes;
-do not request another routine cleanup authorization. It performs the same live verification, retires only
-verified merged/integrated `done` markers, appends exact merge/head/time/local-integration evidence to each TASK,
-and refreshes generated views/eligible parents. Reconcile affected authored handoffs in the same operation.
-OPEN markers remain. Repeated use is idempotent; retired PRs are no longer queried. Review, QA and read-only
-routing never invoke this writing mode. Plain `--write` remains offline.
-
-CLOSED WITHOUT MERGE requires a disposition decision, not automatic completion. A merged PR with a nonterminal
-TASK or missing local ancestry needs scope/integration recovery through authorized work. Missing tools/auth,
-API/network failures, malformed/contradictory metadata and identity mismatch remain incomplete verification.
-These failures stop routing/reconciliation with the missing fact; they never infer merge, clear markers or
-rewrite even stale views. Validation/live errors prevent all planned writes. Unexpected I/O failures require
-inspection of actual disk state before retry; writes are not a filesystem transaction.
-
-All three modes are mutually exclusive. No unmarked historical PRs are queried; the checker never changes TASK
-acceptance, checks CI, publishes, approves, merges or archives. Ordinary checks and the build's fail-fast planning
-step remain offline/read-only; the rest of the build still needs registry/dependency access. Land also follows
-[delivery pre-submit](#delivery-pre-submit-and-final-handoff), independently verifying required hosted proof.
+Keep live delivery/cleanup results in the durable ignored receipt and actual PR, not tracked delivery markers/
+tables, a persistent pending-merge queue or recurring post-merge planning chore. Preserve historical acceptance/
+publication and canonical independent reports. A TASK `pr` records publication history, not live merge proof.
+Planning checks and `--write` remain offline; routing does not query historical PRs or dispatch delivery.
+The rest of the existing build still needs registry/dependency access; no hosted acceptance rule is weakened.
 
 ## Bound target and required retirement
 
@@ -178,8 +152,13 @@ acceptance gate. Discover orphan stacks independently of worktrees with source/p
 After worker exit continue from the safe checkout with original model/ledger/authority; preserve active sessions.
 Positively qualify Docker VM read-only sharing against all containers (including stopped), parent mounts, host
 cwd/writers and stable preservation manifests. Unknown readers hold; never stop the shared VM. Preserve active,
-dirty/shared resources, independent reports, credentials and durable data. Reobserve current consumers, resume
-only missing effects and verify exact postconditions with finite recovery actions.
+dirty/shared resources, independent reports, credentials and durable data. Capture exact creating-container
+mounts and named/image-anonymous volume creation provenance before creator removal. Inventory created versus
+merely used/shared containers, networks, volumes, images and caches with size, discard authority, dependencies
+and disposition. Reobserve exact identity and all consumers, including stopped containers, before each normal
+exact effect; unknown/shared/durable/excluded or denied inspection holds without force/prune, shared shutdown
+or suppressed cleanup errors. Resume only missing authorized effects and verify absence/preservation with
+finite recovery actions.
 
 ## Status and readiness
 
@@ -221,8 +200,7 @@ human-decision section, and **Wayfinder Review** pointer. Its `planning:next` su
 `planning:execution` summary share the same priority/readiness grouping as **Active Work**, **Ready Frontier**,
 **Waiting**, **Needs Info**, **Human Action**, **Needs Triage**, and **Recently Done**. They show all active TASKs,
 otherwise the first ready TASK, plus human/needs-info inputs and the first waiting/triage reasons when idle.
-The Board's **Current delivery** is generated separately from explicit delivery markers. Only TASKs are
-execution rows. Never substitute a requirement TICKET because no TASK exists.
+Only TASKs are execution rows; live delivery evidence is not a tracked planning queue. Never substitute a requirement TICKET because no TASK exists.
 
 For "What's next?" or an unqualified invocation, return the human decision under **Now** and the active TASK,
 if any; otherwise return the first executable TASK under **Ready Frontier**. If neither exists, say there is no
@@ -243,7 +221,7 @@ After editing planning records:
 `--write` validates records/links before refreshing marked views. The read-only command fails on invalid
 identities, parents, dependency cycles, impossible parent completion, broken links, or stale generated sections.
 The write command derives eligible parent completion; neither command invents child acceptance, decisions or records.
-Current TASK summaries and delivery rows are checked alongside indexes. The canonical build uses the offline
+Current TASK summaries are checked alongside indexes. The canonical build uses the offline
 read-only check; it cannot certify authored prose or live hosting state.
 Validate planning tooling through these owning commands and direct inspection, not product-suite meta-tests.
 
@@ -319,29 +297,28 @@ Before a commit or PR:
 These target-specific steps apply to shared Land in this repository, without modifying or copying the provider
 skill. Land owns authorized TASK/parent closeout, generated views and affected authored documentation together:
 
-1. At authorized intake, run `./bin/planning-check --reconcile-delivery` under
-   [current delivery handoffs](#current-delivery-handoffs), then reconcile affected authored Board/Roadmap/README/
-   context and parent handoffs. Preserve historical Review/QA and acceptance identities. Immediately before
-   push/PR publication run `./bin/planning-check --check-delivery`; offline build or earlier live checks do not
-   substitute. Exact merged/integrated done work resolves without routine cleanup requests. Closed-unmerged,
-   uncertain evidence or missing integration stops publication with the precise owner/input.
+1. Land closes the independently accepted TASK, eligible parents and applicable authored current Board/Roadmap/
+   README/context during delivery. Preserve historical Review/QA and acceptance/publication identities. At intake,
+   immediately before publication and final handoff verify exact live own PR/default/base/head/remote candidate;
+   offline planning or an old observation is not live proof. Missing/conflicting identity or required delivery
+   evidence holds the affected action; closed-unmerged is not delivered.
 2. Before closeout commits, reconcile these same authored documents with the verified implementation and actual
    stage; point readers to current generated routing rather than repeating a transient Land/merge instruction.
    Label any retained delivery-pending note as a checkpoint in its owning record, not the next action in Board,
    Roadmap or READMEs. Refresh views with `--write`, inspect the resulting diff/parent rollup, and rerun validation.
-3. Record the actual PR URL and current `delivery: awaiting-merge` marker as part of authorized closeout. Run the
-   canonical gate before every commit/PR as above. Any metadata commit moves the delivery candidate: retain the
+3. Record the actual PR URL as publication history, not a persistent pending-merge queue. Apply required gate
+   evidence and verified input-equivalence reuse under the owning provider's execution contract. Any metadata commit moves the delivery candidate: retain the
    draft and resources until required final-head proof covers that candidate. This changes no acceptance or
    hosted-verification requirement and authorizes no extra commit merely to record successful CI.
-4. After final metadata/view changes and publication, rerun `--check-delivery` and inspect affected authored
-   handoffs. Verify the intended published head and required delivery proof separately; an OPEN PR is not CI,
+4. After final metadata/view changes and publication, requery the exact own PR/default/head/remote and inspect
+   affected authored handoffs. Verify the intended published head and required delivery proof separately; an OPEN PR is not CI,
    independent acceptance, QA or merge approval. Record final proof in the ignored receipt/PR body under the
    existing finite closeout contract. No successful Land handoff while required verification is incomplete.
-5. Hand off the actual OPEN PR to human review/merge. After human merge, read-only routing resolves exact
-   verified merged/integrated done work without a cleanup request; normal authorized intake retires its snapshot.
-   Closure without merge or unavailable integration/evidence still needs an actual owner decision/recovery,
-   never another implementation/review cycle merely because delivery history moved. Land does not merge and
-   cannot promise freshness after a concurrent change.
+5. Complete eligible owned local Git/Docker/storage retirement with durable creation/mount receipts and fresh
+   all-consumer qualification. Keep results in ignored evidence/actual PR; a held effect means incomplete cleanup.
+   Human review/merge of the actual OPEN PR remains separate; preserve its remote head. No recurring post-merge
+   planning work or another tracked commit merely to certify delivery/cleanup success. Uncertain evidence holds
+   the affected effect; never force/prune or infer acceptance from changed delivery history.
 
 Planning-only changes may update guidance and records under explicit human approval without fabricating an
 implementation TASK for the migration itself. They still require the canonical gate before any commit or PR.

@@ -4,9 +4,8 @@ TASKs are approved implementation slices under accepted requirements TICKETs, no
 Approved standalone bugs may use `kind: bug` with an empty `ticket:`; see the same readiness rules below.
 Use `_TASK_TEMPLATE.md` and the readiness rules in [planning conventions](../CONVENTIONS.md).
 [BOARD.md](BOARD.md) is the canonical execution frontier; its generated summary owns current TASK selection.
-Before routing run `./bin/planning-check --check-delivery` from the repository root. Explicit delivery markers
-are publication snapshots: exact verified merged/integrated done work resolves read-only without cleanup requests.
-Authorized intake retires resolved markers under [current delivery handoffs](../CONVENTIONS.md#current-delivery-handoffs).
+Run offline `./bin/planning-check` before routing. [Land closeout](../CONVENTIONS.md#publication-closeout) owns
+exact live own-PR validation and eligible local retirement; no persistent delivery queue or recurring post-merge chore.
 Historical PR links and terminal status do not imply pending publication. Creating a TASK alone does not start
 execution or select an implementation worktree.
 
