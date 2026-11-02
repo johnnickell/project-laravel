@@ -106,6 +106,6 @@ Validate these tools directly with native Compose/Worktrunk and normal gates, ou
 
 The production-runtime probe uses a separate project-scoped `runtime` image; it does not retag the running Compose `api` image. Both immutable image identities are checked before reuse.
 
-Local development builds use native `--provenance=false` so cached executable layers retain a stable immutable image identity instead of a timestamped attestation index. Release/publication commands retain their own policy. Layers and actual image IDs remain verified; this does not permit publishing local images.
+Local development builds set native `BUILDX_NO_DEFAULT_ATTESTATIONS=1` for the build command so cached executable layers retain a stable immutable image identity instead of a timestamped attestation index. Release/publication commands retain their own policy. Layers and actual image IDs remain verified; this does not permit publishing local images.
 
 Use `./bin/runtime docker ps` to list all selected-checkout containers and their published ports, including plain-run tool previews. `docker compose ps` lists Compose services only.
