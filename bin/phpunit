@@ -2,10 +2,11 @@
 set -eu
 
 mkdir -p var/cache/laravel var/cache/phpunit
-image=${COMPOSE_PROJECT_NAME:-project-laravel}-build
-docker build --pull --file etc/docker/build/Dockerfile --tag "$image" .
+cd "$(dirname "$0")/.."
+image=$(./bin/runtime image-name build)
+docker build --pull --provenance=false --file etc/docker/build/Dockerfile --tag "$image" .
 # Compatibility entrypoint; Pest is the repository's canonical runner.
-docker run --rm \
+./bin/runtime docker run --rm \
     --user "$(id -u):$(id -g)" \
     --env APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
     --env "APP_NAME=Fight Laravel Starter" \

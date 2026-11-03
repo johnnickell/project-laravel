@@ -11,7 +11,8 @@ required for that gate. Image-building commands explicitly pull base images and 
 with a warm cache; a failed pull stops the command.
 
 ```sh
-./bin/build                 # Current setup plus canonical verification, including frontend assets
+./bin/up                    # Explicit runtime preparation
+./bin/build                 # Locked setup plus canonical verification, including frontend assets
 ./bin/up                    # Start the local application
 ./bin/artisan about
 ./bin/phpunit               # Focused application test run through Pest
@@ -34,22 +35,19 @@ Dockerfiles pin patch versions; `--pull` refreshes those tags but does not advan
 Future security releases require a deliberate Dockerfile update, rebuild, and replacement of affected workers.
 This local workflow does not deploy or restart production.
 
-For an isolated worktree, export a unique `COMPOSE_PROJECT_NAME` before running **all** `./bin/` commands.
-Build/test/Composer image tags use that prefix too; the default remains `project-laravel`.
-If another stack uses port 18084, supply a separate Compose override through `COMPOSE_FILE` that replaces the
-server's port mapping with an unused loopback port. Use `./bin/down` with the same project and files; never stop
-another checkout's stack. Source, dependencies and caches remain inside the selected checkout.
+Use [local tooling](docs/engineering/LOCAL_TOOLING.md) for explicit main/worktree selection, dynamic loopback
+ports, cached gate evidence and guarded teardown. Inside a registered worktree start with
+`./bin/up --worktree "$PWD"`; inspect `./bin/runtime docker compose ps` for its port. Main retains port 18084.
+The wrapper selects Compose files/project itself; ambient project/file overrides do not redirect it. Build,
+test, coverage and Composer image tags use the selected checkout's project.
 
 ## Disposable command lifecycle
 
-`./bin/exec COMMAND ...` and `./bin/artisan ...` execute their explicit command in an auto-removed one-off
-container; they no longer start FPM instead of the requested command. With no explicit command, the service
-entrypoint retains normal FPM startup. Compose init forwards interruption signals and reaps children, including
-commands that would otherwise become PID 1 and ignore TERM. Rebuild the selected checkout image after changes.
-Keep the same exact Compose project/config for startup, commands and shutdown. `./bin/down` does not cancel an
-active one-off workload: finish/cancel its owning caller, then repeat the selected teardown and verify absence.
-No volumes are declared; unknown/durable/shared storage is not disposable by association. Preserve exact creating
-mount/resource receipts and use qualified Land retirement for held resources, never force or prune.
+`./bin/exec COMMAND ...` and `./bin/artisan ...` retain explicit auto-removed one-off application commands.
+With no explicit command the entrypoint retains FPM startup. Compose init forwards interruption signals and
+reaps children. CLI build-image commands keep their existing dependency/coverage environment and now carry
+native project ownership labels. Finish the owning command before recording final outcomes; retain unique
+work and verify actual runtime absence after teardown. No release or deployment is performed.
 
 ## Package integration and verification
 
@@ -84,3 +82,5 @@ own-PR/default/head/remote validation and eligible owned local Git/Docker/storag
 remains separate, without a tracked pending-merge queue or recurring post-merge planning chore. Keep live
 results in ignored delivery evidence and the actual PR; preserve historical acceptance/publication. Planning
 checks remain offline and never infer merge or acceptance. Legacy certification is history, not a gate.
+
+See [local Docker, worktree and build-cache operations](docs/engineering/LOCAL_TOOLING.md) for explicit main/worktree selection, guarded teardown and fresh versus reused gate evidence.

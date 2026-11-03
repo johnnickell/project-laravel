@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -eu
+./bin/composer install --no-interaction --prefer-dist --no-progress
+./bin/runtime docker run --rm --user "$(id -u):$(id -g)" --env HOME=/tmp --volume "$PWD:/app" --workdir /app "$(./bin/runtime image-name build)" npm ci --prefix client --cache /app/var/cache/npm --no-audit --no-fund
+docker build --pull --provenance=false --file etc/docker/fpm/Dockerfile --tag "$(./bin/runtime image-name runtime)" .
