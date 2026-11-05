@@ -35,5 +35,6 @@
     "server",
     "build",
     "runtime"
-  ]
+  ],
+  "https_preview": {"service": "server", "network": "app-network", "port": 80}
 }
