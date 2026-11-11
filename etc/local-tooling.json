@@ -1,23 +1,10 @@
 {
   "project": "project-laravel",
-  "running": [
-    "api"
-  ],
   "gate": [
     "./bin/.build-full"
   ],
   "outputs": [
     "public/build"
-  ],
-  "runtime_probes": [
-    [
-      "exec",
-      "-T",
-      "api",
-      "php",
-      "-r",
-      "echo json_encode([PHP_VERSION, get_loaded_extensions(), ini_get_all(null, false)]);"
-    ]
   ],
   "directories": [
     "var/cache/laravel",
@@ -25,10 +12,6 @@
   ],
   "build_prepare": [
     "./bin/.build-prepare"
-  ],
-  "extra_images": [
-    "build",
-    "runtime"
   ],
   "images": [
     "api",
