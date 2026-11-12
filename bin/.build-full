@@ -3,7 +3,6 @@ set -eu
 
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 build_image=$("$root/bin/runtime" image-name build)
-runtime_image=$("$root/bin/runtime" image-name runtime)
 
 cd "$root"
 export APP_NAME='Fight Laravel Starter'
@@ -19,8 +18,6 @@ mkdir -p \
     var/cache/phpstan \
     var/cache/phpunit
 
-docker build --pull --provenance=false --file etc/docker/build/Dockerfile --tag "$build_image" .
-docker build --pull --provenance=false --file etc/docker/fpm/Dockerfile --tag "$runtime_image" .
 
 services=$(./bin/runtime docker compose config --services)
 if [ "$services" != "api
@@ -59,14 +56,10 @@ container_environment() {
 }
 
 # shellcheck disable=SC2046
-printf '%s' "$composer_auth" | ./bin/runtime docker run --rm -i \
+./bin/runtime docker run --rm \
     $(container_environment) \
-    --env COMPOSER_AUTH_FROM_STDIN=1 \
     --volume "$root:/app" --workdir /app "$build_image" sh -ec '
-        COMPOSER_AUTH=$(cat)
-        export COMPOSER_AUTH
         composer validate --strict
-        composer install --no-interaction --prefer-dist --no-progress
         # Do not leave build-environment configuration in the bind-mounted local runtime.
         trap "rm -f -- \"$APP_CONFIG_CACHE\"" EXIT
         php scripts/artisan config:cache
@@ -93,7 +86,6 @@ printf '%s' "$composer_auth" | ./bin/runtime docker run --rm -i \
             --coverage --exactly=100 \
             --fail-on-warning --fail-on-risky --fail-on-deprecation \
             --fail-on-notice --fail-on-skipped --fail-on-incomplete
-        npm ci --prefix client --cache /app/var/cache/npm --no-audit --no-fund
         npm --prefix client run build
     '
 
