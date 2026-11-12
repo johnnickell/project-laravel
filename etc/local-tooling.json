@@ -4,7 +4,8 @@
     "./bin/.build-full"
   ],
   "outputs": [
-    "public/build"
+    "public/build",
+    "vendor/pestphp/pest-plugin-mutate/.temp/pest-mutate-cache"
   ],
   "directories": [
     "var/cache/laravel",

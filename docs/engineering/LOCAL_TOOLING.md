@@ -60,6 +60,10 @@ evidence cannot qualify a hit. Concurrent builds refuse the same checkout's lock
 
 A cache hit skips build preparation, including dependency installation/update and image builds.
 On a miss, configured preparation runs first and its resulting dependency contents become the gate inputs.
+Laravel installs Composer and npm dependencies once in preparation; the full gate consumes those installed
+dependencies. The separate production copy retains its no-dev install to verify production boot.
+Pest’s generated mutation-cache directory is a build output, so its first creation does not change the
+source fingerprint. Installed dependency code remains covered.
 A miss executes the entire existing gate and reports its reason and original exit. `--force` invalidates the
 pointer before fresh execution; failures never publish a success. Changing Pi roles or recreating runtime
 services does not invalidate an otherwise qualifying receipt. Old cache formats require one fresh build.
