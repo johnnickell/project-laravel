@@ -67,7 +67,7 @@ lifecycle enforcement, or HMAC replay prevention; no new security endpoint is ex
 Tests prove the homepage, retained credential/key/time-window behavior, and the default Laravel transaction
 connection's commit/rollback outcomes. The gate enforces exact **100% statement coverage of `app/`**, without
 coverage exclusions added for this cutover. That is combined integration/functional coverage, not a unit-suite
-claim. Tools, wrappers, architecture rules, and documentation are verified through their owning commands and
+claim. The [required Unit-only line policy](planning/agents/domain.md#test-quality-and-suite-balance) is not yet enforced by that combined gate. Tools, wrappers, architecture rules, and documentation are verified through their owning commands and
 inspection rather than product-suite meta-tests.
 
 ## Planning
